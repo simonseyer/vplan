@@ -1,0 +1,115 @@
+
+
+<?xml version="1.0" encoding="UTF-8"?>
+<vplan xmlns="http://www.fls-wiesbaden.de/schema/vplan" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" lastUpdate="1511509327" xsi:schemaLocation="http://www.fls-wiesbaden.de/schema/vplan.xsd">
+   <school name="BG">
+      <class name="11/5 W/Bili">
+         <date value="Montag, 27.11.2017" timestamp="1511737200">
+            <lesson>
+               <original>
+                  <hours>3.-4.</hours>
+                  <tutor>
+                     <firstname>Matthias</firstname>
+                     <lastname>Schatz</lastname>
+                     <shortcut>SCHA</shortcut>
+                  </tutor>
+                  <subject>
+                     <name>Deutsch</name>
+                     <shortcut>DEUT</shortcut>
+                  </subject>
+                  <room>C05</room>
+               </original>
+               <substitute>
+                  <type>1028</type>
+                  <tutor>
+                     <firstname>Sonja</firstname>
+                     <lastname>Max</lastname>
+                     <shortcut>MAX</shortcut>
+                  </tutor>
+                  <room />
+                  <attribute />
+                  <info>Tausch mit Mi., 3./4. Std.</info>
+               </substitute>
+            </lesson>
+         </date>
+      </class>
+      <class name="12">
+         <date value="Montag, 27.11.2017" timestamp="1511737200">
+            <lesson>
+               <original>
+                  <hours>1.-2.</hours>
+                  <tutor>
+                     <firstname>Larissa</firstname>
+                     <lastname>Deli</lastname>
+                     <shortcut>DELI</shortcut>
+                  </tutor>
+                  <subject>
+                     <name>Religion evangelisch</name>
+                     <shortcut>EVREL</shortcut>
+                  </subject>
+                  <room>A311</room>
+               </original>
+               <substitute>
+                  <type>1026</type>
+                  <room>001</room>
+                  <attribute />
+                  <info />
+               </substitute>
+            </lesson>
+            <lesson>
+               <original>
+                  <hours>3.-4.</hours>
+                  <tutor>
+                     <firstname>Doris</firstname>
+                     <lastname>Müller</lastname>
+                     <shortcut>MUEL</shortcut>
+                  </tutor>
+                  <subject>
+                     <name>Religion katholisch</name>
+                     <shortcut>KREL</shortcut>
+                  </subject>
+                  <room>A212</room>
+               </original>
+               <substitute>
+                  <type>1028</type>
+                  <tutor>
+                     <firstname>Petra</firstname>
+                     <lastname>Schmidt 2</lastname>
+                     <shortcut>SCHP</shortcut>
+                  </tutor>
+                  <room />
+                  <attribute />
+                  <info />
+               </substitute>
+            </lesson>
+         </date>
+      </class>
+   </school>
+   <school name="BS">
+      <class name="1075">
+         <date value="Montag, 27.11.2017" timestamp="1511737200">
+            <lesson>
+               <original>
+                  <hours>1.-2.</hours>
+                  <tutor>
+                     <firstname>Michael</firstname>
+                     <lastname>Thomas</lastname>
+                     <shortcut>THOM</shortcut>
+                  </tutor>
+                  <subject>
+                     <shortcut>BBUN</shortcut>
+                  </subject>
+                  <room>U08</room>
+               </original>
+               <substitute>
+                  <type>1024</type>
+                  <room />
+                  <attribute>Klausur 5./6. Std. untere Aula</attribute>
+                  <info>Klasse frei</info>
+               </substitute>
+            </lesson>
+         </date>
+      </class>
+   </school>
+</vplan>
+
