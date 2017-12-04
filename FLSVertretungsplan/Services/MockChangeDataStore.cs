@@ -7,11 +7,11 @@ namespace FLSVertretungsplan
     public class MockChangeDataStore: IChangeDataStore
     {
 
-        List<Change> changes;
+        Vplan vplan;
 
         public MockChangeDataStore()
         {
-            changes = new List<Change>
+            List<Change> changes = new List<Change>
             {
                 new Change { 
                     ClassName = "1212", 
@@ -104,11 +104,17 @@ namespace FLSVertretungsplan
                     }
                 },
             };
+            vplan = new Vplan
+            {
+                Changes = changes,
+                LastUpdate = DateTime.Now
+            };
         }
 
-        public async Task<IEnumerable<Change>> GetChangesAsync(bool forceRefresh = false)
+        public async Task<Vplan> GetVplanAsync(bool forceRefresh = false)
         {
-            return changes;
+            return vplan;
         }
+
     }
 }

@@ -72,6 +72,14 @@ namespace FLSVertretungsplan.iOS
                         });
                     }
                     break;
+                case nameof(ViewModel.LastUpdate):
+                    {
+                        InvokeOnMainThread(() =>
+                        {
+                            LastUpdateLabel.Text = ViewModel.LastUpdate;
+                        });
+                    }
+                    break;
             }
         }
 

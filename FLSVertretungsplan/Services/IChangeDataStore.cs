@@ -7,7 +7,7 @@ namespace FLSVertretungsplan
     public interface IChangeDataStore
     {
 
-        Task<IEnumerable<Change>> GetChangesAsync(bool forceRefresh = false);
+        Task<Vplan> GetVplanAsync(bool forceRefresh = false);
 
     }
 }

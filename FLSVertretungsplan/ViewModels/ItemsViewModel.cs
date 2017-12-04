@@ -87,12 +87,19 @@ namespace FLSVertretungsplan
         public ObservableCollection<Collection<ChangePresentationModel>> Changes { get; }
         public Command LoadItemsCommand { get; }
 
+        string lastUpdate = string.Empty;
+        public string LastUpdate
+        {
+            get { return lastUpdate; }
+            set { SetProperty(ref lastUpdate, value); }
+        }
+
         public ItemsViewModel()
         {
             Title = "Vertretungsplan";
             Dates = new ObservableCollection<String>();
             Changes = new ObservableCollection<Collection<ChangePresentationModel>>();
-            LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
+            LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());       
         }
 
         async Task ExecuteLoadItemsCommand()
@@ -106,9 +113,10 @@ namespace FLSVertretungsplan
             {
                 Dates.Clear();
                 Changes.Clear();
+                var plan = await DataStore.GetVplanAsync(true);
 
-                var items = await DataStore.GetChangesAsync(true);
-                foreach (var item in items)
+                LastUpdate = "Letzte Aktualisierung: " + plan.LastUpdate.ToString("dd.MM.yy hh:mm") + " h";
+                foreach (var item in plan.Changes)
                 {
                     var date = item.Day.ToString("dd.MM.yy");
                     var dateIndex = Dates.IndexOf(date);

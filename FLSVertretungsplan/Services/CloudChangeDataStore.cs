@@ -11,28 +11,29 @@ namespace FLSVertretungsplan
     {
 
         HttpClient client;
-        DateTime lastUpdate;
-        IEnumerable<Change> changes;
+        Vplan vplan;
 
         public CloudChangeDataStore()
         {
             client = new HttpClient();
             client.BaseAddress = new Uri($"{App.BackendUrl}/");
 
-            changes = new List<Change>();
+            vplan = new Vplan {
+                Changes = new List<Change>()
+            };
         }
 
-        public async Task<IEnumerable<Change>> GetChangesAsync(bool forceRefresh = false)
+        public async Task<Vplan> GetVplanAsync(bool forceRefresh = false)
         {
             if (forceRefresh)
             {
                 var json = await client.GetStringAsync($"raw/vplan?version=1.2.4");
-                changes = await Task.Run(() => DeserializeChanges(json));
+                vplan = await Task.Run(() => DeserializeChanges(json));
             }
-            return changes;
+            return vplan;
         }
 
-        private IEnumerable<Change> DeserializeChanges(string xml)
+        private Vplan DeserializeChanges(string xml)
         {
             var parsedChanges = new List<Change>();
             var doc = new XmlDocument();
@@ -41,6 +42,9 @@ namespace FLSVertretungsplan
 
             Debug.Assert(vPlanNode != null);
             Debug.Assert(vPlanNode.ChildNodes.Count > 0);
+
+            var lastUpdateTimestamp = vPlanNode.Attributes["lastUpdate"]?.Value;
+            var lastUpdate = DateTimeOffset.FromUnixTimeSeconds(Convert.ToInt64(lastUpdateTimestamp)).DateTime;
 
             foreach (XmlNode schoolNode in vPlanNode.ChildNodes)
             {
@@ -132,7 +136,11 @@ namespace FLSVertretungsplan
                 return x.Hours.CompareTo(y.Hours);
             });
 
-            return parsedChanges;
+            return new Vplan
+            {
+                Changes = parsedChanges,
+                LastUpdate = lastUpdate
+            };
         }
 
     }

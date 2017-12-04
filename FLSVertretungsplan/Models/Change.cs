@@ -1,8 +1,15 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace FLSVertretungsplan
 {
-    
+
+    public class Vplan
+    {
+        public DateTime LastUpdate { get; set; }
+        public IEnumerable<Change> Changes { get; set; }
+    }
+
     public class Change
     {
         public string SchoolName { get; set; }
