@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>CFBundleIdentifier</key>
-	<string>de.fls-wiesbaden.FLS-Vertretungsplan</string>
+	<string>de.fls-wiesbaden.vplan</string>
 	<key>CFBundleShortVersionString</key>
 	<string>1.0</string>
 	<key>CFBundleVersion</key>
