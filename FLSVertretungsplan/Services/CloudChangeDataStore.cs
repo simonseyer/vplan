@@ -119,6 +119,19 @@ namespace FLSVertretungsplan
                 }
             }
 
+            parsedChanges.Sort(delegate (Change x, Change y)
+            {
+                if (x.Day != y.Day)
+                {
+                    return x.Day.CompareTo(y.Day);
+                }
+                if (x.ClassName != y.ClassName)
+                {
+                    return x.ClassName.CompareTo(y.ClassName);
+                }
+                return x.Hours.CompareTo(y.Hours);
+            });
+
             return parsedChanges;
         }
 
