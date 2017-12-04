@@ -1,5 +1,8 @@
 ﻿using Foundation;
 using UIKit;
+using Microsoft.AppCenter;
+using Microsoft.AppCenter.Analytics;
+using Microsoft.AppCenter.Crashes;
 
 namespace FLSVertretungsplan.iOS
 {
@@ -18,9 +21,9 @@ namespace FLSVertretungsplan.iOS
 
         public override bool FinishedLaunching(UIApplication application, NSDictionary launchOptions)
         {
+            AppCenter.Start("***REMOVED***", typeof(Analytics), typeof(Crashes));
+
             App.Initialize();
-
-
 
             return true;
         }
