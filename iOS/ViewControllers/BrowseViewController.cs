@@ -111,7 +111,7 @@ namespace FLSVertretungsplan.iOS
         {
             ChangeCell cell = (ChangeCell)tableView.DequeueReusableCell(CELL_IDENTIFIER, indexPath);
 
-            cell.StatusView.Layer.CornerRadius = 7;//TODO
+            cell.StatusView.Layer.CornerRadius = 6; // TODO
 
             var change = viewModel.Changes[indexPath.Section][indexPath.Row];
 

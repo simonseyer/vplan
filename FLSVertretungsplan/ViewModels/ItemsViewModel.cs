@@ -16,10 +16,10 @@ namespace FLSVertretungsplan
 
         internal ChangePresentationModel(Change model)
         {
-            ClassName = "Klasse " + model.ClassName;
+            ClassName = "" + model.ClassName;
             Hours = model.Hours + " h";
             OldLesson = string.Format("{0} bei {1}. {2} in Raum {3}", 
-                                      model.OldLesson.Subject.Name, 
+                                      model.OldLesson.Subject.Name ?? model.OldLesson.Subject.Identifier, 
                                       model.OldLesson.Teacher.FirstName[0],
                                       model.OldLesson.Teacher.LastName,
                                       model.OldLesson.Room);
@@ -49,7 +49,7 @@ namespace FLSVertretungsplan
 
             if (subjectChanged)
             {
-                Description += model.NewLesson.Subject.Name + " ";
+                Description += model.NewLesson.Subject.Name ?? model.NewLesson.Subject.Identifier + " ";
             }
             if (teacherChanged)
             {
