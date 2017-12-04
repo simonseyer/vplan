@@ -40,11 +40,11 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <view key="tableFooterView" contentMode="scaleToFill" id="YTs-jx-Wry">
-                            <rect key="frame" x="0.0" y="208" width="375" height="48"/>
+                            <rect key="frame" x="0.0" y="208" width="375" height="44"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12.12.1212" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pB5-LP-MsG">
-                                    <rect key="frame" x="148.5" y="16" width="78" height="16"/>
+                                    <rect key="frame" x="148.5" y="8" width="78" height="28"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
@@ -52,8 +52,8 @@
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
-                                <constraint firstAttribute="bottom" secondItem="pB5-LP-MsG" secondAttribute="bottom" constant="16" id="5jg-fL-8lT"/>
-                                <constraint firstItem="pB5-LP-MsG" firstAttribute="top" secondItem="YTs-jx-Wry" secondAttribute="top" constant="16" id="e7q-L5-ak0"/>
+                                <constraint firstAttribute="bottom" secondItem="pB5-LP-MsG" secondAttribute="bottom" constant="8" id="5jg-fL-8lT"/>
+                                <constraint firstItem="pB5-LP-MsG" firstAttribute="top" secondItem="YTs-jx-Wry" secondAttribute="top" constant="8" id="e7q-L5-ak0"/>
                                 <constraint firstItem="pB5-LP-MsG" firstAttribute="centerX" secondItem="YTs-jx-Wry" secondAttribute="centerX" id="lll-oy-Ee9"/>
                             </constraints>
                         </view>
