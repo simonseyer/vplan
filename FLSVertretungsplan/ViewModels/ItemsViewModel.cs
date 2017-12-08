@@ -97,6 +97,7 @@ namespace FLSVertretungsplan
         public ItemsViewModel()
         {
             Title = "Vertretungsplan";
+            LastUpdate = "";
             Dates = new ObservableCollection<String>();
             Changes = new ObservableCollection<Collection<ChangePresentationModel>>();
             LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());       
@@ -132,6 +133,7 @@ namespace FLSVertretungsplan
             }
             catch (Exception ex)
             {
+                LastUpdate = "Laden fehlgeschlagen";
                 Debug.WriteLine(ex);
             }
             finally

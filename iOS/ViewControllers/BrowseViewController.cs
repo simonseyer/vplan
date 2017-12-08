@@ -32,6 +32,7 @@ namespace FLSVertretungsplan.iOS
             TableView.Source = new ItemsDataSource(ViewModel);
 
             Title = ViewModel.Title;
+            LastUpdateLabel.Text = ViewModel.LastUpdate;
 
             ViewModel.PropertyChanged += IsBusy_PropertyChanged;
             ViewModel.Changes.CollectionChanged += Items_CollectionChanged;
