@@ -7,7 +7,7 @@ namespace FLSVertretungsplan
     public class Vplan
     {
         public DateTime LastUpdate { get; set; }
-        public IEnumerable<Change> Changes { get; set; }
+        public List<Change> Changes { get; set; }
     }
 
     public class Change

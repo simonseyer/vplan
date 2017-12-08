@@ -11,11 +11,11 @@ namespace FLSVertretungsplan
         {
             if (UseMockDataStore)
             {
-                ServiceLocator.Instance.Register<IChangeDataStore, MockChangeDataStore>();
+                ServiceLocator.Instance.Register<IVplanDataStore, MockVplanDataStore>();
             }
             else
             {
-                ServiceLocator.Instance.Register<IChangeDataStore, CloudChangeDataStore>();
+                ServiceLocator.Instance.Register<IVplanDataStore, CloudVplanDataStore>();
             }
         }
     }

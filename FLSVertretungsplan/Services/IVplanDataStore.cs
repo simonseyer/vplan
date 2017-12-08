@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace FLSVertretungsplan
 {
-    public interface IChangeDataStore
+    public interface IVplanDataStore
     {
 
         Task<Vplan> GetVplanAsync(bool forceRefresh = false);

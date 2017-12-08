@@ -7,7 +7,7 @@ namespace FLSVertretungsplan
 {
     public class BaseViewModel : INotifyPropertyChanged
     {
-        public IChangeDataStore DataStore => ServiceLocator.Instance.Get<IChangeDataStore>();
+        public IVplanDataStore DataStore => ServiceLocator.Instance.Get<IVplanDataStore>();
 
         bool isBusy = false;
         public bool IsBusy
