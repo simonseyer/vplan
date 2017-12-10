@@ -16,7 +16,7 @@ namespace FLSVertretungsplan
 
         internal ChangePresentationModel(Change model)
         {
-            ClassName = "" + model.ClassName;
+            ClassName = "" + model.SchoolClass.Name;
             Hours = model.Hours + " h";
             OldLesson = string.Format("{0} bei {1}. {2} in Raum {3}", 
                                       model.OldLesson.Subject.Name ?? model.OldLesson.Subject.Identifier, 

@@ -19,8 +19,6 @@ namespace FLSVertretungsplan.iOS
 
         public override void ViewDidLoad()
         {
-            NavigationController.NavigationBar.PrefersLargeTitles = true;
-
             base.ViewDidLoad();
 
             ViewModel = new ItemsViewModel();
@@ -31,7 +29,6 @@ namespace FLSVertretungsplan.iOS
             TableView.RefreshControl = refreshControl;
             TableView.Source = new ItemsDataSource(ViewModel);
 
-            Title = ViewModel.Title;
             LastUpdateLabel.Text = ViewModel.LastUpdate;
 
             ViewModel.PropertyChanged += IsBusy_PropertyChanged;

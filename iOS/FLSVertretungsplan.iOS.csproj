@@ -151,6 +151,15 @@
     <Compile Include="Views\ChangeCell.designer.cs">
       <DependentUpon>ChangeCell.cs</DependentUpon>
     </Compile>
+    <Compile Include="ViewControllers\SettingsViewController.cs" />
+    <Compile Include="ViewControllers\SettingsViewController.designer.cs">
+      <DependentUpon>SettingsViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ChipCell.cs" />
+    <Compile Include="Views\ChipCell.designer.cs">
+      <DependentUpon>ChipCell.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIColorExtension.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Entitlements.plist" />
@@ -160,7 +169,7 @@
   <ItemGroup>
     <InterfaceDefinition Include="LaunchScreen.storyboard" />
     <InterfaceDefinition Include="Main.storyboard" />
-    <InterfaceDefinition Include="Views\MyTableViewCell.xib" />
+    <InterfaceDefinition Include="Resources\Views\MyTableViewCell.xib" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\" />

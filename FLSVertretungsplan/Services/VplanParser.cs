@@ -57,7 +57,6 @@ namespace FLSVertretungsplan
             return changes;
         }
 
-
         private static List<Change> ParseDateNode(XmlNode schoolNode, XmlNode classNode, XmlNode dateNode)
         {
             var changes = new List<Change>();
@@ -84,8 +83,8 @@ namespace FLSVertretungsplan
 
             var change = new Change
             {
-                SchoolName = dateNode.Attributes["name"]?.Value,
-                ClassName = classNode.Attributes["name"]?.Value,
+                SchoolClass = new SchoolClass(classNode.Attributes["name"]?.Value,
+                                              schoolNode.Attributes["name"]?.Value),
                 Day = day,
                 Hours = oldNode.ChildText("hours"),
                 OldLesson = new Lesson
@@ -141,9 +140,13 @@ namespace FLSVertretungsplan
                 {
                     return x.Day.CompareTo(y.Day);
                 }
-                if (x.ClassName != y.ClassName)
+                if (x.SchoolClass.School != y.SchoolClass.School)
                 {
-                    return x.ClassName.CompareTo(y.ClassName);
+                    return x.SchoolClass.School.CompareTo(y.SchoolClass.School);
+                }
+                if (x.SchoolClass.Name != y.SchoolClass.Name)
+                {
+                    return x.SchoolClass.Name.CompareTo(y.SchoolClass.Name);
                 }
                 return x.Hours.CompareTo(y.Hours);
             });

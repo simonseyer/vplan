@@ -12,8 +12,7 @@ namespace FLSVertretungsplan
 
     public class Change
     {
-        public string SchoolName { get; set; }
-        public string ClassName { get; set; }
+        public SchoolClass SchoolClass { get; set; }
         public DateTime Day { get; set; }
         public string Hours { get; set; }
 
