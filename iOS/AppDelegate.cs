@@ -3,6 +3,8 @@ using UIKit;
 using Microsoft.AppCenter;
 using Microsoft.AppCenter.Analytics;
 using Microsoft.AppCenter.Crashes;
+using System;
+using System.Threading.Tasks;
 
 namespace FLSVertretungsplan.iOS
 {
@@ -24,6 +26,10 @@ namespace FLSVertretungsplan.iOS
             AppCenter.Start("***REMOVED***", typeof(Analytics), typeof(Crashes));
 
             App.Initialize();
+
+            RequestNotifications();
+            var dataStore = ServiceLocator.Instance.Get<IVplanDataStore>();
+            var _ = dataStore.GetVplanAsync(true);
 
             return true;
         }
