@@ -4,7 +4,9 @@ using Microsoft.AppCenter;
 using Microsoft.AppCenter.Analytics;
 using Microsoft.AppCenter.Crashes;
 using System;
+using System.Diagnostics;
 using System.Threading.Tasks;
+using UserNotifications;
 
 namespace FLSVertretungsplan.iOS
 {
@@ -32,6 +34,55 @@ namespace FLSVertretungsplan.iOS
             var _ = dataStore.GetVplanAsync(true);
 
             return true;
+        }
+
+        private async void RequestNotifications()
+        {
+            var notificationCenter = UNUserNotificationCenter.Current;
+            var result = await notificationCenter.RequestAuthorizationAsync(UNAuthorizationOptions.Alert);
+            if (!result.Item1)
+            {
+                Debug.WriteLine("User denied notifications: " + result.Item2.LocalizedDescription);
+            }
+        }
+
+        public override void PerformFetch(UIApplication application, System.Action<UIBackgroundFetchResult> completionHandler)
+        {
+            try
+            {
+                var fetch = FetchData();
+                fetch.Wait();
+                completionHandler(fetch.Result ? UIBackgroundFetchResult.NewData : UIBackgroundFetchResult.NoData);
+            }
+            catch (Exception)
+            {
+                completionHandler(UIBackgroundFetchResult.Failed);
+            }
+        }
+
+        private async Task<bool> FetchData()
+        {
+            var dataStore = ServiceLocator.Instance.Get<IVplanDataStore>();
+
+            var oldVplan = await dataStore.GetVplanAsync();
+            var newVplan = await dataStore.GetVplanAsync(true);
+
+            var gotUpdated = newVplan != null && (oldVplan == null || !oldVplan.LastUpdate.Equals(newVplan.LastUpdate));
+
+            var notificationCenter = UNUserNotificationCenter.Current;
+            var settings = await notificationCenter.GetNotificationSettingsAsync();
+            var oldNotifications = await notificationCenter.GetPendingNotificationRequestsAsync();
+            if (settings.AuthorizationStatus == UNAuthorizationStatus.Authorized && oldNotifications.Length == 0)
+            {
+                var content = new UNMutableNotificationContent();
+                content.Title = "Neuer Vertretungsplan verfügbar";
+                content.Body = newVplan.Changes.Count + " Einträge";
+                var trigger = UNTimeIntervalNotificationTrigger.CreateTrigger(0, false);
+                var request = UNNotificationRequest.FromIdentifier("", content, trigger);
+                await notificationCenter.AddNotificationRequestAsync(request);
+            }
+
+            return gotUpdated;
         }
 
         public override void OnResignActivation(UIApplication application)

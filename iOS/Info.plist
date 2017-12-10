@@ -10,8 +10,6 @@
 	<string>1.0</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
-	<key>MinimumOSVersion</key>
-	<string>8.0</string>
 	<key>UIDeviceFamily</key>
 	<array>
 		<integer>1</integer>
@@ -46,5 +44,11 @@
 	<false/>
 	<key>CFBundleName</key>
 	<string>FLS</string>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>fetch</string>
+	</array>
+	<key>MinimumOSVersion</key>
+	<string>8.0</string>
 </dict>
 </plist>
