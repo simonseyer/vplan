@@ -1,10 +1,18 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.Diagnostics;
 using System.Threading.Tasks;
 
 namespace FLSVertretungsplan
 {
+    public class DatePresentationModel {
+
+        public string Title { get; set; }
+        public Collection<ChangePresentationModel> Items { get; set; }
+    }
+
     public class ChangePresentationModel {
 
         public string ClassName { get; set; }
@@ -83,24 +91,28 @@ namespace FLSVertretungsplan
 
     public class ItemsViewModel : BaseViewModel
     {
-        public ObservableCollection<String> Dates { get; }
-        public ObservableCollection<Collection<ChangePresentationModel>> Changes { get; }
+        public Property<List<DatePresentationModel>> Dates { get; set; }
+        public Property<string> LastUpdate { get; set; }
         public Command LoadItemsCommand { get; }
+        public bool BookmarkedVplan { get; private set; }
 
-        string lastUpdate = string.Empty;
-        public string LastUpdate
+        public ItemsViewModel(bool bookmarkedVplan)
         {
-            get { return lastUpdate; }
-            set { SetProperty(ref lastUpdate, value); }
-        }
-
-        public ItemsViewModel()
-        {
+            BookmarkedVplan = bookmarkedVplan;
             Title = "Vertretungsplan";
-            LastUpdate = "";
-            Dates = new ObservableCollection<String>();
-            Changes = new ObservableCollection<Collection<ChangePresentationModel>>();
-            LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());       
+            LastUpdate = new Property<string>() {
+                Value = ""
+            };
+            Dates = new Property<List<DatePresentationModel>>()
+            {
+                Value = new List<DatePresentationModel>()
+            };
+            LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
+            if (BookmarkedVplan)
+            {
+                DataStore.GetBookmarkedVplan().PropertyChanged += VplanChanged;
+                VplanChanged(null, null);
+            }
         }
 
         async Task ExecuteLoadItemsCommand()
@@ -112,34 +124,54 @@ namespace FLSVertretungsplan
 
             try
             {
-                Dates.Clear();
-                Changes.Clear();
                 var plan = await DataStore.GetVplanAsync(true);
-
-                LastUpdate = "Letzte Aktualisierung: " + plan.LastUpdate.ToString("dd.MM.yy hh:mm") + " h";
-                foreach (var item in plan.Changes)
+                if (!BookmarkedVplan)
                 {
-                    var date = item.Day.ToString("dd.MM.yy");
-                    var dateIndex = Dates.IndexOf(date);
-                    if (dateIndex < 0)
-                    {
-                        dateIndex = Dates.Count;
-                        Dates.Add(date);
-                        Changes.Add(new Collection<ChangePresentationModel>());
-                    }
-
-                    Changes[dateIndex].Add(new ChangePresentationModel(item));
+                    updateData(plan);
                 }
             }
             catch (Exception ex)
             {
-                LastUpdate = "Laden fehlgeschlagen";
+                LastUpdate.Value = "Laden fehlgeschlagen";
                 Debug.WriteLine(ex);
             }
             finally
             {
                 IsBusy = false;
             }
+        }
+
+        private void VplanChanged(object sender, EventArgs e)
+        {
+            updateData(DataStore.GetBookmarkedVplan().Value);
+        }
+
+        private void updateData(Vplan vplan)
+        {
+            var dates = new List<DatePresentationModel>();
+            var datesDict = new Dictionary<string, DatePresentationModel>();
+            LastUpdate.Value = "Letzte Aktualisierung: " + vplan.LastUpdate.ToString("dd.MM.yy hh:mm") + " h";
+            foreach (var item in vplan.Changes)
+            {
+                var date = item.Day.ToString("dd.MM.yy");
+                DatePresentationModel presentationModel;
+                if (datesDict.ContainsKey(date))
+                {
+                    presentationModel = datesDict[date];
+                }
+                else
+                {
+                    presentationModel = new DatePresentationModel() {
+                        Title = date,
+                        Items = new Collection<ChangePresentationModel>()
+                    };
+                    dates.Add(presentationModel);
+                    datesDict[date] = presentationModel;
+                }
+
+                presentationModel.Items.Add(new ChangePresentationModel(item));
+            }
+            Dates.Value = dates;
         }
     }
 }

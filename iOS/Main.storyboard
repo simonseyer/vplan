@@ -36,7 +36,7 @@
             <objects>
                 <tableViewController id="75" customClass="ItemsViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="170" sectionHeaderHeight="28" sectionFooterHeight="28" id="76">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="554"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <view key="tableFooterView" contentMode="scaleToFill" id="YTs-jx-Wry">
@@ -150,7 +150,40 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="81" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2833" y="-778"/>
+            <point key="canvasLocation" x="4286" y="-959"/>
+        </scene>
+        <!--Alle-->
+        <scene sceneID="hVl-iR-tpU">
+            <objects>
+                <viewController id="4Cp-Hj-FAj" customClass="VplanViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="6Z2-4R-5I6"/>
+                        <viewControllerLayoutGuide type="bottom" id="K2r-e7-PXR"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="kfI-fv-URE">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6mB-YN-mXg">
+                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
+                                <connections>
+                                    <segue destination="75" kind="embed" id="Pd5-iv-FWk"/>
+                                </connections>
+                            </containerView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="K2r-e7-PXR" firstAttribute="top" secondItem="6mB-YN-mXg" secondAttribute="bottom" id="3a1-wQ-gIU"/>
+                            <constraint firstItem="6mB-YN-mXg" firstAttribute="leading" secondItem="kfI-fv-URE" secondAttribute="leading" id="Cl4-b6-kHD"/>
+                            <constraint firstItem="6mB-YN-mXg" firstAttribute="top" secondItem="6Z2-4R-5I6" secondAttribute="bottom" id="S8B-KO-tCa"/>
+                            <constraint firstAttribute="trailing" secondItem="6mB-YN-mXg" secondAttribute="trailing" id="syi-eO-dLO"/>
+                        </constraints>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Alle" id="NCD-k8-jQ8"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2QB-sf-7wL" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2847" y="-778"/>
         </scene>
         <!--Einstellungen-->
         <scene sceneID="Ql2-eB-dCw">
@@ -290,25 +323,6 @@
             </objects>
             <point key="canvasLocation" x="2832.8000000000002" y="-15.742128935532236"/>
         </scene>
-        <!--Meine-->
-        <scene sceneID="Iet-K0-Map">
-            <objects>
-                <viewController id="kAy-iR-rLU" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="UfP-A8-OIh"/>
-                        <viewControllerLayoutGuide type="bottom" id="ty7-fa-Xtf"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="0MS-Vu-zra">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="Meine" id="2Pk-0I-RZT"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Ppy-Q0-qz1" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2833" y="-1456"/>
-        </scene>
         <!--Vertretungsplan-->
         <scene sceneID="1NB-3Y-rq6">
             <objects>
@@ -320,8 +334,8 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
                     <connections>
-                        <segue destination="kAy-iR-rLU" kind="relationship" relationship="viewControllers" id="nq6-T4-lIQ"/>
-                        <segue destination="75" kind="relationship" relationship="viewControllers" id="L1L-v3-AxW"/>
+                        <segue destination="k2r-19-stU" kind="relationship" relationship="viewControllers" id="MW1-py-c4c"/>
+                        <segue destination="4Cp-Hj-FAj" kind="relationship" relationship="viewControllers" id="lHB-dP-z1V"/>
                         <segue destination="cdI-FG-gat" kind="relationship" relationship="viewControllers" id="Luf-OL-W7J"/>
                     </connections>
                 </tabBarController>
@@ -329,8 +343,44 @@
             </objects>
             <point key="canvasLocation" x="1574" y="-777"/>
         </scene>
+        <!--Meine-->
+        <scene sceneID="PeH-PL-gHl">
+            <objects>
+                <viewController id="k2r-19-stU" customClass="BookmarkedViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="UQe-Rp-Aa3"/>
+                        <viewControllerLayoutGuide type="bottom" id="L4w-bB-84t"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="wrb-8Q-7XZ">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5MM-un-4zX">
+                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
+                                <connections>
+                                    <segue destination="75" kind="embed" id="vQ1-Yz-Ylf"/>
+                                </connections>
+                            </containerView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="5MM-un-4zX" secondAttribute="trailing" id="LFi-V7-VKs"/>
+                            <constraint firstItem="L4w-bB-84t" firstAttribute="top" secondItem="5MM-un-4zX" secondAttribute="bottom" id="P08-jh-o14"/>
+                            <constraint firstItem="5MM-un-4zX" firstAttribute="leading" secondItem="wrb-8Q-7XZ" secondAttribute="leading" id="Q4L-f5-8Hu"/>
+                            <constraint firstItem="5MM-un-4zX" firstAttribute="top" secondItem="UQe-Rp-Aa3" secondAttribute="bottom" id="yBm-0j-5J8"/>
+                        </constraints>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Meine" id="CMw-Rb-y34"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3Hl-dq-TZQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2833" y="-1488"/>
+        </scene>
     </scenes>
     <resources>
         <image name="First" width="32" height="30"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="vQ1-Yz-Ylf"/>
+    </inferredMetricsTieBreakers>
 </document>

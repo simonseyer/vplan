@@ -12,6 +12,7 @@ namespace FLSVertretungsplan.iOS
         UIRefreshControl refreshControl;
 
         public ItemsViewModel ViewModel { get; set; }
+        public bool bookmarkedVplan;
 
         public BrowseViewController(IntPtr handle) : base(handle)
         {
@@ -21,7 +22,7 @@ namespace FLSVertretungsplan.iOS
         {
             base.ViewDidLoad();
 
-            ViewModel = new ItemsViewModel();
+            ViewModel = new ItemsViewModel(bookmarkedVplan);
 
             // Setup UITableView.
             refreshControl = new UIRefreshControl();
@@ -29,17 +30,17 @@ namespace FLSVertretungsplan.iOS
             TableView.RefreshControl = refreshControl;
             TableView.Source = new ItemsDataSource(ViewModel);
 
-            LastUpdateLabel.Text = ViewModel.LastUpdate;
+            LastUpdateLabel.Text = ViewModel.LastUpdate.Value;
 
             ViewModel.PropertyChanged += IsBusy_PropertyChanged;
-            ViewModel.Changes.CollectionChanged += Items_CollectionChanged;
+            ViewModel.Dates.PropertyChanged += Items_CollectionChanged;
         }
 
         public override void ViewDidAppear(bool animated)
         {
             base.ViewDidAppear(animated);
 
-            if (ViewModel.Changes.Count == 0)
+            if (ViewModel.Dates.Value.Count == 0)
                 ViewModel.LoadItemsCommand.Execute(null);
         }
 
@@ -65,7 +66,6 @@ namespace FLSVertretungsplan.iOS
                             else if (!ViewModel.IsBusy)
                             {
                                 refreshControl.EndRefreshing();
-                                TableView.ReloadData();
                             }
                         });
                     }
@@ -74,16 +74,16 @@ namespace FLSVertretungsplan.iOS
                     {
                         InvokeOnMainThread(() =>
                         {
-                            LastUpdateLabel.Text = ViewModel.LastUpdate;
+                            LastUpdateLabel.Text = ViewModel.LastUpdate.Value;
                         });
                     }
                     break;
             }
         }
 
-        void Items_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        void Items_CollectionChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            
+            TableView.ReloadData();
         }
     }
 
@@ -100,17 +100,17 @@ namespace FLSVertretungsplan.iOS
 
         public override nint NumberOfSections(UITableView tableView)
         {
-            return viewModel.Dates.Count;
+            return viewModel.Dates.Value.Count;
         }
 
         public override nint RowsInSection(UITableView tableview, nint section) 
         {
-            return viewModel.Changes[(int)section].Count;
+            return viewModel.Dates.Value[(int)section].Items.Count;
         }
 
         public override string TitleForHeader(UITableView tableView, nint section)
         {
-            return viewModel.Dates[(int)section];
+            return viewModel.Dates.Value[(int)section].Title;
         }
 
         public override UITableViewCell GetCell(UITableView tableView, NSIndexPath indexPath)
@@ -119,7 +119,7 @@ namespace FLSVertretungsplan.iOS
 
             cell.StatusView.Layer.CornerRadius = 6; // TODO
 
-            var change = viewModel.Changes[indexPath.Section][indexPath.Row];
+            var change = viewModel.Dates.Value[indexPath.Section].Items[indexPath.Row];
 
             cell.ClassNameLabel.Text = change.ClassName;
             cell.HoursLabel.Text = change.Hours;

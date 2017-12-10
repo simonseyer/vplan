@@ -160,6 +160,14 @@
       <DependentUpon>ChipCell.cs</DependentUpon>
     </Compile>
     <Compile Include="UIColorExtension.cs" />
+    <Compile Include="ViewControllers\VplanViewController.cs" />
+    <Compile Include="ViewControllers\VplanViewController.designer.cs">
+      <DependentUpon>VplanViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ViewControllers\BookmarkedViewController.cs" />
+    <Compile Include="ViewControllers\BookmarkedViewController.designer.cs">
+      <DependentUpon>BookmarkedViewController.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Entitlements.plist" />
