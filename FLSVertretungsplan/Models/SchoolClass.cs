@@ -24,15 +24,7 @@ namespace FLSVertretungsplan
             SchoolClass schoolClass = obj as SchoolClass;
             if (schoolClass != null)
             {
-                var schoolComparisonResult = School.CompareTo(schoolClass.School);
-                if (schoolComparisonResult != 0)
-                {
-                    return schoolComparisonResult;
-                }
-                else
-                {
-                    return Name.CompareTo(schoolClass.Name);
-                }
+                return string.Compare(Name, schoolClass.Name, StringComparison.Ordinal);
             }
             else
             {
