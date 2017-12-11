@@ -113,9 +113,18 @@ namespace FLSVertretungsplan
                 DataStore.GetBookmarkedVplan().PropertyChanged += VplanChanged;
                 VplanChanged(null, null);
             }
+            else
+            {
+                var _ = Refresh(false);
+            }
         }
 
         async Task ExecuteLoadItemsCommand()
+        {
+            await Refresh(true);
+        }
+
+        private async Task Refresh(bool force)
         {
             if (IsBusy)
                 return;
