@@ -29,14 +29,14 @@ namespace FLSVertretungsplan.iOS
 
             App.Initialize();
 
-            RequestNotifications();
+            _ = RequestNotifications();
             var dataStore = ServiceLocator.Instance.Get<IVplanDataStore>();
             var _ = dataStore.GetVplanAsync(true);
 
             return true;
         }
 
-        private async void RequestNotifications()
+        private async Task RequestNotifications()
         {
             var notificationCenter = UNUserNotificationCenter.Current;
             var result = await notificationCenter.RequestAuthorizationAsync(UNAuthorizationOptions.Alert);
@@ -46,18 +46,20 @@ namespace FLSVertretungsplan.iOS
             }
         }
 
-        public override void PerformFetch(UIApplication application, System.Action<UIBackgroundFetchResult> completionHandler)
+        public override void PerformFetch(UIApplication application, Action<UIBackgroundFetchResult> completionHandler)
         {
-            try
+            var fetch = FetchData();
+            fetch.ContinueWith(r => 
             {
-                var fetch = FetchData();
-                fetch.Wait();
-                completionHandler(fetch.Result ? UIBackgroundFetchResult.NewData : UIBackgroundFetchResult.NoData);
-            }
-            catch (Exception)
-            {
-                completionHandler(UIBackgroundFetchResult.Failed);
-            }
+                if (r.IsFaulted)
+                {
+                    completionHandler(UIBackgroundFetchResult.Failed);
+                }
+                else
+                {
+                    completionHandler(r.Result ? UIBackgroundFetchResult.NewData : UIBackgroundFetchResult.NoData);
+                }
+            });
         }
 
         private async Task<bool> FetchData()
@@ -77,8 +79,7 @@ namespace FLSVertretungsplan.iOS
                 var content = new UNMutableNotificationContent();
                 content.Title = "Neuer Vertretungsplan verfügbar";
                 content.Body = newVplan.Changes.Count + " Einträge";
-                var trigger = UNTimeIntervalNotificationTrigger.CreateTrigger(0, false);
-                var request = UNNotificationRequest.FromIdentifier("", content, trigger);
+                var request = UNNotificationRequest.FromIdentifier(newVplan.LastUpdate.ToString(), content, null);
                 await notificationCenter.AddNotificationRequestAsync(request);
             }
 
