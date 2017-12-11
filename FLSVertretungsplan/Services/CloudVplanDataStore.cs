@@ -5,6 +5,8 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.Xml;
 using System.Diagnostics;
+using Newtonsoft.Json;
+using System.IO;
 
 namespace FLSVertretungsplan
 {
@@ -12,23 +14,35 @@ namespace FLSVertretungsplan
     {
 
         HttpClient client;
-        Vplan vplan;
-        Property<Vplan> bookmarkedVplan;
-        ObservableCollection<SchoolBookmark> bookmarkedSchools;
-        HashSet<SchoolClassBookmark> schoolClasses;
-        ObservableCollection<SchoolClassBookmark> bookmarkedClasses;
+
+        // Transient state
+        Property<bool> IsRefreshing;
+
+        // State
+        Property<Vplan> Vplan;
+        HashSet<SchoolClassBookmark> AllSchoolClassBookmarks;
+        ObservableCollection<SchoolBookmark> SchoolBookmarks;
+
+        // Derived state
+        Property<Vplan> BookmarkedVplan;
+        // Contains only SchoolClassBookmarks of the bookmarked schools
+        ObservableCollection<SchoolClassBookmark> SchoolClassBookmarks;
 
         public CloudVplanDataStore()
         {
             client = new HttpClient();
             client.BaseAddress = new Uri($"{App.BackendUrl}/");
 
-            vplan = new Vplan
-            {
-                LastUpdate = DateTime.Now,
-                Changes = new List<Change>()
+            IsRefreshing = new Property<bool>();
+
+            Vplan = new Property<Vplan> {
+                Value = new Vplan
+                {
+                    LastUpdate = DateTime.Now,
+                    Changes = new List<Change>()
+                }
             };
-            bookmarkedVplan = new Property<Vplan>()
+            BookmarkedVplan = new Property<Vplan>()
             {
                 Value = new Vplan
                 {
@@ -36,48 +50,104 @@ namespace FLSVertretungsplan
                     Changes = new List<Change>()
                 }
             };
-            bookmarkedSchools = new ObservableCollection<SchoolBookmark>() 
+            SchoolBookmarks = new ObservableCollection<SchoolBookmark>() 
             {
                 new SchoolBookmark("BG", false),
                 new SchoolBookmark("BS", false),
                 new SchoolBookmark("BFS", false),
                 new SchoolBookmark("HBFS", false)
             };
-            schoolClasses = new HashSet<SchoolClassBookmark>();
-            bookmarkedClasses = new ObservableCollection<SchoolClassBookmark>();
+            AllSchoolClassBookmarks = new HashSet<SchoolClassBookmark>();
+            SchoolClassBookmarks = new ObservableCollection<SchoolClassBookmark>();
+
+            _ = LoadPersistedData();
         }
 
-        public async Task<Vplan> GetVplanAsync(bool forceRefresh = false)
+        public async Task Refresh()
         {
-            if (forceRefresh)
+            if (IsRefreshing.Value)
             {
-                var xml = await client.GetStringAsync($"raw/vplan?version=1.2.4");
-                vplan = await Task.Run(() => VplanParser.Parse(xml));
-                AddClasses(vplan);
-                UpdateBookmarkedVplan();
+                return;
             }
-            return vplan;
+            IsRefreshing.Value = true;
+            
+            var xml = await client.GetStringAsync($"raw/vplan?version=1.2.4");
+            Vplan.Value = await Task.Run(() => VplanParser.Parse(xml));
+
+            UpdateSchoolClasses();
+            UpdateBookmarkedVplan();
+
+            _ = PersistAll();
+
+            IsRefreshing.Value = false;
+        }
+
+        public void BookmarkSchool(string school, bool bookmark)
+        {
+            var i = IndexOfSchoolBookmark(school);
+            Debug.Assert(i >= 0, string.Format("School bookmark {0} schould exist", school));
+            SchoolBookmarks[i] = new SchoolBookmark(school, bookmark);
+
+            foreach (var schoolClassBookmark in new HashSet<SchoolClassBookmark>(AllSchoolClassBookmarks))
+            {
+                if (schoolClassBookmark.SchoolClass.School.Equals(school))
+                {
+                    var newBookmark = new SchoolClassBookmark(schoolClassBookmark.SchoolClass,
+                                                              schoolClassBookmark.Bookmarked,
+                                                              bookmark);
+                    UpdateSchoolClassBookmark(newBookmark);
+                }
+            }
+            UpdateBookmarkedVplan();
+
+            _ = PersistSchoolBookmarks();
+            _ = PersistSchoolClassBookmarks();
+        }
+
+        public void BookmarkSchoolClass(SchoolClass schoolClass, bool bookmark)
+        {
+            var i = IndexOfSchoolClassBookmark(schoolClass);
+            Debug.Assert(i >= 0, string.Format("School class bookmark {0} schould exist", schoolClass));
+
+            var oldBookmark = SchoolClassBookmarks[i];
+            var newBookmark = new SchoolClassBookmark(schoolClass,
+                                                      bookmark,
+                                                      oldBookmark.SchoolBookmarked);
+            UpdateSchoolClassBookmark(newBookmark);
+            UpdateBookmarkedVplan();
+
+            _ = PersistSchoolClassBookmarks();
+        }
+
+        public Property<bool> GetIsRefreshing()
+        {
+            return IsRefreshing;
+        }
+
+        public Property<Vplan> GetVplan()
+        {
+            return Vplan;
         }
 
         public Property<Vplan> GetBookmarkedVplan() 
         {
-            return bookmarkedVplan;
+            return BookmarkedVplan;
         }
 
-        public ObservableCollection<SchoolBookmark> GetBookmarkedSchools()
+        public ObservableCollection<SchoolBookmark> GetSchoolBookmarks()
         {
-            return bookmarkedSchools;
+            return SchoolBookmarks;
         }
 
-        public ObservableCollection<SchoolClassBookmark> GetBookmarkedClasses()
+        public ObservableCollection<SchoolClassBookmark> GetSchoolClassBookmarks()
         {
-            return bookmarkedClasses;
+            return SchoolClassBookmarks;
         }
 
         private void UpdateBookmarkedVplan()
         {
             List<Change> bookmarkedChanges = new List<Change>();
-            foreach (Change change in vplan.Changes)
+            foreach (Change change in Vplan.Value.Changes)
             {
                 var bookmark = GetSchoolClassBookmark(change.SchoolClass);
                 if (bookmark != null && bookmark.Bookmarked)
@@ -86,16 +156,16 @@ namespace FLSVertretungsplan
                 }
             }
 
-            bookmarkedVplan.Value = new Vplan
+            BookmarkedVplan.Value = new Vplan
             {
-                LastUpdate = vplan.LastUpdate,
+                LastUpdate = Vplan.Value.LastUpdate,
                 Changes = bookmarkedChanges
             };
         }
 
-        private void AddClasses(Vplan vplan)
+        private void UpdateSchoolClasses()
         {
-            foreach (Change change in vplan.Changes)
+            foreach (Change change in Vplan.Value.Changes)
             {
                 AddClass(change.SchoolClass);
             }
@@ -109,79 +179,49 @@ namespace FLSVertretungsplan
                                                      false,
                                                      schoolBookmark.Bookmarked);
 
-            if (schoolClasses.Contains(newBookmark))
+            if (AllSchoolClassBookmarks.Contains(newBookmark))
             {
                 return;
             }
 
-            UpdateBookmarkedSchoolClass(newBookmark);
+            UpdateSchoolClassBookmark(newBookmark);
         }
 
-        private void UpdateBookmarkedSchoolClass(SchoolClassBookmark newBookmark)
+        private void UpdateSchoolClassBookmark(SchoolClassBookmark newBookmark)
         {
-            schoolClasses.Remove(newBookmark);
-            schoolClasses.Add(newBookmark);
+            // Replace bookmark
+            AllSchoolClassBookmarks.Remove(newBookmark);
+            AllSchoolClassBookmarks.Add(newBookmark);
+
             if (newBookmark.SchoolBookmarked)
             {
-                for (var i = 0; i < bookmarkedClasses.Count; i++)
+                for (var i = 0; i < SchoolClassBookmarks.Count; i++)
                 {
-                    var bookmark = bookmarkedClasses[i];
+                    var bookmark = SchoolClassBookmarks[i];
                     var comparison = bookmark.SchoolClass.CompareTo(newBookmark.SchoolClass);
                     if (comparison == 0)
                     {
-                        bookmarkedClasses[i] = newBookmark;
+                        SchoolClassBookmarks[i] = newBookmark;
                         return;
                     }
                     else if (comparison > 0)
                     {
-                        bookmarkedClasses.Insert(i, newBookmark);
+                        SchoolClassBookmarks.Insert(i, newBookmark);
                         return;
                     }
                 }
-                bookmarkedClasses.Add(newBookmark);
+                SchoolClassBookmarks.Add(newBookmark);
             }
             else
             {
-                bookmarkedClasses.Remove(newBookmark);
+                SchoolClassBookmarks.Remove(newBookmark);
             }
-        }
-
-        public void BookmarkSchool(string school, bool bookmark)
-        {
-            var i = IndexOfSchoolBookmark(school);
-            Debug.Assert(i >= 0, string.Format("School bookmark {0} schould exist", school));
-            bookmarkedSchools[i] = new SchoolBookmark(school, bookmark);
-
-            foreach (var schoolClassBookmark in new HashSet<SchoolClassBookmark>(schoolClasses))
-            {
-                if (schoolClassBookmark.SchoolClass.School.Equals(school))
-                {
-                    var newBookmark = new SchoolClassBookmark(schoolClassBookmark.SchoolClass,
-                                                              schoolClassBookmark.Bookmarked,
-                                                              bookmark);
-                    UpdateBookmarkedSchoolClass(newBookmark);
-                }
-            }
-            UpdateBookmarkedVplan();
-        }
-
-        public void BookmarkClass(SchoolClass schoolClass, bool bookmark)
-        {
-            var i = IndexOfSchoolClassBookmark(schoolClass);
-            Debug.Assert(i >= 0, string.Format("School class bookmark {0} schould exist", schoolClass));
-
-            var oldBookmark = bookmarkedClasses[i];
-            var newBookmark = new SchoolClassBookmark(schoolClass, 
-                                                      bookmark, 
-                                                      oldBookmark.SchoolBookmarked);
-            UpdateBookmarkedSchoolClass(newBookmark);
-            UpdateBookmarkedVplan();
         }
 
         private int IndexOfSchoolClassBookmark(SchoolClass schoolClass)
         {
             var dummyBookmark = new SchoolClassBookmark(schoolClass, false, false);
-            return bookmarkedClasses.IndexOf(dummyBookmark);
+            return SchoolClassBookmarks.IndexOf(dummyBookmark);
         }
 
         private SchoolClassBookmark GetSchoolClassBookmark(SchoolClass schoolClass)
@@ -191,13 +231,13 @@ namespace FLSVertretungsplan
             {
                 return null;
             }
-            return bookmarkedClasses[i];
+            return SchoolClassBookmarks[i];
         }
 
         private int IndexOfSchoolBookmark(string school)
         {
             var dummyBookmark = new SchoolBookmark(school, false);
-            return bookmarkedSchools.IndexOf(dummyBookmark);
+            return SchoolBookmarks.IndexOf(dummyBookmark);
         }
 
         private SchoolBookmark GetSchoolBookmark(string school)
@@ -207,9 +247,81 @@ namespace FLSVertretungsplan
             {
                 return null;
             }
-            return bookmarkedSchools[i];
+            return SchoolBookmarks[i];
         }
 
-    }
+        private async Task PersistAll()
+        {
+            await PersistVplan();
+            await PersistSchoolBookmarks();
+            await PersistSchoolClassBookmarks();
+        }
 
+        private async Task PersistVplan()
+        {
+            var json = await Task.Run(() => JsonConvert.SerializeObject(Vplan.Value));
+            await PersistJson(json, "vplan.json");
+            //Vplan.Value = JsonConvert.DeserializeObject<Vplan>(json);
+        }
+
+        private async Task PersistSchoolBookmarks()
+        {
+            var json = await Task.Run(() => JsonConvert.SerializeObject(SchoolBookmarks));
+            await PersistJson(json, "schoolBookmarks.json");
+        }
+
+        private async Task PersistSchoolClassBookmarks()
+        {
+            var json = await Task.Run(() => JsonConvert.SerializeObject(SchoolClassBookmarks));
+            await PersistJson(json, "schoolClassBookmarks.json");
+        }
+
+        private async Task PersistJson(string json, string fileName)
+        {
+            var filePath = CreatePersistentPath(fileName);
+            using (var file = File.Open(filePath, FileMode.Create, FileAccess.Write))
+            using (var strm = new StreamWriter(file))
+            {
+                await strm.WriteAsync(json);
+            }
+        }
+
+        private async Task<string> LoadJson(string fileName)
+        {
+            var filePath = CreatePersistentPath(fileName);
+            using (var file = File.Open(filePath, FileMode.Open, FileAccess.Read))
+            using (var strm = new StreamReader(file))
+            {
+                return await strm.ReadToEndAsync();
+            }
+        }
+
+        private string CreatePersistentPath(string fileName)
+        {
+            string path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            return Path.Combine(path, fileName);
+        }
+
+        private async Task LoadPersistedData()
+        {
+            var json = await LoadJson("vplan.json");
+            Vplan.Value = await Task.Run(() => JsonConvert.DeserializeObject<Vplan>(json));
+
+            json = await LoadJson("schoolBookmarks.json");
+            var schoolBookmarks = await Task.Run(() => JsonConvert.DeserializeObject<Collection<SchoolBookmark>>(json));
+            foreach (var bookmark in schoolBookmarks)
+            {
+                SchoolBookmarks.Add(bookmark);
+            }
+
+            json = await LoadJson("schoolClassBookmarks.json");
+            var schoolClassBookmarks = await Task.Run(() => JsonConvert.DeserializeObject<Collection<SchoolClassBookmark>>(json));
+            foreach (var bookmark in schoolClassBookmarks)
+            {
+                UpdateSchoolClassBookmark(bookmark);
+            }
+
+            UpdateBookmarkedVplan();
+        }
+    }
 }

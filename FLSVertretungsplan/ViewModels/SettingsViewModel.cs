@@ -53,29 +53,29 @@ namespace FLSVertretungsplan
         {
             Schools = new ObservableCollection<ChipPresentationModel>();
             LoadSchools();
-            DataStore.GetBookmarkedSchools().CollectionChanged += Schools_CollectionChanged;
+            DataStore.GetSchoolBookmarks().CollectionChanged += Schools_CollectionChanged;
 
             SchoolClasses = new ObservableCollection<ChipPresentationModel>();
             LoadSchoolClasses();
-            DataStore.GetBookmarkedClasses().CollectionChanged += SchoolClasses_CollectionChanged;
+            DataStore.GetSchoolClassBookmarks().CollectionChanged += SchoolClasses_CollectionChanged;
         }
 
         public void ToggleSchoolBookmarkAtIndex(int index)
         {
-            var bookmark = DataStore.GetBookmarkedSchools()[index];
+            var bookmark = DataStore.GetSchoolBookmarks()[index];
             DataStore.BookmarkSchool(bookmark.School, !bookmark.Bookmarked);
         }
 
         public void ToggleSchoolClassBookmarkAtIndex(int index)
         {
-            var bookmark = DataStore.GetBookmarkedClasses()[index];
-            DataStore.BookmarkClass(bookmark.SchoolClass, !bookmark.Bookmarked);
+            var bookmark = DataStore.GetSchoolClassBookmarks()[index];
+            DataStore.BookmarkSchoolClass(bookmark.SchoolClass, !bookmark.Bookmarked);
         }
 
         private void LoadSchools()
         {
             Schools.Clear();
-            foreach (SchoolBookmark bookmark in DataStore.GetBookmarkedSchools())
+            foreach (SchoolBookmark bookmark in DataStore.GetSchoolBookmarks())
             {
                 Schools.Add(new ChipPresentationModel(bookmark));
             }
@@ -119,7 +119,7 @@ namespace FLSVertretungsplan
         {
             SchoolClasses.Clear();
 
-            var bookmarks = DataStore.GetBookmarkedClasses();
+            var bookmarks = DataStore.GetSchoolClassBookmarks();
             for (var i = 0; i < bookmarks.Count; i++)
             {
                 if (bookmarks[i].SchoolBookmarked)

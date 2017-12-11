@@ -7,14 +7,16 @@ namespace FLSVertretungsplan
 {
     public interface IVplanDataStore
     {
-        Task<Vplan> GetVplanAsync(bool forceRefresh = false);
+        Task Refresh();
 
+        Property<bool> GetIsRefreshing();
+        Property<Vplan> GetVplan();
         Property<Vplan> GetBookmarkedVplan();
-        ObservableCollection<SchoolBookmark> GetBookmarkedSchools();
-        ObservableCollection<SchoolClassBookmark> GetBookmarkedClasses();
+        ObservableCollection<SchoolBookmark> GetSchoolBookmarks();
+        ObservableCollection<SchoolClassBookmark> GetSchoolClassBookmarks();
 
         void BookmarkSchool(string schoolName, bool bookmark);
-        void BookmarkClass(SchoolClass schoolClass, bool bookmark);
+        void BookmarkSchoolClass(SchoolClass schoolClass, bool bookmark);
 
     }
 }

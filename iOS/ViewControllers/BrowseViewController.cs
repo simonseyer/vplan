@@ -32,58 +32,50 @@ namespace FLSVertretungsplan.iOS
 
             LastUpdateLabel.Text = ViewModel.LastUpdate.Value;
 
-            ViewModel.PropertyChanged += IsBusy_PropertyChanged;
-            ViewModel.Dates.PropertyChanged += Items_CollectionChanged;
+            ViewModel.IsRefreshing.PropertyChanged += IsRefreshing_PropertyChanged;
+            ViewModel.LastUpdate.PropertyChanged += LastUpdate_PropertyChanged;
+            ViewModel.Dates.PropertyChanged += Dates_CollectionChanged;
         }
 
         public override void ViewDidAppear(bool animated)
         {
             base.ViewDidAppear(animated);
-
-            if (ViewModel.Dates.Value.Count == 0)
-                ViewModel.LoadItemsCommand.Execute(null);
         }
 
         void RefreshControl_ValueChanged(object sender, EventArgs e)
         {
-            if (!ViewModel.IsBusy && refreshControl.Refreshing)
-                ViewModel.LoadItemsCommand.Execute(null);
+            ViewModel.LoadItemsCommand.Execute(null);
         }
 
-        void IsBusy_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        void IsRefreshing_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            var propertyName = e.PropertyName;
-            switch (propertyName)
+            InvokeOnMainThread(() =>
             {
-                case nameof(ViewModel.IsBusy):
-                    {
-                        InvokeOnMainThread(() =>
-                        {
-                            if (ViewModel.IsBusy && !refreshControl.Refreshing)
-                            {
-                                refreshControl.BeginRefreshing();
-                            }
-                            else if (!ViewModel.IsBusy)
-                            {
-                                refreshControl.EndRefreshing();
-                            }
-                        });
-                    }
-                    break;
-                case nameof(ViewModel.LastUpdate):
-                    {
-                        InvokeOnMainThread(() =>
-                        {
-                            LastUpdateLabel.Text = ViewModel.LastUpdate.Value;
-                        });
-                    }
-                    break;
-            }
+                if (ViewModel.IsRefreshing.Value && !refreshControl.Refreshing)
+                {
+                    refreshControl.BeginRefreshing();
+                }
+                else if (!ViewModel.IsRefreshing.Value)
+                {
+                    refreshControl.EndRefreshing();
+                }
+            });
         }
 
-        void Items_CollectionChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        void LastUpdate_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            TableView.ReloadData();
+            InvokeOnMainThread(() =>
+            {
+                LastUpdateLabel.Text = ViewModel.LastUpdate.Value;
+            });
+        }
+
+        void Dates_CollectionChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            InvokeOnMainThread(() =>
+            {
+                TableView.ReloadData();
+            });
         }
     }
 

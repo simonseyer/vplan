@@ -89,68 +89,61 @@ namespace FLSVertretungsplan
 
     }
 
-    public class ItemsViewModel : BaseViewModel
+    public class ItemsViewModel
     {
-        public Property<List<DatePresentationModel>> Dates { get; set; }
-        public Property<string> LastUpdate { get; set; }
-        public Command LoadItemsCommand { get; }
-        public bool BookmarkedVplan { get; private set; }
+        private IVplanDataStore DataStore => ServiceLocator.Instance.Get<IVplanDataStore>();
 
-        public ItemsViewModel(bool bookmarkedVplan)
+        public Property<string> LastUpdate { get; private set; }
+        public Property<bool> IsRefreshing { get; private set; }
+        public Property<List<DatePresentationModel>> Dates { get; private set; }
+        public Command LoadItemsCommand { get; }
+
+        public bool UseBookmarkedVplan { get; private set; }
+
+        public ItemsViewModel(bool useBookmarkedVplan)
         {
-            BookmarkedVplan = bookmarkedVplan;
-            Title = "Vertretungsplan";
+            UseBookmarkedVplan = useBookmarkedVplan;
             LastUpdate = new Property<string>() {
                 Value = ""
             };
+            IsRefreshing = DataStore.GetIsRefreshing();
             Dates = new Property<List<DatePresentationModel>>()
             {
                 Value = new List<DatePresentationModel>()
             };
             LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
-            if (BookmarkedVplan)
+
+            if (UseBookmarkedVplan)
             {
-                DataStore.GetBookmarkedVplan().PropertyChanged += VplanChanged;
-                VplanChanged(null, null);
+                DataStore.GetBookmarkedVplan().PropertyChanged += BookmarkedVplanChanged;
+                BookmarkedVplanChanged(null, null);
             }
             else
             {
-                var _ = Refresh(false);
+                DataStore.GetVplan().PropertyChanged += VplanChanged;
+                VplanChanged(null, null);
             }
         }
 
         async Task ExecuteLoadItemsCommand()
         {
-            await Refresh(true);
-        }
-
-        private async Task Refresh(bool force)
-        {
-            if (IsBusy)
-                return;
-
-            IsBusy = true;
-
             try
             {
-                var plan = await DataStore.GetVplanAsync(true);
-                if (!BookmarkedVplan)
-                {
-                    updateData(plan);
-                }
+                await DataStore.Refresh();
             }
             catch (Exception ex)
             {
                 LastUpdate.Value = "Laden fehlgeschlagen";
                 Debug.WriteLine(ex);
             }
-            finally
-            {
-                IsBusy = false;
-            }
         }
 
         private void VplanChanged(object sender, EventArgs e)
+        {
+            updateData(DataStore.GetVplan().Value);
+        }
+
+        private void BookmarkedVplanChanged(object sender, EventArgs e)
         {
             updateData(DataStore.GetBookmarkedVplan().Value);
         }
