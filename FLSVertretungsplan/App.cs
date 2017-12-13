@@ -9,13 +9,17 @@ namespace FLSVertretungsplan
 
         public static void Initialize()
         {
+            ServiceLocator.Instance.Register<IVplanDataStore, CloudVplanDataStore>();
+
             if (UseMockDataStore)
             {
-                ServiceLocator.Instance.Register<IVplanDataStore, MockVplanDataStore>();
+                ServiceLocator.Instance.Register<IVplanLoader, MockVplanLoader>();
+                ServiceLocator.Instance.Register<IVplanPersistence, MockVplanPersistence>();
             }
             else
             {
-                ServiceLocator.Instance.Register<IVplanDataStore, CloudVplanDataStore>();
+                ServiceLocator.Instance.Register<IVplanLoader, CloudVplanLoader>();
+                ServiceLocator.Instance.Register<IVplanPersistence, JsonVplanPersistence>();
             }
         }
     }

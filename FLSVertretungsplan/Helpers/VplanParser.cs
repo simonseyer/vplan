@@ -2,29 +2,32 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Xml;
-using System.Diagnostics;
 
 namespace FLSVertretungsplan
 {
-    public class VplanParser
+    public static class VplanParser
     {
-        public static Vplan Parse(string xml)
+
+        public static async Task<Vplan> Parse(string xml)
         {
-            var doc = new XmlDocument();
-            doc.LoadXml(xml);
-
-            var vPlanNode = doc.DocumentElement;
-            var changes = ParseVPlanNode(doc.DocumentElement);
-            SortChanges(changes);
-
-            var lastUpdateTimestamp = vPlanNode.Attributes["lastUpdate"]?.Value;
-            var lastUpdate = DateTimeOffset.FromUnixTimeSeconds(Convert.ToInt64(lastUpdateTimestamp)).DateTime;
-
-            return new Vplan
+            return await Task.Run(() =>
             {
-                Changes = changes,
-                LastUpdate = lastUpdate
-            };
+                var doc = new XmlDocument();
+                doc.LoadXml(xml);
+
+                var vPlanNode = doc.DocumentElement;
+                var changes = ParseVPlanNode(doc.DocumentElement);
+                SortChanges(changes);
+
+                var lastUpdateTimestamp = vPlanNode.Attributes["lastUpdate"]?.Value;
+                var lastUpdate = DateTimeOffset.FromUnixTimeSeconds(Convert.ToInt64(lastUpdateTimestamp)).DateTime;
+
+                return new Vplan
+                {
+                    Changes = changes,
+                    LastUpdate = lastUpdate
+                };
+            });
         }
 
         private static List<Change> ParseVPlanNode(XmlNode vplanNode)

@@ -53,29 +53,29 @@ namespace FLSVertretungsplan
         {
             Schools = new ObservableCollection<ChipPresentationModel>();
             LoadSchools();
-            DataStore.GetSchoolBookmarks().CollectionChanged += Schools_CollectionChanged;
+            DataStore.SchoolBookmarks.CollectionChanged += Schools_CollectionChanged;
 
             SchoolClasses = new ObservableCollection<ChipPresentationModel>();
             LoadSchoolClasses();
-            DataStore.GetSchoolClassBookmarks().CollectionChanged += SchoolClasses_CollectionChanged;
+            DataStore.SchoolClassBookmarks.CollectionChanged += SchoolClasses_CollectionChanged;
         }
 
         public void ToggleSchoolBookmarkAtIndex(int index)
         {
-            var bookmark = DataStore.GetSchoolBookmarks()[index];
+            var bookmark = DataStore.SchoolBookmarks[index];
             DataStore.BookmarkSchool(bookmark.School, !bookmark.Bookmarked);
         }
 
         public void ToggleSchoolClassBookmarkAtIndex(int index)
         {
-            var bookmark = DataStore.GetSchoolClassBookmarks()[index];
+            var bookmark = DataStore.SchoolClassBookmarks[index];
             DataStore.BookmarkSchoolClass(bookmark.SchoolClass, !bookmark.Bookmarked);
         }
 
         private void LoadSchools()
         {
             Schools.Clear();
-            foreach (SchoolBookmark bookmark in DataStore.GetSchoolBookmarks())
+            foreach (SchoolBookmark bookmark in DataStore.SchoolBookmarks)
             {
                 Schools.Add(new ChipPresentationModel(bookmark));
             }
@@ -119,7 +119,7 @@ namespace FLSVertretungsplan
         {
             SchoolClasses.Clear();
 
-            var bookmarks = DataStore.GetSchoolClassBookmarks();
+            var bookmarks = DataStore.SchoolClassBookmarks;
             for (var i = 0; i < bookmarks.Count; i++)
             {
                 if (bookmarks[i].SchoolBookmarked)

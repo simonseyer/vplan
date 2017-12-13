@@ -1,38 +1,35 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Net.Http;
 using System.Threading.Tasks;
-using System.Xml;
 using System.Diagnostics;
-using Newtonsoft.Json;
-using System.IO;
+using System.Linq;
 
 namespace FLSVertretungsplan
 {
     public class CloudVplanDataStore: IVplanDataStore
     {
 
-        HttpClient client;
+        private IVplanLoader Loader => ServiceLocator.Instance.Get<IVplanLoader>();
+        private IVplanPersistence Persistence => ServiceLocator.Instance.Get<IVplanPersistence>();
 
         // Transient state
-        Property<bool> IsRefreshing;
+        public Property<bool> IsRefreshing { get; }
 
         // State
-        Property<Vplan> Vplan;
-        HashSet<SchoolClassBookmark> AllSchoolClassBookmarks;
-        ObservableCollection<SchoolBookmark> SchoolBookmarks;
+        public Property<Vplan> Vplan { get; }
+        public HashSet<SchoolClassBookmark> AllSchoolClassBookmarks { get; }
+        public ObservableCollection<SchoolBookmark> SchoolBookmarks { get; }
+        public ObservableCollection<SchoolClass> NewSchoolClasses { get; }
 
         // Derived state
-        Property<Vplan> BookmarkedVplan;
+        public Property<Vplan> BookmarkedVplan { get; }
         // Contains only SchoolClassBookmarks of the bookmarked schools
-        ObservableCollection<SchoolClassBookmark> SchoolClassBookmarks;
+        public ObservableCollection<SchoolClassBookmark> SchoolClassBookmarks { get; }
 
         public CloudVplanDataStore()
         {
-            client = new HttpClient();
-            client.BaseAddress = new Uri($"{App.BackendUrl}/");
-
+            
             IsRefreshing = new Property<bool>();
 
             Vplan = new Property<Vplan> {
@@ -59,8 +56,40 @@ namespace FLSVertretungsplan
             };
             AllSchoolClassBookmarks = new HashSet<SchoolClassBookmark>();
             SchoolClassBookmarks = new ObservableCollection<SchoolClassBookmark>();
+            NewSchoolClasses = new ObservableCollection<SchoolClass>();
+        }
 
-            _ = LoadPersistedData();
+        public async Task Load()
+        {
+            Vplan.Value = await Persistence.LoadVplan();
+
+            var newSchoolClasses = await Persistence.LoadNewSchoolClasses();
+            foreach (var schoolClass in newSchoolClasses)
+            {
+                NewSchoolClasses.Add(schoolClass);
+            }
+
+            var schoolBookmarks = await Persistence.LoadSchoolBookmarks();
+            foreach (var bookmark in schoolBookmarks)
+            {
+                var i = SchoolBookmarks.IndexOf(bookmark);
+                if (i >= 0)
+                {
+                    SchoolBookmarks[i] = bookmark;
+                }
+                else
+                {
+                    SchoolBookmarks.Add(bookmark);
+                }
+            }
+
+            var schoolClassBookmarks = await Persistence.LoadSchoolClassBookmarks();
+            foreach (var bookmark in schoolClassBookmarks)
+            {
+                UpdateSchoolClassBookmark(bookmark);
+            }
+
+            UpdateBookmarkedVplan();
         }
 
         public async Task Refresh()
@@ -70,9 +99,8 @@ namespace FLSVertretungsplan
                 return;
             }
             IsRefreshing.Value = true;
-            
-            var xml = await client.GetStringAsync($"raw/vplan?version=1.2.4");
-            Vplan.Value = await Task.Run(() => VplanParser.Parse(xml));
+
+            Vplan.Value = await Loader.Load();
 
             UpdateSchoolClasses();
             UpdateBookmarkedVplan();
@@ -80,6 +108,12 @@ namespace FLSVertretungsplan
             _ = PersistAll();
 
             IsRefreshing.Value = false;
+        }
+
+        public void ClearNewSchoolClasses()
+        {
+            NewSchoolClasses.Clear();
+            _ = Persistence.PersistNewSchoolClasses(NewSchoolClasses.ToList());
         }
 
         public void BookmarkSchool(string school, bool bookmark)
@@ -100,8 +134,8 @@ namespace FLSVertretungsplan
             }
             UpdateBookmarkedVplan();
 
-            _ = PersistSchoolBookmarks();
-            _ = PersistSchoolClassBookmarks();
+            Persistence.PersistSchoolBookmarks(SchoolBookmarks.ToList());
+            Persistence.PersistSchoolClassBookmarks(SchoolClassBookmarks.ToList());
         }
 
         public void BookmarkSchoolClass(SchoolClass schoolClass, bool bookmark)
@@ -116,32 +150,7 @@ namespace FLSVertretungsplan
             UpdateSchoolClassBookmark(newBookmark);
             UpdateBookmarkedVplan();
 
-            _ = PersistSchoolClassBookmarks();
-        }
-
-        public Property<bool> GetIsRefreshing()
-        {
-            return IsRefreshing;
-        }
-
-        public Property<Vplan> GetVplan()
-        {
-            return Vplan;
-        }
-
-        public Property<Vplan> GetBookmarkedVplan() 
-        {
-            return BookmarkedVplan;
-        }
-
-        public ObservableCollection<SchoolBookmark> GetSchoolBookmarks()
-        {
-            return SchoolBookmarks;
-        }
-
-        public ObservableCollection<SchoolClassBookmark> GetSchoolClassBookmarks()
-        {
-            return SchoolClassBookmarks;
+            Persistence.PersistSchoolClassBookmarks(SchoolClassBookmarks.ToList());
         }
 
         private void UpdateBookmarkedVplan()
@@ -184,6 +193,7 @@ namespace FLSVertretungsplan
                 return;
             }
 
+            NewSchoolClasses.Add(schoolClass);
             UpdateSchoolClassBookmark(newBookmark);
         }
 
@@ -252,76 +262,11 @@ namespace FLSVertretungsplan
 
         private async Task PersistAll()
         {
-            await PersistVplan();
-            await PersistSchoolBookmarks();
-            await PersistSchoolClassBookmarks();
+            await Persistence.PersistVplan(Vplan.Value);
+            await Persistence.PersistNewSchoolClasses(NewSchoolClasses.ToList());
+            await Persistence.PersistSchoolBookmarks(SchoolBookmarks.ToList());
+            await Persistence.PersistSchoolClassBookmarks(AllSchoolClassBookmarks.ToList());
         }
 
-        private async Task PersistVplan()
-        {
-            var json = await Task.Run(() => JsonConvert.SerializeObject(Vplan.Value));
-            await PersistJson(json, "vplan.json");
-            //Vplan.Value = JsonConvert.DeserializeObject<Vplan>(json);
-        }
-
-        private async Task PersistSchoolBookmarks()
-        {
-            var json = await Task.Run(() => JsonConvert.SerializeObject(SchoolBookmarks));
-            await PersistJson(json, "schoolBookmarks.json");
-        }
-
-        private async Task PersistSchoolClassBookmarks()
-        {
-            var json = await Task.Run(() => JsonConvert.SerializeObject(SchoolClassBookmarks));
-            await PersistJson(json, "schoolClassBookmarks.json");
-        }
-
-        private async Task PersistJson(string json, string fileName)
-        {
-            var filePath = CreatePersistentPath(fileName);
-            using (var file = File.Open(filePath, FileMode.Create, FileAccess.Write))
-            using (var strm = new StreamWriter(file))
-            {
-                await strm.WriteAsync(json);
-            }
-        }
-
-        private async Task<string> LoadJson(string fileName)
-        {
-            var filePath = CreatePersistentPath(fileName);
-            using (var file = File.Open(filePath, FileMode.Open, FileAccess.Read))
-            using (var strm = new StreamReader(file))
-            {
-                return await strm.ReadToEndAsync();
-            }
-        }
-
-        private string CreatePersistentPath(string fileName)
-        {
-            string path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-            return Path.Combine(path, fileName);
-        }
-
-        private async Task LoadPersistedData()
-        {
-            var json = await LoadJson("vplan.json");
-            Vplan.Value = await Task.Run(() => JsonConvert.DeserializeObject<Vplan>(json));
-
-            json = await LoadJson("schoolBookmarks.json");
-            var schoolBookmarks = await Task.Run(() => JsonConvert.DeserializeObject<Collection<SchoolBookmark>>(json));
-            foreach (var bookmark in schoolBookmarks)
-            {
-                SchoolBookmarks.Add(bookmark);
-            }
-
-            json = await LoadJson("schoolClassBookmarks.json");
-            var schoolClassBookmarks = await Task.Run(() => JsonConvert.DeserializeObject<Collection<SchoolClassBookmark>>(json));
-            foreach (var bookmark in schoolClassBookmarks)
-            {
-                UpdateSchoolClassBookmark(bookmark);
-            }
-
-            UpdateBookmarkedVplan();
-        }
     }
 }

@@ -31,7 +31,10 @@ namespace FLSVertretungsplan.iOS
 
             _ = RequestNotifications();
             var dataStore = ServiceLocator.Instance.Get<IVplanDataStore>();
-            _ = dataStore.Refresh();
+            Task.Run(() => {
+                dataStore.Load();
+                dataStore.Refresh();
+            });
 
             return true;
         }
@@ -66,9 +69,9 @@ namespace FLSVertretungsplan.iOS
         {
             var dataStore = ServiceLocator.Instance.Get<IVplanDataStore>();
 
-            var oldVplan = dataStore.GetVplan().Value;
+            var oldVplan = dataStore.Vplan.Value;
             await dataStore.Refresh();
-            var newVplan = dataStore.GetVplan().Value;
+            var newVplan = dataStore.Vplan.Value;
 
             var gotUpdated = newVplan != null && (oldVplan == null || !oldVplan.LastUpdate.Equals(newVplan.LastUpdate));
 

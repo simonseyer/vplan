@@ -26,10 +26,23 @@ namespace FLSVertretungsplan
         {
             ClassName = "" + model.SchoolClass.Name;
             Hours = model.Hours + " h";
-            OldLesson = string.Format("{0} bei {1}. {2} in Raum {3}", 
+
+            string oldTeacherName;
+            if (model.OldLesson.Teacher.FirstName != null && 
+                model.OldLesson.Teacher.LastName != null)
+            {
+                oldTeacherName = string.Format("{0}. {1}", 
+                                               model.OldLesson.Teacher.FirstName[0],
+                                               model.OldLesson.Teacher.LastName);
+            }
+            else
+            {
+                oldTeacherName = model.OldLesson.Teacher.Identifier;
+            }
+
+            OldLesson = string.Format("{0} bei {1} in Raum {2}", 
                                       model.OldLesson.Subject.Name ?? model.OldLesson.Subject.Identifier, 
-                                      model.OldLesson.Teacher.FirstName[0],
-                                      model.OldLesson.Teacher.LastName,
+                                      oldTeacherName,
                                       model.OldLesson.Room);
             Description = "";
 
@@ -61,9 +74,18 @@ namespace FLSVertretungsplan
             }
             if (teacherChanged)
             {
-                Description += string.Format("bei {0}. {1} ", 
-                                             model.NewLesson.Teacher.FirstName[0],
-                                             model.NewLesson.Teacher.LastName);
+                if (model.NewLesson.Teacher.FirstName != null &&
+                    model.NewLesson.Teacher.LastName != null)
+                {
+                    Description += string.Format("bei {0}. {1} ",
+                                                 model.NewLesson.Teacher.FirstName[0],
+                                                 model.NewLesson.Teacher.LastName);
+                }
+                else
+                {
+                    Description += string.Format("{0} ", 
+                                                 model.NewLesson.Teacher.Identifier);
+                }
             }
             if (roomChanged)
             {
@@ -106,7 +128,7 @@ namespace FLSVertretungsplan
             LastUpdate = new Property<string>() {
                 Value = ""
             };
-            IsRefreshing = DataStore.GetIsRefreshing();
+            IsRefreshing = DataStore.IsRefreshing;
             Dates = new Property<List<DatePresentationModel>>()
             {
                 Value = new List<DatePresentationModel>()
@@ -115,12 +137,12 @@ namespace FLSVertretungsplan
 
             if (UseBookmarkedVplan)
             {
-                DataStore.GetBookmarkedVplan().PropertyChanged += BookmarkedVplanChanged;
+                DataStore.BookmarkedVplan.PropertyChanged += BookmarkedVplanChanged;
                 BookmarkedVplanChanged(null, null);
             }
             else
             {
-                DataStore.GetVplan().PropertyChanged += VplanChanged;
+                DataStore.Vplan.PropertyChanged += VplanChanged;
                 VplanChanged(null, null);
             }
         }
@@ -140,12 +162,12 @@ namespace FLSVertretungsplan
 
         private void VplanChanged(object sender, EventArgs e)
         {
-            updateData(DataStore.GetVplan().Value);
+            updateData(DataStore.Vplan.Value);
         }
 
         private void BookmarkedVplanChanged(object sender, EventArgs e)
         {
-            updateData(DataStore.GetBookmarkedVplan().Value);
+            updateData(DataStore.BookmarkedVplan.Value);
         }
 
         private void updateData(Vplan vplan)
