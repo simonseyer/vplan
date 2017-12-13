@@ -186,4 +186,5 @@
   </ItemGroup>
   <Import Project="..\FLSVertretungsplan\FLSVertretungsplan.projitems" Label="Shared" Condition="Exists('..\FLSVertretungsplan\FLSVertretungsplan.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
+  <Import Project="..\packages\NETStandard.Library.2.0.1\build\netstandard2.0\NETStandard.Library.targets" Condition="Exists('..\packages\NETStandard.Library.2.0.1\build\netstandard2.0\NETStandard.Library.targets')" />
 </Project>
