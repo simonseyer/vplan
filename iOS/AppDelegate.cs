@@ -7,6 +7,7 @@ using System;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using UserNotifications;
+using System.Linq;
 
 namespace FLSVertretungsplan.iOS
 {
@@ -25,15 +26,17 @@ namespace FLSVertretungsplan.iOS
 
         public override bool FinishedLaunching(UIApplication application, NSDictionary launchOptions)
         {
+            UIApplication.SharedApplication.SetMinimumBackgroundFetchInterval(UIApplication.BackgroundFetchIntervalMinimum);
+
             AppCenter.Start("***REMOVED***", typeof(Analytics), typeof(Crashes));
 
             App.Initialize();
 
             _ = RequestNotifications();
             var dataStore = ServiceLocator.Instance.Get<IVplanDataStore>();
-            Task.Run(() => {
+            Task.Run(() =>
+            {
                 dataStore.Load();
-                dataStore.Refresh();
             });
 
             return true;
@@ -52,7 +55,7 @@ namespace FLSVertretungsplan.iOS
         public override void PerformFetch(UIApplication application, Action<UIBackgroundFetchResult> completionHandler)
         {
             var fetch = FetchData();
-            fetch.ContinueWith(r => 
+            fetch.ContinueWith(r =>
             {
                 if (r.IsFaulted)
                 {
@@ -68,27 +71,35 @@ namespace FLSVertretungsplan.iOS
         private async Task<bool> FetchData()
         {
             var dataStore = ServiceLocator.Instance.Get<IVplanDataStore>();
-
             await dataStore.Load();
-            var oldVplan = dataStore.Vplan.Value;
-            await dataStore.Refresh();
-            var newVplan = dataStore.Vplan.Value;
-
-            var gotUpdated = newVplan != null && (oldVplan == null || !oldVplan.LastUpdate.Equals(newVplan.LastUpdate));
+            var diff = await dataStore.Refresh();
 
             var notificationCenter = UNUserNotificationCenter.Current;
             var settings = await notificationCenter.GetNotificationSettingsAsync();
             var oldNotifications = await notificationCenter.GetPendingNotificationRequestsAsync();
-            if (settings.AuthorizationStatus == UNAuthorizationStatus.Authorized && oldNotifications.Length == 0)
+
+            if (settings.AuthorizationStatus == UNAuthorizationStatus.Authorized &&
+                oldNotifications.Length == 0 &&
+                (diff.NewBookmarkedChanges.Any() || diff.NewNewClasses.Any()))
             {
-                var content = new UNMutableNotificationContent();
-                content.Title = "Neuer Vertretungsplan verfügbar";
-                content.Body = newVplan.Changes.Length + " Einträge";
-                var request = UNNotificationRequest.FromIdentifier(newVplan.LastUpdate.ToString(), content, null);
+                var content = new UNMutableNotificationContent
+                {
+                    Title = "Neuer Vertretungsplan verfügbar"
+                };
+                if (diff.NewBookmarkedChanges.Any())
+                {
+                    content.Body = diff.NewBookmarkedChanges.Count() + " neue Einträge";
+                }
+                else
+                {
+                    content.Body = diff.NewNewClasses.Count() + " neue Klassen";
+                }
+
+                var request = UNNotificationRequest.FromIdentifier(dataStore.Vplan.Value.LastUpdate.ToString(), content, null);
                 await notificationCenter.AddNotificationRequestAsync(request);
             }
 
-            return gotUpdated;
+            return diff.Updated;
         }
 
         public override void OnResignActivation(UIApplication application)
