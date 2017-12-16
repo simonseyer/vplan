@@ -93,7 +93,17 @@ namespace FLSVertretungsplan
             }
             IsRefreshing.Value = true;
 
-            Vplan.Value = await Loader.Load();
+            try
+            {
+
+                Vplan.Value = await Loader.Load();
+            } 
+            catch (Exception e) 
+            {
+                Debug.Print("Failed to refresh data: " + e);
+                IsRefreshing.Value = false;
+                throw e;
+            }
 
             UpdateSchoolClasses();
             UpdateBookmarkedVplan();
