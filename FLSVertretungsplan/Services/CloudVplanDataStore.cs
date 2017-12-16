@@ -28,6 +28,7 @@ namespace FLSVertretungsplan
         public ObservableCollection<SchoolClassBookmark> SchoolClassBookmarks { get; }
 
         Task LoadTask;
+        Task<VplanDiff> RefreshTask;
 
         public CloudVplanDataStore()
         {
@@ -101,10 +102,17 @@ namespace FLSVertretungsplan
 
         public async Task<VplanDiff> Refresh()
         {
-            if (IsRefreshing.Value)
+            if (RefreshTask != null)
             {
-                return new VplanDiff(false, new List<Change>(), new List<SchoolClass>());
+                return await RefreshTask;
             }
+
+            RefreshTask = DoRefresh();
+            return await RefreshTask;
+        }
+
+        private async Task<VplanDiff> DoRefresh()
+        {
             IsRefreshing.Value = true;
 
             var oldVplan = BookmarkedVplan.Value;
