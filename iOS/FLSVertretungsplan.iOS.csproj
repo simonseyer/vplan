@@ -146,9 +146,9 @@
     <ImageAsset Include="Resources\Assets.xcassets\LogoShape.imageset\LogoShape.pdf" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ViewControllers\BrowseViewController.cs" />
+    <Compile Include="ViewControllers\VplanViewController.cs" />
     <Compile Include="ViewControllers\BrowseViewController.designer.cs">
-      <DependentUpon>BrowseViewController.cs</DependentUpon>
+      <DependentUpon>VplanViewController.cs</DependentUpon>
     </Compile>
     <Compile Include="AppDelegate.cs" />
     <Compile Include="Main.cs" />
@@ -165,13 +165,13 @@
       <DependentUpon>ChipCell.cs</DependentUpon>
     </Compile>
     <Compile Include="UIColorExtension.cs" />
-    <Compile Include="ViewControllers\VplanViewController.cs" />
+    <Compile Include="ViewControllers\AllChangesViewController.cs" />
     <Compile Include="ViewControllers\VplanViewController.designer.cs">
-      <DependentUpon>VplanViewController.cs</DependentUpon>
+      <DependentUpon>AllChangesViewController.cs</DependentUpon>
     </Compile>
-    <Compile Include="ViewControllers\BookmarkedViewController.cs" />
+    <Compile Include="ViewControllers\BookmarkedChangesViewController.cs" />
     <Compile Include="ViewControllers\BookmarkedViewController.designer.cs">
-      <DependentUpon>BookmarkedViewController.cs</DependentUpon>
+      <DependentUpon>BookmarkedChangesViewController.cs</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
