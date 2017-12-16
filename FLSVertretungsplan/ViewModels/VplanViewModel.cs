@@ -164,15 +164,15 @@ namespace FLSVertretungsplan
 
         private void VplanChanged(object sender, EventArgs e)
         {
-            updateData(DataStore.Vplan.Value);
+            UpdateData(DataStore.Vplan.Value);
         }
 
         private void BookmarkedVplanChanged(object sender, EventArgs e)
         {
-            updateData(DataStore.BookmarkedVplan.Value);
+            UpdateData(DataStore.BookmarkedVplan.Value);
         }
 
-        private void updateData(Vplan vplan)
+        private void UpdateData(Vplan vplan)
         {
             if (vplan == null)
             {
