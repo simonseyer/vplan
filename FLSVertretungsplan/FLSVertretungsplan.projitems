@@ -33,6 +33,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Models\Lesson.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Change.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\VplanDiff.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\ChipViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Plugins\" />

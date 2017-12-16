@@ -93,7 +93,6 @@ namespace FLSVertretungsplan.iOS
 
             cell.Label.Text = item.Name;
             cell.BackgroundColor = UIColor.Clear.FromHex(item.Color);
-            cell.Hidden = !item.Visible;
 
             cell.Layer.CornerRadius = 15;
             cell.ClipsToBounds = true;
@@ -124,7 +123,7 @@ namespace FLSVertretungsplan.iOS
             var items = schoolClassesMode ? ViewModel.SchoolClasses : ViewModel.Schools;
             var name = new NSString(items[indexPath.Row].Name);
             var size = name.GetSizeUsingAttributes(new UIStringAttributes() { Font = UIFont.SystemFontOfSize(17) });
-            return items[indexPath.Row].Visible ? new CGSize(size.Width + 32, 30) : new CGSize(0, 0);
+            return new CGSize(size.Width + 32, 30);
         }
 
         public override void ItemSelected(UICollectionView collectionView, NSIndexPath indexPath)
