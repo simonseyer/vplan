@@ -28,6 +28,10 @@
     <Compile Include="$(MSBuildThisFileDirectory)Plugins\MockVplanPersistence.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Plugins\JsonVplanPersistence.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\VplanParser.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Subject.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Teacher.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Lesson.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Change.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Plugins\" />

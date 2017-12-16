@@ -1,45 +1,34 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 
 namespace FLSVertretungsplan
 {
-
     public class Vplan
     {
-        public DateTime LastUpdate { get; set; }
-        public List<Change> Changes { get; set; }
-    }
+        public DateTime LastUpdate { get; private set; }
+        public ImmutableArray<Change> Changes { get; private set; }
 
-    public class Change
-    {
-        public SchoolClass SchoolClass { get; set; }
-        public DateTime Day { get; set; }
-        public string Hours { get; set; }
+        public Vplan(DateTime lastUpdate, List<Change> changes)
+        {
+            LastUpdate = lastUpdate;
+            Changes = ImmutableArray.CreateRange(changes);
+        }
 
-        public Lesson OldLesson { get; set; }
-        public Lesson NewLesson { get; set; }
+        public override bool Equals(object obj)
+        {
+            var vplan = obj as Vplan;
+            return vplan != null &&
+                   LastUpdate == vplan.LastUpdate &&
+                   Changes.Equals(vplan.Changes);
+        }
 
-        public string Attribute { get; set; }
-        public string Info { get; set; }
-    }
-
-    public class Lesson
-    {
-        public Subject Subject { get; set; }
-        public Teacher Teacher { get; set; }
-        public string Room { get; set; }
-    }
-
-    public class Teacher
-    {
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public string Identifier { get; set; }
-    }
-
-    public class Subject
-    {
-        public string Name { get; set; }
-        public string Identifier { get; set; }
+        public override int GetHashCode()
+        {
+            var hashCode = -741907486;
+            hashCode = hashCode * -1521134295 + LastUpdate.GetHashCode();
+            hashCode = hashCode * -1521134295 + EqualityComparer<ImmutableArray<Change>>.Default.GetHashCode(Changes);
+            return hashCode;
+        }
     }
 }

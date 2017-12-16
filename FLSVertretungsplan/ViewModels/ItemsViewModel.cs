@@ -118,6 +118,7 @@ namespace FLSVertretungsplan
         public Property<string> LastUpdate { get; private set; }
         public Property<bool> IsRefreshing { get; private set; }
         public Property<List<DatePresentationModel>> Dates { get; private set; }
+        public Property<bool> ShowsNewClasses { get; private set; }
         public Command LoadItemsCommand { get; }
 
         public bool UseBookmarkedVplan { get; private set; }
@@ -133,6 +134,7 @@ namespace FLSVertretungsplan
             {
                 Value = new List<DatePresentationModel>()
             };
+            ShowsNewClasses = new Property<bool>();
             LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
 
             if (UseBookmarkedVplan)
@@ -172,6 +174,12 @@ namespace FLSVertretungsplan
 
         private void updateData(Vplan vplan)
         {
+            if (vplan == null)
+            {
+                LastUpdate.Value = "";
+                return;
+            }
+
             var dates = new List<DatePresentationModel>();
             var datesDict = new Dictionary<string, DatePresentationModel>();
             LastUpdate.Value = "Letzte Aktualisierung: " + vplan.LastUpdate.ToString("dd.MM.yy hh:mm") + " h";

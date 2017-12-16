@@ -22,11 +22,7 @@ namespace FLSVertretungsplan
                 var lastUpdateTimestamp = vPlanNode.Attributes["lastUpdate"]?.Value;
                 var lastUpdate = DateTimeOffset.FromUnixTimeSeconds(Convert.ToInt64(lastUpdateTimestamp)).DateTime;
 
-                return new Vplan
-                {
-                    Changes = changes,
-                    LastUpdate = lastUpdate
-                };
+                return new Vplan(lastUpdate, changes);
             });
         }
 
@@ -83,56 +79,41 @@ namespace FLSVertretungsplan
 
             var stringDay = dateNode.Attributes["timestamp"]?.Value;
             var day = DateTimeOffset.FromUnixTimeSeconds(Convert.ToInt64(stringDay)).DateTime;
+            var hours = oldNode.ChildText("hours");
 
-            var change = new Change
-            {
-                SchoolClass = new SchoolClass(classNode.Attributes["name"]?.Value,
-                                              schoolNode.Attributes["name"]?.Value),
-                Day = day,
-                Hours = oldNode.ChildText("hours"),
-                OldLesson = new Lesson
-                {
-                    Subject = new Subject
-                    {
-                        Name = oldSubjectNode?.ChildText("name"),
-                        Identifier = oldSubjectNode?.ChildText("shortcut"),
-                    },
-                    Teacher = new Teacher
-                    {
-                        FirstName = oldTeacherNode?.ChildText("firstname"),
-                        LastName = oldTeacherNode?.ChildText("lastname"),
-                        Identifier = oldTeacherNode?.ChildText("shortcut")
-                    },
-                    Room = oldNode.ChildText("room")
-                },
-                NewLesson = new Lesson
-                {
-                    Room = newNode.ChildText("room")
-                },
-                Attribute = newNode.ChildText("attribute"),
-                Info = newNode.ChildText("info")
-            };
+            var schoolClass = new SchoolClass(classNode.Attributes["name"]?.Value,
+                                              schoolNode.Attributes["name"]?.Value);
 
+            var oldLesson = new Lesson(new Subject(oldSubjectNode?.ChildText("shortcut"),
+                                                   oldSubjectNode?.ChildText("name")),
+                                       new Teacher(oldTeacherNode?.ChildText("firstname"),
+                                                   oldTeacherNode?.ChildText("lastname"),
+                                                   oldTeacherNode?.ChildText("shortcut")),
+                                       oldNode.ChildText("room"));
+
+            var attribute = newNode.ChildText("attribute");
+            var info = newNode.ChildText("info");
+
+            Subject newSubject = null;
             if (newSubjectNode != null)
             {
-                change.NewLesson.Subject = new Subject
-                {
-                    Name = newSubjectNode.ChildText("name"),
-                    Identifier = newSubjectNode.ChildText("shortcut"),
-                };
+                newSubject = new Subject(newSubjectNode.ChildText("shortcut"),
+                                         newSubjectNode.ChildText("name"));
             }
 
+            Teacher newTeacher = null;
             if (newTeacherNode != null)
             {
-                change.NewLesson.Teacher = new Teacher
-                {
-                    FirstName = newTeacherNode.ChildText("firstname"),
-                    LastName = newTeacherNode.ChildText("lastname"),
-                    Identifier = newTeacherNode.ChildText("shortcut")
-                };
+                newTeacher = new Teacher(newTeacherNode.ChildText("firstname"),
+                                         newTeacherNode.ChildText("lastname"),
+                                         newTeacherNode.ChildText("shortcut"));
             }
 
-            return change;
+            var newLesson = new Lesson(newSubject,
+                                       newTeacher,
+                                       newNode.ChildText("room"));
+
+            return new Change(schoolClass, day, hours, oldLesson, newLesson, attribute, info);
         }
 
         private static void SortChanges(List<Change> changes)
@@ -145,13 +126,13 @@ namespace FLSVertretungsplan
                 }
                 if (x.SchoolClass.School != y.SchoolClass.School)
                 {
-                    return x.SchoolClass.School.CompareTo(y.SchoolClass.School);
+                    return string.Compare(x.SchoolClass.School, y.SchoolClass.School, StringComparison.CurrentCulture);
                 }
                 if (x.SchoolClass.Name != y.SchoolClass.Name)
                 {
-                    return x.SchoolClass.Name.CompareTo(y.SchoolClass.Name);
+                    return string.Compare(x.SchoolClass.Name, y.SchoolClass.Name, StringComparison.CurrentCulture);
                 }
-                return x.Hours.CompareTo(y.Hours);
+                return string.Compare(x.Hours, y.Hours, StringComparison.CurrentCulture);
             });
         }
 

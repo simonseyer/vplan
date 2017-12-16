@@ -69,6 +69,7 @@ namespace FLSVertretungsplan.iOS
         {
             var dataStore = ServiceLocator.Instance.Get<IVplanDataStore>();
 
+            await dataStore.Load();
             var oldVplan = dataStore.Vplan.Value;
             await dataStore.Refresh();
             var newVplan = dataStore.Vplan.Value;
@@ -82,7 +83,7 @@ namespace FLSVertretungsplan.iOS
             {
                 var content = new UNMutableNotificationContent();
                 content.Title = "Neuer Vertretungsplan verfügbar";
-                content.Body = newVplan.Changes.Count + " Einträge";
+                content.Body = newVplan.Changes.Length + " Einträge";
                 var request = UNNotificationRequest.FromIdentifier(newVplan.LastUpdate.ToString(), content, null);
                 await notificationCenter.AddNotificationRequestAsync(request);
             }

@@ -32,20 +32,13 @@ namespace FLSVertretungsplan
             
             IsRefreshing = new Property<bool>();
 
-            Vplan = new Property<Vplan> {
-                Value = new Vplan
-                {
-                    LastUpdate = DateTime.Now,
-                    Changes = new List<Change>()
-                }
+            Vplan = new Property<Vplan>
+            {
+                Value = null
             };
             BookmarkedVplan = new Property<Vplan>()
             {
-                Value = new Vplan
-                {
-                    LastUpdate = DateTime.Now,
-                    Changes = new List<Change>()
-                }
+                Value = null
             };
             SchoolBookmarks = new ObservableCollection<SchoolBookmark>() 
             {
@@ -105,7 +98,7 @@ namespace FLSVertretungsplan
             UpdateSchoolClasses();
             UpdateBookmarkedVplan();
 
-            _ = PersistAll();
+            await PersistAll();
 
             IsRefreshing.Value = false;
         }
@@ -165,11 +158,7 @@ namespace FLSVertretungsplan
                 }
             }
 
-            BookmarkedVplan.Value = new Vplan
-            {
-                LastUpdate = Vplan.Value.LastUpdate,
-                Changes = bookmarkedChanges
-            };
+            BookmarkedVplan.Value = new Vplan(Vplan.Value.LastUpdate, bookmarkedChanges);
         }
 
         private void UpdateSchoolClasses()

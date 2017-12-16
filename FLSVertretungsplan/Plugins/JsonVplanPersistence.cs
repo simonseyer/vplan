@@ -57,12 +57,12 @@ namespace FLSVertretungsplan
         {
             try
             {
-                return await Load<Vplan>(vplanFileName) ?? new Vplan();
+                return await Load<Vplan>(vplanFileName);
             }
             catch (Exception ex)
             {
                 Debug.WriteLine(ex);
-                return new Vplan();
+                return null;
             }
         }
 
