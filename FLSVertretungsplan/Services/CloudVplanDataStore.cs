@@ -65,6 +65,7 @@ namespace FLSVertretungsplan
 
             LoadTask = DoLoad();
             await LoadTask;
+            LoadTask = null;
         }
 
         private async Task DoLoad()
@@ -108,7 +109,9 @@ namespace FLSVertretungsplan
             }
 
             RefreshTask = DoRefresh();
-            return await RefreshTask;
+            var diff = await RefreshTask;
+            RefreshTask = null;
+            return diff;
         }
 
         private async Task<VplanDiff> DoRefresh()
