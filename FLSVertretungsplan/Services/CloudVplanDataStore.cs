@@ -10,8 +10,8 @@ namespace FLSVertretungsplan
     public class CloudVplanDataStore: IVplanDataStore
     {
 
-        private IVplanLoader Loader => ServiceLocator.Instance.Get<IVplanLoader>();
-        private IVplanPersistence Persistence => ServiceLocator.Instance.Get<IVplanPersistence>();
+        IVplanLoader Loader => ServiceLocator.Instance.Get<IVplanLoader>();
+        IVplanPersistence Persistence => ServiceLocator.Instance.Get<IVplanPersistence>();
 
         // Transient state
         public Property<bool> IsRefreshing { get; }
@@ -26,6 +26,8 @@ namespace FLSVertretungsplan
         public Property<Vplan> BookmarkedVplan { get; }
         // Contains only SchoolClassBookmarks of the bookmarked schools
         public ObservableCollection<SchoolClassBookmark> SchoolClassBookmarks { get; }
+
+        Task LoadTask;
 
         public CloudVplanDataStore()
         {
@@ -53,6 +55,18 @@ namespace FLSVertretungsplan
         }
 
         public async Task Load()
+        {
+            if (LoadTask != null)
+            {
+                await LoadTask;
+                return;
+            }
+
+            LoadTask = DoLoad();
+            await LoadTask;
+        }
+
+        private async Task DoLoad()
         {
             Vplan.Value = await Persistence.LoadVplan();
 
@@ -85,17 +99,19 @@ namespace FLSVertretungsplan
             UpdateBookmarkedVplan();
         }
 
-        public async Task Refresh()
+        public async Task<VplanDiff> Refresh()
         {
             if (IsRefreshing.Value)
             {
-                return;
+                return new VplanDiff(false, new List<Change>(), new List<SchoolClass>());
             }
             IsRefreshing.Value = true;
 
+            var oldVplan = BookmarkedVplan.Value;
+            var oldNewSchoolClasses = NewSchoolClasses.ToList();
+
             try
             {
-
                 Vplan.Value = await Loader.Load();
             } 
             catch (Exception e) 
@@ -110,7 +126,12 @@ namespace FLSVertretungsplan
 
             await PersistAll();
 
+            var gotUpdated = Vplan.Value != null && (oldVplan == null || !oldVplan.LastUpdate.Equals(Vplan.Value.LastUpdate));
+            var newBookmarks = BookmarkedVplan.Value.Changes.ToHashSet().Except(oldVplan.Changes.ToHashSet());
+            var newNewClasses = NewSchoolClasses.ToHashSet().Except(oldNewSchoolClasses.ToHashSet());
+
             IsRefreshing.Value = false;
+            return new VplanDiff(gotUpdated, newBookmarks.ToList(), newNewClasses.ToList());
         }
 
         public void ClearNewSchoolClasses()

@@ -32,6 +32,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Models\Teacher.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Lesson.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Change.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\VplanDiff.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Plugins\" />

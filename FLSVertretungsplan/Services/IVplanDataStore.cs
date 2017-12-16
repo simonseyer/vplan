@@ -15,7 +15,7 @@ namespace FLSVertretungsplan
         ObservableCollection<SchoolClass> NewSchoolClasses { get; }
 
         Task Load();
-        Task Refresh();
+        Task<VplanDiff> Refresh();
         void ClearNewSchoolClasses();
         void BookmarkSchool(string schoolName, bool bookmark);
         void BookmarkSchoolClass(SchoolClass schoolClass, bool bookmark);
