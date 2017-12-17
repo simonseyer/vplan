@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:local="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:foreground="?attr/selectableItemBackground"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="12dp"
+    android:layout_marginRight="12dp"
+    android:layout_marginBottom="12dp"
+    local:contentPadding="@dimen/abc_dialog_padding_material">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:id="@+id/linearLayout2">
+            <TextView
+                android:id="@+id/schoolClassText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@android:style/TextAppearance.Material.Headline"
+                tools:text="1042" />
+            <TextView
+                android:id="@+id/hoursText"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                style="@android:style/TextAppearance.Material.Headline"
+                tools:text="4." />
+        </LinearLayout>
+        <TextView
+            android:id="@+id/oldLessonText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@android:style/TextAppearance.Material.Body1"
+            tools:text="BBUN bei N. Tokgöz in Raum A317"
+            android:paddingTop="@dimen/small_margin" />
+        <TextView
+            android:id="@+id/changeText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/small_margin"
+            android:maxLines="1"
+            android:ellipsize="end"
+            style="@android:style/TextAppearance.Material.Headline"
+            tools:text="Ausfall" />
+        <TextView
+            android:id="@+id/newLessonText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@android:style/TextAppearance.Material.Body1"
+            tools:text="Klasse frei. Pausenhalle"
+            android:paddingTop="@dimen/small_margin" />
+    </LinearLayout>
+</android.support.v7.widget.CardView>

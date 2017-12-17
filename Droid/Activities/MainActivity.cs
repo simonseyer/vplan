@@ -37,28 +37,10 @@ namespace FLSVertretungsplan.Droid
             tabs.SetupWithViewPager(pager);
             pager.OffscreenPageLimit = 3;
 
-            pager.PageSelected += (sender, args) =>
-            {
-                var fragment = adapter.InstantiateItem(pager, args.Position) as IFragmentVisible;
-
-                fragment?.BecameVisible();
-            };
-
-            Toolbar.MenuItemClick += (sender, e) =>
-            {
-                var intent = new Intent(this, typeof(AddItemActivity)); ;
-                StartActivity(intent);
-            };
-
             SupportActionBar.SetDisplayHomeAsUpEnabled(false);
             SupportActionBar.SetHomeButtonEnabled(false);
         }
 
-        public override bool OnCreateOptionsMenu(IMenu menu)
-        {
-            MenuInflater.Inflate(Resource.Menu.top_menus, menu);
-            return base.OnCreateOptionsMenu(menu);
-        }
     }
 
     class TabsAdapter : FragmentStatePagerAdapter
@@ -79,9 +61,8 @@ namespace FLSVertretungsplan.Droid
         {
             switch (position)
             {
-                case 0: return BrowseFragment.NewInstance();
-                case 1: return AboutFragment.NewInstance();
-                case 2: return SettingsFragment.NewInstance();
+                case 0: return VplanFragment.NewInstance();
+                case 1: return SettingsFragment.NewInstance();
             }
             return null;
         }

@@ -3,6 +3,5 @@
 	<string-array name="sections">
 		<item>@string/tab1</item>
 		<item>@string/tab2</item>
-        <item>@string/tab3</item>
 	</string-array>
 </resources>

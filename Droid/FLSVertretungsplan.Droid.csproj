@@ -63,9 +63,6 @@
     <Reference Include="System.Collections.Immutable">
       <HintPath>..\packages\System.Collections.Immutable.1.4.0\lib\netstandard2.0\System.Collections.Immutable.dll</HintPath>
     </Reference>
-    <Reference Include="AndroidFlowLayout">
-      <HintPath>..\packages\AndroidFlowLayout.1.9.0.1\lib\monoandroid403\AndroidFlowLayout.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.AppCenter.Analytics.Android.Bindings">
       <HintPath>..\packages\Microsoft.AppCenter.Analytics.1.1.0\lib\MonoAndroid403\Microsoft.AppCenter.Analytics.Android.Bindings.dll</HintPath>
     </Reference>
@@ -141,22 +138,19 @@
     <Reference Include="Xamarin.Android.Support.Design">
       <HintPath>..\packages\Xamarin.Android.Support.Design.26.1.0.1\lib\MonoAndroid80\Xamarin.Android.Support.Design.dll</HintPath>
     </Reference>
+    <Reference Include="AndroidFlowLayout">
+      <HintPath>..\packages\AndroidFlowLayout.1.9.0.1\lib\monoandroid403\AndroidFlowLayout.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MainApplication.cs" />
-    <Compile Include="Activities\AddItemActivity.cs" />
     <Compile Include="Activities\BaseActivity.cs" />
-    <Compile Include="Activities\BrowseItemDetailActivity.cs" />
     <Compile Include="Activities\MainActivity.cs" />
     <Compile Include="Activities\SplashActivity.cs" />
-    <Compile Include="Fragments\AboutFragment.cs" />
-    <Compile Include="Fragments\BrowseFragment.cs" />
-    <Compile Include="Fragments\IFragmentVisible.cs" />
-    <Compile Include="Helpers\BaseRecycleViewAdapter.cs" />
-    <Compile Include="Helpers\RecyclerClickEvent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Fragments\SettingsFragment.cs" />
+    <Compile Include="Fragments\VplanFragment.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\AboutAssets.txt" />
@@ -166,26 +160,9 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\background_splash.xml" />
-    <AndroidResource Include="Resources\drawable\circle_background.xml" />
-    <AndroidResource Include="Resources\drawable\heroplaceholder.png" />
-    <AndroidResource Include="Resources\drawable\xamarin_logo.png" />
-    <AndroidResource Include="Resources\drawable-hdpi\ic_save.png" />
-    <AndroidResource Include="Resources\drawable-mdpi\ic_save.png" />
-    <AndroidResource Include="Resources\drawable-xhdpi\ic_save.png" />
-    <AndroidResource Include="Resources\drawable-xxhdpi\ic_save.png" />
-    <AndroidResource Include="Resources\drawable-xxxhdpi\ic_save.png" />
-    <AndroidResource Include="Resources\layout\activity_add_item.axml" />
-    <AndroidResource Include="Resources\layout\activity_item_details.axml" />
     <AndroidResource Include="Resources\layout\activity_main.axml" />
-    <AndroidResource Include="Resources\layout\activity_myitem_details.axml" />
-    <AndroidResource Include="Resources\layout\fragment_about.axml" />
-    <AndroidResource Include="Resources\layout\fragment_browse.axml" />
-    <AndroidResource Include="Resources\layout\fragment_myitems.axml" />
-    <AndroidResource Include="Resources\layout\item_browse.axml" />
-    <AndroidResource Include="Resources\layout\item_my_item.axml" />
     <AndroidResource Include="Resources\layout\tabs.axml" />
     <AndroidResource Include="Resources\layout\toolbar.axml" />
-    <AndroidResource Include="Resources\menu\top_menus.xml" />
     <AndroidResource Include="Resources\mipmap-hdpi\Icon.png" />
     <AndroidResource Include="Resources\mipmap-mdpi\Icon.png" />
     <AndroidResource Include="Resources\mipmap-xhdpi\Icon.png" />
@@ -201,6 +178,23 @@
     <AndroidResource Include="Resources\layout\fragment_settings.axml" />
     <AndroidResource Include="Resources\layout\item_chip.axml" />
     <AndroidResource Include="Resources\drawable\shape_chip_drawable.xml" />
+    <AndroidResource Include="Resources\layout\item_vplan.axml" />
+    <AndroidResource Include="Resources\layout\fragment_vplan.axml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\FlowLayoutManager\FlowLayoutManager.csproj">
+      <Project>{7CE9FBCE-41A5-4039-B9D6-6986A0B65B1E}</Project>
+      <Name>FlowLayoutManager</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Resources\drawable-hdpi\" />
+    <Folder Include="Resources\drawable-mdpi\" />
+    <Folder Include="Resources\drawable-xhdpi\" />
+    <Folder Include="Resources\drawable-xxhdpi\" />
+    <Folder Include="Resources\drawable-xxxhdpi\" />
+    <Folder Include="Helpers\" />
+    <Folder Include="Resources\menu\" />
   </ItemGroup>
   <Import Project="..\FLSVertretungsplan\FLSVertretungsplan.projitems" Label="Shared" Condition="Exists('..\FLSVertretungsplan\FLSVertretungsplan.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
