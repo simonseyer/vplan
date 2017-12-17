@@ -1,5 +1,5 @@
 ﻿using System;
-
+using System.Threading.Tasks;
 using Android.App;
 using Android.OS;
 using Android.Runtime;
@@ -21,7 +21,15 @@ namespace FLSVertretungsplan.Droid
         {
             base.OnCreate();
             RegisterActivityLifecycleCallbacks(this);
+
             App.Initialize();
+
+            var dataStore = ServiceLocator.Instance.Get<IVplanDataStore>();
+            Task.Run(() =>
+            {
+                dataStore.Load();
+                dataStore.Refresh();
+            });
         }
 
         public override void OnTerminate()

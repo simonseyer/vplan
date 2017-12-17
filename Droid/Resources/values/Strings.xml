@@ -4,6 +4,7 @@
 	<string name="app_name">FLS Vertretungsplan</string>
 	<string name="tab1">Browse</string>
 	<string name="tab2">About</string>
+    <string name="tab3">Settings</string>
 	<string name="signin">Sign In</string>
 	<string name="notnow">Not Now</string>
 	<string name="signing_in">Signing in...</string>
