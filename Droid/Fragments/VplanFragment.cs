@@ -33,7 +33,7 @@ namespace FLSVertretungsplan.Droid
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
-            ViewModel = new VplanViewModel(false);
+            ViewModel = new VplanViewModel(true);
             ViewModel.IsRefreshing.PropertyChanged += IsRefreshing_PropertyChanged;
 
             View view = inflater.Inflate(Resource.Layout.fragment_vplan, container, false);
