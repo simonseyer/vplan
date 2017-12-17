@@ -138,7 +138,9 @@ namespace FLSVertretungsplan
             await PersistAll();
 
             var gotUpdated = Vplan.Value != null && (oldVplan == null || !oldVplan.LastUpdate.Equals(Vplan.Value.LastUpdate));
-            var newBookmarks = BookmarkedVplan.Value.Changes.ToHashSet().Except(oldVplan.Changes.ToHashSet());
+            var oldBookmarkedChanges = oldVplan?.Changes.ToHashSet() ?? new HashSet<Change>();
+            var newBookmarkedChanges = BookmarkedVplan.Value?.Changes.ToHashSet() ?? new HashSet<Change>();
+            var newBookmarks = oldBookmarkedChanges.Except(newBookmarkedChanges);
             var newNewClasses = NewSchoolClasses.ToHashSet().Except(oldNewSchoolClasses.ToHashSet());
 
             IsRefreshing.Value = false;
