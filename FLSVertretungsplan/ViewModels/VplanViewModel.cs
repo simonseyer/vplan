@@ -111,7 +111,7 @@ namespace FLSVertretungsplan
 
     }
 
-    public class ItemsViewModel
+    public class VplanViewModel
     {
         private IVplanDataStore DataStore => ServiceLocator.Instance.Get<IVplanDataStore>();
 
@@ -123,7 +123,7 @@ namespace FLSVertretungsplan
 
         public bool UseBookmarkedVplan { get; private set; }
 
-        public ItemsViewModel(bool useBookmarkedVplan)
+        public VplanViewModel(bool useBookmarkedVplan)
         {
             UseBookmarkedVplan = useBookmarkedVplan;
             LastUpdate = new Property<string>() {

@@ -5,20 +5,34 @@ using System.Collections.Specialized;
 
 namespace FLSVertretungsplan
 {
+    public class RgbColor 
+    {
+        public readonly byte Red;
+        public readonly byte Green;
+        public readonly byte Blue;
+
+        public RgbColor(byte red, byte green, byte blue)
+        {
+            Red = red;
+            Green = green;
+            Blue = blue;
+        }
+    }
+
     public class ChipPresentationModel
     {
         public string Name { get; private set; }
-        public int Color { get; private set; }
+        public RgbColor Color { get; private set; }
 
-        static readonly Dictionary<string, int> Colors = new Dictionary<string, int>
+        static readonly Dictionary<string, RgbColor> Colors = new Dictionary<string, RgbColor>
         {
-            { "BG", 0x5d94cc },
-            { "BS", 0x73db43 },
-            { "BFS", 0xdd7b35 },
-            { "HBFS", 0x1ec9a4 }
+            { "BG", new RgbColor(93, 148, 204) },
+            { "BS", new RgbColor(115, 219, 67) },
+            { "BFS", new RgbColor(221, 123, 53) },
+            { "HBFS", new RgbColor(30, 201, 164) }
         };
 
-        public ChipPresentationModel(string name, int color)
+        public ChipPresentationModel(string name, RgbColor color)
         {
             Name = name;
             Color = color;
@@ -27,20 +41,20 @@ namespace FLSVertretungsplan
         public static ChipPresentationModel Create(SchoolBookmark bookmark)
         {
             return new ChipPresentationModel(bookmark.School,
-                                             bookmark.Bookmarked ? GetColor(bookmark.School) : 0xdbdcdd);
+                                             bookmark.Bookmarked ? GetColor(bookmark.School) : new RgbColor(219, 220, 221));
         }
 
         public static ChipPresentationModel Create(SchoolClassBookmark bookmark)
         {
             return new ChipPresentationModel(bookmark.SchoolClass.Name,
-                                             bookmark.Bookmarked ? GetColor(bookmark.SchoolClass.School) : 0xdbdcdd);
+                                             bookmark.Bookmarked ? GetColor(bookmark.SchoolClass.School) : new RgbColor(219, 220, 221));
         }
 
-        private static int GetColor(string school)
+        private static RgbColor GetColor(string school)
         {
             if (!Colors.ContainsKey(school))
             {
-                return 0xc91d1d;
+                return new RgbColor(201, 29, 29);
             }
             return Colors[school];
         }

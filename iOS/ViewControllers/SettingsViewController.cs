@@ -53,7 +53,7 @@ namespace FLSVertretungsplan.iOS
             items.CollectionChanged += CollectionChanged;
         }
 
-        private void CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        void CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
             var oldIndexPaths = GetIndexPaths(e.OldStartingIndex, e.OldItems?.Count ?? 0);
             var newIndexPaths = GetIndexPaths(e.NewStartingIndex, e.NewItems?.Count ?? 0);
@@ -76,7 +76,7 @@ namespace FLSVertretungsplan.iOS
             }
         }
 
-        private NSIndexPath[] GetIndexPaths(int startIndex, int count)
+        NSIndexPath[] GetIndexPaths(int startIndex, int count)
         {
             var indexPaths = new NSIndexPath[count];
             for (var i = 0; i < count; i++)
@@ -92,7 +92,7 @@ namespace FLSVertretungsplan.iOS
             var item = Items[indexPath.Row];
 
             cell.Label.Text = item.Name;
-            cell.BackgroundColor = UIColor.Clear.FromHex(item.Color);
+            cell.BackgroundColor = UIColor.FromRGB(item.Color.Red, item.Color.Green, item.Color.Blue);
 
             cell.Layer.CornerRadius = 15;
             cell.ClipsToBounds = true;

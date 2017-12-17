@@ -11,7 +11,7 @@ namespace FLSVertretungsplan.iOS
     {
         UIRefreshControl refreshControl;
 
-        public ItemsViewModel ViewModel { get; set; }
+        public VplanViewModel ViewModel { get; set; }
         public bool bookmarkedVplan;
 
         public BrowseViewController(IntPtr handle) : base(handle)
@@ -22,7 +22,7 @@ namespace FLSVertretungsplan.iOS
         {
             base.ViewDidLoad();
 
-            ViewModel = new ItemsViewModel(bookmarkedVplan);
+            ViewModel = new VplanViewModel(bookmarkedVplan);
 
             // Setup UITableView.
             refreshControl = new UIRefreshControl();
@@ -83,9 +83,9 @@ namespace FLSVertretungsplan.iOS
     {
         static readonly NSString CELL_IDENTIFIER = new NSString("CHANGE_CELL");
 
-        ItemsViewModel viewModel;
+        VplanViewModel viewModel;
 
-        public ItemsDataSource(ItemsViewModel viewModel)
+        public ItemsDataSource(VplanViewModel viewModel)
         {
             this.viewModel = viewModel;
         }
