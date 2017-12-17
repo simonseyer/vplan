@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FLSVertretungsplan.iOS", "i
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FLSVertretungsplan.Droid", "Droid\FLSVertretungsplan.Droid.csproj", "{373826DB-815B-4150-8428-94063066AE46}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlowLayoutManager", "FlowLayoutManager\FlowLayoutManager.csproj", "{7CE9FBCE-41A5-4039-B9D6-6986A0B65B1E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|iPhoneSimulator = Debug|iPhoneSimulator
