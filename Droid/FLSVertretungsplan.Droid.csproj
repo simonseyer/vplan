@@ -182,12 +182,6 @@
     <AndroidResource Include="Resources\layout\fragment_vplan.axml" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\FlowLayoutManager\FlowLayoutManager.csproj">
-      <Project>{7CE9FBCE-41A5-4039-B9D6-6986A0B65B1E}</Project>
-      <Name>FlowLayoutManager</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <Folder Include="Resources\drawable-hdpi\" />
     <Folder Include="Resources\drawable-mdpi\" />
     <Folder Include="Resources\drawable-xhdpi\" />
@@ -195,6 +189,12 @@
     <Folder Include="Resources\drawable-xxxhdpi\" />
     <Folder Include="Helpers\" />
     <Folder Include="Resources\menu\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\FlowLayoutManager\FlowLayoutManager.csproj">
+      <Project>{7CE9FBCE-41A5-4039-B9D6-6986A0B65B1E}</Project>
+      <Name>FlowLayoutManager</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="..\FLSVertretungsplan\FLSVertretungsplan.projitems" Label="Shared" Condition="Exists('..\FLSVertretungsplan\FLSVertretungsplan.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
