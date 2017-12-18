@@ -140,7 +140,7 @@ namespace FLSVertretungsplan
             var gotUpdated = Vplan.Value != null && (oldVplan == null || !oldVplan.LastUpdate.Equals(Vplan.Value.LastUpdate));
             var oldBookmarkedChanges = oldVplan?.Changes.ToHashSet() ?? new HashSet<Change>();
             var newBookmarkedChanges = BookmarkedVplan.Value?.Changes.ToHashSet() ?? new HashSet<Change>();
-            var newBookmarks = oldBookmarkedChanges.Except(newBookmarkedChanges);
+            var newBookmarks = newBookmarkedChanges.Except(oldBookmarkedChanges);
             var newNewClasses = NewSchoolClasses.ToHashSet().Except(oldNewSchoolClasses.ToHashSet());
 
             IsRefreshing.Value = false;
