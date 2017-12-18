@@ -18,13 +18,18 @@ namespace FLSVertretungsplan.Droid
 {
     public class VplanFragment : Android.Support.V4.App.Fragment
     {
-        public static VplanFragment NewInstance() =>
-            new VplanFragment { Arguments = new Bundle() };
+        public static VplanFragment NewInstance(bool bookmarkedVplan)
+        {
+            return new VplanFragment { 
+                Arguments = new Bundle(), 
+                ViewModel = new VplanViewModel(bookmarkedVplan)
+            };
+        }
 
         VplanAdapter adapter;
         SwipeRefreshLayout refresher;
 
-        public static VplanViewModel ViewModel { get; set; }
+        public VplanViewModel ViewModel { get; set; }
 
         public override void OnCreate(Bundle savedInstanceState)
         {
@@ -33,7 +38,6 @@ namespace FLSVertretungsplan.Droid
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
-            ViewModel = new VplanViewModel(true);
             ViewModel.IsRefreshing.PropertyChanged += IsRefreshing_PropertyChanged;
 
             View view = inflater.Inflate(Resource.Layout.fragment_vplan, container, false);

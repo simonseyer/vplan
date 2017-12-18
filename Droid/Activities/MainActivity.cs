@@ -61,8 +61,9 @@ namespace FLSVertretungsplan.Droid
         {
             switch (position)
             {
-                case 0: return VplanFragment.NewInstance();
-                case 1: return SettingsFragment.NewInstance();
+                case 0: return VplanFragment.NewInstance(true);
+                case 1: return VplanFragment.NewInstance(false);
+                case 2: return SettingsFragment.NewInstance();
             }
             return null;
         }

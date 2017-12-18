@@ -3400,8 +3400,8 @@ namespace FLSVertretungsplan.Droid
 			// aapt resource value: 0x7f0b0012
 			public const int abc_toolbar_collapse_description = 2131427346;
 			
-			// aapt resource value: 0x7f0b003a
-			public const int app_description = 2131427386;
+			// aapt resource value: 0x7f0b003b
+			public const int app_description = 2131427387;
 			
 			// aapt resource value: 0x7f0b002a
 			public const int app_name = 2131427370;
@@ -3415,29 +3415,29 @@ namespace FLSVertretungsplan.Droid
 			// aapt resource value: 0x7f0b0023
 			public const int character_counter_pattern = 2131427363;
 			
-			// aapt resource value: 0x7f0b0033
-			public const int description = 2131427379;
+			// aapt resource value: 0x7f0b0034
+			public const int description = 2131427380;
 			
 			// aapt resource value: 0x7f0b0029
 			public const int hello = 2131427369;
 			
-			// aapt resource value: 0x7f0b0039
-			public const int hint_description = 2131427385;
-			
-			// aapt resource value: 0x7f0b0037
-			public const int hint_name = 2131427383;
+			// aapt resource value: 0x7f0b003a
+			public const int hint_description = 2131427386;
 			
 			// aapt resource value: 0x7f0b0038
-			public const int info = 2131427384;
+			public const int hint_name = 2131427384;
+			
+			// aapt resource value: 0x7f0b0039
+			public const int info = 2131427385;
+			
+			// aapt resource value: 0x7f0b0033
+			public const int learn_more = 2131427379;
 			
 			// aapt resource value: 0x7f0b0032
-			public const int learn_more = 2131427378;
+			public const int login = 2131427378;
 			
-			// aapt resource value: 0x7f0b0031
-			public const int login = 2131427377;
-			
-			// aapt resource value: 0x7f0b002e
-			public const int notnow = 2131427374;
+			// aapt resource value: 0x7f0b002f
+			public const int notnow = 2131427375;
 			
 			// aapt resource value: 0x7f0b0024
 			public const int password_toggle_content_description = 2131427364;
@@ -3454,20 +3454,20 @@ namespace FLSVertretungsplan.Droid
 			// aapt resource value: 0x7f0b0028
 			public const int path_password_strike_through = 2131427368;
 			
-			// aapt resource value: 0x7f0b0036
-			public const int quantity = 2131427382;
+			// aapt resource value: 0x7f0b0037
+			public const int quantity = 2131427383;
 			
 			// aapt resource value: 0x7f0b0013
 			public const int search_menu_title = 2131427347;
 			
-			// aapt resource value: 0x7f0b003b
-			public const int sign_in_text = 2131427387;
+			// aapt resource value: 0x7f0b003c
+			public const int sign_in_text = 2131427388;
 			
-			// aapt resource value: 0x7f0b002d
-			public const int signin = 2131427373;
+			// aapt resource value: 0x7f0b002e
+			public const int signin = 2131427374;
 			
-			// aapt resource value: 0x7f0b002f
-			public const int signing_in = 2131427375;
+			// aapt resource value: 0x7f0b0030
+			public const int signing_in = 2131427376;
 			
 			// aapt resource value: 0x7f0b0014
 			public const int status_bar_notification_info_overflow = 2131427348;
@@ -3478,14 +3478,17 @@ namespace FLSVertretungsplan.Droid
 			// aapt resource value: 0x7f0b002c
 			public const int tab2 = 2131427372;
 			
+			// aapt resource value: 0x7f0b002d
+			public const int tab3 = 2131427373;
+			
+			// aapt resource value: 0x7f0b0036
+			public const int text = 2131427382;
+			
 			// aapt resource value: 0x7f0b0035
-			public const int text = 2131427381;
+			public const int title = 2131427381;
 			
-			// aapt resource value: 0x7f0b0034
-			public const int title = 2131427380;
-			
-			// aapt resource value: 0x7f0b0030
-			public const int version_number = 2131427376;
+			// aapt resource value: 0x7f0b0031
+			public const int version_number = 2131427377;
 			
 			static String()
 			{
