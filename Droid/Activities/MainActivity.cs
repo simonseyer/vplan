@@ -39,6 +39,15 @@ namespace FLSVertretungsplan.Droid
 
             SupportActionBar.SetDisplayHomeAsUpEnabled(false);
             SupportActionBar.SetHomeButtonEnabled(false);
+
+            var alarmIntent = new Intent(this, typeof(AlarmReceiver));
+            var pendingIntent = PendingIntent.GetBroadcast(this, 0, alarmIntent, 0);
+
+            var alarmManager = AlarmManager.FromContext(this);
+            alarmManager.SetInexactRepeating(AlarmType.ElapsedRealtimeWakeup, 
+                                             SystemClock.ElapsedRealtime() + AlarmManager.IntervalHalfHour,
+                                             AlarmManager.IntervalHalfHour,
+                                             pendingIntent);
         }
 
     }
