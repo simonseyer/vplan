@@ -151,7 +151,7 @@
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Fragments\SettingsFragment.cs" />
     <Compile Include="Fragments\VplanFragment.cs" />
-    <Compile Include="Helpers\AlarmReciever.cs" />
+    <Compile Include="Helpers\AlarmReceiver.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\AboutAssets.txt" />
