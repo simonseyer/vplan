@@ -182,7 +182,6 @@
   <ItemGroup>
     <InterfaceDefinition Include="LaunchScreen.storyboard" />
     <InterfaceDefinition Include="Main.storyboard" />
-    <InterfaceDefinition Include="Resources\Views\MyTableViewCell.xib" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\" />
