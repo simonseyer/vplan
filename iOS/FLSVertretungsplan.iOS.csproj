@@ -173,6 +173,10 @@
     <Compile Include="ViewControllers\BookmarkedViewController.designer.cs">
       <DependentUpon>BookmarkedChangesViewController.cs</DependentUpon>
     </Compile>
+    <Compile Include="ViewControllers\TabBarController.cs" />
+    <Compile Include="ViewControllers\TabBarController.designer.cs">
+      <DependentUpon>TabBarController.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Entitlements.plist" />
