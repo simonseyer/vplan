@@ -1,5 +1,4 @@
 ﻿using System;
-
 using Foundation;
 using UIKit;
 
@@ -11,5 +10,6 @@ namespace FLSVertretungsplan.iOS.Views
         {
             // Note: this .ctor should not contain any initialization logic.
         }
+
     }
 }

@@ -137,7 +137,7 @@ namespace FLSVertretungsplan.Droid
             var chipViewHolder = holder as ChipViewHolder;
             var model = Items[position];
             chipViewHolder.TextView.Text = model?.Name;
-            chipViewHolder.Background.SetColor(new Color(model.Color.Red, model.Color.Green, model.Color.Blue));
+            chipViewHolder.Background.SetColor(new Color(model.OutlineColor.Red, model.OutlineColor.Green, model.OutlineColor.Blue));
         }
 
         public void OnClick(View view)

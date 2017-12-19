@@ -92,9 +92,23 @@ namespace FLSVertretungsplan.iOS
             var item = Items[indexPath.Row];
 
             cell.Label.Text = item.Name;
-            cell.BackgroundColor = UIColor.FromRGB(item.Color.Red, item.Color.Green, item.Color.Blue);
+            if (item.Filled)
+            {
+                cell.Gradient = item.FillColor;
+                cell.Layer.BorderWidth = 0;
+                cell.Layer.BorderColor = UIColor.Clear.CGColor;
+                cell.Label.TextColor = UIColor.White;
+            }
+            else
+            {
+                cell.Gradient = null;
+                cell.Layer.BorderWidth = 1;
+                cell.Layer.BorderColor = item.OutlineColor.ToUIColor().CGColor;
+                cell.Label.TextColor = item.OutlineColor.ToUIColor();
+            }
 
-            cell.Layer.CornerRadius = 15;
+
+            cell.Layer.CornerRadius = 18;
             cell.ClipsToBounds = true;
 
             return cell;
@@ -110,25 +124,25 @@ namespace FLSVertretungsplan.iOS
     class ChipCollectionViewDelegate : UICollectionViewDelegateFlowLayout
     {
         public SettingsViewModel ViewModel { get; private set; }
-        public bool schoolClassesMode { get; private set; }
+        public bool SchoolClassesMode { get; private set; }
 
         public ChipCollectionViewDelegate(SettingsViewModel viewModel, bool schoolClassesMode)
         {
             ViewModel = viewModel;
-            this.schoolClassesMode = schoolClassesMode;
+            SchoolClassesMode = schoolClassesMode;
         }
 
         public override CGSize GetSizeForItem(UICollectionView collectionView, UICollectionViewLayout layout, NSIndexPath indexPath)
         {
-            var items = schoolClassesMode ? ViewModel.SchoolClasses : ViewModel.Schools;
+            var items = SchoolClassesMode ? ViewModel.SchoolClasses : ViewModel.Schools;
             var name = new NSString(items[indexPath.Row].Name);
             var size = name.GetSizeUsingAttributes(new UIStringAttributes() { Font = UIFont.SystemFontOfSize(17) });
-            return new CGSize(size.Width + 32, 30);
+            return new CGSize(size.Width + 24, 36);
         }
 
         public override void ItemSelected(UICollectionView collectionView, NSIndexPath indexPath)
         {
-            if (schoolClassesMode)
+            if (SchoolClassesMode)
             {
                 ViewModel.ToggleSchoolClassBookmarkAtIndex(indexPath.Row);
             }

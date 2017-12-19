@@ -144,6 +144,12 @@
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\AppIcon%402x.png" />
     <ImageAsset Include="Resources\Assets.xcassets\LogoShape.imageset\Contents.json" />
     <ImageAsset Include="Resources\Assets.xcassets\LogoShape.imageset\LogoShape.pdf" />
+    <ImageAsset Include="Resources\Assets.xcassets\favorite-normal.imageset\Contents.json" />
+    <ImageAsset Include="Resources\Assets.xcassets\favorite-normal.imageset\favorite-normal.pdf" />
+    <ImageAsset Include="Resources\Assets.xcassets\list-normal.imageset\Contents.json" />
+    <ImageAsset Include="Resources\Assets.xcassets\list-normal.imageset\list-normal.pdf" />
+    <ImageAsset Include="Resources\Assets.xcassets\settings-normal.imageset\Contents.json" />
+    <ImageAsset Include="Resources\Assets.xcassets\settings-normal.imageset\settings-normal.pdf" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ViewControllers\VplanViewController.cs" />
@@ -173,6 +179,8 @@
     <Compile Include="ViewControllers\BookmarkedViewController.designer.cs">
       <DependentUpon>BookmarkedChangesViewController.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\DynamicCollectionView.cs" />
+    <Compile Include="Helpers\RgbColorExtension.cs" />
     <Compile Include="ViewControllers\TabBarController.cs" />
     <Compile Include="ViewControllers\TabBarController.designer.cs">
       <DependentUpon>TabBarController.cs</DependentUpon>
@@ -189,6 +197,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\" />
+    <Folder Include="Helpers\" />
   </ItemGroup>
   <Import Project="..\FLSVertretungsplan\FLSVertretungsplan.projitems" Label="Shared" Condition="Exists('..\FLSVertretungsplan\FLSVertretungsplan.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />

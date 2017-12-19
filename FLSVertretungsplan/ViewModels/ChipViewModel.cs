@@ -19,44 +19,80 @@ namespace FLSVertretungsplan
         }
     }
 
+    public class Gradient
+    {
+        public readonly RgbColor Start;
+        public readonly RgbColor End;
+
+        public Gradient(RgbColor start, RgbColor end)
+        {
+            Start = start;
+            End = end;
+        }
+    }
+
     public class ChipPresentationModel
     {
         public string Name { get; private set; }
-        public RgbColor Color { get; private set; }
+        public bool Filled { get; private set; }
+        public RgbColor OutlineColor { get; private set; }
+        public Gradient FillColor { get; private set; }
 
-        static readonly Dictionary<string, RgbColor> Colors = new Dictionary<string, RgbColor>
+        static readonly Dictionary<string, RgbColor> OutlineColors = new Dictionary<string, RgbColor>
         {
-            { "BG", new RgbColor(93, 148, 204) },
-            { "BS", new RgbColor(115, 219, 67) },
-            { "BFS", new RgbColor(221, 123, 53) },
-            { "HBFS", new RgbColor(30, 201, 164) }
+            { "BG", new RgbColor(254, 57, 94) },
+            { "BS", new RgbColor(30, 154, 249) },
+            { "BFS", new RgbColor(28, 200, 142) },
+            { "HBFS", new RgbColor(113, 63, 192) }
+        };
+        static readonly Dictionary<string, Gradient> FillColors = new Dictionary<string, Gradient>
+        {
+            { "BG", new Gradient(new RgbColor(254, 150, 116), new RgbColor(254, 57, 94)) },
+            { "BS", new Gradient(new RgbColor(30, 154, 249), new RgbColor(41, 182, 199)) },
+            { "BFS", new Gradient(new RgbColor(27, 201, 182), new RgbColor(28, 200, 142)) },
+            { "HBFS", new Gradient(new RgbColor(113, 63, 192), new RgbColor(135, 70, 231)) }
         };
 
-        public ChipPresentationModel(string name, RgbColor color)
+        public ChipPresentationModel(string name, bool filled, RgbColor outlineColor, Gradient fillColor)
         {
             Name = name;
-            Color = color;
+            Filled = filled;
+            OutlineColor = outlineColor;
+            FillColor = fillColor;
         }
 
         public static ChipPresentationModel Create(SchoolBookmark bookmark)
         {
             return new ChipPresentationModel(bookmark.School,
-                                             bookmark.Bookmarked ? GetColor(bookmark.School) : new RgbColor(219, 220, 221));
+                                             bookmark.Bookmarked,
+                                             GetOutlineColor(bookmark.School),
+                                             GetFillColor(bookmark.School));
         }
 
         public static ChipPresentationModel Create(SchoolClassBookmark bookmark)
         {
             return new ChipPresentationModel(bookmark.SchoolClass.Name,
-                                             bookmark.Bookmarked ? GetColor(bookmark.SchoolClass.School) : new RgbColor(219, 220, 221));
+                                             bookmark.Bookmarked,
+                                             GetOutlineColor(bookmark.SchoolClass.School),
+                                             GetFillColor(bookmark.SchoolClass.School));
         }
 
-        private static RgbColor GetColor(string school)
+        private static RgbColor GetOutlineColor(string school)
         {
-            if (!Colors.ContainsKey(school))
+            if (!OutlineColors.ContainsKey(school))
             {
                 return new RgbColor(201, 29, 29);
             }
-            return Colors[school];
+            return OutlineColors[school];
+        }
+
+        private static Gradient GetFillColor(string school)
+        {
+            if (!FillColors.ContainsKey(school))
+            {
+                return new Gradient(new RgbColor(201, 29, 29), new RgbColor(201, 29, 29));
+            }
+            return FillColors[school];
         }
     }
 
