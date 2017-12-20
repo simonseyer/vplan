@@ -7,15 +7,21 @@
 using Foundation;
 using System;
 using System.CodeDom.Compiler;
-using UIKit;
 
 namespace FLSVertretungsplan.iOS
 {
     [Register ("VplanViewController")]
     partial class VplanViewController
     {
+        [Outlet]
+        UIKit.UILabel LastUpdateLabel { get; set; }
+
         void ReleaseDesignerOutlets ()
         {
+            if (LastUpdateLabel != null) {
+                LastUpdateLabel.Dispose ();
+                LastUpdateLabel = null;
+            }
         }
     }
 }

@@ -7,21 +7,15 @@
 using Foundation;
 using System;
 using System.CodeDom.Compiler;
+using UIKit;
 
 namespace FLSVertretungsplan.iOS
 {
-    [Register ("ItemsViewController")]
-    partial class BrowseViewController
+    [Register ("AllChangesViewController")]
+    partial class AllChangesViewController
     {
-        [Outlet]
-        UIKit.UILabel LastUpdateLabel { get; set; }
-
         void ReleaseDesignerOutlets ()
         {
-            if (LastUpdateLabel != null) {
-                LastUpdateLabel.Dispose ();
-                LastUpdateLabel = null;
-            }
         }
     }
 }
