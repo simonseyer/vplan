@@ -16,8 +16,8 @@ namespace FLSVertretungsplan
 
         Task Load();
         Task<VplanDiff> Refresh();
-        void ClearNewSchoolClasses();
-        void BookmarkSchool(string schoolName, bool bookmark);
-        void BookmarkSchoolClass(SchoolClass schoolClass, bool bookmark);
+        Task ClearNewSchoolClasses();
+        Task BookmarkSchool(string schoolName, bool bookmark);
+        Task BookmarkSchoolClass(SchoolClass schoolClass, bool bookmark);
     }
 }

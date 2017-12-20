@@ -68,7 +68,7 @@ namespace FLSVertretungsplan
             LoadTask = null;
         }
 
-        private async Task DoLoad()
+        async Task DoLoad()
         {
             Vplan.Value = await Persistence.LoadVplan();
 
@@ -114,7 +114,7 @@ namespace FLSVertretungsplan
             return diff;
         }
 
-        private async Task<VplanDiff> DoRefresh()
+        async Task<VplanDiff> DoRefresh()
         {
             IsRefreshing.Value = true;
 
@@ -147,13 +147,13 @@ namespace FLSVertretungsplan
             return new VplanDiff(gotUpdated, newBookmarks.ToList(), newNewClasses.ToList());
         }
 
-        public void ClearNewSchoolClasses()
+        public async Task ClearNewSchoolClasses()
         {
             NewSchoolClasses.Clear();
-            _ = Persistence.PersistNewSchoolClasses(NewSchoolClasses.ToList());
+            await PersistNewSchoolClasses();
         }
 
-        public void BookmarkSchool(string school, bool bookmark)
+        public async Task BookmarkSchool(string school, bool bookmark)
         {
             var i = IndexOfSchoolBookmark(school);
             Debug.Assert(i >= 0, string.Format("School bookmark {0} schould exist", school));
@@ -171,11 +171,11 @@ namespace FLSVertretungsplan
             }
             UpdateBookmarkedVplan();
 
-            Persistence.PersistSchoolBookmarks(SchoolBookmarks.ToList());
-            Persistence.PersistSchoolClassBookmarks(SchoolClassBookmarks.ToList());
+            await PersistSchoolBookmarks();
+            await PersistSchoolClassBookmarks();
         }
 
-        public void BookmarkSchoolClass(SchoolClass schoolClass, bool bookmark)
+        public async Task BookmarkSchoolClass(SchoolClass schoolClass, bool bookmark)
         {
             var i = IndexOfSchoolClassBookmark(schoolClass);
             Debug.Assert(i >= 0, string.Format("School class bookmark {0} schould exist", schoolClass));
@@ -187,10 +187,10 @@ namespace FLSVertretungsplan
             UpdateSchoolClassBookmark(newBookmark);
             UpdateBookmarkedVplan();
 
-            Persistence.PersistSchoolClassBookmarks(SchoolClassBookmarks.ToList());
+            await PersistSchoolClassBookmarks();
         }
 
-        private void UpdateBookmarkedVplan()
+        void UpdateBookmarkedVplan()
         {
             List<Change> bookmarkedChanges = new List<Change>();
             foreach (Change change in Vplan.Value.Changes)
@@ -205,7 +205,7 @@ namespace FLSVertretungsplan
             BookmarkedVplan.Value = new Vplan(Vplan.Value.LastUpdate, bookmarkedChanges);
         }
 
-        private void UpdateSchoolClasses()
+        void UpdateSchoolClasses()
         {
             foreach (Change change in Vplan.Value.Changes)
             {
@@ -213,7 +213,7 @@ namespace FLSVertretungsplan
             }
         }
 
-        private void AddClass(SchoolClass schoolClass)
+        void AddClass(SchoolClass schoolClass)
         {
             var schoolBookmark = GetSchoolBookmark(schoolClass.School);
             Debug.Assert(schoolBookmark != null, string.Format("School class bookmark {0} schould exist", schoolClass));
@@ -230,7 +230,7 @@ namespace FLSVertretungsplan
             UpdateSchoolClassBookmark(newBookmark);
         }
 
-        private void UpdateSchoolClassBookmark(SchoolClassBookmark newBookmark)
+        void UpdateSchoolClassBookmark(SchoolClassBookmark newBookmark)
         {
             // Replace bookmark
             AllSchoolClassBookmarks.Remove(newBookmark);
@@ -261,13 +261,13 @@ namespace FLSVertretungsplan
             }
         }
 
-        private int IndexOfSchoolClassBookmark(SchoolClass schoolClass)
+        int IndexOfSchoolClassBookmark(SchoolClass schoolClass)
         {
             var dummyBookmark = new SchoolClassBookmark(schoolClass, false, false);
             return SchoolClassBookmarks.IndexOf(dummyBookmark);
         }
 
-        private SchoolClassBookmark GetSchoolClassBookmark(SchoolClass schoolClass)
+        SchoolClassBookmark GetSchoolClassBookmark(SchoolClass schoolClass)
         {
             var i = IndexOfSchoolClassBookmark(schoolClass);
             if (i < 0)
@@ -277,13 +277,13 @@ namespace FLSVertretungsplan
             return SchoolClassBookmarks[i];
         }
 
-        private int IndexOfSchoolBookmark(string school)
+        int IndexOfSchoolBookmark(string school)
         {
             var dummyBookmark = new SchoolBookmark(school, false);
             return SchoolBookmarks.IndexOf(dummyBookmark);
         }
 
-        private SchoolBookmark GetSchoolBookmark(string school)
+        SchoolBookmark GetSchoolBookmark(string school)
         {
             var i = IndexOfSchoolBookmark(school);
             if (i < 0)
@@ -293,13 +293,27 @@ namespace FLSVertretungsplan
             return SchoolBookmarks[i];
         }
 
-        private async Task PersistAll()
+        async Task PersistSchoolBookmarks()
         {
-            await Persistence.PersistVplan(Vplan.Value);
-            await Persistence.PersistNewSchoolClasses(NewSchoolClasses.ToList());
             await Persistence.PersistSchoolBookmarks(SchoolBookmarks.ToList());
+        }
+
+        async Task PersistSchoolClassBookmarks()
+        {
             await Persistence.PersistSchoolClassBookmarks(AllSchoolClassBookmarks.ToList());
         }
 
+        async Task PersistNewSchoolClasses()
+        {
+            await Persistence.PersistNewSchoolClasses(NewSchoolClasses.ToList());
+        }
+
+        async Task PersistAll()
+        {
+            await Persistence.PersistVplan(Vplan.Value);
+            await PersistNewSchoolClasses();
+            await PersistSchoolBookmarks();
+            await PersistSchoolClassBookmarks();
+        }
     }
 }
