@@ -30,6 +30,10 @@ namespace FLSVertretungsplan.iOS
             TableView.RefreshControl = refreshControl;
             TableView.Source = new ItemsDataSource(ViewModel);
 
+            TableView.ClipsToBounds = true;
+            TableView.Layer.CornerRadius = 6;
+            TableView.ContentInset = new UIEdgeInsets(14, 0, 14, 0);
+
             LastUpdateLabel.Text = ViewModel.LastUpdate.Value;
 
             ViewModel.IsRefreshing.PropertyChanged += IsRefreshing_PropertyChanged;
@@ -119,6 +123,14 @@ namespace FLSVertretungsplan.iOS
             cell.ChangeTypeLabel.Text = change.Type;
             cell.ChangeDescriptionLabel.Text = change.Description;
             cell.StatusView.BackgroundColor = change.Canceled ? UIColor.FromRGB(0.76f, 0.19f, 0.12f) : UIColor.FromRGB(0.18f, 0.76f, 0.23f);
+
+            cell.ContentBackgroundView.Layer.CornerRadius = 8;
+            cell.ContentBackgroundView.Layer.BorderWidth = 1;
+            cell.ContentBackgroundView.Layer.BorderColor = UIColor.FromRGB(227, 228, 232).CGColor;
+            cell.ContentBackgroundView.Layer.ShadowColor = UIColor.Black.CGColor;
+            cell.ContentBackgroundView.Layer.ShadowOffset = new CoreGraphics.CGSize(0, 2);
+            cell.ContentBackgroundView.Layer.ShadowRadius = 3;
+            cell.ContentBackgroundView.Layer.ShadowOpacity = 0.06F;
 
             return cell;
         }
