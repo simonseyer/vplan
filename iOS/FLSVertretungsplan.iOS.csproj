@@ -150,6 +150,13 @@
     <ImageAsset Include="Resources\Assets.xcassets\list-normal.imageset\list-normal.pdf" />
     <ImageAsset Include="Resources\Assets.xcassets\settings-normal.imageset\Contents.json" />
     <ImageAsset Include="Resources\Assets.xcassets\settings-normal.imageset\settings-normal.pdf" />
+    <ImageAsset Include="Resources\Assets.xcassets\info.imageset\Contents.json" />
+    <ImageAsset Include="Resources\Assets.xcassets\info.imageset\info.pdf" />
+    <ImageAsset Include="Resources\Assets.xcassets\location.imageset\Contents.json" />
+    <ImageAsset Include="Resources\Assets.xcassets\location.imageset\location.pdf" />
+    <ImageAsset Include="Resources\Assets.xcassets\person.imageset\Contents.json" />
+    <ImageAsset Include="Resources\Assets.xcassets\person.imageset\person.pdf" />
+    <ImageAsset Include="Resources\Assets.xcassets\location.imageset\location.png" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ViewControllers\VplanViewController.cs" />
@@ -185,6 +192,15 @@
     <Compile Include="ViewControllers\TabBarController.designer.cs">
       <DependentUpon>TabBarController.cs</DependentUpon>
     </Compile>
+    <Compile Include="ViewControllers\VplanContainerViewController.cs" />
+    <Compile Include="ViewControllers\VplanContainerViewController.designer.cs">
+      <DependentUpon>VplanContainerViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ViewControllers\VplanDayViewController.cs" />
+    <Compile Include="ViewControllers\VplanDayViewController.designer.cs">
+      <DependentUpon>VplanDayViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\GradientView.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Entitlements.plist" />

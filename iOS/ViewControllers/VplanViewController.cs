@@ -4,17 +4,39 @@ using System.Collections.Specialized;
 using Foundation;
 using UIKit;
 using FLSVertretungsplan.iOS.Views;
+using System.Collections.ObjectModel;
 
 namespace FLSVertretungsplan.iOS
 {
-    public partial class BrowseViewController : UITableViewController
+    public partial class VplanViewController : UITableViewController
     {
         UIRefreshControl refreshControl;
 
-        public VplanViewModel ViewModel { get; set; }
-        public bool bookmarkedVplan;
+        DatePresentationModel _PresentationModel;
+        public DatePresentationModel PresentationModel
+        {
+            get
+            {
+                return _PresentationModel;
+            }
+            set
+            {
+                if (_PresentationModel != null)
+                {
+                    _PresentationModel.IsRefreshing.PropertyChanged -= IsRefreshing_PropertyChanged;
+                }
+                _PresentationModel = value;
+                if (_PresentationModel != null)
+                {
+                    _PresentationModel.IsRefreshing.PropertyChanged += IsRefreshing_PropertyChanged;
+                }
+                ReloadData();
+            }
+        }
 
-        public BrowseViewController(IntPtr handle) : base(handle)
+        ItemsDataSource DataSource = new ItemsDataSource();
+
+        public VplanViewController(IntPtr handle) : base(handle)
         {
         }
 
@@ -22,23 +44,20 @@ namespace FLSVertretungsplan.iOS
         {
             base.ViewDidLoad();
 
-            ViewModel = new VplanViewModel(bookmarkedVplan);
-
             // Setup UITableView.
             refreshControl = new UIRefreshControl();
+            refreshControl.Layer.ZPosition = -1;
             refreshControl.ValueChanged += RefreshControl_ValueChanged;
             TableView.RefreshControl = refreshControl;
-            TableView.Source = new ItemsDataSource(ViewModel);
+            TableView.Source = DataSource;
 
             TableView.ClipsToBounds = true;
             TableView.Layer.CornerRadius = 6;
+            TableView.Layer.BorderWidth = 0.5F;
+            TableView.Layer.BorderColor = UIColor.FromRGB(236, 237, 241).CGColor;
             TableView.ContentInset = new UIEdgeInsets(14, 0, 14, 0);
 
-            LastUpdateLabel.Text = ViewModel.LastUpdate.Value;
-
-            ViewModel.IsRefreshing.PropertyChanged += IsRefreshing_PropertyChanged;
-            ViewModel.LastUpdate.PropertyChanged += LastUpdate_PropertyChanged;
-            ViewModel.Dates.PropertyChanged += Dates_CollectionChanged;
+            //LastUpdateLabel.Text = ViewModel.LastUpdate.Value;
         }
 
         public override void ViewDidAppear(bool animated)
@@ -48,36 +67,37 @@ namespace FLSVertretungsplan.iOS
 
         void RefreshControl_ValueChanged(object sender, EventArgs e)
         {
-            ViewModel.LoadItemsCommand.Execute(null);
+            PresentationModel.LoadItemsCommand.Execute(null);
         }
 
         void IsRefreshing_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             InvokeOnMainThread(() =>
             {
-                if (ViewModel.IsRefreshing.Value && !refreshControl.Refreshing)
+                if (PresentationModel.IsRefreshing.Value && !refreshControl.Refreshing)
                 {
                     refreshControl.BeginRefreshing();
                 }
-                else if (!ViewModel.IsRefreshing.Value)
+                else if (!PresentationModel.IsRefreshing.Value)
                 {
                     refreshControl.EndRefreshing();
                 }
             });
         }
 
-        void LastUpdate_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
-        {
-            InvokeOnMainThread(() =>
-            {
-                LastUpdateLabel.Text = ViewModel.LastUpdate.Value;
-            });
-        }
+        //void LastUpdate_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        //{
+        //    InvokeOnMainThread(() =>
+        //    {
+        //        LastUpdateLabel.Text = ViewModel.LastUpdate.Value;
+        //    });
+        //}
 
-        void Dates_CollectionChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        void ReloadData()
         {
             InvokeOnMainThread(() =>
             {
+                DataSource.Items = PresentationModel?.Items;
                 TableView.ReloadData();
             });
         }
@@ -87,43 +107,98 @@ namespace FLSVertretungsplan.iOS
     {
         static readonly NSString CELL_IDENTIFIER = new NSString("CHANGE_CELL");
 
-        VplanViewModel viewModel;
-
-        public ItemsDataSource(VplanViewModel viewModel)
-        {
-            this.viewModel = viewModel;
-        }
+        public Collection<ChangePresentationModel> Items;
 
         public override nint NumberOfSections(UITableView tableView)
         {
-            return viewModel.Dates.Value.Count;
+            return 1;
         }
 
         public override nint RowsInSection(UITableView tableview, nint section) 
         {
-            return viewModel.Dates.Value[(int)section].Items.Count;
-        }
-
-        public override string TitleForHeader(UITableView tableView, nint section)
-        {
-            return viewModel.Dates.Value[(int)section].Title;
+            return Items?.Count ?? 0;
         }
 
         public override UITableViewCell GetCell(UITableView tableView, NSIndexPath indexPath)
         {
             ChangeCell cell = (ChangeCell)tableView.DequeueReusableCell(CELL_IDENTIFIER, indexPath);
 
-            cell.StatusView.Layer.CornerRadius = 6; // TODO
-
-            var change = viewModel.Dates.Value[indexPath.Section].Items[indexPath.Row];
+            var change = Items[indexPath.Row];
 
             cell.ClassNameLabel.Text = change.ClassName;
             cell.HoursLabel.Text = change.Hours;
-            cell.OriginalLessonLabel.Text = change.OldLesson;
             cell.ChangeTypeLabel.Text = change.Type;
-            cell.ChangeDescriptionLabel.Text = change.Description;
-            cell.StatusView.BackgroundColor = change.Canceled ? UIColor.FromRGB(0.76f, 0.19f, 0.12f) : UIColor.FromRGB(0.18f, 0.76f, 0.23f);
+            cell.SchoolView.Gradient = change.FillColor;
 
+            var primaryTextColor = UIColor.FromRGB(23, 43, 76);
+            var secondaryTextColor = UIColor.FromRGB(164, 174, 186);
+            var font = UIFont.SystemFontOfSize(15);
+            var paragraphStyle = new NSMutableParagraphStyle
+            {
+                ParagraphSpacing = 0.25F * font.LineHeight
+            };
+
+            var originalLessonText = new NSMutableAttributedString();
+            foreach (var component in change.OldLesson)
+            {
+                if (component.PrimaryText != null)
+                {
+                    originalLessonText.Append(new NSAttributedString(component.PrimaryText, foregroundColor: primaryTextColor, font: font));
+                }
+                else if (component.SecondaryText != null)
+                {
+                    originalLessonText.Append(new NSAttributedString(component.SecondaryText, foregroundColor: secondaryTextColor, font: font));
+                }
+            }
+            cell.OriginalLessonLabel.AttributedText = originalLessonText;
+
+            var descriptionText = new NSMutableAttributedString();
+            foreach (var component in change.Description)
+            {
+                if (component.PrimaryText != null)
+                {
+                    descriptionText.Append(new NSAttributedString(component.PrimaryText, foregroundColor: secondaryTextColor, font: font));
+                }
+                else if (component.SecondaryText != null)
+                {
+                    descriptionText.Append(new NSAttributedString(component.SecondaryText, foregroundColor: secondaryTextColor, font: font));
+                }
+                else if (component.IconIdentifier != TextComponent.Icon.None)
+                {
+                    string icon = "info";
+                    switch (component.IconIdentifier)
+                    {
+                        case TextComponent.Icon.Info:
+                            icon = "info";
+                            break;
+                        case TextComponent.Icon.Location:
+                            icon = "location";
+                            break;
+                        case TextComponent.Icon.Person:
+                            icon = "person";
+                            break;
+                    }
+
+                    var iconImage = UIImage.FromBundle(icon);
+                    var iconAttachment = new NSTextAttachment
+                    {
+                        Image = iconImage,
+                        Bounds = new CoreGraphics.CGRect(new CoreGraphics.CGPoint(0, font.Descender), iconImage.Size)
+                    };
+
+                    descriptionText.Append(NSAttributedString.FromAttachment(iconAttachment));
+                    descriptionText.Append(new NSAttributedString(" ", font: font));
+                }
+            }
+            descriptionText.AddAttributes(new UIStringAttributes { ParagraphStyle = paragraphStyle }, 
+                                          new NSRange(0, descriptionText.Length - 1));
+            cell.ChangeDescriptionLabel.AttributedText = descriptionText;
+
+
+            cell.SchoolView.Layer.CornerRadius = 5;
+            cell.SchoolView.ClipsToBounds = true;
+
+            //cell.ContentBackgroundView.ClipsToBounds = true;
             cell.ContentBackgroundView.Layer.CornerRadius = 8;
             cell.ContentBackgroundView.Layer.BorderWidth = 1;
             cell.ContentBackgroundView.Layer.BorderColor = UIColor.FromRGB(227, 228, 232).CGColor;

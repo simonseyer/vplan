@@ -30,8 +30,8 @@ namespace FLSVertretungsplan.iOS
         {
             base.PrepareForSegue(segue, sender);
 
-            var viewController = segue.DestinationViewController as BrowseViewController;
-            viewController.bookmarkedVplan = true;
+            var viewController = segue.DestinationViewController as VplanContainerViewController;
+            viewController.ViewModel = new VplanViewModel(true);
         }
     }
 }

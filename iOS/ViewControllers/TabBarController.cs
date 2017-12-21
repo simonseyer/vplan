@@ -18,6 +18,7 @@ namespace FLSVertretungsplan.iOS
             TabBar.ClipsToBounds = true;
             TabBar.TintColor = UIColor.FromRGB(23, 43, 76);
             TabBar.UnselectedItemTintColor = UIColor.FromRGB(164, 174, 186);
+            SelectedIndex = 1;
         }
     }
 }

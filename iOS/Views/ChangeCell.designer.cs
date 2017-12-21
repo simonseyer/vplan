@@ -16,33 +16,23 @@ namespace FLSVertretungsplan.iOS.Views
         [Outlet]
         public UIKit.UILabel ChangeDescriptionLabel { get; private set; }
 
-
         [Outlet]
         public UIKit.UILabel ChangeTypeLabel { get; private set; }
-
 
         [Outlet]
         public UIKit.UILabel ClassNameLabel { get; private set; }
 
-
         [Outlet]
         public UIKit.UIView ContentBackgroundView { get; private set; }
-
 
         [Outlet]
         public UIKit.UILabel HoursLabel { get; private set; }
 
-
         [Outlet]
         public UIKit.UILabel OriginalLessonLabel { get; private set; }
 
-
         [Outlet]
-        public UIKit.UIView SchoolView { get; private set; }
-
-
-        [Outlet]
-        public UIKit.UIView StatusView { get; private set; }
+        public FLSVertretungsplan.iOS.GradientView SchoolView { get; private set; }
 
         void ReleaseDesignerOutlets ()
         {
@@ -76,9 +66,9 @@ namespace FLSVertretungsplan.iOS.Views
                 OriginalLessonLabel = null;
             }
 
-            if (StatusView != null) {
-                StatusView.Dispose ();
-                StatusView = null;
+            if (SchoolView != null) {
+                SchoolView.Dispose ();
+                SchoolView = null;
             }
         }
     }

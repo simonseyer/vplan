@@ -10,12 +10,9 @@ using System.CodeDom.Compiler;
 
 namespace FLSVertretungsplan.iOS
 {
-    [Register ("VplanViewController")]
-    partial class VplanViewController
+    [Register ("GradientView")]
+    partial class GradientView
     {
-        [Outlet]
-        UIKit.UILabel LastUpdateLabel { get; set; }
-
         void ReleaseDesignerOutlets ()
         {
         }

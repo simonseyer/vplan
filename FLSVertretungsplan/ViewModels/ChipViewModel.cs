@@ -77,7 +77,7 @@ namespace FLSVertretungsplan
                                              GetFillColor(bookmark.SchoolClass.School));
         }
 
-        private static RgbColor GetOutlineColor(string school)
+        public static RgbColor GetOutlineColor(string school)
         {
             if (!OutlineColors.ContainsKey(school))
             {
@@ -86,7 +86,7 @@ namespace FLSVertretungsplan
             return OutlineColors[school];
         }
 
-        private static Gradient GetFillColor(string school)
+        public static Gradient GetFillColor(string school)
         {
             if (!FillColors.ContainsKey(school))
             {
