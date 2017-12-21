@@ -8,6 +8,7 @@ namespace FLSVertretungsplan
     public interface IVplanDataStore
     {
         Property<bool> IsRefreshing { get; }
+        Property<bool> LastRefreshFailed { get; }
         Property<Vplan> Vplan { get; }
         Property<Vplan> BookmarkedVplan { get; }
         ObservableCollection<SchoolBookmark> SchoolBookmarks { get; }

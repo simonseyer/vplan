@@ -15,6 +15,7 @@ namespace FLSVertretungsplan
 
         // Transient state
         public Property<bool> IsRefreshing { get; }
+        public Property<bool> LastRefreshFailed { get; }
 
         // State
         public Property<Vplan> Vplan { get; }
@@ -34,6 +35,7 @@ namespace FLSVertretungsplan
         {
             
             IsRefreshing = new Property<bool>();
+            LastRefreshFailed = new Property<bool>();
 
             Vplan = new Property<Vplan>
             {
@@ -154,6 +156,7 @@ namespace FLSVertretungsplan
 
         async Task<VplanDiff> DoRefresh()
         {
+            LastRefreshFailed.Value = false;
             IsRefreshing.Value = true;
 
             var oldVplan = BookmarkedVplan.Value;
@@ -163,11 +166,12 @@ namespace FLSVertretungsplan
             {
                 Vplan.Value = await Loader.Load();
             } 
-            catch (Exception e) 
+            catch (Exception e)
             {
                 Debug.Print("Failed to refresh data: " + e);
                 IsRefreshing.Value = false;
-                throw e;
+                LastRefreshFailed.Value = true;
+                return null;
             }
 
             UpdateSchoolClasses();

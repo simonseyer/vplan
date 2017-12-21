@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Foundation;
 using UIKit;
 
@@ -27,6 +28,7 @@ namespace FLSVertretungsplan.iOS
 
             ScrollView.Delegate = this;
             ViewModel.Dates.PropertyChanged += Dates_PropertyChanged;
+            ViewModel.LastRefreshFailed.PropertyChanged += LastRefreshFailed_PropertyChanged;
             ReloadData();
         }
 
@@ -36,6 +38,28 @@ namespace FLSVertretungsplan.iOS
             {
                 ReloadData();
             });
+        }
+
+        void LastRefreshFailed_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            if (ViewModel.LastRefreshFailed.Value)
+            {
+                InvokeOnMainThread(() =>
+                {
+                    View.LayoutIfNeeded();
+                    StatusViewHiddenConstraint.Active = false;
+                    UIView.Animate(0.3, 0, UIViewAnimationOptions.CurveEaseOut, () => View.LayoutIfNeeded(), null);
+                });
+                Task.Delay(3000).ContinueWith(t2 =>
+                {
+                    InvokeOnMainThread(() =>
+                    {
+                        View.LayoutIfNeeded();
+                        StatusViewHiddenConstraint.Active = true;
+                        UIView.Animate(0.3, 0, UIViewAnimationOptions.CurveEaseIn, () => View.LayoutIfNeeded(), null);
+                    });
+                });
+            }
         }
 
         [Export("scrollViewDidEndDecelerating:")]

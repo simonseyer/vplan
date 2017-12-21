@@ -99,6 +99,10 @@ namespace FLSVertretungsplan.iOS
             var dataStore = ServiceLocator.Instance.Get<IVplanDataStore>();
             await dataStore.Load();
             var diff = await dataStore.Refresh();
+            if (diff == null)
+            {
+                throw new Exception();
+            }
 
             var notificationCenter = UNUserNotificationCenter.Current;
             var settings = await notificationCenter.GetNotificationSettingsAsync();

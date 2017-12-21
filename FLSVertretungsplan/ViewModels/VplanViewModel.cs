@@ -155,6 +155,7 @@ namespace FLSVertretungsplan
 
         public Property<string> LastUpdate { get; private set; }
         public Property<bool> IsRefreshing { get; private set; }
+        public Property<bool> LastRefreshFailed { get; private set; }
         public Property<List<DatePresentationModel>> Dates { get; private set; }
         public Property<bool> ShowsNewClasses { get; private set; }
         public Command LoadItemsCommand { get; }
@@ -168,6 +169,7 @@ namespace FLSVertretungsplan
                 Value = ""
             };
             IsRefreshing = DataStore.IsRefreshing;
+            LastRefreshFailed = DataStore.LastRefreshFailed;
             Dates = new Property<List<DatePresentationModel>>()
             {
                 Value = new List<DatePresentationModel>()
@@ -189,15 +191,7 @@ namespace FLSVertretungsplan
 
         async Task ExecuteLoadItemsCommand()
         {
-            try
-            {
-                await DataStore.Refresh();
-            }
-            catch (Exception ex)
-            {
-                LastUpdate.Value = "Laden fehlgeschlagen";
-                Debug.WriteLine(ex);
-            }
+            await DataStore.Refresh();
         }
 
         private void VplanChanged(object sender, EventArgs e)
