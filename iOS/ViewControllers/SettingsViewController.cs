@@ -55,25 +55,28 @@ namespace FLSVertretungsplan.iOS
 
         void CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
-            var oldIndexPaths = GetIndexPaths(e.OldStartingIndex, e.OldItems?.Count ?? 0);
-            var newIndexPaths = GetIndexPaths(e.NewStartingIndex, e.NewItems?.Count ?? 0);
-            switch (e.Action)
+            InvokeOnMainThread(() =>
             {
-                case NotifyCollectionChangedAction.Add:
-                    CollectionView.InsertItems(newIndexPaths);
-                    break;
-                case NotifyCollectionChangedAction.Remove:
-                    CollectionView.DeleteItems(oldIndexPaths);
-                    break;
-                case NotifyCollectionChangedAction.Replace:
-                    CollectionView.ReloadItems(newIndexPaths);
-                    break;
-                case NotifyCollectionChangedAction.Move:
-                    throw new NotSupportedException("Moving items is not supported");
-                case NotifyCollectionChangedAction.Reset:
-                    CollectionView.ReloadData();
-                    break;
-            }
+                var oldIndexPaths = GetIndexPaths(e.OldStartingIndex, e.OldItems?.Count ?? 0);
+                var newIndexPaths = GetIndexPaths(e.NewStartingIndex, e.NewItems?.Count ?? 0);
+                switch (e.Action)
+                {
+                    case NotifyCollectionChangedAction.Add:
+                        CollectionView.InsertItems(newIndexPaths);
+                        break;
+                    case NotifyCollectionChangedAction.Remove:
+                        CollectionView.DeleteItems(oldIndexPaths);
+                        break;
+                    case NotifyCollectionChangedAction.Replace:
+                        CollectionView.ReloadItems(newIndexPaths);
+                        break;
+                    case NotifyCollectionChangedAction.Move:
+                        throw new NotSupportedException("Moving items is not supported");
+                    case NotifyCollectionChangedAction.Reset:
+                        CollectionView.ReloadData();
+                        break;
+                }
+            });
         }
 
         NSIndexPath[] GetIndexPaths(int startIndex, int count)
