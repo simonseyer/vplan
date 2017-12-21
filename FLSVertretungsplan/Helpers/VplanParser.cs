@@ -8,6 +8,8 @@ namespace FLSVertretungsplan
     public static class VplanParser
     {
 
+        static Int64 TimeZoneOffset = 7200;
+
         public static async Task<Vplan> Parse(string xml)
         {
             return await Task.Run(() =>
@@ -78,7 +80,7 @@ namespace FLSVertretungsplan
             var newTeacherNode = newNode.ChildNodes.Item("tutor");
 
             var stringDay = dateNode.Attributes["timestamp"]?.Value;
-            var day = DateTimeOffset.FromUnixTimeSeconds(Convert.ToInt64(stringDay)).DateTime;
+            var day = DateTimeOffset.FromUnixTimeSeconds(Convert.ToInt64(stringDay) + TimeZoneOffset).DateTime;
             var hours = oldNode.ChildText("hours");
 
             var schoolClass = new SchoolClass(classNode.Attributes["name"]?.Value,
