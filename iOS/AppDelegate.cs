@@ -24,6 +24,8 @@ namespace FLSVertretungsplan.iOS
             set;
         }
 
+        bool InitialRun = true;
+
         public override bool FinishedLaunching(UIApplication application, NSDictionary launchOptions)
         {
             UIApplication.SharedApplication.SetMinimumBackgroundFetchInterval(UIApplication.BackgroundFetchIntervalMinimum);
@@ -51,7 +53,22 @@ namespace FLSVertretungsplan.iOS
             return true;
         }
 
-        private async Task RequestNotifications()
+        public override void OnActivated(UIApplication application)
+        {
+            if (!InitialRun)
+            {
+                return;
+            }
+            InitialRun = false;
+
+            var dataStore = ServiceLocator.Instance.Get<IVplanDataStore>();
+            Task.Run(() =>
+            {
+                dataStore.Refresh();
+            });
+        }
+
+        async Task RequestNotifications()
         {
             var notificationCenter = UNUserNotificationCenter.Current;
             var result = await notificationCenter.RequestAuthorizationAsync(UNAuthorizationOptions.Alert);
@@ -77,7 +94,7 @@ namespace FLSVertretungsplan.iOS
             });
         }
 
-        private async Task<bool> FetchData()
+        async Task<bool> FetchData()
         {
             var dataStore = ServiceLocator.Instance.Get<IVplanDataStore>();
             await dataStore.Load();
@@ -129,12 +146,6 @@ namespace FLSVertretungsplan.iOS
         {
             // Called as part of the transiton from background to active state.
             // Here you can undo many of the changes made on entering the background.
-        }
-
-        public override void OnActivated(UIApplication application)
-        {
-            // Restart any tasks that were paused (or not yet started) while the application was inactive. 
-            // If the application was previously in the background, optionally refresh the user interface.
         }
 
         public override void WillTerminate(UIApplication application)
