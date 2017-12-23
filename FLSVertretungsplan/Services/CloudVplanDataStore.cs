@@ -164,13 +164,19 @@ namespace FLSVertretungsplan
 
             try
             {
-                Vplan.Value = await Loader.Load();
+                var newVplan = await Loader.Load();
+                if (newVplan.Equals(Vplan.Value))
+                {
+                    IsRefreshing.Value = false;
+                    return new VplanDiff(false, new List<Change>(), new List<SchoolClass>());
+                }
+                Vplan.Value = newVplan;
             } 
             catch (Exception e)
             {
                 Debug.Print("Failed to refresh data: " + e);
-                IsRefreshing.Value = false;
                 LastRefreshFailed.Value = true;
+                IsRefreshing.Value = false;
                 return null;
             }
 
