@@ -34,6 +34,29 @@ namespace FLSVertretungsplan.iOS
 
             App.Initialize();
 
+            var navigationController = Window.RootViewController as UINavigationController;
+            var storyboard = UIStoryboard.FromName("Main", NSBundle.MainBundle);
+
+            ISettingsDataStore settingsDataSore = ServiceLocator.Instance.Get<ISettingsDataStore>();
+
+            if (settingsDataSore.FirstAppLaunch)
+            {
+                settingsDataSore.FirstAppLaunch = false;
+                navigationController.ViewControllers = new UIViewController[]
+                {
+                    storyboard.InstantiateViewController("SetupViewController")
+                };
+            }
+            else
+            {
+                navigationController.ViewControllers = new UIViewController[]
+                {
+                    storyboard.InstantiateViewController("MainViewController")
+                };
+            }
+
+
+
             _ = RequestNotifications();
             var dataStore = ServiceLocator.Instance.Get<IVplanDataStore>();
             Task.Run(() =>

@@ -34,6 +34,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)Models\Change.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\VplanDiff.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\ChipViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\ISettingsDataStore.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\StandardSettingsDataStore.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Plugins\" />

@@ -126,6 +126,12 @@
     <Reference Include="System.Collections.Immutable">
       <HintPath>..\packages\System.Collections.Immutable.1.4.0\lib\netstandard2.0\System.Collections.Immutable.dll</HintPath>
     </Reference>
+    <Reference Include="Plugin.Settings.Abstractions">
+      <HintPath>..\packages\Xam.Plugins.Settings.3.1.1\lib\Xamarin.iOS10\Plugin.Settings.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Plugin.Settings">
+      <HintPath>..\packages\Xam.Plugins.Settings.3.1.1\lib\Xamarin.iOS10\Plugin.Settings.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Contents.json" />
@@ -160,6 +166,8 @@
     <ImageAsset Include="Resources\Assets.xcassets\person.imageset\Contents.json" />
     <ImageAsset Include="Resources\Assets.xcassets\person.imageset\person.pdf" />
     <ImageAsset Include="Resources\Assets.xcassets\location.imageset\location.png" />
+    <ImageAsset Include="Resources\Assets.xcassets\arrow-forward.imageset\Contents.json" />
+    <ImageAsset Include="Resources\Assets.xcassets\arrow-forward.imageset\arrow-forward.pdf" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ViewControllers\VplanViewController.cs" />

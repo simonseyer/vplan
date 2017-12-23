@@ -21,6 +21,7 @@ namespace FLSVertretungsplan
                 ServiceLocator.Instance.Register<IVplanLoader, CloudVplanLoader>();
                 ServiceLocator.Instance.Register<IVplanPersistence, JsonVplanPersistence>();
             }
+            ServiceLocator.Instance.Register<ISettingsDataStore, StandardSettingsDataStore>();
         }
     }
 }
