@@ -1,0 +1,909 @@
+
+<?xml version="1.0" encoding="UTF-8"?>
+<vplan lastUpdate="1513799216">
+                                        <class name="1021">
+                                            <date value="Freitag, 22.12.2017" timestamp="1513897200">
+                                                            <lesson>
+                                    <original>
+                                        <hours>3.-4</hours>
+                                        <tutor>S. Aulenbacher (AULE)</tutor>
+                                        <subject>BBUN</subject>
+                                        <room>A214</room>
+                                    </original>
+                                    <substitute>
+                                        <tutor></tutor>
+                                        <subject></subject>
+                                        <room>A204 SB</room>
+                                        <attribute></attribute>
+                                        <info></info>
+                                    </substitute>
+                                </lesson>
+                                                    </date>
+                                    </class>
+                            <class name="1031">
+                                            <date value="Donnerstag, 21.12.2017" timestamp="1513810800">
+                                                            <lesson>
+                                    <original>
+                                        <hours>1.-2</hours>
+                                        <tutor>M. Thomas (THOM)</tutor>
+                                        <subject>BBUN</subject>
+                                        <room>U04 DV</room>
+                                    </original>
+                                    <substitute>
+                                        <tutor></tutor>
+                                        <subject></subject>
+                                        <room></room>
+                                        <attribute></attribute>
+                                        <info>Klasse frei</info>
+                                    </substitute>
+                                </lesson>
+                                                    </date>
+                                    </class>
+                            <class name="1035">
+                                            <date value="Donnerstag, 21.12.2017" timestamp="1513810800">
+                                                            <lesson>
+                                    <original>
+                                        <hours>1</hours>
+                                        <tutor>R. Lecher (LECH)</tutor>
+                                        <subject>BBUN</subject>
+                                        <room>C14</room>
+                                    </original>
+                                    <substitute>
+                                        <tutor></tutor>
+                                        <subject></subject>
+                                        <room></room>
+                                        <attribute>verschoben auf Di, 19.12. 3. Std.</attribute>
+                                        <info></info>
+                                    </substitute>
+                                </lesson>
+                                                            <lesson>
+                                    <original>
+                                        <hours>2</hours>
+                                        <tutor>R. Lecher (LECH)</tutor>
+                                        <subject>BBUN</subject>
+                                        <room>C14</room>
+                                    </original>
+                                    <substitute>
+                                        <tutor></tutor>
+                                        <subject></subject>
+                                        <room></room>
+                                        <attribute>verschoben auf Di, 19.12. 4. Std.</attribute>
+                                        <info></info>
+                                    </substitute>
+                                </lesson>
+                                                            <lesson>
+                                    <original>
+                                        <hours>3.-4</hours>
+                                        <tutor>R. Lecher (LECH)</tutor>
+                                        <subject>BBUN</subject>
+                                        <room>C14</room>
+                                    </original>
+                                    <substitute>
+                                        <tutor></tutor>
+                                        <subject></subject>
+                                        <room></room>
+                                        <attribute>Unterrichtsgang</attribute>
+                                        <info>Klasse frei</info>
+                                    </substitute>
+                                </lesson>
+                                                            <lesson>
+                                    <original>
+                                        <hours>5.-6</hours>
+                                        <tutor>T. Ketzer (KETZ)</tutor>
+                                        <subject>BBUN</subject>
+                                        <room>C14</room>
+                                    </original>
+                                    <substitute>
+                                        <tutor></tutor>
+                                        <subject></subject>
+                                        <room></room>
+                                        <attribute>Unterrichtsgang</attribute>
+                                        <info>Klasse frei</info>
+                                    </substitute>
+                                </lesson>
+                                                    </date>
+                                    </class>
+                            <class name="1037">
+                                            <date value="Donnerstag, 21.12.2017" timestamp="1513810800">
+                                                            <lesson>
+                                    <original>
+                                        <hours>1.-2</hours>
+                                        <tutor>S. Schubert (SCHU)</tutor>
+                                        <subject>BBUN</subject>
+                                        <room>303   SB</room>
+                                    </original>
+                                    <substitute>
+                                        <tutor></tutor>
+                                        <subject></subject>
+                                        <room></room>
+                                        <attribute></attribute>
+                                        <info>Klasse frei</info>
+                                    </substitute>
+                                </lesson>
+                                                            <lesson>
+                                    <original>
+                                        <hours>3.-4</hours>
+                                        <tutor>K. Lappe (LAPP)</tutor>
+                                        <subject>BBUN</subject>
+                                        <room>A313</room>
+                                    </original>
+                                    <substitute>
+                                        <tutor>S. Aulenbacher (AULE)</tutor>
+                                        <subject></subject>
+                                        <room></room>
+                                        <attribute></attribute>
+                                        <info></info>
+                                    </substitute>
+                                </lesson>
+                                                    </date>
+                                            <date value="Freitag, 22.12.2017" timestamp="1513897200">
+                                                            <lesson>
+                                    <original>
+                                        <hours>5.-6</hours>
+                                        <tutor>S. Schubert (SCHU)</tutor>
+                                        <subject>BBUN</subject>
+                                        <room>303   SB</room>
+                                    </original>
+                                    <substitute>
+                                        <tutor></tutor>
+                                        <subject></subject>
+                                        <room></room>
+                                        <attribute>In die Betriebe</attribute>
+                                        <info>Klasse frei</info>
+                                    </substitute>
+                                </lesson>
+                                                    </date>
+                                    </class>
+                            <class name="1038">
+                                            <date value="Freitag, 22.12.2017" timestamp="1513897200">
+                                                            <lesson>
+                                    <original>
+                                        <hours>1.-2</hours>
+                                        <tutor>G. Gaube-Dubey (GAUB)</tutor>
+                                        <subject>BBUN</subject>
+                                        <room>103 SB GHL</room>
+                                    </original>
+                                    <substitute>
+                                        <tutor></tutor>
+                                        <subject></subject>
+                                        <room></room>
+                                        <attribute></attribute>
+                                        <info>Klasse frei</info>
+                                    </substitute>
+                                </lesson>
+                                                    </date>
+                                    </class>
+                            <class name="1051">
+                                            <date value="Donnerstag, 21.12.2017" timestamp="1513810800">
+                                                            <lesson>
+                                    <original>
+                                        <hours>5</hours>
+                                        <tutor>S. Schubert (SCHU)</tutor>
+                                        <subject>BBUN</subject>
+                                        <room>A308  SB</room>
+                                    </original>
+                                    <substitute>
+                                        <tutor>T. Tokgöz (TOTA)</tutor>
+                                        <subject></subject>
+                                        <room></room>
+                                        <attribute></attribute>
+                                        <info></info>
+                                    </substitute>
+                                </lesson>
+                                                            <lesson>
+                                    <original>
+                                        <hours>6</hours>
+                                        <tutor>S. Schubert (SCHU)</tutor>
+                                        <subject>BBUN</subject>
+                                        <room>A308  SB</room>
+                                    </original>
+                                    <substitute>
+                                        <tutor></tutor>
+                                        <subject></subject>
+                                        <room></room>
+                                        <attribute></attribute>
+                                        <info>Klasse frei</info>
+                                    </substitute>
+                                </lesson>
+                                                    </date>
+                                    </class>
+                            <class name="1137">
+                                            <date value="Freitag, 22.12.2017" timestamp="1513897200">
+                                                            <lesson>
+                                    <original>
+                                        <hours>1.-2</hours>
+                                        <tutor>S. Schubert (SCHU)</tutor>
+                                        <subject>BBUN</subject>
+                                        <room>303   SB</room>
+                                    </original>
+                                    <substitute>
+                                        <tutor>D. Balzhäußer	 (BALZ)</tutor>
+                                        <subject></subject>
+                                        <room></room>
+                                        <attribute></attribute>
+                                        <info>Arbeitsauftrag</info>
+                                    </substitute>
+                                </lesson>
+                                                    </date>
+                                    </class>
+                            <class name="1141">
+                                            <date value="Freitag, 22.12.2017" timestamp="1513897200">
+                                                            <lesson>
+                                    <original>
+                                        <hours>3.-6</hours>
+                                        <tutor>R. Lecher (LECH)</tutor>
+                                        <subject>BBUN</subject>
+                                        <room>A318</room>
+                                    </original>
+                                    <substitute>
+                                        <tutor></tutor>
+                                        <subject></subject>
+                                        <room></room>
+                                        <attribute>Unterrichtsgang</attribute>
+                                        <info>Klasse frei</info>
+                                    </substitute>
+                                </lesson>
+                                                    </date>
+                                    </class>
+                            <class name="1162">
+                                            <date value="Donnerstag, 21.12.2017" timestamp="1513810800">
+                                                            <lesson>
+                                    <original>
+                                        <hours>3.-6</hours>
+                                        <tutor>J. Morbe (MORB)</tutor>
+                                        <subject>BBUN</subject>
+                                        <room>A306  SB</room>
+                                    </original>
+                                    <substitute>
+                                        <tutor></tutor>
+                                        <subject></subject>
+                                        <room></room>
+                                        <attribute>Unterrichtsgang</attribute>
+                                        <info>Klasse frei</info>
+                                    </substitute>
+                                </lesson>
+                                                    </date>
+                                    </class>
+                            <class name="1163">
+                                            <date value="Freitag, 22.12.2017" timestamp="1513897200">
+                                                            <lesson>
+                                    <original>
+                                        <hours>1.-4</hours>
+                                        <tutor>J. Tiegel (TIGL)</tutor>
+                                        <subject>BBUN</subject>
+                                        <room>A305  SB</room>
+                                    </original>
+                                    <substitute>
+                                        <tutor></tutor>
+                                        <subject></subject>
+                                        <room></room>
+                                        <attribute>Unterrichtsgang</attribute>
+                                        <info>Klasse frei</info>
+                                    </substitute>
+                                </lesson>
+                                                    </date>
+                                    </class>
+                            <class name="1171">
+                                            <date value="Freitag, 22.12.2017" timestamp="1513897200">
+                                                            <lesson>
+                                    <original>
+                                        <hours>1.-2</hours>
+                                        <tutor>M. Löffler (LÖFF)</tutor>
+                                        <subject>BBUN</subject>
+                                        <room>A310</room>
+                                    </original>
+                                    <substitute>
+                                        <tutor></tutor>
+                                        <subject></subject>
+                                        <room></room>
+                                        <attribute>Unterrichtsgang</attribute>
+                                        <info>Klasse frei</info>
+                                    </substitute>
+                                </lesson>
+                                                            <lesson>
+                                    <original>
+                                        <hours>3.-4</hours>
+                                        <tutor>R. Bock (BOCK)</tutor>
+                                        <subject>DAVE</subject>
+                                        <room>A204 SB</room>
+                                    </original>
+                                    <substitute>
+                                        <tutor></tutor>
+                                        <subject></subject>
+                                        <room></room>
+                                        <attribute>Unterrichtsgang</attribute>
+                                        <info>Klasse frei</info>
+                                    </substitute>
+                                </lesson>
+                                                    </date>
+                                    </class>
+                            <class name="1225">
+                                            <date value="Donnerstag, 21.12.2017" timestamp="1513810800">
+                                                            <lesson>
+                                    <original>
+                                        <hours>3.-4</hours>
+                                        <tutor>M. Vey (VEY)</tutor>
+                                        <subject>BBUN</subject>
+                                        <room>A209 SB</room>
+                                    </original>
+                                    <substitute>
+                                        <tutor></tutor>
+                                        <subject></subject>
+                                        <room></room>
+                                        <attribute>Pausenhalle</attribute>
+                                        <info>Klasse frei</info>
+                                    </substitute>
+                                </lesson>
+                                                    </date>
+                                    </class>
+                            <class name="1245">
+                                            <date value="Freitag, 22.12.2017" timestamp="1513897200">
+                                                            <lesson>
+                                    <original>
+                                        <hours>3.-4</hours>
+                                        <tutor>N. Tokgöz (TOKG)</tutor>
+                                        <subject>BBUN</subject>
+                                        <room>A317</room>
+                                    </original>
+                                    <substitute>
+                                        <tutor></tutor>
+                                        <subject></subject>
+                                        <room></room>
+                                        <attribute>Unterrichtsgang</attribute>
+                                        <info>Klasse frei</info>
+                                    </substitute>
+                                </lesson>
+                                                            <lesson>
+                                    <original>
+                                        <hours>5.-6</hours>
+                                        <tutor>B. Kolell (KOLE)</tutor>
+                                        <subject>BBUN</subject>
+                                        <room>304</room>
+                                    </original>
+                                    <substitute>
+                                        <tutor></tutor>
+                                        <subject></subject>
+                                        <room></room>
+                                        <attribute>Unterrichtsgang</attribute>
+                                        <info>Klasse frei</info>
+                                    </substitute>
+                                </lesson>
+                                                    </date>
+                                    </class>
+                            <class name="1271">
+                                            <date value="Freitag, 22.12.2017" timestamp="1513897200">
+                                                            <lesson>
+                                    <original>
+                                        <hours>3.-4</hours>
+                                        <tutor>M. Löffler (LÖFF)</tutor>
+                                        <subject>BBUN</subject>
+                                        <room>C13</room>
+                                    </original>
+                                    <substitute>
+                                        <tutor>K. Hell-Berlin (HELL)</tutor>
+                                        <subject></subject>
+                                        <room></room>
+                                        <attribute></attribute>
+                                        <info></info>
+                                    </substitute>
+                                </lesson>
+                                                    </date>
+                                    </class>
+                                                <class name="1082">
+                                            <date value="Donnerstag, 21.12.2017" timestamp="1513810800">
+                                                            <lesson>
+                                    <original>
+                                        <hours>1.-2</hours>
+                                        <tutor>M. Herz (HERZ)</tutor>
+                                        <subject>BBUN</subject>
+                                        <room>A107 DV</room>
+                                    </original>
+                                    <substitute>
+                                        <tutor></tutor>
+                                        <subject></subject>
+                                        <room>C02</room>
+                                        <attribute></attribute>
+                                        <info></info>
+                                    </substitute>
+                                </lesson>
+                                                    </date>
+                                            <date value="Freitag, 22.12.2017" timestamp="1513897200">
+                                                            <lesson>
+                                    <original>
+                                        <hours>2</hours>
+                                        <tutor>P. Schmidt 1 (SPE)</tutor>
+                                        <subject>RELI</subject>
+                                        <room>A109</room>
+                                    </original>
+                                    <substitute>
+                                        <tutor></tutor>
+                                        <subject></subject>
+                                        <room></room>
+                                        <attribute></attribute>
+                                        <info>Zusatzunterricht</info>
+                                    </substitute>
+                                </lesson>
+                                                    </date>
+                                    </class>
+                                                <class name="1191">
+                                            <date value="Donnerstag, 21.12.2017" timestamp="1513810800">
+                                                            <lesson>
+                                    <original>
+                                        <hours>7</hours>
+                                        <tutor>K. Grünberg (GRÜN)</tutor>
+                                        <subject>MATH</subject>
+                                        <room>A209 SB</room>
+                                    </original>
+                                    <substitute>
+                                        <tutor></tutor>
+                                        <subject></subject>
+                                        <room></room>
+                                        <attribute>verschoben auf Mi, 20.12. 5. Std.</attribute>
+                                        <info></info>
+                                    </substitute>
+                                </lesson>
+                                                            <lesson>
+                                    <original>
+                                        <hours>8</hours>
+                                        <tutor>K. Grünberg (GRÜN)</tutor>
+                                        <subject>MATH</subject>
+                                        <room>A209 SB</room>
+                                    </original>
+                                    <substitute>
+                                        <tutor></tutor>
+                                        <subject></subject>
+                                        <room></room>
+                                        <attribute>verschoben auf Mi, 20.12. 6. Std.</attribute>
+                                        <info></info>
+                                    </substitute>
+                                </lesson>
+                                                    </date>
+                                    </class>
+                            <class name="1193">
+                                            <date value="Donnerstag, 21.12.2017" timestamp="1513810800">
+                                                            <lesson>
+                                    <original>
+                                        <hours>7.-8</hours>
+                                        <tutor>O. Keutzer (KEUZ)</tutor>
+                                        <subject>DEUT</subject>
+                                        <room>A110  SB</room>
+                                    </original>
+                                    <substitute>
+                                        <tutor></tutor>
+                                        <subject></subject>
+                                        <room></room>
+                                        <attribute>wird im neuen Jahr nachgeholt</attribute>
+                                        <info>Klasse frei</info>
+                                    </substitute>
+                                </lesson>
+                                                    </date>
+                                    </class>
+                                                <class name="11 REFILAS">
+                                            <date value="Donnerstag, 21.12.2017" timestamp="1513810800">
+                                                            <lesson>
+                                    <original>
+                                        <hours>1.-2</hours>
+                                        <tutor>D. Müller (MUEL)</tutor>
+                                        <subject>RELI</subject>
+                                        <room>A212</room>
+                                    </original>
+                                    <substitute>
+                                        <tutor></tutor>
+                                        <subject></subject>
+                                        <room></room>
+                                        <attribute></attribute>
+                                        <info>Klasse frei</info>
+                                    </substitute>
+                                </lesson>
+                                                    </date>
+                                            <date value="Freitag, 22.12.2017" timestamp="1513897200">
+                                                            <lesson>
+                                    <original>
+                                        <hours>5.-6</hours>
+                                        <tutor>D. Müller (MUEL)</tutor>
+                                        <subject>RELI</subject>
+                                        <room>203  SB GH</room>
+                                    </original>
+                                    <substitute>
+                                        <tutor></tutor>
+                                        <subject></subject>
+                                        <room></room>
+                                        <attribute></attribute>
+                                        <info>Klasse frei</info>
+                                    </substitute>
+                                </lesson>
+                                                    </date>
+                                    </class>
+                            <class name="11/1 W">
+                                            <date value="Donnerstag, 21.12.2017" timestamp="1513810800">
+                                                            <lesson>
+                                    <original>
+                                        <hours>1.-2</hours>
+                                        <tutor>M. Vey (VEY)</tutor>
+                                        <subject>ENGL</subject>
+                                        <room>A204 SB</room>
+                                    </original>
+                                    <substitute>
+                                        <tutor></tutor>
+                                        <subject></subject>
+                                        <room></room>
+                                        <attribute></attribute>
+                                        <info>Klasse frei</info>
+                                    </substitute>
+                                </lesson>
+                                                    </date>
+                                            <date value="Freitag, 22.12.2017" timestamp="1513897200">
+                                                            <lesson>
+                                    <original>
+                                        <hours>5.-6</hours>
+                                        <tutor>M. Berger (BERM)</tutor>
+                                        <subject>POWI</subject>
+                                        <room>403</room>
+                                    </original>
+                                    <substitute>
+                                        <tutor>J. Sundermann (SUND)</tutor>
+                                        <subject></subject>
+                                        <room></room>
+                                        <attribute></attribute>
+                                        <info></info>
+                                    </substitute>
+                                </lesson>
+                                                    </date>
+                                    </class>
+                            <class name="11/2 W">
+                                            <date value="Donnerstag, 21.12.2017" timestamp="1513810800">
+                                                            <lesson>
+                                    <original>
+                                        <hours>3</hours>
+                                        <tutor>S. Schubert (SCHU)</tutor>
+                                        <subject>GESC</subject>
+                                        <room>303   SB</room>
+                                    </original>
+                                    <substitute>
+                                        <tutor>K. Berendes-Schirmer (BERE)</tutor>
+                                        <subject>ENGL</subject>
+                                        <room></room>
+                                        <attribute>anstatt Do, 21.12. 5. Std.</attribute>
+                                        <info></info>
+                                    </substitute>
+                                </lesson>
+                                                            <lesson>
+                                    <original>
+                                        <hours>4</hours>
+                                        <tutor>S. Schubert (SCHU)</tutor>
+                                        <subject>GESC</subject>
+                                        <room>303   SB</room>
+                                    </original>
+                                    <substitute>
+                                        <tutor>K. Berendes-Schirmer (BERE)</tutor>
+                                        <subject>ENGL</subject>
+                                        <room></room>
+                                        <attribute>anstatt Do, 21.12. 6. Std.</attribute>
+                                        <info></info>
+                                    </substitute>
+                                </lesson>
+                                                            <lesson>
+                                    <original>
+                                        <hours>5</hours>
+                                        <tutor>K. Berendes-Schirmer (BERE)</tutor>
+                                        <subject>ENGL</subject>
+                                        <room>203  SB GH</room>
+                                    </original>
+                                    <substitute>
+                                        <tutor></tutor>
+                                        <subject></subject>
+                                        <room></room>
+                                        <attribute>verschoben auf Do, 21.12. 3. Std.</attribute>
+                                        <info></info>
+                                    </substitute>
+                                </lesson>
+                                                            <lesson>
+                                    <original>
+                                        <hours>6</hours>
+                                        <tutor>K. Berendes-Schirmer (BERE)</tutor>
+                                        <subject>ENGL</subject>
+                                        <room>203  SB GH</room>
+                                    </original>
+                                    <substitute>
+                                        <tutor></tutor>
+                                        <subject></subject>
+                                        <room></room>
+                                        <attribute>verschoben auf Do, 21.12. 4. Std.</attribute>
+                                        <info></info>
+                                    </substitute>
+                                </lesson>
+                                                    </date>
+                                    </class>
+                            <class name="11/7 DV">
+                                            <date value="Freitag, 22.12.2017" timestamp="1513897200">
+                                                            <lesson>
+                                    <original>
+                                        <hours>1</hours>
+                                        <tutor>J. Sundermann (SUND)</tutor>
+                                        <subject>POWI</subject>
+                                        <room>202</room>
+                                    </original>
+                                    <substitute>
+                                        <tutor></tutor>
+                                        <subject></subject>
+                                        <room></room>
+                                        <attribute>verschoben auf Fr, 22.12. 3. Std.</attribute>
+                                        <info></info>
+                                    </substitute>
+                                </lesson>
+                                                            <lesson>
+                                    <original>
+                                        <hours>3</hours>
+                                        <tutor>S. Schubert (SCHU)</tutor>
+                                        <subject>POWI</subject>
+                                        <room>303   SB</room>
+                                    </original>
+                                    <substitute>
+                                        <tutor>J. Sundermann (SUND)</tutor>
+                                        <subject>POWI</subject>
+                                        <room>202</room>
+                                        <attribute>anstatt Fr, 22.12. 1. Std.</attribute>
+                                        <info></info>
+                                    </substitute>
+                                </lesson>
+                                                    </date>
+                                    </class>
+                            <class name="11/8 CT">
+                                            <date value="Donnerstag, 21.12.2017" timestamp="1513810800">
+                                                            <lesson>
+                                    <original>
+                                        <hours>1.-2</hours>
+                                        <tutor>S. Baier (BAIE)</tutor>
+                                        <subject>MATH</subject>
+                                        <room>A206 SB</room>
+                                    </original>
+                                    <substitute>
+                                        <tutor></tutor>
+                                        <subject></subject>
+                                        <room></room>
+                                        <attribute></attribute>
+                                        <info>Klasse frei</info>
+                                    </substitute>
+                                </lesson>
+                                                    </date>
+                                            <date value="Freitag, 22.12.2017" timestamp="1513897200">
+                                                            <lesson>
+                                    <original>
+                                        <hours>3</hours>
+                                        <tutor>S. Baier (BAIE)</tutor>
+                                        <subject>MATH</subject>
+                                        <room>A206 SB</room>
+                                    </original>
+                                    <substitute>
+                                        <tutor></tutor>
+                                        <subject></subject>
+                                        <room></room>
+                                        <attribute></attribute>
+                                        <info>Klasse frei</info>
+                                    </substitute>
+                                </lesson>
+                                                    </date>
+                                    </class>
+                            <class name="12">
+                                            <date value="Donnerstag, 21.12.2017" timestamp="1513810800">
+                                                            <lesson>
+                                    <original>
+                                        <hours>3.-4</hours>
+                                        <tutor>M. Finck (FINC)</tutor>
+                                        <subject>CHLK</subject>
+                                        <room>104 Che</room>
+                                    </original>
+                                    <substitute>
+                                        <tutor></tutor>
+                                        <subject></subject>
+                                        <room></room>
+                                        <attribute></attribute>
+                                        <info>Klasse frei</info>
+                                    </substitute>
+                                </lesson>
+                                                            <lesson>
+                                    <original>
+                                        <hours>3.-5</hours>
+                                        <tutor>M. Schatz (SCHA)</tutor>
+                                        <subject>DELK</subject>
+                                        <room>C05</room>
+                                    </original>
+                                    <substitute>
+                                        <tutor></tutor>
+                                        <subject></subject>
+                                        <room></room>
+                                        <attribute>Unterrichtsgang</attribute>
+                                        <info>Klasse frei</info>
+                                    </substitute>
+                                </lesson>
+                                                            <lesson>
+                                    <original>
+                                        <hours>3.-5</hours>
+                                        <tutor>A. Tubbesing (TUBB)</tutor>
+                                        <subject>DELK</subject>
+                                        <room>A218</room>
+                                    </original>
+                                    <substitute>
+                                        <tutor></tutor>
+                                        <subject></subject>
+                                        <room>A206 SB</room>
+                                        <attribute></attribute>
+                                        <info></info>
+                                    </substitute>
+                                </lesson>
+                                                            <lesson>
+                                    <original>
+                                        <hours>3.-5</hours>
+                                        <tutor>S. Baier (BAIE)</tutor>
+                                        <subject>MALK</subject>
+                                        <room>A206 SB</room>
+                                    </original>
+                                    <substitute>
+                                        <tutor></tutor>
+                                        <subject></subject>
+                                        <room></room>
+                                        <attribute></attribute>
+                                        <info>Klasse frei</info>
+                                    </substitute>
+                                </lesson>
+                                                            <lesson>
+                                    <original>
+                                        <hours>5</hours>
+                                        <tutor>M. Finck (FINC)</tutor>
+                                        <subject>CHLK</subject>
+                                        <room>302   SB</room>
+                                    </original>
+                                    <substitute>
+                                        <tutor></tutor>
+                                        <subject></subject>
+                                        <room></room>
+                                        <attribute></attribute>
+                                        <info>Klasse frei</info>
+                                    </substitute>
+                                </lesson>
+                                                    </date>
+                                            <date value="Freitag, 22.12.2017" timestamp="1513897200">
+                                                            <lesson>
+                                    <original>
+                                        <hours>1.-2</hours>
+                                        <tutor>S. Kaiser-Herz (KAIS)</tutor>
+                                        <subject>WIRT</subject>
+                                        <room>A318</room>
+                                    </original>
+                                    <substitute>
+                                        <tutor></tutor>
+                                        <subject></subject>
+                                        <room>A204 SB</room>
+                                        <attribute></attribute>
+                                        <info></info>
+                                    </substitute>
+                                </lesson>
+                                                            <lesson>
+                                    <original>
+                                        <hours>4.-6</hours>
+                                        <tutor>M. Finck (FINC)</tutor>
+                                        <subject>CHGK</subject>
+                                        <room>104 Che</room>
+                                    </original>
+                                    <substitute>
+                                        <tutor></tutor>
+                                        <subject></subject>
+                                        <room></room>
+                                        <attribute></attribute>
+                                        <info>Klasse frei</info>
+                                    </substitute>
+                                </lesson>
+                                                    </date>
+                                    </class>
+                            <class name="13">
+                                            <date value="Donnerstag, 21.12.2017" timestamp="1513810800">
+                                                            <lesson>
+                                    <original>
+                                        <hours>1</hours>
+                                        <tutor>K. Lappe (LAPP)</tutor>
+                                        <subject>REWE</subject>
+                                        <room>A313</room>
+                                    </original>
+                                    <substitute>
+                                        <tutor></tutor>
+                                        <subject></subject>
+                                        <room></room>
+                                        <attribute></attribute>
+                                        <info>Klasse frei</info>
+                                    </substitute>
+                                </lesson>
+                                                            <lesson>
+                                    <original>
+                                        <hours>2.-5</hours>
+                                        <tutor>A. Saalmüller (SAAL)</tutor>
+                                        <subject>WIRT</subject>
+                                        <room>A210</room>
+                                    </original>
+                                    <substitute>
+                                        <tutor></tutor>
+                                        <subject></subject>
+                                        <room></room>
+                                        <attribute></attribute>
+                                        <info>Klasse frei</info>
+                                    </substitute>
+                                </lesson>
+                                                            <lesson>
+                                    <original>
+                                        <hours>6</hours>
+                                        <tutor>M. Finck (FINC)</tutor>
+                                        <subject>CHGK</subject>
+                                        <room>304</room>
+                                    </original>
+                                    <substitute>
+                                        <tutor></tutor>
+                                        <subject></subject>
+                                        <room></room>
+                                        <attribute></attribute>
+                                        <info>Klasse frei</info>
+                                    </substitute>
+                                </lesson>
+                                                            <lesson>
+                                    <original>
+                                        <hours>7.-8</hours>
+                                        <tutor>M. Finck (FINC)</tutor>
+                                        <subject>CHGK</subject>
+                                        <room>104 Che</room>
+                                    </original>
+                                    <substitute>
+                                        <tutor></tutor>
+                                        <subject></subject>
+                                        <room></room>
+                                        <attribute></attribute>
+                                        <info>Klasse frei</info>
+                                    </substitute>
+                                </lesson>
+                                                    </date>
+                                            <date value="Freitag, 22.12.2017" timestamp="1513897200">
+                                                            <lesson>
+                                    <original>
+                                        <hours>3</hours>
+                                        <tutor>G. Gaube-Dubey (GAUB)</tutor>
+                                        <subject>ENGK</subject>
+                                        <room>103 SB GHL</room>
+                                    </original>
+                                    <substitute>
+                                        <tutor></tutor>
+                                        <subject></subject>
+                                        <room></room>
+                                        <attribute></attribute>
+                                        <info>Klasse frei</info>
+                                    </substitute>
+                                </lesson>
+                                                            <lesson>
+                                    <original>
+                                        <hours>3.-4</hours>
+                                        <tutor>D. Müller (MUEL)</tutor>
+                                        <subject>KREL</subject>
+                                        <room>A212</room>
+                                    </original>
+                                    <substitute>
+                                        <tutor></tutor>
+                                        <subject></subject>
+                                        <room></room>
+                                        <attribute></attribute>
+                                        <info>Klasse frei</info>
+                                    </substitute>
+                                </lesson>
+                                                            <lesson>
+                                    <original>
+                                        <hours>5.-6</hours>
+                                        <tutor>N. Tokgöz (TOKG)</tutor>
+                                        <subject>DEGK</subject>
+                                        <room>A317</room>
+                                    </original>
+                                    <substitute>
+                                        <tutor></tutor>
+                                        <subject></subject>
+                                        <room></room>
+                                        <attribute></attribute>
+                                        <info>Klasse frei</info>
+                                    </substitute>
+                                </lesson>
+                                                    </date>
+                                    </class>
+                        </vplan>
