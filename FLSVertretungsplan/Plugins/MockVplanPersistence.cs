@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace FLSVertretungsplan
@@ -17,7 +18,16 @@ namespace FLSVertretungsplan
 
         public Task<List<SchoolBookmark>> LoadSchoolBookmarks() => Task.FromResult(new List<SchoolBookmark>());
 
-        public Task<List<SchoolClassBookmark>> LoadSchoolClassBookmarks() => Task.FromResult(new List<SchoolClassBookmark>());
+        public async Task<List<SchoolClassBookmark>> LoadSchoolClassBookmarks()
+        {
+            var vplan = await VplanParser.Parse(xml);
+            var schoolClassBookmarks = new HashSet<SchoolClassBookmark>();
+            foreach (var change in vplan.Changes)
+            {
+                schoolClassBookmarks.Add(new SchoolClassBookmark(change.SchoolClass, false, false));
+            }
+            return schoolClassBookmarks.ToList();
+        }
 
         public Task PersistNewSchoolClasses(List<SchoolClass> newSchoolClasses) => Task.CompletedTask;
 
