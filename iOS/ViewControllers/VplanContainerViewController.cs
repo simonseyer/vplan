@@ -75,7 +75,7 @@ namespace FLSVertretungsplan.iOS
 
             if (diff > 0)
             {
-                AddPages(diff);
+                AddPages(diff, "VplanDayViewController");
             } 
             if (diff < 0)
             {
@@ -86,16 +86,25 @@ namespace FLSVertretungsplan.iOS
                 RemovePages(Math.Abs(diff));
             }
 
-            PageControl.Pages = count;
+            PageControl.Pages = count > 1 ? count : 0;
 
-            for (var i = 0; i < count; i++)
+            if (count > 0)
             {
-                var viewController = ChildViewControllers[i] as VplanDayViewController;
-                viewController.PresentationModel = ViewModel.Dates.Value[i];
+                for (var i = 0; i < count; i++)
+                {
+                    var viewController = ChildViewControllers[i] as VplanDayViewController;
+                    viewController.PresentationModel = ViewModel.Dates.Value[i];
+                }
+            }
+            else
+            {
+                AddPages(1, "EmptyVplanViewController");
+                var viewController = ChildViewControllers[0] as EmptyVplanViewController;
+                viewController.ViewModel = ViewModel;
             }
         }
 
-        void AddPages(int number)
+        void AddPages(int number, string type)
         {
             UIViewController precedingViewController = null;
             if (ChildViewControllers.Length > 0)
@@ -106,7 +115,7 @@ namespace FLSVertretungsplan.iOS
 
             for (var i = 0; i < number; i++)
             {
-                var newViewController = Storyboard.InstantiateViewController("VplanDayViewController");
+                var newViewController = Storyboard.InstantiateViewController(type);
                 AddChildViewController(newViewController);
 
                 newViewController.View.TranslatesAutoresizingMaskIntoConstraints = false;

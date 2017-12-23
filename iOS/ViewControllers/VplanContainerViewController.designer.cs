@@ -9,34 +9,34 @@ using System.CodeDom.Compiler;
 
 namespace FLSVertretungsplan.iOS
 {
-	[Register ("VplanContainerViewController")]
-	partial class VplanContainerViewController
-	{
-		[Outlet]
-		public UIKit.UIPageControl PageControl { get; private set; }
+    [Register ("VplanContainerViewController")]
+    partial class VplanContainerViewController
+    {
+        [Outlet]
+        public UIKit.UIPageControl PageControl { get; private set; }
 
-		[Outlet]
-		public UIKit.UIScrollView ScrollView { get; private set; }
+        [Outlet]
+        public UIKit.UIScrollView ScrollView { get; private set; }
 
-		[Outlet]
-        public UIKit.NSLayoutConstraint StatusViewHiddenConstraint { get; set; }
-		
-		void ReleaseDesignerOutlets ()
-		{
-			if (PageControl != null) {
-				PageControl.Dispose ();
-				PageControl = null;
-			}
+        [Outlet]
+        public UIKit.NSLayoutConstraint StatusViewHiddenConstraint { get; private set; }
+        
+        void ReleaseDesignerOutlets ()
+        {
+            if (PageControl != null) {
+                PageControl.Dispose ();
+                PageControl = null;
+            }
 
-			if (ScrollView != null) {
-				ScrollView.Dispose ();
-				ScrollView = null;
-			}
+            if (ScrollView != null) {
+                ScrollView.Dispose ();
+                ScrollView = null;
+            }
 
-			if (StatusViewHiddenConstraint != null) {
-				StatusViewHiddenConstraint.Dispose ();
-				StatusViewHiddenConstraint = null;
-			}
-		}
-	}
+            if (StatusViewHiddenConstraint != null) {
+                StatusViewHiddenConstraint.Dispose ();
+                StatusViewHiddenConstraint = null;
+            }
+        }
+    }
 }
