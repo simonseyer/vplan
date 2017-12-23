@@ -22,7 +22,11 @@ namespace FLSVertretungsplan
                 SortChanges(changes);
 
                 var lastUpdateTimestamp = vPlanNode.Attributes["lastUpdate"]?.Value;
-                var lastUpdate = DateTimeOffset.FromUnixTimeSeconds(Convert.ToInt64(lastUpdateTimestamp)).DateTime;
+                DateTime lastUpdate = DateTime.Today;
+                if (lastUpdateTimestamp != "")
+                {
+                    lastUpdate = DateTimeOffset.FromUnixTimeSeconds(Convert.ToInt64(lastUpdateTimestamp)).DateTime;
+                }
 
                 return new Vplan(lastUpdate, changes);
             });
