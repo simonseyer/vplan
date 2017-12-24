@@ -91,6 +91,7 @@ namespace FLSVertretungsplan.iOS
             {
                 DataSource.Items = PresentationModel?.Items;
                 TableView.ReloadData();
+                LastUpdateLabel.Text = PresentationModel?.LastUpdate;
             });
         }
     }

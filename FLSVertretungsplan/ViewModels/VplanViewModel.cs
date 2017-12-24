@@ -13,6 +13,7 @@ namespace FLSVertretungsplan
 
         public string Title { get; set; }
         public string SubTitle { get; set; }
+        public string LastUpdate { get; set; }
         public Property<bool> IsRefreshing { get; set; }
         public Collection<ChangePresentationModel> Items { get; set; }
         public Command LoadItemsCommand { get; set; }
@@ -153,7 +154,6 @@ namespace FLSVertretungsplan
     {
         IVplanDataStore DataStore => ServiceLocator.Instance.Get<IVplanDataStore>();
 
-        public Property<string> LastUpdate { get; private set; }
         public Property<bool> IsRefreshing { get; private set; }
         public Property<bool> LastRefreshFailed { get; private set; }
         public Property<List<DatePresentationModel>> Dates { get; private set; }
@@ -165,9 +165,6 @@ namespace FLSVertretungsplan
         public VplanViewModel(bool useBookmarkedVplan)
         {
             UseBookmarkedVplan = useBookmarkedVplan;
-            LastUpdate = new Property<string>() {
-                Value = ""
-            };
             IsRefreshing = DataStore.IsRefreshing;
             LastRefreshFailed = DataStore.LastRefreshFailed;
             Dates = new Property<List<DatePresentationModel>>()
@@ -208,13 +205,13 @@ namespace FLSVertretungsplan
         {
             if (vplan == null)
             {
-                LastUpdate.Value = "";
+                Dates.Value = new List<DatePresentationModel>();
                 return;
             }
 
             var dates = new List<DatePresentationModel>();
             var datesDict = new Dictionary<string, DatePresentationModel>();
-            LastUpdate.Value = "Letzte Aktualisierung: " + vplan.LastUpdate.ToString("dd.MM.yy hh:mm") + " h";
+            var lastUpdate = "Letzte Aktualisierung " + vplan.LastUpdate.ToString("dd.MM.yy hh:mm") + " h";
             foreach (var item in vplan.Changes)
             {
                 var date = item.Day.ToString("dd.MM.yy");
@@ -228,6 +225,7 @@ namespace FLSVertretungsplan
                     presentationModel = new DatePresentationModel() {
                         Title = item.Day.ToString("dddd", new CultureInfo("de-DE")),
                         SubTitle = date,
+                        LastUpdate = lastUpdate,
                         IsRefreshing = IsRefreshing,
                         Items = new Collection<ChangePresentationModel>(),
                         LoadItemsCommand = LoadItemsCommand

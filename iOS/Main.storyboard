@@ -98,14 +98,32 @@
         <scene sceneID="74">
             <objects>
                 <tableViewController id="75" customClass="VplanViewController" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="170" sectionHeaderHeight="28" sectionFooterHeight="28" id="76">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="170" sectionHeaderHeight="20" sectionFooterHeight="28" id="76">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="574"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.96078431372549022" green="0.96078431372549022" blue="0.96862745098039216" alpha="1" colorSpace="calibratedRGB"/>
                         <inset key="scrollIndicatorInsets" minX="0.0" minY="18" maxX="0.0" maxY="18"/>
+                        <view key="tableHeaderView" contentMode="scaleToFill" id="eSo-Ew-K6D">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="20"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Letzte Aktualisierung 24.12. 6:30 h" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5tA-ba-1OW">
+                                    <rect key="frame" x="89" y="0.0" width="197" height="20"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                    <color key="textColor" red="0.64313725490196072" green="0.68235294117647061" blue="0.72941176470588232" alpha="1" colorSpace="calibratedRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                            <color key="backgroundColor" red="0.96078431372549022" green="0.96078431372549022" blue="0.96862745098039216" alpha="0.0" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstItem="5tA-ba-1OW" firstAttribute="centerX" secondItem="eSo-Ew-K6D" secondAttribute="centerX" id="GVx-gz-j2b"/>
+                                <constraint firstAttribute="bottom" secondItem="5tA-ba-1OW" secondAttribute="bottom" id="TUs-v0-lw4"/>
+                                <constraint firstItem="5tA-ba-1OW" firstAttribute="top" secondItem="eSo-Ew-K6D" secondAttribute="top" id="e4u-fW-Pbt"/>
+                            </constraints>
+                        </view>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="CHANGE_CELL" rowHeight="180" id="79" customClass="ChangeCell">
-                                <rect key="frame" x="0.0" y="28" width="375" height="180"/>
+                                <rect key="frame" x="0.0" y="40" width="375" height="180"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="79" id="80">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="180"/>
@@ -198,10 +216,13 @@
                         </connections>
                     </tableView>
                     <tabBarItem key="tabBarItem" title="Alle" id="l1y-Sv-QdN"/>
+                    <connections>
+                        <outlet property="LastUpdateLabel" destination="5tA-ba-1OW" id="uKp-et-SoH"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="81" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5740" y="-816"/>
+            <point key="canvasLocation" x="5740" y="-816.79160419790117"/>
         </scene>
         <!--Vplan Day View Controller-->
         <scene sceneID="bk2-yS-yIK">
