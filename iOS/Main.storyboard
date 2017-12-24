@@ -341,22 +341,24 @@
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YYP-th-FCO">
-                                                <rect key="frame" x="26" y="170" width="323" height="194"/>
+                                                <rect key="frame" x="57.5" y="151" width="260" height="232"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Alles nach Plan" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3fE-jM-Bvy">
-                                                        <rect key="frame" x="48.5" y="130" width="226" height="38.5"/>
+                                                        <rect key="frame" x="17" y="130" width="226" height="38.5"/>
                                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="32"/>
                                                         <color key="textColor" red="0.090196078430000007" green="0.16862745100000001" blue="0.29803921570000003" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Du wirst benachrichtigt, wenn neue Vertretungen vorliegen. Ziehen zum Aktualisieren." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0C7-ut-E9T">
-                                                        <rect key="frame" x="0.0" y="174.5" width="323" height="19.5"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0C7-ut-E9T">
+                                                        <rect key="frame" x="0.0" y="174.5" width="260" height="57.5"/>
+                                                        <string key="text">Du wirst benachrichtigt, wenn neue Vertretungen vorliegen.
+Ziehen zum Aktualisieren.</string>
                                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                         <color key="textColor" red="0.64313725489999995" green="0.68235294120000001" blue="0.72941176470000002" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="empty-visual" translatesAutoresizingMaskIntoConstraints="NO" id="7fL-T3-WES">
-                                                        <rect key="frame" x="109.5" y="0.0" width="104" height="104"/>
+                                                        <rect key="frame" x="78" y="0.0" width="104" height="104"/>
                                                     </imageView>
                                                 </subviews>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

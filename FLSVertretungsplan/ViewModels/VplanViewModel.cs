@@ -77,15 +77,15 @@ namespace FLSVertretungsplan
             }
             else if (subjectChanged)
             {
-                Type = "Fach-Änderung";    
+                Type = "Fachänderung";    
             }
             else if (roomChanged)
             {
-                Type = "Raum-Änderung";
+                Type = "Raumänderung";
             }
             else
             {
-                Type = "Ausfall";
+                Type = "Entfall";
             }
 
             if (subjectChanged)
