@@ -134,42 +134,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Contents.json" />
-    <ImageAsset Include="Assets.xcassets\First.imageset\Contents.json" />
-    <ImageAsset Include="Assets.xcassets\First.imageset\tab_feed.png" />
-    <ImageAsset Include="Assets.xcassets\First.imageset\tab_feed%402x.png" />
-    <ImageAsset Include="Assets.xcassets\First.imageset\tab_feed%403x.png" />
-    <ImageAsset Include="Assets.xcassets\Second.imageset\Contents.json" />
-    <ImageAsset Include="Assets.xcassets\Second.imageset\tab_about.png" />
-    <ImageAsset Include="Assets.xcassets\Second.imageset\tab_about%402x.png" />
-    <ImageAsset Include="Assets.xcassets\Second.imageset\tab_about%403x.png" />
-    <ImageAsset Include="Assets.xcassets\XamarinLogo.imageset\Contents.json" />
-    <ImageAsset Include="Assets.xcassets\XamarinLogo.imageset\xamarin_logo.png" />
-    <ImageAsset Include="Assets.xcassets\XamarinLogo.imageset\xamarin_logo%402x.png" />
-    <ImageAsset Include="Assets.xcassets\XamarinLogo.imageset\xamarin_logo%403x.png" />
-    <ImageAsset Include="Assets.xcassets\Contents.json" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\FLSAppIcon.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\AppIcon%403x.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\AppIcon%402x.png" />
-    <ImageAsset Include="Resources\Assets.xcassets\LogoShape.imageset\Contents.json" />
-    <ImageAsset Include="Resources\Assets.xcassets\LogoShape.imageset\LogoShape.pdf" />
-    <ImageAsset Include="Resources\Assets.xcassets\favorite-normal.imageset\Contents.json" />
-    <ImageAsset Include="Resources\Assets.xcassets\favorite-normal.imageset\favorite-normal.pdf" />
-    <ImageAsset Include="Resources\Assets.xcassets\list-normal.imageset\Contents.json" />
-    <ImageAsset Include="Resources\Assets.xcassets\list-normal.imageset\list-normal.pdf" />
-    <ImageAsset Include="Resources\Assets.xcassets\settings-normal.imageset\Contents.json" />
-    <ImageAsset Include="Resources\Assets.xcassets\settings-normal.imageset\settings-normal.pdf" />
-    <ImageAsset Include="Resources\Assets.xcassets\info.imageset\Contents.json" />
-    <ImageAsset Include="Resources\Assets.xcassets\info.imageset\info.pdf" />
-    <ImageAsset Include="Resources\Assets.xcassets\location.imageset\Contents.json" />
-    <ImageAsset Include="Resources\Assets.xcassets\location.imageset\location.pdf" />
-    <ImageAsset Include="Resources\Assets.xcassets\person.imageset\Contents.json" />
-    <ImageAsset Include="Resources\Assets.xcassets\person.imageset\person.pdf" />
-    <ImageAsset Include="Resources\Assets.xcassets\location.imageset\location.png" />
-    <ImageAsset Include="Resources\Assets.xcassets\arrow-forward.imageset\Contents.json" />
-    <ImageAsset Include="Resources\Assets.xcassets\arrow-forward.imageset\arrow-forward.pdf" />
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="ViewControllers\VplanViewController.cs" />
     <Compile Include="ViewControllers\VplanViewController.designer.cs">
       <DependentUpon>VplanViewController.cs</DependentUpon>
@@ -229,6 +193,46 @@
   <ItemGroup>
     <Folder Include="Views\" />
     <Folder Include="Helpers\" />
+    <Folder Include="Assets.xcassets\" />
+    <Folder Include="Resources\" />
+    <Folder Include="Assets.xcassets\icon-shape.imageset\" />
+    <Folder Include="Assets.xcassets\location.imageset\" />
+    <Folder Include="Assets.xcassets\icon.imageset\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\appicon_1024.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\appicon_120.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\appicon_152.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\appicon_167.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\appicon_180.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\appicon_20.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\appicon_29.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\appicon_40.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\appicon_58.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\appicon_60.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\appicon_76.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\appicon_80.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\appicon_87.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\arrow-forward.imageset\arrow-forward.pdf" />
+    <ImageAsset Include="Assets.xcassets\arrow-forward.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\book.imageset\book.pdf" />
+    <ImageAsset Include="Assets.xcassets\book.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\favorite-normal.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\favorite-normal.imageset\favorite-normal.pdf" />
+    <ImageAsset Include="Assets.xcassets\info.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\info.imageset\info.pdf" />
+    <ImageAsset Include="Assets.xcassets\list-normal.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\list-normal.imageset\list-normal.pdf" />
+    <ImageAsset Include="Assets.xcassets\person.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\person.imageset\person.pdf" />
+    <ImageAsset Include="Assets.xcassets\settings-normal.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\settings-normal.imageset\settings-normal.pdf" />
+    <ImageAsset Include="Assets.xcassets\location.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\location.imageset\location.pdf" />
+    <ImageAsset Include="Assets.xcassets\icon.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\icon.imageset\icon.pdf" />
   </ItemGroup>
   <Import Project="..\FLSVertretungsplan\FLSVertretungsplan.projitems" Label="Shared" Condition="Exists('..\FLSVertretungsplan\FLSVertretungsplan.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />

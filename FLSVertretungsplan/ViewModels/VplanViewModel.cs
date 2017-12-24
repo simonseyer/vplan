@@ -25,7 +25,7 @@ namespace FLSVertretungsplan
         public string SecondaryText;
         public Icon IconIdentifier = Icon.None;
 
-        public enum Icon { None, Info, Person, Location };  
+        public enum Icon { None, Info, Person, Location, Subject };  
 
     }
 
@@ -91,7 +91,7 @@ namespace FLSVertretungsplan
             if (subjectChanged)
             {
                 var text = model.NewLesson.Subject.Name ?? model.NewLesson.Subject.Identifier;
-                Description.Add(new TextComponent { IconIdentifier = TextComponent.Icon.Info });
+                Description.Add(new TextComponent { IconIdentifier = TextComponent.Icon.Subject });
                 Description.Add(new TextComponent { SecondaryText = "Fach " });
                 Description.Add(new TextComponent { PrimaryText = text });
                 Description.Add(new TextComponent { SecondaryText = "\n" });

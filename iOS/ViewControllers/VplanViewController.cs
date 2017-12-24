@@ -169,6 +169,9 @@ namespace FLSVertretungsplan.iOS
                         case TextComponent.Icon.Person:
                             icon = "person";
                             break;
+                        case TextComponent.Icon.Subject:
+                            icon = "book";
+                            break;
                     }
 
                     var iconImage = UIImage.FromBundle(icon);
