@@ -14,6 +14,8 @@ namespace FLSVertretungsplan.iOS
 
         NSLayoutConstraint TrailingConstraint;
 
+        bool EmptyViewShown = false;
+
         public VplanContainerViewController() : base("VplanContainerViewController", null)
         {
         }
@@ -70,6 +72,12 @@ namespace FLSVertretungsplan.iOS
 
         void ReloadData() 
         {
+            if (EmptyViewShown)
+            {
+                RemovePages(1);
+                EmptyViewShown = false;
+            }
+
             var count = ViewModel.Dates.Value.Count;
             var diff = count - ChildViewControllers.Length;
 
@@ -98,6 +106,7 @@ namespace FLSVertretungsplan.iOS
             }
             else
             {
+                EmptyViewShown = true;
                 AddPages(1, "EmptyVplanViewController");
                 var viewController = ChildViewControllers[0] as EmptyVplanViewController;
                 viewController.ViewModel = ViewModel;
