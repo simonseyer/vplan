@@ -38,6 +38,19 @@ namespace FLSVertretungsplan.iOS
             classCollectionView.Delegate = SchoolClassesDelegate;
         }
 
+        public override void ViewWillAppear(bool animated)
+        {
+            base.ViewWillAppear(animated);
+            SchoolsDelegate.ActivateFeedback(true);
+            SchoolClassesDelegate.ActivateFeedback(true);
+        }
+
+        public override void ViewWillDisappear(bool animated)
+        {
+            base.ViewWillDisappear(animated);
+            SchoolsDelegate.ActivateFeedback(false);
+            SchoolClassesDelegate.ActivateFeedback(false);
+        }
     }
 
     class ChipCollectionViewDataSource : UICollectionViewDataSource
@@ -129,6 +142,8 @@ namespace FLSVertretungsplan.iOS
         public SettingsViewModel ViewModel { get; private set; }
         public bool SchoolClassesMode { get; private set; }
 
+        UISelectionFeedbackGenerator FeedbackGenerator;
+
         public ChipCollectionViewDelegate(SettingsViewModel viewModel, bool schoolClassesMode)
         {
             ViewModel = viewModel;
@@ -152,6 +167,22 @@ namespace FLSVertretungsplan.iOS
             else
             {
                 ViewModel.ToggleSchoolBookmarkAtIndex(indexPath.Row);
+            }
+
+            FeedbackGenerator?.SelectionChanged();
+            FeedbackGenerator?.Prepare();
+        }
+
+        public void ActivateFeedback(bool activate)
+        {
+            if (activate)
+            {
+                FeedbackGenerator = new UISelectionFeedbackGenerator();
+                FeedbackGenerator.Prepare();
+            }
+            else
+            {
+                FeedbackGenerator = null;
             }
         }
 

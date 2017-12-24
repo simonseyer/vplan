@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
 using Foundation;
 using UIKit;
@@ -13,6 +14,9 @@ namespace FLSVertretungsplan.iOS
         static readonly nfloat PageSpacing = 6;
 
         NSLayoutConstraint TrailingConstraint;
+        bool Visible;
+        CancellationTokenSource HideOverlayCancellationToken;
+        UINotificationFeedbackGenerator FeedbackGenerator;
 
         bool EmptyViewShown = false;
 
@@ -34,6 +38,18 @@ namespace FLSVertretungsplan.iOS
             ReloadData();
         }
 
+        public override void ViewWillAppear(bool animated)
+        {
+            base.ViewWillAppear(animated);
+            Visible = true;
+        }
+
+        public override void ViewWillDisappear(bool animated)
+        {
+            base.ViewWillDisappear(animated);
+            Visible = false;
+        }
+
         void Dates_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             InvokeOnMainThread(() =>
@@ -44,21 +60,32 @@ namespace FLSVertretungsplan.iOS
 
         void LastRefreshFailed_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            if (ViewModel.LastRefreshFailed.Value)
+            if (ViewModel.LastRefreshFailed.Value && Visible)
             {
                 InvokeOnMainThread(() =>
                 {
+                    FeedbackGenerator = new UINotificationFeedbackGenerator();
+                    FeedbackGenerator.NotificationOccurred(UINotificationFeedbackType.Error);
+
                     View.LayoutIfNeeded();
                     StatusViewHiddenConstraint.Active = false;
                     UIView.Animate(0.3, 0, UIViewAnimationOptions.CurveEaseOut, () => View.LayoutIfNeeded(), null);
                 });
-                Task.Delay(3000).ContinueWith(t2 =>
+
+                HideOverlayCancellationToken?.Cancel();
+                HideOverlayCancellationToken = new CancellationTokenSource();
+                Task.Delay(3000, HideOverlayCancellationToken.Token).ContinueWith(t2 =>
                 {
+                    if (t2.IsCanceled)
+                    {
+                        return;
+                    }
                     InvokeOnMainThread(() =>
                     {
                         View.LayoutIfNeeded();
                         StatusViewHiddenConstraint.Active = true;
                         UIView.Animate(0.3, 0, UIViewAnimationOptions.CurveEaseIn, () => View.LayoutIfNeeded(), null);
+                        FeedbackGenerator = null;
                     });
                 });
             }
