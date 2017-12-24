@@ -180,6 +180,10 @@
     <Compile Include="ViewControllers\EmptyVplanViewController.designer.cs">
       <DependentUpon>EmptyVplanViewController.cs</DependentUpon>
     </Compile>
+    <Compile Include="ViewControllers\NewSchoolClassesViewController.cs" />
+    <Compile Include="ViewControllers\NewSchoolClassesViewController.designer.cs">
+      <DependentUpon>NewSchoolClassesViewController.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Entitlements.plist" />
@@ -236,6 +240,8 @@
     <ImageAsset Include="Assets.xcassets\icon.imageset\icon.pdf" />
     <ImageAsset Include="Assets.xcassets\empty-visual.imageset\Contents.json" />
     <ImageAsset Include="Assets.xcassets\empty-visual.imageset\empty-visual.pdf" />
+    <ImageAsset Include="Resources\Assets.xcassets\close-button.imageset\Contents.json" />
+    <ImageAsset Include="Resources\Assets.xcassets\close-button.imageset\close-button.pdf" />
   </ItemGroup>
   <Import Project="..\FLSVertretungsplan\FLSVertretungsplan.projitems" Label="Shared" Condition="Exists('..\FLSVertretungsplan\FLSVertretungsplan.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />

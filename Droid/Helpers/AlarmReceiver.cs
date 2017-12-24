@@ -30,7 +30,7 @@ namespace FLSVertretungsplan.Droid
                 try {
                     var diff = await dataStore.Refresh();
 
-                    if (diff.NewBookmarkedChanges.Any() || diff.NewNewClasses.Any())
+                    if (diff.NewBookmarkedChanges.Any() || diff.NewNewSchoolClassBookmarks.Any())
                     {
                         string text;
                         if (diff.NewBookmarkedChanges.Any())
@@ -39,7 +39,7 @@ namespace FLSVertretungsplan.Droid
                         }
                         else
                         {
-                            text = diff.NewNewClasses.Count() + " neue Klassen";
+                            text = diff.NewNewSchoolClassBookmarks.Count() + " neue Klassen";
                         }
 
                         var notificationManager = NotificationManager.FromContext(context);

@@ -13,11 +13,11 @@ namespace FLSVertretungsplan
         Property<Vplan> BookmarkedVplan { get; }
         ObservableCollection<SchoolBookmark> SchoolBookmarks { get; }
         ObservableCollection<SchoolClassBookmark> SchoolClassBookmarks { get; }
-        ObservableCollection<SchoolClass> NewSchoolClasses { get; }
+        ObservableCollection<SchoolClassBookmark> NewSchoolClassBookmarks { get; }
 
         Task Load();
         Task<VplanDiff> Refresh();
-        Task ClearNewSchoolClasses();
+        Task ClearNewSchoolClassBookmarks();
         Task BookmarkSchool(string schoolName, bool bookmark);
         Task BookmarkSchoolClass(SchoolClass schoolClass, bool bookmark);
     }

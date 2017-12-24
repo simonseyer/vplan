@@ -36,6 +36,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\ChipViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\ISettingsDataStore.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\StandardSettingsDataStore.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\NewSchoolClassesViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Plugins\" />

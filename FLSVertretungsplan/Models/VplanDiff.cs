@@ -7,13 +7,13 @@ namespace FLSVertretungsplan
     {
         public bool Updated;
         public ImmutableArray<Change> NewBookmarkedChanges { get; private set; }
-        public ImmutableArray<SchoolClass> NewNewClasses { get; private set; }
+        public ImmutableArray<SchoolClassBookmark> NewNewSchoolClassBookmarks { get; private set; }
 
-        public VplanDiff(bool updated, List<Change> newBookmarkedChanges, List<SchoolClass> newNewClasses)
+        public VplanDiff(bool updated, List<Change> newBookmarkedChanges, List<SchoolClassBookmark> newNewClassBookmarks)
         {
             Updated = updated;
             NewBookmarkedChanges = ImmutableArray.CreateRange(newBookmarkedChanges);
-            NewNewClasses = ImmutableArray.CreateRange(newNewClasses);
+            NewNewSchoolClassBookmarks = ImmutableArray.CreateRange(newNewClassBookmarks);
         }
     }
 }

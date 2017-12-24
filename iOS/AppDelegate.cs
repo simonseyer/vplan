@@ -133,7 +133,7 @@ namespace FLSVertretungsplan.iOS
 
             if (settings.AuthorizationStatus == UNAuthorizationStatus.Authorized &&
                 oldNotifications.Length == 0 &&
-                (diff.NewBookmarkedChanges.Any() || diff.NewNewClasses.Any()))
+                (diff.NewBookmarkedChanges.Any() || diff.NewNewSchoolClassBookmarks.Any()))
             {
                 var content = new UNMutableNotificationContent
                 {
@@ -145,7 +145,7 @@ namespace FLSVertretungsplan.iOS
                 }
                 else
                 {
-                    content.Body = diff.NewNewClasses.Count() + " neue Klassen";
+                    content.Body = diff.NewNewSchoolClassBookmarks.Count() + " neue Klassen";
                 }
 
                 var request = UNNotificationRequest.FromIdentifier(dataStore.Vplan.Value.LastUpdate.ToString(), content, null);

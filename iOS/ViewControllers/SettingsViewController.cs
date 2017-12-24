@@ -28,13 +28,12 @@ namespace FLSVertretungsplan.iOS
 
             SchoolsDataSource = new ChipCollectionViewDataSource(schoolCollectionView, ViewModel.Schools);
             schoolCollectionView.DataSource = SchoolsDataSource;
-            SchoolsDelegate = new ChipCollectionViewDelegate(ViewModel, false);
+            SchoolsDelegate = new ChipCollectionViewDelegate(ViewModel.Schools, ViewModel.ToggleSchoolBookmarkAtIndex);
             schoolCollectionView.Delegate = SchoolsDelegate;
-
 
             SchoolClassesDataSource = new ChipCollectionViewDataSource(classCollectionView, ViewModel.SchoolClasses);
             classCollectionView.DataSource = SchoolClassesDataSource;
-            SchoolClassesDelegate = new ChipCollectionViewDelegate(ViewModel, true);
+            SchoolClassesDelegate = new ChipCollectionViewDelegate(ViewModel.SchoolClasses, ViewModel.ToggleSchoolClassBookmarkAtIndex);
             classCollectionView.Delegate = SchoolClassesDelegate;
         }
 
@@ -57,19 +56,23 @@ namespace FLSVertretungsplan.iOS
     {
 
         public UICollectionView CollectionView { get; private set; }
-        public ObservableCollection<ChipPresentationModel> Items { get; private set; }
+        public ObservableCollection<ChipPresentationModel> ObservableItems { get; private set; }
+        public Collection<ChipPresentationModel> Items { get; private set; }
 
         public ChipCollectionViewDataSource(UICollectionView collectionView, ObservableCollection<ChipPresentationModel> items)
         {
             CollectionView = collectionView;
-            Items = items;
+            ObservableItems = items;
+            Items = new Collection<ChipPresentationModel>(ObservableItems);
             items.CollectionChanged += CollectionChanged;
         }
 
         void CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
+            var newItems = new Collection<ChipPresentationModel>(ObservableItems);
             InvokeOnMainThread(() =>
             {
+                Items = newItems;
                 var oldIndexPaths = GetIndexPaths(e.OldStartingIndex, e.OldItems?.Count ?? 0);
                 var newIndexPaths = GetIndexPaths(e.NewStartingIndex, e.NewItems?.Count ?? 0);
                 switch (e.Action)
@@ -139,36 +142,26 @@ namespace FLSVertretungsplan.iOS
 
     class ChipCollectionViewDelegate : UICollectionViewDelegateFlowLayout
     {
-        public SettingsViewModel ViewModel { get; private set; }
-        public bool SchoolClassesMode { get; private set; }
-
+        ObservableCollection<ChipPresentationModel> Items;
+        Action<int> ToggleBookmark;
         UISelectionFeedbackGenerator FeedbackGenerator;
 
-        public ChipCollectionViewDelegate(SettingsViewModel viewModel, bool schoolClassesMode)
+        public ChipCollectionViewDelegate(ObservableCollection<ChipPresentationModel> items, Action<int> toggleBookmark)
         {
-            ViewModel = viewModel;
-            SchoolClassesMode = schoolClassesMode;
+            Items = items;
+            ToggleBookmark = toggleBookmark;
         }
 
         public override CGSize GetSizeForItem(UICollectionView collectionView, UICollectionViewLayout layout, NSIndexPath indexPath)
         {
-            var items = SchoolClassesMode ? ViewModel.SchoolClasses : ViewModel.Schools;
-            var name = new NSString(items[indexPath.Row].Name);
+            var name = new NSString(Items[indexPath.Row].Name);
             var size = name.GetSizeUsingAttributes(new UIStringAttributes() { Font = UIFont.SystemFontOfSize(17) });
             return new CGSize(size.Width + 24, 36);
         }
 
         public override void ItemSelected(UICollectionView collectionView, NSIndexPath indexPath)
         {
-            if (SchoolClassesMode)
-            {
-                ViewModel.ToggleSchoolClassBookmarkAtIndex(indexPath.Row);
-            }
-            else
-            {
-                ViewModel.ToggleSchoolBookmarkAtIndex(indexPath.Row);
-            }
-
+            ToggleBookmark.Invoke(indexPath.Row);
             FeedbackGenerator?.SelectionChanged();
             FeedbackGenerator?.Prepare();
         }

@@ -21,7 +21,7 @@ namespace FLSVertretungsplan
         public Property<Vplan> Vplan { get; }
         public HashSet<SchoolClassBookmark> AllSchoolClassBookmarks { get; }
         public ObservableCollection<SchoolBookmark> SchoolBookmarks { get; }
-        public ObservableCollection<SchoolClass> NewSchoolClasses { get; }
+        public ObservableCollection<SchoolClassBookmark> NewSchoolClassBookmarks { get; }
 
         // Derived state
         public Property<Vplan> BookmarkedVplan { get; }
@@ -30,6 +30,7 @@ namespace FLSVertretungsplan
 
         Task LoadTask;
         Task<VplanDiff> RefreshTask;
+        bool Loaded;
 
         public CloudVplanDataStore()
         {
@@ -91,7 +92,7 @@ namespace FLSVertretungsplan
                 new SchoolClassBookmark(new SchoolClass("11/5 W/Bili", "BG"), false, false)
             };
             SchoolClassBookmarks = new ObservableCollection<SchoolClassBookmark>();
-            NewSchoolClasses = new ObservableCollection<SchoolClass>();
+            NewSchoolClassBookmarks = new ObservableCollection<SchoolClassBookmark>();
         }
 
         public async Task Load()
@@ -101,6 +102,11 @@ namespace FLSVertretungsplan
                 await LoadTask;
                 return;
             }
+            if (Loaded)
+            {
+                return;
+            }
+            Loaded = true;
 
             LoadTask = DoLoad();
             await LoadTask;
@@ -111,10 +117,10 @@ namespace FLSVertretungsplan
         {
             Vplan.Value = await Persistence.LoadVplan();
 
-            var newSchoolClasses = await Persistence.LoadNewSchoolClasses();
-            foreach (var schoolClass in newSchoolClasses)
+            var newSchoolClassBookmarks = await Persistence.LoadNewSchoolClassBookmarks();
+            foreach (var schoolClassBookmark in newSchoolClassBookmarks)
             {
-                NewSchoolClasses.Add(schoolClass);
+                NewSchoolClassBookmarks.Add(schoolClassBookmark);
             }
 
             var schoolBookmarks = await Persistence.LoadSchoolBookmarks();
@@ -148,6 +154,8 @@ namespace FLSVertretungsplan
                 return await RefreshTask;
             }
 
+            await Load();
+
             RefreshTask = DoRefresh();
             var diff = await RefreshTask;
             RefreshTask = null;
@@ -160,7 +168,7 @@ namespace FLSVertretungsplan
             IsRefreshing.Value = true;
 
             var oldVplan = BookmarkedVplan.Value;
-            var oldNewSchoolClasses = NewSchoolClasses.ToList();
+            var oldNewSchoolClasses = NewSchoolClassBookmarks.ToList();
 
             try
             {
@@ -168,7 +176,7 @@ namespace FLSVertretungsplan
                 if (newVplan.Equals(Vplan.Value))
                 {
                     IsRefreshing.Value = false;
-                    return new VplanDiff(false, new List<Change>(), new List<SchoolClass>());
+                    return new VplanDiff(false, new List<Change>(), new List<SchoolClassBookmark>());
                 }
                 Vplan.Value = newVplan;
             } 
@@ -189,15 +197,15 @@ namespace FLSVertretungsplan
             var oldBookmarkedChanges = oldVplan?.Changes.ToHashSet() ?? new HashSet<Change>();
             var newBookmarkedChanges = BookmarkedVplan.Value?.Changes.ToHashSet() ?? new HashSet<Change>();
             var newBookmarks = newBookmarkedChanges.Except(oldBookmarkedChanges);
-            var newNewClasses = NewSchoolClasses.ToHashSet().Except(oldNewSchoolClasses.ToHashSet());
+            var newNewClasses = NewSchoolClassBookmarks.ToHashSet().Except(oldNewSchoolClasses.ToHashSet());
 
             IsRefreshing.Value = false;
             return new VplanDiff(gotUpdated, newBookmarks.ToList(), newNewClasses.ToList());
         }
 
-        public async Task ClearNewSchoolClasses()
+        public async Task ClearNewSchoolClassBookmarks()
         {
-            NewSchoolClasses.Clear();
+            NewSchoolClassBookmarks.Clear();
             await PersistNewSchoolClasses();
         }
 
@@ -278,7 +286,10 @@ namespace FLSVertretungsplan
                 return;
             }
 
-            NewSchoolClasses.Add(schoolClass);
+            if (schoolBookmark.Bookmarked)
+            {
+                NewSchoolClassBookmarks.Add(newBookmark);
+            }
             UpdateSchoolClassBookmark(newBookmark);
         }
 
@@ -287,6 +298,12 @@ namespace FLSVertretungsplan
             // Replace bookmark
             AllSchoolClassBookmarks.Remove(newBookmark);
             AllSchoolClassBookmarks.Add(newBookmark);
+
+            var newBookmarkIndex = NewSchoolClassBookmarks.IndexOf(newBookmark);
+            if (newBookmarkIndex >= 0)
+            {
+                NewSchoolClassBookmarks[newBookmarkIndex] = newBookmark;
+            }
 
             if (newBookmark.SchoolBookmarked)
             {
@@ -357,7 +374,7 @@ namespace FLSVertretungsplan
 
         async Task PersistNewSchoolClasses()
         {
-            await Persistence.PersistNewSchoolClasses(NewSchoolClasses.ToList());
+            await Persistence.PersistNewSchoolClassBookmarks(NewSchoolClassBookmarks.ToList());
         }
 
         async Task PersistAll()

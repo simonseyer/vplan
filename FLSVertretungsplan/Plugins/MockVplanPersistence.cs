@@ -14,7 +14,7 @@ namespace FLSVertretungsplan
             return await VplanParser.Parse(xml);
         }
 
-        public Task<List<SchoolClass>> LoadNewSchoolClasses() => Task.FromResult(new List<SchoolClass>());
+        public Task<List<SchoolClassBookmark>> LoadNewSchoolClassBookmarks() => Task.FromResult(new List<SchoolClassBookmark>());
 
         public Task<List<SchoolBookmark>> LoadSchoolBookmarks() => Task.FromResult(new List<SchoolBookmark>());
 
@@ -29,7 +29,7 @@ namespace FLSVertretungsplan
             return schoolClassBookmarks.ToList();
         }
 
-        public Task PersistNewSchoolClasses(List<SchoolClass> newSchoolClasses) => Task.CompletedTask;
+        public Task PersistNewSchoolClassBookmarks(List<SchoolClassBookmark> newSchoolClassBookmarks) => Task.CompletedTask;
 
         public Task PersistSchoolBookmarks(List<SchoolBookmark> schoolBookmarks) => Task.CompletedTask;
 

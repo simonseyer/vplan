@@ -9,21 +9,21 @@ namespace FLSVertretungsplan
 {
     public class JsonVplanPersistence: IVplanPersistence
     {
-        static string newClassesFileName = "newSchoolClasses.json";
+        static string newClassesFileName = "newSchoolClassBookmarks.json";
         static string schoolBookmarksFileName = "schoolBookmarks.json";
         static string schoolClassBookmarksFileName = "schoolClassBookmarks.json";
         static string vplanFileName = "vplan.json";
 
-        public async Task<List<SchoolClass>> LoadNewSchoolClasses()
+        public async Task<List<SchoolClassBookmark>> LoadNewSchoolClassBookmarks()
         {
             try
             {
-                return await Load<List<SchoolClass>>(newClassesFileName) ?? new List<SchoolClass>();
+                return await Load<List<SchoolClassBookmark>>(newClassesFileName) ?? new List<SchoolClassBookmark>();
             }
             catch (Exception ex)
             {
                 Debug.WriteLine(ex);
-                return new List<SchoolClass>();
+                return new List<SchoolClassBookmark>();
             }
         }
 
@@ -66,7 +66,7 @@ namespace FLSVertretungsplan
             }
         }
 
-        public async Task PersistNewSchoolClasses(List<SchoolClass> newSchoolClasses)
+        public async Task PersistNewSchoolClassBookmarks(List<SchoolClassBookmark> newSchoolClasses)
         {
             await Persist(newSchoolClasses, newClassesFileName);
         }
