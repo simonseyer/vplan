@@ -198,6 +198,7 @@
     <Folder Include="Assets.xcassets\icon-shape.imageset\" />
     <Folder Include="Assets.xcassets\location.imageset\" />
     <Folder Include="Assets.xcassets\icon.imageset\" />
+    <Folder Include="Assets.xcassets\empty-visual.imageset\" />
   </ItemGroup>
   <ItemGroup>
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\appicon_1024.png" />
@@ -233,6 +234,8 @@
     <ImageAsset Include="Assets.xcassets\location.imageset\location.pdf" />
     <ImageAsset Include="Assets.xcassets\icon.imageset\Contents.json" />
     <ImageAsset Include="Assets.xcassets\icon.imageset\icon.pdf" />
+    <ImageAsset Include="Assets.xcassets\empty-visual.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\empty-visual.imageset\empty-visual.pdf" />
   </ItemGroup>
   <Import Project="..\FLSVertretungsplan\FLSVertretungsplan.projitems" Label="Shared" Condition="Exists('..\FLSVertretungsplan\FLSVertretungsplan.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />

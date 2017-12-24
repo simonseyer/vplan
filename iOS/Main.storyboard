@@ -338,29 +338,34 @@
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YYP-th-FCO">
-                                                <rect key="frame" x="26" y="168" width="323" height="64"/>
+                                                <rect key="frame" x="26" y="170" width="323" height="194"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Alles nach Plan" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3fE-jM-Bvy">
-                                                        <rect key="frame" x="48.5" y="0.0" width="226" height="38.5"/>
+                                                        <rect key="frame" x="48.5" y="130" width="226" height="38.5"/>
                                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="32"/>
                                                         <color key="textColor" red="0.090196078430000007" green="0.16862745100000001" blue="0.29803921570000003" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Du wirst benachrichtigt, wenn neue Vertretungen vorliegen. Ziehen zum Aktualisieren." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0C7-ut-E9T">
-                                                        <rect key="frame" x="0.0" y="44.5" width="323" height="19.5"/>
+                                                        <rect key="frame" x="0.0" y="174.5" width="323" height="19.5"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                         <color key="textColor" red="0.64313725489999995" green="0.68235294120000001" blue="0.72941176470000002" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
+                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="empty-visual" translatesAutoresizingMaskIntoConstraints="NO" id="7fL-T3-WES">
+                                                        <rect key="frame" x="109.5" y="0.0" width="104" height="104"/>
+                                                    </imageView>
                                                 </subviews>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
+                                                    <constraint firstItem="7fL-T3-WES" firstAttribute="centerX" secondItem="YYP-th-FCO" secondAttribute="centerX" id="9n5-i9-f5L"/>
                                                     <constraint firstAttribute="trailing" secondItem="0C7-ut-E9T" secondAttribute="trailing" id="EHi-CG-Fgn"/>
                                                     <constraint firstItem="0C7-ut-E9T" firstAttribute="leading" secondItem="YYP-th-FCO" secondAttribute="leading" id="JPg-Jj-7Z1"/>
                                                     <constraint firstItem="0C7-ut-E9T" firstAttribute="top" secondItem="3fE-jM-Bvy" secondAttribute="bottom" constant="6" id="VmA-bT-HGy"/>
                                                     <constraint firstItem="3fE-jM-Bvy" firstAttribute="centerX" secondItem="YYP-th-FCO" secondAttribute="centerX" id="XJK-Ca-fxC"/>
-                                                    <constraint firstItem="3fE-jM-Bvy" firstAttribute="top" secondItem="YYP-th-FCO" secondAttribute="top" id="Zfy-he-2TK"/>
+                                                    <constraint firstItem="7fL-T3-WES" firstAttribute="top" secondItem="YYP-th-FCO" secondAttribute="top" id="ZJx-HU-59o"/>
                                                     <constraint firstAttribute="bottom" secondItem="0C7-ut-E9T" secondAttribute="bottom" id="e2o-6e-PDw"/>
+                                                    <constraint firstItem="3fE-jM-Bvy" firstAttribute="top" secondItem="7fL-T3-WES" secondAttribute="bottom" constant="26" id="mza-qU-tjO"/>
                                                 </constraints>
                                             </view>
                                         </subviews>
@@ -368,7 +373,7 @@
                                         <constraints>
                                             <constraint firstItem="YYP-th-FCO" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="yXh-9O-pDB" secondAttribute="leading" constant="26" id="HSK-Cu-GaJ"/>
                                             <constraint firstItem="YYP-th-FCO" firstAttribute="centerX" secondItem="yXh-9O-pDB" secondAttribute="centerX" id="b6t-ZK-DT3"/>
-                                            <constraint firstItem="YYP-th-FCO" firstAttribute="centerY" secondItem="yXh-9O-pDB" secondAttribute="centerY" multiplier="0.6" id="z6O-OA-Kg3"/>
+                                            <constraint firstItem="YYP-th-FCO" firstAttribute="centerY" secondItem="yXh-9O-pDB" secondAttribute="centerY" multiplier="0.8" id="z6O-OA-Kg3"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -669,6 +674,7 @@
     <resources>
         <image name="First" width="32" height="30"/>
         <image name="arrow-forward" width="12" height="11"/>
+        <image name="empty-visual" width="104" height="104"/>
         <image name="favorite-normal" width="21" height="19"/>
         <image name="list-normal" width="21" height="13"/>
         <image name="settings-normal" width="21" height="21"/>
