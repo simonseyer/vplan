@@ -250,7 +250,11 @@ namespace FLSVertretungsplan
                 }
             }
 
-            BookmarkedVplan.Value = new Vplan(Vplan.Value.LastUpdate, bookmarkedChanges);
+            var newVplan = new Vplan(Vplan.Value.LastUpdate, bookmarkedChanges);
+            if (!newVplan.Equals(BookmarkedVplan.Value))
+            {
+                BookmarkedVplan.Value = newVplan;
+            }
         }
 
         void UpdateSchoolClasses()
