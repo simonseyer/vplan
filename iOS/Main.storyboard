@@ -272,6 +272,9 @@
                             </scrollView>
                             <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="aJe-iV-NLN">
                                 <rect key="frame" x="168" y="581" width="39" height="37"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="37" id="Rhr-SE-l62"/>
+                                </constraints>
                                 <color key="pageIndicatorTintColor" red="0.96078431372549022" green="0.96078431372549022" blue="0.96862745098039216" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="currentPageIndicatorTintColor" red="0.64313725489999995" green="0.68235294120000001" blue="0.72941176470000002" alpha="1" colorSpace="calibratedRGB"/>
                             </pageControl>
