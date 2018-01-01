@@ -21,12 +21,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)Models\SchoolClass.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\SchoolClassBookmark.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\SchoolBookmark.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Plugins\IVplanLoader.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Plugins\IVplanPersistence.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Plugins\MockVplanLoader.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Plugins\CloudVplanLoader.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Plugins\MockVplanPersistence.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Plugins\JsonVplanPersistence.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\VplanParser.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Subject.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Teacher.cs" />
@@ -37,8 +31,16 @@
     <Compile Include="$(MSBuildThisFileDirectory)Services\ISettingsDataStore.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\StandardSettingsDataStore.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\NewSchoolClassesViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Plugins\Loader\CloudVplanLoader.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Plugins\Loader\IVplanLoader.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Plugins\Loader\MockVplanLoader.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Plugins\Persistence\IVplanPersistence.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Plugins\Persistence\JsonVplanPersistence.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Plugins\Persistence\MockVplanPersistence.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Plugins\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Plugins\Loader\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Plugins\Persistence\" />
   </ItemGroup>
 </Project>
