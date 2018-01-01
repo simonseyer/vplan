@@ -88,12 +88,6 @@
     <Reference Include="System.Core" />
     <Reference Include="Xamarin.iOS" />
     <Reference Include="System.Net.Http" />
-    <Reference Include="Plugin.Share.Abstractions">
-      <HintPath>..\packages\Plugin.Share.7.0.1\lib\Xamarin.iOS10\Plugin.Share.Abstractions.dll</HintPath>
-    </Reference>
-    <Reference Include="Plugin.Share">
-      <HintPath>..\packages\Plugin.Share.7.0.1\lib\Xamarin.iOS10\Plugin.Share.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.AppCenter">
       <HintPath>..\packages\Microsoft.AppCenter.1.1.0\lib\Xamarin.iOS10\Microsoft.AppCenter.dll</HintPath>
     </Reference>
@@ -131,6 +125,12 @@
     </Reference>
     <Reference Include="Plugin.Settings">
       <HintPath>..\packages\Xam.Plugins.Settings.3.1.1\lib\Xamarin.iOS10\Plugin.Settings.dll</HintPath>
+    </Reference>
+    <Reference Include="Plugin.Share.Abstractions">
+      <HintPath>..\packages\Plugin.Share.7.1.1\lib\Xamarin.iOS10\Plugin.Share.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Plugin.Share">
+      <HintPath>..\packages\Plugin.Share.7.1.1\lib\Xamarin.iOS10\Plugin.Share.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

@@ -46,12 +46,6 @@
     <Reference Include="Plugin.CurrentActivity">
       <HintPath>..\packages\Plugin.CurrentActivity.1.0.1\lib\MonoAndroid10\Plugin.CurrentActivity.dll</HintPath>
     </Reference>
-    <Reference Include="Plugin.Share.Abstractions">
-      <HintPath>..\packages\Plugin.Share.7.0.1\lib\MonoAndroid10\Plugin.Share.Abstractions.dll</HintPath>
-    </Reference>
-    <Reference Include="Plugin.Share">
-      <HintPath>..\packages\Plugin.Share.7.0.1\lib\MonoAndroid10\Plugin.Share.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.IO.Compression" />
     <Reference Include="Microsoft.AppCenter.Android.Bindings">
@@ -141,6 +135,12 @@
     <Reference Include="AndroidFlowLayout">
       <HintPath>..\packages\AndroidFlowLayout.1.9.0.1\lib\monoandroid403\AndroidFlowLayout.dll</HintPath>
     </Reference>
+    <Reference Include="Plugin.Share.Abstractions">
+      <HintPath>..\packages\Plugin.Share.7.1.1\lib\MonoAndroid10\Plugin.Share.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Plugin.Share">
+      <HintPath>..\packages\Plugin.Share.7.1.1\lib\MonoAndroid10\Plugin.Share.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MainApplication.cs" />
@@ -217,4 +217,5 @@
   <Import Project="..\packages\Xamarin.Android.Support.Animated.Vector.Drawable.26.1.0.1\build\MonoAndroid80\Xamarin.Android.Support.Animated.Vector.Drawable.targets" Condition="Exists('..\packages\Xamarin.Android.Support.Animated.Vector.Drawable.26.1.0.1\build\MonoAndroid80\Xamarin.Android.Support.Animated.Vector.Drawable.targets')" />
   <Import Project="..\packages\Xamarin.Android.Support.v7.AppCompat.26.1.0.1\build\MonoAndroid80\Xamarin.Android.Support.v7.AppCompat.targets" Condition="Exists('..\packages\Xamarin.Android.Support.v7.AppCompat.26.1.0.1\build\MonoAndroid80\Xamarin.Android.Support.v7.AppCompat.targets')" />
   <Import Project="..\packages\Xamarin.Android.Support.Design.26.1.0.1\build\MonoAndroid80\Xamarin.Android.Support.Design.targets" Condition="Exists('..\packages\Xamarin.Android.Support.Design.26.1.0.1\build\MonoAndroid80\Xamarin.Android.Support.Design.targets')" />
+  <Import Project="..\packages\NETStandard.Library.2.0.1\build\netstandard2.0\NETStandard.Library.targets" Condition="Exists('..\packages\NETStandard.Library.2.0.1\build\netstandard2.0\NETStandard.Library.targets')" />
 </Project>
