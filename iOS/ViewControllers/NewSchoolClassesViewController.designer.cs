@@ -15,6 +15,15 @@ namespace FLSVertretungsplan.iOS
         [Outlet]
         UIKit.UICollectionView CollectionView { get; set; }
 
+        [Outlet]
+        UIKit.UILabel DoneButtonLabel { get; set; }
+
+        [Outlet]
+        UIKit.UILabel SubTitleLabel { get; set; }
+
+        [Outlet]
+        UIKit.UILabel TitleLabel { get; set; }
+
         [Action ("CloseTapped:")]
         partial void CloseTapped (Foundation.NSObject sender);
 
@@ -23,9 +32,24 @@ namespace FLSVertretungsplan.iOS
         
         void ReleaseDesignerOutlets ()
         {
+            if (TitleLabel != null) {
+                TitleLabel.Dispose ();
+                TitleLabel = null;
+            }
+
+            if (SubTitleLabel != null) {
+                SubTitleLabel.Dispose ();
+                SubTitleLabel = null;
+            }
+
             if (CollectionView != null) {
                 CollectionView.Dispose ();
                 CollectionView = null;
+            }
+
+            if (DoneButtonLabel != null) {
+                DoneButtonLabel.Dispose ();
+                DoneButtonLabel = null;
             }
         }
     }

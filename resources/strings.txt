@@ -1,0 +1,69 @@
+[[notifications]]
+	[new_plan_title]
+		de = Neuer Vertretungsplan verfügbar
+	[new_changes_singular]
+		de = "Ein neuer Eintrag"
+	[new_changes_plural]
+		de = "%@ neue Einträge"
+	[new_school_classes_singular]
+		de = "Eine neue Klasse"
+	[new_school_classes_plural]
+		de = "%@ neue Klassen"
+
+[[setup]]
+	[setup_start_button]
+		de = Auf geht's
+
+[[tab_bar]]
+	[school_tab]
+		de = Schul-Plan
+	[my_plan_tab]
+		de = Mein Plan
+	[filter_tab]
+		de = Filter
+
+[[new_school_classes]]
+	[new_school_classes_title]
+		de = Neue Klassen verfügbar
+	[new_school_classes_subtitle]
+		de = Wähle die Klassen, die dich interessieren.
+	[new_school_classses_done_button]
+		de = Fertig
+
+[[filter]]
+	[filter_title]
+		de = FLS Vertretungsplan
+	[filter_subtitle]
+		de = Wähle deine Schulform und Klassen. Die Liste wird ständig aktualisiert.
+	[filter_school_section_title]
+		de = Schulformen
+	[filter_school_class_section_title]
+		de = Klassen
+
+[[empty_vplan]]
+	[empty_vplan_title]
+		de = Alles nach Plan
+	[empty_vplan_subtitle]
+		de = Du wirst benachrichtigt, wenn neue Vertretungen vorliegen.\nZiehen zum Aktualisieren.
+
+[[vplan]]
+	[vplan_last_update]
+		de = Letzte Aktualisierung %@ h
+
+[[change]]
+	[change_type_teacher]
+		de = Vertretung
+	[change_type_subject]
+		de = Fachänderung
+	[change_type_room]
+		de = Raumänderung
+	[change_type_cancelled]
+		de = Entfall
+	[change_connector_teacher]
+		de = bei
+	[change_connector_room]
+		de = in Raum
+	[change_prefix_subject]
+		de = Fach
+	[change_prefix_room]
+		de = Raum

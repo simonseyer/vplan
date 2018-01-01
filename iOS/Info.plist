@@ -37,7 +37,7 @@
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<true/>
 	<key>CFBundleName</key>
-	<string>FLS Vplan</string>
+	<string>Vplan</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>fetch</string>
@@ -48,5 +48,7 @@
 	<string>Assets.xcassets/AppIcon.appiconset</string>
 	<key>CFBundleVersion</key>
 	<string>1.4</string>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>de</string>
 </dict>
 </plist>

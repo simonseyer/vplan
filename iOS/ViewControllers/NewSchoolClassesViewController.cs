@@ -1,5 +1,5 @@
 ﻿using System;
-
+using Foundation;
 using UIKit;
 
 namespace FLSVertretungsplan.iOS
@@ -28,6 +28,10 @@ namespace FLSVertretungsplan.iOS
             CollectionView.DataSource = SchoolClassesDataSource;
             SchoolClassesDelegate = new ChipCollectionViewDelegate(ViewModel.SchoolClasses, ViewModel.ToggleSchoolClassBookmarkAtIndex);
             CollectionView.Delegate = SchoolClassesDelegate;
+
+            TitleLabel.Text = NSBundle.MainBundle.LocalizedString("new_school_classes_title", "");
+            SubTitleLabel.Text = NSBundle.MainBundle.LocalizedString("new_school_classes_subtitle", "");
+            DoneButtonLabel.Text = NSBundle.MainBundle.LocalizedString("new_school_classses_done_button", "");
         }
 
         public override void ViewWillAppear(bool animated)

@@ -26,15 +26,21 @@ namespace FLSVertretungsplan.iOS
 
             ViewModel = new SettingsViewModel();
 
-            SchoolsDataSource = new ChipCollectionViewDataSource(schoolCollectionView, ViewModel.Schools);
-            schoolCollectionView.DataSource = SchoolsDataSource;
+            SchoolsDataSource = new ChipCollectionViewDataSource(SchoolCollectionView, ViewModel.Schools);
+            SchoolCollectionView.DataSource = SchoolsDataSource;
             SchoolsDelegate = new ChipCollectionViewDelegate(ViewModel.Schools, ViewModel.ToggleSchoolBookmarkAtIndex);
-            schoolCollectionView.Delegate = SchoolsDelegate;
+            SchoolCollectionView.Delegate = SchoolsDelegate;
 
-            SchoolClassesDataSource = new ChipCollectionViewDataSource(classCollectionView, ViewModel.SchoolClasses);
-            classCollectionView.DataSource = SchoolClassesDataSource;
+            SchoolClassesDataSource = new ChipCollectionViewDataSource(SchoolClassCollectionView, ViewModel.SchoolClasses);
+            SchoolClassCollectionView.DataSource = SchoolClassesDataSource;
             SchoolClassesDelegate = new ChipCollectionViewDelegate(ViewModel.SchoolClasses, ViewModel.ToggleSchoolClassBookmarkAtIndex);
-            classCollectionView.Delegate = SchoolClassesDelegate;
+            SchoolClassCollectionView.Delegate = SchoolClassesDelegate;
+
+            TabBarItem.Title = NSBundle.MainBundle.LocalizedString("filter_tab", "");
+            TitleLabel.Text = NSBundle.MainBundle.LocalizedString("filter_title", "");
+            SubTitleLabel.Text = NSBundle.MainBundle.LocalizedString("filter_subtitle", "");
+            SchoolSectionLabel.Text = NSBundle.MainBundle.LocalizedString("filter_school_section_title", "");
+            SchoolClassSectionLabel.Text = NSBundle.MainBundle.LocalizedString("filter_school_class_section_title", "");
         }
 
         public override void ViewWillAppear(bool animated)

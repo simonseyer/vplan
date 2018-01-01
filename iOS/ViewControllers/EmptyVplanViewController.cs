@@ -1,5 +1,5 @@
 ﻿using System;
-
+using Foundation;
 using UIKit;
 
 namespace FLSVertretungsplan.iOS
@@ -42,6 +42,9 @@ namespace FLSVertretungsplan.iOS
             RefreshControl = new UIRefreshControl();
             RefreshControl.ValueChanged += RefreshControl_ValueChanged;
             ScrollView.AddSubview(RefreshControl);
+
+            TitleLabel.Text = NSBundle.MainBundle.LocalizedString("empty_vplan_title", "");
+            SubTitleLabel.Text = NSBundle.MainBundle.LocalizedString("empty_vplan_subtitle", "");
         }
 
         void RefreshControl_ValueChanged(object sender, EventArgs e)

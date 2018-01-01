@@ -55,8 +55,6 @@ namespace FLSVertretungsplan.iOS
                 };
             }
 
-
-
             _ = RequestNotifications();
             var dataStore = ServiceLocator.Instance.Get<IVplanDataStore>();
             Task.Run(() =>
@@ -137,15 +135,31 @@ namespace FLSVertretungsplan.iOS
             {
                 var content = new UNMutableNotificationContent
                 {
-                    Title = "Neuer Vertretungsplan verfügbar"
+                    Title = NSBundle.MainBundle.LocalizedString("new_plan_title", "")
                 };
                 if (diff.NewBookmarkedChanges.Any())
                 {
-                    content.Body = diff.NewBookmarkedChanges.Count() + " neue Einträge";
+                    if (diff.NewBookmarkedChanges.Count() == 1)
+                    {
+                        content.Body = NSBundle.MainBundle.LocalizedString("new_changes_singular", "");
+                    }
+                    else
+                    {
+                        var text = NSBundle.MainBundle.LocalizedString("new_changes_plural", "");
+                        content.Body = NSString.LocalizedFormat(text, diff.NewBookmarkedChanges.Count());
+                    }
                 }
                 else
                 {
-                    content.Body = diff.NewNewSchoolClassBookmarks.Count() + " neue Klassen";
+                    if (diff.NewBookmarkedChanges.Count() == 1)
+                    {
+                        content.Body = NSBundle.MainBundle.LocalizedString("new_school_classes_singular", "");
+                    }
+                    else
+                    {
+                        var text = NSBundle.MainBundle.LocalizedString("new_school_classes_plural", "");
+                        content.Body = NSString.LocalizedFormat(text, diff.NewNewSchoolClassBookmarks.Count());
+                    }
                 }
 
                 var request = UNNotificationRequest.FromIdentifier(dataStore.Vplan.Value.LastUpdate.ToString(), content, null);

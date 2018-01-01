@@ -41,7 +41,7 @@ namespace FLSVertretungsplan
 
         internal ChangePresentationModel(Change model)
         {
-            ClassName = "" + model.SchoolClass.Name;
+            ClassName = model.SchoolClass.Name;
             Hours = model.Hours;
             FillColor = ChipPresentationModel.GetFillColor(model.SchoolClass.School);
 
@@ -60,9 +60,13 @@ namespace FLSVertretungsplan
 
             OldLesson = new Collection<TextComponent> {
                 new TextComponent { PrimaryText = model.OldLesson.Subject.Name ?? model.OldLesson.Subject.Identifier },
-                new TextComponent { SecondaryText = " bei " },
+                new TextComponent { SecondaryText = " " },
+                new TextComponent { SecondaryText = "change_connector_teacher" },
+                new TextComponent { SecondaryText = " " },
                 new TextComponent { PrimaryText = oldTeacherName },
-                new TextComponent { SecondaryText = " in Raum " },
+                new TextComponent { SecondaryText = " " },
+                new TextComponent { SecondaryText = "change_connector_room" },
+                new TextComponent { SecondaryText = " " },
                 new TextComponent { PrimaryText = model.OldLesson.Room },
             };
 
@@ -74,26 +78,27 @@ namespace FLSVertretungsplan
 
             if (teacherChanged)
             {
-                Type = "Vertretung";
+                Type = "change_type_teacher";
             }
             else if (subjectChanged)
             {
-                Type = "Fachänderung";    
+                Type = "change_type_subject";    
             }
             else if (roomChanged)
             {
-                Type = "Raumänderung";
+                Type = "change_type_room";
             }
             else
             {
-                Type = "Entfall";
+                Type = "change_type_cancelled";
             }
 
             if (subjectChanged)
             {
                 var text = model.NewLesson.Subject.Name ?? model.NewLesson.Subject.Identifier;
                 Description.Add(new TextComponent { IconIdentifier = TextComponent.Icon.Subject });
-                Description.Add(new TextComponent { SecondaryText = "Fach " });
+                Description.Add(new TextComponent { SecondaryText = "change_prefix_subject" });
+                Description.Add(new TextComponent { SecondaryText = " " });
                 Description.Add(new TextComponent { PrimaryText = text });
                 Description.Add(new TextComponent { SecondaryText = "\n" });
             }
@@ -121,7 +126,8 @@ namespace FLSVertretungsplan
             if (roomChanged)
             {
                 Description.Add(new TextComponent { IconIdentifier = TextComponent.Icon.Location });
-                Description.Add(new TextComponent { SecondaryText = "Raum " });
+                Description.Add(new TextComponent { SecondaryText = "change_prefix_room" });
+                Description.Add(new TextComponent { SecondaryText = " " });
                 Description.Add(new TextComponent { PrimaryText = model.NewLesson.Room });
                 Description.Add(new TextComponent { SecondaryText = "\n" });
             }
@@ -211,7 +217,7 @@ namespace FLSVertretungsplan
 
             var dates = new List<DatePresentationModel>();
             var datesDict = new Dictionary<string, DatePresentationModel>();
-            var lastUpdate = "Letzte Aktualisierung " + vplan.LastUpdate.ToString("dd.MM.yy hh:mm") + " h";
+            var lastUpdate = vplan.LastUpdate.ToString("dd.MM.yy hh:mm");
             foreach (var item in vplan.Changes)
             {
                 var date = item.Day.ToString("dd.MM.yy");

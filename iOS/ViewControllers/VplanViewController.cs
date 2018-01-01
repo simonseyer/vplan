@@ -56,8 +56,6 @@ namespace FLSVertretungsplan.iOS
             TableView.Layer.BorderWidth = 0.5F;
             TableView.Layer.BorderColor = UIColor.FromRGB(236, 237, 241).CGColor;
             TableView.ContentInset = new UIEdgeInsets(14, 0, 14, 0);
-
-            //LastUpdateLabel.Text = ViewModel.LastUpdate.Value;
         }
 
         public override void ViewDidAppear(bool animated)
@@ -91,7 +89,8 @@ namespace FLSVertretungsplan.iOS
             {
                 DataSource.Items = PresentationModel?.Items;
                 TableView.ReloadData();
-                LastUpdateLabel.Text = PresentationModel?.LastUpdate;
+                var lastUpdateText = NSBundle.MainBundle.LocalizedString("vplan_last_update", ""); 
+                LastUpdateLabel.Text = NSString.LocalizedFormat(lastUpdateText, PresentationModel?.LastUpdate);
             });
         }
     }
@@ -120,7 +119,7 @@ namespace FLSVertretungsplan.iOS
 
             cell.ClassNameLabel.Text = change.ClassName;
             cell.HoursLabel.Text = change.Hours;
-            cell.ChangeTypeLabel.Text = change.Type;
+            cell.ChangeTypeLabel.Text = NSBundle.MainBundle.LocalizedString(change.Type, "");
             cell.SchoolView.Gradient = change.FillColor;
 
             var primaryTextColor = UIColor.FromRGB(23, 43, 76);
@@ -136,11 +135,13 @@ namespace FLSVertretungsplan.iOS
             {
                 if (component.PrimaryText != null)
                 {
-                    originalLessonText.Append(new NSAttributedString(component.PrimaryText, foregroundColor: primaryTextColor, font: font));
+                    var translatedText = NSBundle.MainBundle.LocalizedString(component.PrimaryText, "");
+                    originalLessonText.Append(new NSAttributedString(translatedText, foregroundColor: primaryTextColor, font: font));
                 }
                 else if (component.SecondaryText != null)
                 {
-                    originalLessonText.Append(new NSAttributedString(component.SecondaryText, foregroundColor: secondaryTextColor, font: font));
+                    var translatedText = NSBundle.MainBundle.LocalizedString(component.SecondaryText, "");
+                    originalLessonText.Append(new NSAttributedString(translatedText, foregroundColor: secondaryTextColor, font: font));
                 }
             }
             cell.OriginalLessonLabel.AttributedText = originalLessonText;
@@ -150,11 +151,13 @@ namespace FLSVertretungsplan.iOS
             {
                 if (component.PrimaryText != null)
                 {
-                    descriptionText.Append(new NSAttributedString(component.PrimaryText, foregroundColor: secondaryTextColor, font: font));
+                    var translatedText = NSBundle.MainBundle.LocalizedString(component.PrimaryText, "");
+                    descriptionText.Append(new NSAttributedString(translatedText, foregroundColor: secondaryTextColor, font: font));
                 }
                 else if (component.SecondaryText != null)
                 {
-                    descriptionText.Append(new NSAttributedString(component.SecondaryText, foregroundColor: secondaryTextColor, font: font));
+                    var translatedText = NSBundle.MainBundle.LocalizedString(component.SecondaryText, "");
+                    descriptionText.Append(new NSAttributedString(translatedText, foregroundColor: secondaryTextColor, font: font));
                 }
                 else if (component.IconIdentifier != TextComponent.Icon.None)
                 {
