@@ -14,8 +14,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)Models\Vplan.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\VplanViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)App.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Services\IVplanDataStore.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Services\CloudVplanDataStore.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\Property.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\SettingsViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\SchoolClass.cs" />
@@ -28,8 +26,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)Models\Change.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\VplanDiff.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\ChipViewModel.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Services\ISettingsDataStore.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Services\StandardSettingsDataStore.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\NewSchoolClassesViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Plugins\Loader\CloudVplanLoader.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Plugins\Loader\IVplanLoader.cs" />
@@ -37,10 +33,16 @@
     <Compile Include="$(MSBuildThisFileDirectory)Plugins\Persistence\IVplanPersistence.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Plugins\Persistence\JsonVplanPersistence.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Plugins\Persistence\MockVplanPersistence.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\VplanDataStore\CloudVplanDataStore.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\VplanDataStore\IVplanDataStore.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\SettingsDataStore\ISettingsDataStore.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\SettingsDataStore\StandardSettingsDataStore.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Plugins\" />
     <Folder Include="$(MSBuildThisFileDirectory)Plugins\Loader\" />
     <Folder Include="$(MSBuildThisFileDirectory)Plugins\Persistence\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Services\VplanDataStore\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Services\SettingsDataStore\" />
   </ItemGroup>
 </Project>
