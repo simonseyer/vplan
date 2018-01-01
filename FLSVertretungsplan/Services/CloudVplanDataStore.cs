@@ -248,6 +248,11 @@ namespace FLSVertretungsplan
 
         void UpdateBookmarkedVplan()
         {
+            if (Vplan.Value == null)
+            {
+                return;
+            }
+
             List<Change> bookmarkedChanges = new List<Change>();
             foreach (Change change in Vplan.Value.Changes)
             {
