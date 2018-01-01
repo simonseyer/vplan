@@ -6,13 +6,14 @@ namespace FLSVertretungsplan
     public class SchoolClass : IComparable
     {
 
-        public string Name { get; private set; }
         public string School { get; private set; }
+        public string Name { get; private set; }
 
-        public SchoolClass(string name, string school)
+
+        public SchoolClass(string school, string name)
         {
-            Name = name;
             School = school;
+            Name = name;
         }
 
         public int CompareTo(object obj)

@@ -87,8 +87,8 @@ namespace FLSVertretungsplan
             var day = DateTimeOffset.FromUnixTimeSeconds(Convert.ToInt64(stringDay) + TimeZoneOffset).DateTime;
             var hours = oldNode.ChildText("hours");
 
-            var schoolClass = new SchoolClass(classNode.Attributes["name"]?.Value,
-                                              schoolNode.Attributes["name"]?.Value);
+            var schoolClass = new SchoolClass(schoolNode.Attributes["name"]?.Value,
+                                              classNode.Attributes["name"]?.Value);
 
             var oldLesson = new Lesson(new Subject(oldSubjectNode?.ChildText("shortcut"),
                                                    oldSubjectNode?.ChildText("name")),

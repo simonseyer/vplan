@@ -46,51 +46,13 @@ namespace FLSVertretungsplan
             {
                 Value = null
             };
-            SchoolBookmarks = new ObservableCollection<SchoolBookmark>() 
-            {
-                new SchoolBookmark("BG", false),
-                new SchoolBookmark("BS", false),
-                new SchoolBookmark("BFS", false),
-                new SchoolBookmark("HBFS", false)
-            };
-            AllSchoolClassBookmarks = new HashSet<SchoolClassBookmark>
-            {
-                new SchoolClassBookmark(new SchoolClass("1181", "BFS"), false, false),
-                new SchoolClassBookmark(new SchoolClass("11 REFILAS", "BG"), false, false),
-                new SchoolClassBookmark(new SchoolClass("11/1 W", "BG"), false, false),
-                new SchoolClassBookmark(new SchoolClass("11/2 W", "BG"), false, false),
-                new SchoolClassBookmark(new SchoolClass("11/3 W", "BG"), false, false),
-                new SchoolClassBookmark(new SchoolClass("11/6 DV", "BG"), false, false),
-                new SchoolClassBookmark(new SchoolClass("12", "BG"), false, false),
-                new SchoolClassBookmark(new SchoolClass("13", "BG"), false, false),
-                new SchoolClassBookmark(new SchoolClass("1051", "BS"), false, false),
-                new SchoolClassBookmark(new SchoolClass("1061", "BS"), false, false),
-                new SchoolClassBookmark(new SchoolClass("1071", "BS"), false, false),
-                new SchoolClassBookmark(new SchoolClass("1151", "BS"), false, false),
-                new SchoolClassBookmark(new SchoolClass("1222", "BS"), false, false),
-                new SchoolClassBookmark(new SchoolClass("1251", "BS"), false, false),
-                new SchoolClassBookmark(new SchoolClass("InteA 3", "BS"), false, false),
-                new SchoolClassBookmark(new SchoolClass("1191", "HBFS"), false, false),
-                new SchoolClassBookmark(new SchoolClass("1291", "HBFS"), false, false),
-                new SchoolClassBookmark(new SchoolClass("1082", "BFS"), false, false),
-                new SchoolClassBookmark(new SchoolClass("11/8 CT", "BG"), false, false),
-                new SchoolClassBookmark(new SchoolClass("1031", "BS"), false, false),
-                new SchoolClassBookmark(new SchoolClass("1035", "BS"), false, false),
-                new SchoolClassBookmark(new SchoolClass("1037", "BS"), false, false),
-                new SchoolClassBookmark(new SchoolClass("1162", "BS"), false, false),
-                new SchoolClassBookmark(new SchoolClass("1225", "BS"), false, false),
-                new SchoolClassBookmark(new SchoolClass("1193", "HBFS"), false, false),
-                new SchoolClassBookmark(new SchoolClass("11/7 DV", "BG"), false, false),
-                new SchoolClassBookmark(new SchoolClass("1021", "BS"), false, false),
-                new SchoolClassBookmark(new SchoolClass("1038", "BS"), false, false),
-                new SchoolClassBookmark(new SchoolClass("1137", "BS"), false, false),
-                new SchoolClassBookmark(new SchoolClass("1141", "BS"), false, false),
-                new SchoolClassBookmark(new SchoolClass("1163", "BS"), false, false),
-                new SchoolClassBookmark(new SchoolClass("1171", "BS"), false, false),
-                new SchoolClassBookmark(new SchoolClass("1245", "BS"), false, false),
-                new SchoolClassBookmark(new SchoolClass("1271", "BS"), false, false),
-                new SchoolClassBookmark(new SchoolClass("11/5 W/Bili", "BG"), false, false)
-            };
+
+            SchoolBookmarks = new ObservableCollection<SchoolBookmark>(
+                DefaultData.Schools.Select(school => new SchoolBookmark(school, false))
+            );
+            AllSchoolClassBookmarks = new HashSet<SchoolClassBookmark>(
+                DefaultData.SchoolClasses.Select(schoolClass => new SchoolClassBookmark(schoolClass, false, false))
+            );
             SchoolClassBookmarks = new ObservableCollection<SchoolClassBookmark>();
             NewSchoolClassBookmarks = new ObservableCollection<SchoolClassBookmark>();
         }
@@ -140,7 +102,7 @@ namespace FLSVertretungsplan
             var schoolClassBookmarks = await Persistence.LoadSchoolClassBookmarks();
             foreach (var bookmark in schoolClassBookmarks)
             {
-                Debug.Print(string.Format("new SchoolClassBookmark(new SchoolClass(\"{0}\", \"{1}\"), false, false),", bookmark.SchoolClass.Name, bookmark.SchoolClass.School));
+                Debug.Print(string.Format("new SchoolClass(\"{0}\", \"{1}\"),", bookmark.SchoolClass.School, bookmark.SchoolClass.Name));
                 UpdateSchoolClassBookmark(bookmark);
             }
 

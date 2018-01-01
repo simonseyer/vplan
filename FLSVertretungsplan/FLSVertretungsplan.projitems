@@ -37,6 +37,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Services\VplanDataStore\IVplanDataStore.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\SettingsDataStore\ISettingsDataStore.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\SettingsDataStore\StandardSettingsDataStore.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\VplanDataStore\DefaultData.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Plugins\" />
