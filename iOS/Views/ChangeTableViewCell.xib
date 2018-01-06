@@ -22,7 +22,7 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="320-aJ-77y">
                         <rect key="frame" x="8" y="4" width="304" height="140.5"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ocy-cp-3Bd" customClass="GradientView">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ocy-cp-3Bd" customClass="ChipCell">
                                 <rect key="frame" x="26" y="25" width="20" height="10"/>
                                 <color key="backgroundColor" red="0.75686274509999996" green="0.1271680103" blue="0.1051824593" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>

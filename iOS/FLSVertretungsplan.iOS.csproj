@@ -171,7 +171,6 @@
     <Compile Include="ViewControllers\VplanDayViewController.designer.cs">
       <DependentUpon>VplanDayViewController.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\GradientView.cs" />
     <Compile Include="ViewControllers\EmptyVplanViewController.cs" />
     <Compile Include="ViewControllers\EmptyVplanViewController.designer.cs">
       <DependentUpon>EmptyVplanViewController.cs</DependentUpon>

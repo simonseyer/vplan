@@ -10,7 +10,7 @@ namespace FLSVertretungsplan.iOS
     {
         CAGradientLayer GradientLayer;
 
-        public Gradient gradient;
+        Gradient gradient;
         public Gradient Gradient
         {
             get
@@ -20,16 +20,8 @@ namespace FLSVertretungsplan.iOS
             set
             {
                 gradient = value;
-                if (GradientLayer == null)
-                {
-                    GradientLayer = new CAGradientLayer
-                    {
-                        Locations = new NSNumber[] { 0, 1 },
-                        Frame = Bounds
-                    };
-                    GradientLayer.Transform = CATransform3D.MakeRotation(NMath.PI / 2, 0, 0, 1);
-                    Layer.InsertSublayer(GradientLayer, 0);
-                }
+                CATransaction.Begin();
+                CATransaction.DisableActions = true;
                 if (gradient != null)
                 {
                     GradientLayer.Colors = new CGColor[] { gradient.Start.ToUIColor().CGColor, gradient.End.ToUIColor().CGColor };
@@ -38,6 +30,7 @@ namespace FLSVertretungsplan.iOS
                 {
                     GradientLayer.Colors = new CGColor[] { UIColor.Clear.CGColor, UIColor.Clear.CGColor };
                 }
+                CATransaction.Commit();
             }
         }
 
@@ -46,18 +39,26 @@ namespace FLSVertretungsplan.iOS
             // Note: this .ctor should not contain any initialization logic.
         }
 
+        public override void AwakeFromNib()
+        {
+            base.AwakeFromNib();
+
+            GradientLayer = new CAGradientLayer
+            {
+                Locations = new NSNumber[] { 0, 1 },
+                Transform = CATransform3D.MakeRotation(NMath.PI / 2, 0, 0, 1)
+            };
+            Layer.InsertSublayer(GradientLayer, 0);
+        }
 
         public override void LayoutSubviews()
         {
             base.LayoutSubviews();
 
-            if (GradientLayer != null)
-            {
-                CATransaction.Begin();
-                CATransaction.DisableActions = true;
-                GradientLayer.Frame = Bounds;
-                CATransaction.Commit();
-            }
+            CATransaction.Begin();
+            CATransaction.DisableActions = true;
+            GradientLayer.Frame = Bounds;
+            CATransaction.Commit();
         }
 
     }
