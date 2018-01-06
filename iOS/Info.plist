@@ -37,7 +37,7 @@
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<true/>
 	<key>CFBundleName</key>
-	<string>Vplan</string>
+	<string>FLS Vplan</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>fetch</string>
