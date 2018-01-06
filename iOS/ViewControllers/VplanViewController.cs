@@ -8,7 +8,8 @@ namespace FLSVertretungsplan.iOS
 {
     public partial class VplanViewController : UITableViewController
     {
-        UIRefreshControl refreshControl;
+        UIRefreshControl TableViewRefreshControl;
+        UILongPressGestureRecognizer LongPressGestureRecognizer;
 
         DatePresentationModel _PresentationModel;
         public DatePresentationModel PresentationModel
@@ -42,10 +43,10 @@ namespace FLSVertretungsplan.iOS
         {
             base.ViewDidLoad();
 
-            refreshControl = new UIRefreshControl();
-            refreshControl.Layer.ZPosition = -1;
-            refreshControl.ValueChanged += RefreshControl_ValueChanged;
-            TableView.RefreshControl = refreshControl;
+            TableViewRefreshControl = new UIRefreshControl();
+            TableViewRefreshControl.Layer.ZPosition = -1;
+            TableViewRefreshControl.ValueChanged += RefreshControl_ValueChanged;
+            TableView.RefreshControl = TableViewRefreshControl;
             TableView.Source = DataSource;
 
             TableView.ClipsToBounds = true;
@@ -55,11 +56,19 @@ namespace FLSVertretungsplan.iOS
             TableView.ContentInset = new UIEdgeInsets(14, 0, 14, 0);
 
             TableView.RegisterNibForCellReuse(ChangeTableViewCell.Nib, ChangeTableViewCell.Key);
+
+            AddLongPressGestureRecognizerIfNeeded();
         }
 
         public override void ViewDidAppear(bool animated)
         {
             base.ViewDidAppear(animated);
+        }
+
+        public override void TraitCollectionDidChange(UITraitCollection previousTraitCollection)
+        {
+            base.TraitCollectionDidChange(previousTraitCollection);
+            AddLongPressGestureRecognizerIfNeeded();
         }
 
         void RefreshControl_ValueChanged(object sender, EventArgs e)
@@ -71,13 +80,13 @@ namespace FLSVertretungsplan.iOS
         {
             InvokeOnMainThread(() =>
             {
-                if (PresentationModel.IsRefreshing.Value && !refreshControl.Refreshing)
+                if (PresentationModel.IsRefreshing.Value && !TableViewRefreshControl.Refreshing)
                 {
-                    refreshControl.BeginRefreshing();
+                    TableViewRefreshControl.BeginRefreshing();
                 }
                 else if (!PresentationModel.IsRefreshing.Value)
                 {
-                    refreshControl.EndRefreshing();
+                    TableViewRefreshControl.EndRefreshing();
                 }
             });
         }
@@ -94,16 +103,78 @@ namespace FLSVertretungsplan.iOS
             });
         }
 
-        bool IsForceTouchAvailbale()
+        void AddLongPressGestureRecognizerIfNeeded()
         {
-            return TraitCollection.ForceTouchCapability == UIForceTouchCapability.Available;
+            if (TraitCollection.ForceTouchCapability == UIForceTouchCapability.Unavailable &&
+                LongPressGestureRecognizer == null)
+            {
+                LongPressGestureRecognizer = new UILongPressGestureRecognizer();
+                LongPressGestureRecognizer.AddTarget(() => this.LongPressPerformed(LongPressGestureRecognizer));
+                TableView.AddGestureRecognizer(LongPressGestureRecognizer);
+            }
+        }
+
+        void LongPressPerformed(UILongPressGestureRecognizer gestureRecognizer)
+        {
+            if (gestureRecognizer.State != UIGestureRecognizerState.Began)
+            {
+                return;
+            }
+
+            var location = gestureRecognizer.LocationInView(TableView);
+            var indexPath = TableView.IndexPathForRowAtPoint(location);
+            if (indexPath != null)
+            {
+                var shareViewController = new ChangeViewController();
+                shareViewController.SetPresentationModel(DataSource.Items[indexPath.Row]);
+                shareViewController.Context = this;
+
+                var alertController = new UIAlertController();
+                alertController.AddAction(UIAlertAction.Create(NSBundle.MainBundle.LocalizedString("share_image", ""), UIAlertActionStyle.Default,(obj) => 
+                {
+                    shareViewController.ShareImage();
+                }));
+                alertController.AddAction(UIAlertAction.Create(NSBundle.MainBundle.LocalizedString("share_text", ""), UIAlertActionStyle.Default, (obj) =>
+                {
+                    shareViewController.ShareText();
+                }));
+                alertController.AddAction(UIAlertAction.Create(NSBundle.MainBundle.LocalizedString("share_calendar_entry", ""), UIAlertActionStyle.Default, (obj) =>
+                {
+                    shareViewController.ShareCalendarEvent();
+                }));
+                alertController.AddAction(UIAlertAction.Create(NSBundle.MainBundle.LocalizedString("share_done", ""), UIAlertActionStyle.Cancel, (obj) => {}));
+                PresentViewController(alertController, true, null);
+            }
         }
     }
 
-    class ItemsDataSource : UITableViewSource, IUIViewControllerPreviewingDelegate
+    partial class VplanViewController: IUIViewControllerPreviewingDelegate
+    {
+        public UIViewController GetViewControllerForPreview(IUIViewControllerPreviewing previewingContext, CGPoint location)
+        {
+            var cellPosition = TableView.ConvertPointFromView(location, previewingContext.SourceView);
+            var indexPath = TableView.IndexPathForRowAtPoint(cellPosition);
+            if (indexPath != null)
+            {
+                var viewController = new ChangeViewController();
+                viewController.SetPresentationModel(DataSource.Items[indexPath.Row]);
+                viewController.Context = this;
+
+                var tableCell = TableView.CellAt(indexPath);
+                previewingContext.SourceRect = View.ConvertRectFromView(tableCell.ContentView.Frame, TableView);
+
+                return viewController;
+            }
+            return null;
+        }
+
+        public void CommitViewController(IUIViewControllerPreviewing previewingContext, UIViewController viewControllerToCommit) { }
+    }
+
+    class ItemsDataSource : UITableViewSource
     {
         public Collection<ChangePresentationModel> Items;
-        public UITableViewController Context;
+        public VplanViewController Context;
 
         public override nint NumberOfSections(UITableView tableView)
         {
@@ -127,32 +198,12 @@ namespace FLSVertretungsplan.iOS
             cell.OriginalLessonLabel.AttributedText = TextComponentFormatter.AttributedStringForTextComponents(change.OldLesson, true);
             cell.ChangeDescriptionLabel.AttributedText = TextComponentFormatter.AttributedStringForTextComponents(change.Description, false);
 
-            Context.RegisterForPreviewingWithDelegate(this, cell.ContentView);
+            if (Context.TraitCollection.ForceTouchCapability == UIForceTouchCapability.Available)
+            {
+                Context.RegisterForPreviewingWithDelegate(Context, cell.ContentView);
+            }
 
             return cell;
-        }
-
-        public UIViewController GetViewControllerForPreview(IUIViewControllerPreviewing previewingContext, CGPoint location)
-        {
-            var cellPosition = Context.TableView.ConvertPointFromView(location, previewingContext.SourceView);
-            var indexPath = Context.TableView.IndexPathForRowAtPoint(cellPosition);
-            if (indexPath != null)
-            {
-                var viewController = new ChangeViewController();
-                viewController.SetPresentationModel(Items[indexPath.Row]);
-                viewController.Context = Context;
-
-                var tableCell = Context.TableView.CellAt(indexPath);
-                previewingContext.SourceRect = Context.View.ConvertRectFromView(tableCell.ContentView.Frame, Context.TableView);
-
-                return viewController;
-            }
-            return null;
-        }
-
-        public void CommitViewController(IUIViewControllerPreviewing previewingContext, UIViewController viewControllerToCommit)
-        {
-
         }
     }
 }

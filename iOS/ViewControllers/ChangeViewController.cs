@@ -72,7 +72,7 @@ namespace FLSVertretungsplan.iOS
             }
         }
 
-        void ShareImage()
+        public void ShareImage()
         {
             UIGraphics.BeginImageContextWithOptions(View.Bounds.Size, false, UIScreen.MainScreen.Scale);
             ChangeView.DisableRoundedCorners();
@@ -85,14 +85,14 @@ namespace FLSVertretungsplan.iOS
             Context.PresentViewController(activityViewController, true, null);
         }
 
-        void ShareText()
+        public void ShareText()
         {
             var text = TextComponentFormatter.PlainStringForTextComponents(Model.TextRepresentation);
             var activityViewController = new UIActivityViewController(new NSObject[] { new NSString(text) }, null);
             Context.PresentViewController(activityViewController, true, null);
         }
 
-        void ShareCalendarEvent()
+        public void ShareCalendarEvent()
         {
             var store = new EventKit.EKEventStore();
             store.RequestAccess(EventKit.EKEntityType.Event, (bool granted, NSError error) =>
