@@ -18,6 +18,8 @@ namespace FLSVertretungsplan.iOS
     {
         // class-level declarations
 
+        const int REFRESH_ON_APP_START_DELAY = 600;
+
         public override UIWindow Window
         {
             get;
@@ -84,11 +86,14 @@ namespace FLSVertretungsplan.iOS
             }
             InitialRun = false;
 
+            _ = Refresh();
+        }
+
+        async Task Refresh()
+        {
             var dataStore = ServiceLocator.Instance.Get<IVplanDataStore>();
-            Task.Run(() =>
-            {
-                dataStore.Refresh();
-            });
+            await Task.Delay(REFRESH_ON_APP_START_DELAY);
+            await dataStore.Refresh();
         }
 
         public void ActivateNotifications()
