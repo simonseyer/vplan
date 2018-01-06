@@ -1,14 +1,16 @@
 ﻿using System;
 using System.Collections.Specialized;
 using System.Threading.Tasks;
+using Foundation;
 using UIKit;
 
 namespace FLSVertretungsplan.iOS
 {
-    public partial class TabBarController : UITabBarController
+    public partial class TabBarController : UITabBarController, IUITabBarControllerDelegate
     {
 
         NewSchoolClassesViewModel ViewModel;
+        UIViewController LastViewController;
 
         public TabBarController(IntPtr handle) : base(handle)
         {
@@ -27,6 +29,18 @@ namespace FLSVertretungsplan.iOS
             TabBar.TintColor = UIColor.FromRGB(23, 43, 76);
             TabBar.UnselectedItemTintColor = UIColor.FromRGB(164, 174, 186);
             SelectedIndex = 1;
+            LastViewController = SelectedViewController;
+
+            ViewControllerSelected += (sender, e) => {
+                if (LastViewController == e.ViewController)
+                {
+                    if (e.ViewController is IVplanTabContentViewController viewController)
+                    {
+                        viewController.ResetContent();
+                    }
+                }
+                LastViewController = e.ViewController;
+            };
         }
 
         void NewSchoolClasses_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)

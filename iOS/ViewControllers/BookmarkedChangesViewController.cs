@@ -4,8 +4,11 @@ using UIKit;
 
 namespace FLSVertretungsplan.iOS
 {
-    public partial class BookmarkedViewController : UIViewController
+    public partial class BookmarkedViewController : UIViewController, IVplanTabContentViewController
     {
+
+        VplanContainerViewController VplanViewController;
+
         public BookmarkedViewController() : base("BookmarkedViewController", null)
         {
         }
@@ -25,8 +28,13 @@ namespace FLSVertretungsplan.iOS
         {
             base.PrepareForSegue(segue, sender);
 
-            var viewController = segue.DestinationViewController as VplanContainerViewController;
-            viewController.ViewModel = new VplanViewModel(true);
+            VplanViewController = segue.DestinationViewController as VplanContainerViewController;
+            VplanViewController.ViewModel = new VplanViewModel(true);
+        }
+
+        public void ResetContent()
+        {
+            VplanViewController.ResetContent();
         }
     }
 }

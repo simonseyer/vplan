@@ -4,8 +4,10 @@ using UIKit;
 
 namespace FLSVertretungsplan.iOS
 {
-    public partial class AllChangesViewController : UIViewController
+    public partial class AllChangesViewController : UIViewController, IVplanTabContentViewController
     {
+        VplanContainerViewController VplanViewController;
+
         public AllChangesViewController() : base("VplanViewController", null)
         {
         }
@@ -25,8 +27,13 @@ namespace FLSVertretungsplan.iOS
         {
             base.PrepareForSegue(segue, sender);
 
-            var viewController = segue.DestinationViewController as VplanContainerViewController;
-            viewController.ViewModel = new VplanViewModel(false);
+            VplanViewController = segue.DestinationViewController as VplanContainerViewController;
+            VplanViewController.ViewModel = new VplanViewModel(false);
+        }
+
+        public void ResetContent()
+        {
+            VplanViewController.ResetContent();
         }
     }
 }

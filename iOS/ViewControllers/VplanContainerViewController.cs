@@ -6,7 +6,7 @@ using UIKit;
 
 namespace FLSVertretungsplan.iOS
 {
-    public partial class VplanContainerViewController : UIViewController, IUIScrollViewDelegate
+    public partial class VplanContainerViewController : UIViewController, IUIScrollViewDelegate, IVplanTabContentViewController
     {
         public VplanViewModel ViewModel { get; set; }
 
@@ -197,6 +197,12 @@ namespace FLSVertretungsplan.iOS
                 TrailingConstraint = lastViewController.View.TrailingAnchor.ConstraintEqualTo(ScrollView.TrailingAnchor);
                 TrailingConstraint.Active = true;
             }
+        }
+
+        public void ResetContent()
+        {
+            ScrollView.SetContentOffset(CoreGraphics.CGPoint.Empty, true);
+            PageControl.CurrentPage = 0;
         }
     }
 }

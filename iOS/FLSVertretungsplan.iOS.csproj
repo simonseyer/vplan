@@ -193,6 +193,7 @@
     </Compile>
     <Compile Include="Helpers\TextComponentFormatter.cs" />
     <Compile Include="Helpers\DateExtension.cs" />
+    <Compile Include="ViewControllers\IVplanTabContentViewController.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Entitlements.plist" />
