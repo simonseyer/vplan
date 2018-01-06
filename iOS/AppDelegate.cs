@@ -68,11 +68,11 @@ namespace FLSVertretungsplan.iOS
 
             UITabBarItem.Appearance.SetTitleTextAttributes(new UITextAttributes
             {
-                TextColor = UIColor.FromRGB(164, 174, 186),
+                TextColor = Color.IconColor.ToUIColor()
             }, UIControlState.Normal);
             UITabBarItem.Appearance.SetTitleTextAttributes(new UITextAttributes
             {
-                TextColor = UIColor.FromRGB(23, 43, 76),
+                TextColor = Color.SelectedIconColor.ToUIColor()
             }, UIControlState.Selected);
 
             return true;
