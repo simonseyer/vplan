@@ -14,7 +14,7 @@ namespace FLSVertretungsplan.iOS
     // The UIApplicationDelegate for the application. This class is responsible for launching the
     // User Interface of the application, as well as listening (and optionally responding) to application events from iOS.
     [Register("AppDelegate")]
-    public class AppDelegate : UIApplicationDelegate
+    public class AppDelegate : UIApplicationDelegate, INotificationActivationDelegate
     {
         // class-level declarations
 
@@ -42,20 +42,22 @@ namespace FLSVertretungsplan.iOS
             if (settingsDataSore.FirstAppLaunch)
             {
                 settingsDataSore.FirstAppLaunch = false;
+                var setupViewController = storyboard.InstantiateViewController("SetupViewController") as SetupViewController;
+                setupViewController.NotificationActivationDelegate = this;
                 navigationController.ViewControllers = new UIViewController[]
                 {
-                    storyboard.InstantiateViewController("SetupViewController")
+                    setupViewController
                 };
             }
             else
             {
+                _ = RequestNotifications();
                 navigationController.ViewControllers = new UIViewController[]
                 {
                     storyboard.InstantiateViewController("MainViewController")
                 };
             }
 
-            _ = RequestNotifications();
             var dataStore = ServiceLocator.Instance.Get<IVplanDataStore>();
             Task.Run(() =>
             {
@@ -87,6 +89,11 @@ namespace FLSVertretungsplan.iOS
             {
                 dataStore.Refresh();
             });
+        }
+
+        public void ActivateNotifications()
+        {
+            _ = RequestNotifications();
         }
 
         async Task RequestNotifications()
