@@ -140,10 +140,6 @@
     </Compile>
     <Compile Include="AppDelegate.cs" />
     <Compile Include="Main.cs" />
-    <Compile Include="Views\ChangeCell.cs" />
-    <Compile Include="Views\ChangeCell.designer.cs">
-      <DependentUpon>ChangeCell.cs</DependentUpon>
-    </Compile>
     <Compile Include="ViewControllers\SettingsViewController.cs" />
     <Compile Include="ViewControllers\SettingsViewController.designer.cs">
       <DependentUpon>SettingsViewController.cs</DependentUpon>
@@ -188,6 +184,16 @@
     <Compile Include="ViewControllers\SetupViewController.designer.cs">
       <DependentUpon>SetupViewController.cs</DependentUpon>
     </Compile>
+    <Compile Include="ViewControllers\ChangeViewController.cs" />
+    <Compile Include="ViewControllers\ChangeViewController.designer.cs">
+      <DependentUpon>ChangeViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ChangeTableViewCell.cs" />
+    <Compile Include="Views\ChangeTableViewCell.designer.cs">
+      <DependentUpon>ChangeTableViewCell.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Helpers\TextComponentFormatter.cs" />
+    <Compile Include="Helpers\DateExtension.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Entitlements.plist" />
@@ -197,6 +203,7 @@
   <ItemGroup>
     <InterfaceDefinition Include="LaunchScreen.storyboard" />
     <InterfaceDefinition Include="Main.storyboard" />
+    <InterfaceDefinition Include="Views\ChangeTableViewCell.xib" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\" />
@@ -249,6 +256,7 @@
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="de.lproj\Localizable.strings" />
+    <BundleResource Include="de.lproj\InfoPlist.strings" />
   </ItemGroup>
   <Import Project="..\FLSVertretungsplan\FLSVertretungsplan.projitems" Label="Shared" Condition="Exists('..\FLSVertretungsplan\FLSVertretungsplan.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />

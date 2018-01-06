@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Specialized;
-
 using Foundation;
 using UIKit;
-using FLSVertretungsplan.iOS.Views;
 using System.Collections.ObjectModel;
+using CoreGraphics;
 
 namespace FLSVertretungsplan.iOS
 {
@@ -44,7 +42,6 @@ namespace FLSVertretungsplan.iOS
         {
             base.ViewDidLoad();
 
-            // Setup UITableView.
             refreshControl = new UIRefreshControl();
             refreshControl.Layer.ZPosition = -1;
             refreshControl.ValueChanged += RefreshControl_ValueChanged;
@@ -56,6 +53,8 @@ namespace FLSVertretungsplan.iOS
             TableView.Layer.BorderWidth = 0.5F;
             TableView.Layer.BorderColor = UIColor.FromRGB(236, 237, 241).CGColor;
             TableView.ContentInset = new UIEdgeInsets(14, 0, 14, 0);
+
+            TableView.RegisterNibForCellReuse(ChangeTableViewCell.Nib, ChangeTableViewCell.Key);
         }
 
         public override void ViewDidAppear(bool animated)
@@ -87,19 +86,24 @@ namespace FLSVertretungsplan.iOS
         {
             InvokeOnMainThread(() =>
             {
+                DataSource.Context = this;
                 DataSource.Items = PresentationModel?.Items;
                 TableView.ReloadData();
                 var lastUpdateText = NSBundle.MainBundle.LocalizedString("vplan_last_update", ""); 
                 LastUpdateLabel.Text = NSString.LocalizedFormat(lastUpdateText, PresentationModel?.LastUpdate);
             });
         }
+
+        bool IsForceTouchAvailbale()
+        {
+            return TraitCollection.ForceTouchCapability == UIForceTouchCapability.Available;
+        }
     }
 
-    class ItemsDataSource : UITableViewSource
+    class ItemsDataSource : UITableViewSource, IUIViewControllerPreviewingDelegate
     {
-        static readonly NSString CELL_IDENTIFIER = new NSString("CHANGE_CELL");
-
         public Collection<ChangePresentationModel> Items;
+        public UITableViewController Context;
 
         public override nint NumberOfSections(UITableView tableView)
         {
@@ -113,100 +117,42 @@ namespace FLSVertretungsplan.iOS
 
         public override UITableViewCell GetCell(UITableView tableView, NSIndexPath indexPath)
         {
-            ChangeCell cell = (ChangeCell)tableView.DequeueReusableCell(CELL_IDENTIFIER, indexPath);
-
+            ChangeTableViewCell cell = (ChangeTableViewCell)tableView.DequeueReusableCell(ChangeTableViewCell.Key, indexPath);
             var change = Items[indexPath.Row];
 
-            cell.ClassNameLabel.Text = change.ClassName;
+            cell.SchoolClassLabel.Text = change.ClassName;
             cell.HoursLabel.Text = change.Hours;
-            cell.ChangeTypeLabel.Text = NSBundle.MainBundle.LocalizedString(change.Type, "");
-            cell.SchoolView.Gradient = change.FillColor;
+            cell.ChangeLabel.Text = NSBundle.MainBundle.LocalizedString(change.Type, "");
+            cell.SchoolGradientView.Gradient = change.FillColor;
+            cell.OriginalLessonLabel.AttributedText = TextComponentFormatter.AttributedStringForTextComponents(change.OldLesson, true);
+            cell.ChangeDescriptionLabel.AttributedText = TextComponentFormatter.AttributedStringForTextComponents(change.Description, false);
 
-            var primaryTextColor = UIColor.FromRGB(23, 43, 76);
-            var secondaryTextColor = UIColor.FromRGB(164, 174, 186);
-            var font = UIFont.SystemFontOfSize(15);
-            var paragraphStyle = new NSMutableParagraphStyle
-            {
-                ParagraphSpacing = 0.25F * font.LineHeight
-            };
-
-            var originalLessonText = new NSMutableAttributedString();
-            foreach (var component in change.OldLesson)
-            {
-                if (component.PrimaryText != null)
-                {
-                    var translatedText = NSBundle.MainBundle.LocalizedString(component.PrimaryText, "");
-                    originalLessonText.Append(new NSAttributedString(translatedText, foregroundColor: primaryTextColor, font: font));
-                }
-                else if (component.SecondaryText != null)
-                {
-                    var translatedText = NSBundle.MainBundle.LocalizedString(component.SecondaryText, "");
-                    originalLessonText.Append(new NSAttributedString(translatedText, foregroundColor: secondaryTextColor, font: font));
-                }
-            }
-            cell.OriginalLessonLabel.AttributedText = originalLessonText;
-
-            var descriptionText = new NSMutableAttributedString();
-            foreach (var component in change.Description)
-            {
-                if (component.PrimaryText != null)
-                {
-                    var translatedText = NSBundle.MainBundle.LocalizedString(component.PrimaryText, "");
-                    descriptionText.Append(new NSAttributedString(translatedText, foregroundColor: secondaryTextColor, font: font));
-                }
-                else if (component.SecondaryText != null)
-                {
-                    var translatedText = NSBundle.MainBundle.LocalizedString(component.SecondaryText, "");
-                    descriptionText.Append(new NSAttributedString(translatedText, foregroundColor: secondaryTextColor, font: font));
-                }
-                else if (component.IconIdentifier != TextComponent.Icon.None)
-                {
-                    string icon = "info";
-                    switch (component.IconIdentifier)
-                    {
-                        case TextComponent.Icon.Info:
-                            icon = "info";
-                            break;
-                        case TextComponent.Icon.Location:
-                            icon = "location";
-                            break;
-                        case TextComponent.Icon.Person:
-                            icon = "person";
-                            break;
-                        case TextComponent.Icon.Subject:
-                            icon = "book";
-                            break;
-                    }
-
-                    var iconImage = UIImage.FromBundle(icon);
-                    var iconAttachment = new NSTextAttachment
-                    {
-                        Image = iconImage,
-                        Bounds = new CoreGraphics.CGRect(new CoreGraphics.CGPoint(0, font.Descender), iconImage.Size)
-                    };
-
-                    descriptionText.Append(NSAttributedString.FromAttachment(iconAttachment));
-                    descriptionText.Append(new NSAttributedString(" ", font: font));
-                }
-            }
-            descriptionText.AddAttributes(new UIStringAttributes { ParagraphStyle = paragraphStyle }, 
-                                          new NSRange(0, descriptionText.Length - 1));
-            cell.ChangeDescriptionLabel.AttributedText = descriptionText;
-
-
-            cell.SchoolView.Layer.CornerRadius = 5;
-            cell.SchoolView.ClipsToBounds = true;
-
-            //cell.ContentBackgroundView.ClipsToBounds = true;
-            cell.ContentBackgroundView.Layer.CornerRadius = 8;
-            cell.ContentBackgroundView.Layer.BorderWidth = 1;
-            cell.ContentBackgroundView.Layer.BorderColor = UIColor.FromRGB(227, 228, 232).CGColor;
-            cell.ContentBackgroundView.Layer.ShadowColor = UIColor.Black.CGColor;
-            cell.ContentBackgroundView.Layer.ShadowOffset = new CoreGraphics.CGSize(0, 2);
-            cell.ContentBackgroundView.Layer.ShadowRadius = 3;
-            cell.ContentBackgroundView.Layer.ShadowOpacity = 0.06F;
+            Context.RegisterForPreviewingWithDelegate(this, cell.ContentView);
 
             return cell;
+        }
+
+        public UIViewController GetViewControllerForPreview(IUIViewControllerPreviewing previewingContext, CGPoint location)
+        {
+            var cellPosition = Context.TableView.ConvertPointFromView(location, previewingContext.SourceView);
+            var indexPath = Context.TableView.IndexPathForRowAtPoint(cellPosition);
+            if (indexPath != null)
+            {
+                var viewController = new ChangeViewController();
+                viewController.SetPresentationModel(Items[indexPath.Row]);
+                viewController.Context = Context;
+
+                var tableCell = Context.TableView.CellAt(indexPath);
+                previewingContext.SourceRect = Context.View.ConvertRectFromView(tableCell.ContentView.Frame, Context.TableView);
+
+                return viewController;
+            }
+            return null;
+        }
+
+        public void CommitViewController(IUIViewControllerPreviewing previewingContext, UIViewController viewControllerToCommit)
+        {
+
         }
     }
 }

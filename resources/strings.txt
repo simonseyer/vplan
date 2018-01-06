@@ -67,3 +67,13 @@
 		de = Fach
 	[change_prefix_room]
 		de = Raum
+	[change_suffix_time]
+		de = Stunde
+
+[[share]]
+	[share_image]
+		de = Als Bild teilen
+	[share_text]
+		de = Als Text teilen
+	[share_calendar_entry]
+		de = Kalendereintrag erstellen

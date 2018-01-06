@@ -7,21 +7,15 @@
 using Foundation;
 using System;
 using System.CodeDom.Compiler;
+using UIKit;
 
 namespace FLSVertretungsplan.iOS
 {
-    [Register ("SetupViewController")]
-    partial class SetupViewController
+    [Register ("ChangeViewController")]
+    partial class ChangeViewController
     {
-        [Outlet]
-        UIKit.UILabel StartButtonLabel { get; set; }
-
         void ReleaseDesignerOutlets ()
         {
-            if (StartButtonLabel != null) {
-                StartButtonLabel.Dispose ();
-                StartButtonLabel = null;
-            }
         }
     }
 }

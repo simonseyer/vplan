@@ -6,7 +6,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
-        <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -124,95 +123,6 @@
                                 <constraint firstItem="5tA-ba-1OW" firstAttribute="top" secondItem="eSo-Ew-K6D" secondAttribute="top" id="e4u-fW-Pbt"/>
                             </constraints>
                         </view>
-                        <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="CHANGE_CELL" rowHeight="180" id="79" customClass="ChangeCell">
-                                <rect key="frame" x="0.0" y="40" width="375" height="180"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="79" id="80">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="180"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SKb-ax-Kr8">
-                                            <rect key="frame" x="8" y="4" width="359" height="171.5"/>
-                                            <subviews>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kgB-4X-pwj" customClass="GradientView">
-                                                    <rect key="frame" x="26" y="25" width="20" height="10"/>
-                                                    <color key="backgroundColor" red="0.75686274509999996" green="0.1271680103" blue="0.1051824593" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="10" id="EFo-HW-9yY"/>
-                                                        <constraint firstAttribute="width" constant="20" id="Vjj-a5-gI0"/>
-                                                    </constraints>
-                                                </view>
-                                            </subviews>
-                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                            <constraints>
-                                                <constraint firstItem="kgB-4X-pwj" firstAttribute="leading" secondItem="SKb-ax-Kr8" secondAttribute="leading" constant="26" id="sxU-hQ-7uo"/>
-                                            </constraints>
-                                        </view>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="11/5 W/Bili" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eeF-4e-7qW">
-                                            <rect key="frame" x="60" y="24" width="78" height="19.5"/>
-                                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
-                                            <color key="textColor" red="0.090196078431372548" green="0.16862745098039217" blue="0.29803921568627451" alpha="1" colorSpace="calibratedRGB"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Vertretung" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wea-dV-hyP">
-                                            <rect key="frame" x="34" y="79.5" width="82" height="19.5"/>
-                                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
-                                            <color key="textColor" red="0.090196078431372548" green="0.16862745098039217" blue="0.29803921568627451" alpha="1" colorSpace="calibratedRGB"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" text="11.-12. h" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ugc-2u-PzC">
-                                            <rect key="frame" x="289" y="24" width="60" height="19.5"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                            <color key="textColor" red="0.090196078431372548" green="0.16862745098039217" blue="0.29803921568627451" alpha="1" colorSpace="calibratedRGB"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Deutsch bei M. Schatz (Raum C05)" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nek-ic-MTj">
-                                            <rect key="frame" x="34" y="50" width="255" height="19.5"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                            <color key="textColor" red="0.090196078431372548" green="0.16862745098039217" blue="0.29803921568627451" alpha="1" colorSpace="calibratedRGB"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Durch S. Max" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CYA-M0-lSH">
-                                            <rect key="frame" x="34" y="105.5" width="97" height="19"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                            <color key="textColor" red="0.64313725489999995" green="0.68235294120000001" blue="0.72941176470000002" alpha="1" colorSpace="calibratedRGB"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                    </subviews>
-                                    <constraints>
-                                        <constraint firstItem="nek-ic-MTj" firstAttribute="leading" secondItem="kgB-4X-pwj" secondAttribute="leading" id="2uR-tY-Nnq"/>
-                                        <constraint firstItem="SKb-ax-Kr8" firstAttribute="leading" secondItem="80" secondAttribute="leading" constant="8" id="4uI-l8-XUf"/>
-                                        <constraint firstItem="ugc-2u-PzC" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="nek-ic-MTj" secondAttribute="trailing" id="BDV-ti-ofk"/>
-                                        <constraint firstItem="CYA-M0-lSH" firstAttribute="trailing" relation="lessThanOrEqual" secondItem="SKb-ax-Kr8" secondAttribute="trailing" constant="-18" id="BGw-OF-yWZ"/>
-                                        <constraint firstItem="SKb-ax-Kr8" firstAttribute="top" secondItem="80" secondAttribute="top" constant="4" id="GQf-gO-B0O"/>
-                                        <constraint firstItem="ugc-2u-PzC" firstAttribute="baseline" secondItem="eeF-4e-7qW" secondAttribute="baseline" id="H6l-zY-tTX"/>
-                                        <constraint firstItem="Wea-dV-hyP" firstAttribute="leading" secondItem="nek-ic-MTj" secondAttribute="leading" id="Mfv-4o-TrK"/>
-                                        <constraint firstItem="CYA-M0-lSH" firstAttribute="firstBaseline" secondItem="Wea-dV-hyP" secondAttribute="baseline" constant="26" id="O31-29-qdc"/>
-                                        <constraint firstItem="CYA-M0-lSH" firstAttribute="leading" secondItem="Wea-dV-hyP" secondAttribute="leading" id="PDg-Bp-0ZH"/>
-                                        <constraint firstItem="Wea-dV-hyP" firstAttribute="top" secondItem="nek-ic-MTj" secondAttribute="bottom" constant="10" id="PzA-dS-K6g"/>
-                                        <constraint firstItem="eeF-4e-7qW" firstAttribute="top" secondItem="SKb-ax-Kr8" secondAttribute="top" constant="20" id="Qy0-6M-P2J"/>
-                                        <constraint firstItem="kgB-4X-pwj" firstAttribute="centerY" secondItem="eeF-4e-7qW" secondAttribute="centerY" id="RLP-0s-tYD"/>
-                                        <constraint firstItem="eeF-4e-7qW" firstAttribute="leading" secondItem="kgB-4X-pwj" secondAttribute="trailing" constant="6" id="Suu-bw-CMK"/>
-                                        <constraint firstItem="ugc-2u-PzC" firstAttribute="trailing" secondItem="SKb-ax-Kr8" secondAttribute="trailing" constant="-18" id="YCo-kb-ckb"/>
-                                        <constraint firstAttribute="bottom" secondItem="SKb-ax-Kr8" secondAttribute="bottom" constant="4" id="b0q-jM-4k2"/>
-                                        <constraint firstItem="CYA-M0-lSH" firstAttribute="bottom" relation="lessThanOrEqual" secondItem="SKb-ax-Kr8" secondAttribute="bottom" constant="-20" id="icK-D2-y6f"/>
-                                        <constraint firstAttribute="trailing" secondItem="SKb-ax-Kr8" secondAttribute="trailing" constant="8" id="lkb-dY-wJw"/>
-                                        <constraint firstItem="nek-ic-MTj" firstAttribute="firstBaseline" secondItem="eeF-4e-7qW" secondAttribute="baseline" constant="26" id="pWy-fi-80N"/>
-                                    </constraints>
-                                </tableViewCellContentView>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <connections>
-                                    <outlet property="ChangeDescriptionLabel" destination="CYA-M0-lSH" id="oZb-jr-UGd"/>
-                                    <outlet property="ChangeTypeLabel" destination="Wea-dV-hyP" id="cEe-ll-YM6"/>
-                                    <outlet property="ClassNameLabel" destination="eeF-4e-7qW" id="7sa-rX-9oK"/>
-                                    <outlet property="ContentBackgroundView" destination="SKb-ax-Kr8" id="W0a-S7-KKj"/>
-                                    <outlet property="HoursLabel" destination="ugc-2u-PzC" id="3lb-cp-yU4"/>
-                                    <outlet property="OriginalLessonLabel" destination="nek-ic-MTj" id="d89-eC-ufe"/>
-                                    <outlet property="SchoolView" destination="kgB-4X-pwj" id="Cp9-9W-isc"/>
-                                </connections>
-                            </tableViewCell>
-                        </prototypes>
                         <connections>
                             <outlet property="dataSource" destination="75" id="77"/>
                             <outlet property="delegate" destination="75" id="78"/>

@@ -32,18 +32,27 @@ namespace FLSVertretungsplan
 
     public class ChangePresentationModel {
 
-        public string ClassName { get; set; }
-        public string Hours { get; set; }
-        public Collection<TextComponent> OldLesson { get; set; }
-        public string Type { get; set; }
-        public Collection<TextComponent> Description { get; set; }
-        public Gradient FillColor { get; set; }
+        public string ClassName { get; private set; }
+        public string Day { get; private set; }
+        public DateTime Date { get; private set; }
+        public string Hours { get; private set; }
+        public ReadOnlyCollection<TextComponent> OldLesson { get; private set; }
+        public string Type { get; private set; }
+        public ReadOnlyCollection<TextComponent> Description { get; private set; }
+        public Gradient FillColor { get; private set; }
+        public ReadOnlyCollection<TextComponent> TextRepresentation { get; private set; }
+        public ReadOnlyCollection<TextComponent> EventTitle { get; private set; }
+        public ReadOnlyCollection<TextComponent> EventText { get; private set; }
 
         internal ChangePresentationModel(Change model)
         {
             ClassName = model.SchoolClass.Name;
+            Day = model.Day.ToString("ddd d.M.");
+            Date = model.Day;
             Hours = model.Hours;
             FillColor = ChipPresentationModel.GetFillColor(model.SchoolClass.School);
+
+
 
             string oldTeacherName;
             if (model.OldLesson.Teacher.FirstName != null && 
@@ -58,7 +67,7 @@ namespace FLSVertretungsplan
                 oldTeacherName = model.OldLesson.Teacher.Identifier;
             }
 
-            OldLesson = new Collection<TextComponent> {
+            var oldLesson = new Collection<TextComponent> {
                 new TextComponent { PrimaryText = model.OldLesson.Subject.Name ?? model.OldLesson.Subject.Identifier },
                 new TextComponent { SecondaryText = " " },
                 new TextComponent { SecondaryText = "change_connector_teacher" },
@@ -69,8 +78,9 @@ namespace FLSVertretungsplan
                 new TextComponent { SecondaryText = " " },
                 new TextComponent { PrimaryText = model.OldLesson.Room },
             };
+            OldLesson = new ReadOnlyCollection<TextComponent>(oldLesson);
 
-            Description = new Collection<TextComponent>();
+            var description = new Collection<TextComponent>();
 
             var subjectChanged = model.NewLesson.Subject != null && model.NewLesson.Subject.Identifier != model.OldLesson.Subject.Identifier;
             var teacherChanged = model.NewLesson.Teacher != null && model.NewLesson.Teacher.Identifier != model.OldLesson.Teacher.Identifier;
@@ -96,11 +106,11 @@ namespace FLSVertretungsplan
             if (subjectChanged)
             {
                 var text = model.NewLesson.Subject.Name ?? model.NewLesson.Subject.Identifier;
-                Description.Add(new TextComponent { IconIdentifier = TextComponent.Icon.Subject });
-                Description.Add(new TextComponent { SecondaryText = "change_prefix_subject" });
-                Description.Add(new TextComponent { SecondaryText = " " });
-                Description.Add(new TextComponent { PrimaryText = text });
-                Description.Add(new TextComponent { SecondaryText = "\n" });
+                description.Add(new TextComponent { IconIdentifier = TextComponent.Icon.Subject });
+                description.Add(new TextComponent { SecondaryText = "change_prefix_subject" });
+                description.Add(new TextComponent { SecondaryText = " " });
+                description.Add(new TextComponent { PrimaryText = text });
+                description.Add(new TextComponent { SecondaryText = "\n" });
             }
 
             if (teacherChanged)
@@ -119,39 +129,84 @@ namespace FLSVertretungsplan
                     text = string.Format("{0} ", model.NewLesson.Teacher.Identifier);
                 }
 
-                Description.Add(new TextComponent { IconIdentifier = TextComponent.Icon.Person });
-                Description.Add(new TextComponent { PrimaryText = text});
-                Description.Add(new TextComponent { SecondaryText = "\n" });
+                description.Add(new TextComponent { IconIdentifier = TextComponent.Icon.Person });
+                description.Add(new TextComponent { PrimaryText = text});
+                description.Add(new TextComponent { SecondaryText = "\n" });
             }
             if (roomChanged)
             {
-                Description.Add(new TextComponent { IconIdentifier = TextComponent.Icon.Location });
-                Description.Add(new TextComponent { SecondaryText = "change_prefix_room" });
-                Description.Add(new TextComponent { SecondaryText = " " });
-                Description.Add(new TextComponent { PrimaryText = model.NewLesson.Room });
-                Description.Add(new TextComponent { SecondaryText = "\n" });
+                description.Add(new TextComponent { IconIdentifier = TextComponent.Icon.Location });
+                description.Add(new TextComponent { SecondaryText = "change_prefix_room" });
+                description.Add(new TextComponent { SecondaryText = " " });
+                description.Add(new TextComponent { PrimaryText = model.NewLesson.Room });
+                description.Add(new TextComponent { SecondaryText = "\n" });
             }
             if (model.Info != null || model.Attribute != null)
             {
-                Description.Add(new TextComponent { IconIdentifier = TextComponent.Icon.Info });
+                description.Add(new TextComponent { IconIdentifier = TextComponent.Icon.Info });
                 if (model.Info != null)
                 {
-                    Description.Add(new TextComponent { PrimaryText = model.Info });
+                    description.Add(new TextComponent { PrimaryText = model.Info });
                 }
                 if (model.Info != null && model.Attribute != null)
                 {
-                    Description.Add(new TextComponent { SecondaryText = " - " });
+                    description.Add(new TextComponent { SecondaryText = " - " });
                 }
                 if (model.Attribute != null)
                 {
-                    Description.Add(new TextComponent { PrimaryText =  model.Attribute });
+                    description.Add(new TextComponent { PrimaryText =  model.Attribute });
                 }
             }
             // Trim trailing newline
-            if (Description.Count > 0 && Description[Description.Count - 1].SecondaryText == "\n")
+            if (description.Count > 0 && description[description.Count - 1].SecondaryText == "\n")
             {
-                Description.RemoveAt(Description.Count - 1);
+                description.RemoveAt(description.Count - 1);
             }
+            Description = new ReadOnlyCollection<TextComponent>(description);
+
+            var textRepresentation = new List<TextComponent>
+            {
+                new TextComponent { PrimaryText = model.SchoolClass.School },
+                new TextComponent { SecondaryText = " " },
+                new TextComponent { PrimaryText = model.SchoolClass.Name },
+                new TextComponent { SecondaryText = "\n" },
+                new TextComponent { PrimaryText = Day },
+                new TextComponent { SecondaryText = ", " },
+                new TextComponent { PrimaryText = Hours },
+                new TextComponent { SecondaryText = " " },
+                new TextComponent { SecondaryText = "change_suffix_time" },
+                new TextComponent { SecondaryText = "\n" },
+            };
+            textRepresentation.AddRange(oldLesson);
+            textRepresentation.Add(new TextComponent { SecondaryText = "\n" });
+            textRepresentation.Add(new TextComponent { PrimaryText = Type });
+            textRepresentation.Add(new TextComponent { SecondaryText = "\n" });
+            textRepresentation.AddRange(description);
+            TextRepresentation = new ReadOnlyCollection<TextComponent>(textRepresentation);
+
+            var eventTitle = new List<TextComponent>
+            {
+                new TextComponent { PrimaryText = Type },
+                new TextComponent { SecondaryText = " " },
+                new TextComponent { PrimaryText = Hours },
+                new TextComponent { SecondaryText = " " },
+                new TextComponent { SecondaryText = "change_suffix_time" },
+            };
+            EventTitle = new ReadOnlyCollection<TextComponent>(eventTitle);
+
+            var eventText = new List<TextComponent>
+            {
+                new TextComponent { PrimaryText = model.SchoolClass.School },
+                new TextComponent { SecondaryText = " " },
+                new TextComponent { PrimaryText = model.SchoolClass.Name },
+                new TextComponent { SecondaryText = "\n" },
+            };
+            eventText.AddRange(oldLesson);
+            eventText.Add(new TextComponent { SecondaryText = "\n" });
+            eventText.Add(new TextComponent { PrimaryText = Type });
+            eventText.Add(new TextComponent { SecondaryText = "\n" });
+            eventText.AddRange(description);
+            EventText = new ReadOnlyCollection<TextComponent>(eventText);
         }
 
     }
@@ -229,7 +284,7 @@ namespace FLSVertretungsplan
                 else
                 {
                     presentationModel = new DatePresentationModel() {
-                        Title = item.Day.ToString("dddd", new CultureInfo("de-DE")),
+                        Title = item.Day.ToString("dddd"),
                         SubTitle = date,
                         LastUpdate = lastUpdate,
                         IsRefreshing = IsRefreshing,

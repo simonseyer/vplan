@@ -8,31 +8,31 @@ using Foundation;
 using System;
 using System.CodeDom.Compiler;
 
-namespace FLSVertretungsplan.iOS.Views
+namespace FLSVertretungsplan.iOS
 {
-    [Register ("ChangeCell")]
-    partial class ChangeCell
+    [Register ("ChangeTableViewCell")]
+    partial class ChangeTableViewCell
     {
         [Outlet]
-        public UIKit.UILabel ChangeDescriptionLabel { get; private set; }
+        public UIKit.UILabel ChangeDescriptionLabel { get; set; }
 
         [Outlet]
-        public UIKit.UILabel ChangeTypeLabel { get; private set; }
+        public UIKit.UILabel ChangeLabel { get; set; }
 
         [Outlet]
-        public UIKit.UILabel ClassNameLabel { get; private set; }
+        public UIKit.UIView ContentBackgroundView { get; set; }
 
         [Outlet]
-        public UIKit.UIView ContentBackgroundView { get; private set; }
+        public UIKit.UILabel HoursLabel { get; set; }
 
         [Outlet]
-        public UIKit.UILabel HoursLabel { get; private set; }
+        public UIKit.UILabel OriginalLessonLabel { get; set; }
 
         [Outlet]
-        public UIKit.UILabel OriginalLessonLabel { get; private set; }
+        public UIKit.UILabel SchoolClassLabel { get; set; }
 
         [Outlet]
-        public FLSVertretungsplan.iOS.GradientView SchoolView { get; private set; }
+        public FLSVertretungsplan.iOS.GradientView SchoolGradientView { get; set; }
 
         void ReleaseDesignerOutlets ()
         {
@@ -41,14 +41,9 @@ namespace FLSVertretungsplan.iOS.Views
                 ChangeDescriptionLabel = null;
             }
 
-            if (ChangeTypeLabel != null) {
-                ChangeTypeLabel.Dispose ();
-                ChangeTypeLabel = null;
-            }
-
-            if (ClassNameLabel != null) {
-                ClassNameLabel.Dispose ();
-                ClassNameLabel = null;
+            if (ChangeLabel != null) {
+                ChangeLabel.Dispose ();
+                ChangeLabel = null;
             }
 
             if (ContentBackgroundView != null) {
@@ -66,9 +61,14 @@ namespace FLSVertretungsplan.iOS.Views
                 OriginalLessonLabel = null;
             }
 
-            if (SchoolView != null) {
-                SchoolView.Dispose ();
-                SchoolView = null;
+            if (SchoolClassLabel != null) {
+                SchoolClassLabel.Dispose ();
+                SchoolClassLabel = null;
+            }
+
+            if (SchoolGradientView != null) {
+                SchoolGradientView.Dispose ();
+                SchoolGradientView = null;
             }
         }
     }

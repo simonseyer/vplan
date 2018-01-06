@@ -50,5 +50,7 @@
 	<string>1.4</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>de</string>
+	<key>NSCalendarsUsageDescription</key>
+	<string>Um Kalendereinträge für Änderungen anzulegen, braucht die App Zugriff auf deinen Kalender.</string>
 </dict>
 </plist>

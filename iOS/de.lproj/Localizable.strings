@@ -80,3 +80,14 @@
 "change_prefix_subject" = "Fach";
 
 "change_prefix_room" = "Raum";
+
+"change_suffix_time" = "Stunde";
+
+
+/********** share **********/
+
+"share_image" = "Als Bild teilen";
+
+"share_text" = "Als Text teilen";
+
+"share_calendar_entry" = "Kalendereintrag erstellen";
