@@ -86,6 +86,7 @@ namespace FLSVertretungsplan.iOS
             }
             InitialRun = false;
 
+            UIApplication.SharedApplication.ApplicationIconBadgeNumber = 0;
             _ = Refresh();
         }
 
@@ -104,7 +105,7 @@ namespace FLSVertretungsplan.iOS
         async Task RequestNotifications()
         {
             var notificationCenter = UNUserNotificationCenter.Current;
-            var result = await notificationCenter.RequestAuthorizationAsync(UNAuthorizationOptions.Alert);
+            var result = await notificationCenter.RequestAuthorizationAsync(UNAuthorizationOptions.Alert | UNAuthorizationOptions.Badge);
             if (!result.Item1)
             {
                 Debug.WriteLine("User denied notifications: " + result.Item2.LocalizedDescription);
@@ -160,10 +161,11 @@ namespace FLSVertretungsplan.iOS
                         var text = NSBundle.MainBundle.LocalizedString("new_changes_plural", "");
                         content.Body = NSString.LocalizedFormat(text, diff.NewBookmarkedChanges.Count());
                     }
+                    content.Badge = diff.NewBookmarkedChanges.Count();
                 }
                 else
                 {
-                    if (diff.NewBookmarkedChanges.Count() == 1)
+                    if (diff.NewNewSchoolClassBookmarks.Count() == 1)
                     {
                         content.Body = NSBundle.MainBundle.LocalizedString("new_school_classes_singular", "");
                     }
@@ -172,6 +174,7 @@ namespace FLSVertretungsplan.iOS
                         var text = NSBundle.MainBundle.LocalizedString("new_school_classes_plural", "");
                         content.Body = NSString.LocalizedFormat(text, diff.NewNewSchoolClassBookmarks.Count());
                     }
+                    content.Badge = diff.NewNewSchoolClassBookmarks.Count();
                 }
 
                 var request = UNNotificationRequest.FromIdentifier(dataStore.Vplan.Value.LastUpdate.ToString(), content, null);
