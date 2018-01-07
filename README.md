@@ -4,6 +4,8 @@ This Xamarin app serves the pupil and teacher of the school Friedrich-List-Schul
 as a way to get notified about changes in their daily schedule. 
 It fetches data from the official school server and visualizes them in the app.
 
+<img width="200" alt="iOS screenshot no changes" src="/resources/screenshots/iOS1.PNG"> <img width="200" alt="iOS screenshot filter" src="/resources/screenshots/iOS2.PNG"> <img width="200" alt="iOS screenshot my plan" src="/resources/screenshots/iOS3.PNG"> <img width="200" alt="iOS screenshot sharing" src="/resources/screenshots/iOS4.PNG">
+
 ## Features
 
 * Modern and clear user interface
@@ -42,7 +44,7 @@ The following list shows where I am heading with the project:
 
 ## About
 
-Developer: Simon Seyer (@simonseyer)
+Developer: Simon Seyer (@simonseyer)  
 Designer: Kamil Drozd (@kamildrozd91)
 
 If you are interested in getting a similar app for your school, just get in touch via my
