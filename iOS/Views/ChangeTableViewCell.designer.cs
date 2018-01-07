@@ -38,7 +38,7 @@ namespace FLSVertretungsplan.iOS
 
 
         [Outlet]
-        public FLSVertretungsplan.iOS.ChipCell SchoolGradientView { get; private set; }
+        public FLSVertretungsplan.iOS.ChipCollectionViewCell SchoolGradientView { get; private set; }
 
         void ReleaseDesignerOutlets ()
         {

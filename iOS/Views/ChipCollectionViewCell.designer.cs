@@ -11,7 +11,7 @@ using System.CodeDom.Compiler;
 namespace FLSVertretungsplan.iOS
 {
     [Register ("ChipCell")]
-    partial class ChipCell
+    partial class ChipCollectionViewCell
     {
         [Outlet]
         public UIKit.UILabel Label { get; set; }

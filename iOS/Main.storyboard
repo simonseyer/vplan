@@ -372,7 +372,7 @@ Ziehen zum Aktualisieren.</string>
                                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="16" maxY="0.0"/>
                                         </collectionViewFlowLayout>
                                         <cells>
-                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="CHIP_CELL" id="029-wY-l20" customClass="ChipCell">
+                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ChipCollectionViewCell" id="029-wY-l20" customClass="ChipCell">
                                                 <rect key="frame" x="0.0" y="0.0" width="50" height="35"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
@@ -420,7 +420,7 @@ Ziehen zum Aktualisieren.</string>
                                             <inset key="sectionInset" minX="0.0" minY="20" maxX="16" maxY="20"/>
                                         </collectionViewFlowLayout>
                                         <cells>
-                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="CHIP_CELL" id="TBa-t8-Ran" customClass="ChipCell">
+                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ChipCollectionViewCell" id="TBa-t8-Ran" customClass="ChipCell">
                                                 <rect key="frame" x="0.0" y="20" width="50" height="35"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
@@ -550,7 +550,7 @@ Ziehen zum Aktualisieren.</string>
         <!--Mein Plan-->
         <scene sceneID="PeH-PL-gHl">
             <objects>
-                <viewController id="k2r-19-stU" customClass="BookmarkedViewController" sceneMemberID="viewController">
+                <viewController id="k2r-19-stU" customClass="MyVplanViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="UQe-Rp-Aa3"/>
                         <viewControllerLayoutGuide type="bottom" id="L4w-bB-84t"/>
@@ -583,7 +583,7 @@ Ziehen zum Aktualisieren.</string>
         <!--Schul-Plan-->
         <scene sceneID="oV6-jg-qEO">
             <objects>
-                <viewController id="N3m-SJ-xfD" customClass="AllChangesViewController" sceneMemberID="viewController">
+                <viewController id="N3m-SJ-xfD" customClass="SchoolVplanViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Uii-Mn-LbB"/>
                         <viewControllerLayoutGuide type="bottom" id="Ru4-O4-Ipu"/>
@@ -672,7 +672,7 @@ Ziehen zum Aktualisieren.</string>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="16" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="CHIP_CELL" id="ZKR-Hi-pCF" customClass="ChipCell">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ChipCollectionViewCell" id="ZKR-Hi-pCF" customClass="ChipCell">
                                         <rect key="frame" x="0.0" y="0.0" width="50" height="35"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">

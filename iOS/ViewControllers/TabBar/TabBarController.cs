@@ -12,6 +12,19 @@ namespace FLSVertretungsplan.iOS
         NewSchoolClassesViewModel ViewModel;
         UIViewController LastViewController;
 
+        static TabBarController()
+        {
+            UITabBarItem.Appearance.SetTitleTextAttributes(new UITextAttributes
+            {
+                TextColor = Color.ICON_COLOR.ToUIColor()
+            }, UIControlState.Normal);
+
+            UITabBarItem.Appearance.SetTitleTextAttributes(new UITextAttributes
+            {
+                TextColor = Color.SELECTED_ICON_COLOR.ToUIColor()
+            }, UIControlState.Selected);
+        }
+
         public TabBarController(IntPtr handle) : base(handle)
         {
         }
@@ -23,11 +36,11 @@ namespace FLSVertretungsplan.iOS
             ViewModel = new NewSchoolClassesViewModel();
             ViewModel.SchoolClasses.CollectionChanged += NewSchoolClasses_CollectionChanged;
 
-            TabBar.Layer.BorderColor = UIColor.FromRGB(236, 237, 241).CGColor;
+            TabBar.Layer.BorderColor = Color.TAB_BORDER_COLOR.ToUIColor().CGColor;
             TabBar.Layer.BorderWidth = (nfloat)0.5;
             TabBar.ClipsToBounds = true;
-            TabBar.TintColor = UIColor.FromRGB(23, 43, 76);
-            TabBar.UnselectedItemTintColor = UIColor.FromRGB(164, 174, 186);
+            TabBar.TintColor = Color.SELECTED_ICON_COLOR.ToUIColor();
+            TabBar.UnselectedItemTintColor = Color.ICON_COLOR.ToUIColor();
             SelectedIndex = 1;
             LastViewController = SelectedViewController;
 

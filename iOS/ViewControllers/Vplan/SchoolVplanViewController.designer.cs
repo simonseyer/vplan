@@ -11,8 +11,8 @@ using UIKit;
 
 namespace FLSVertretungsplan.iOS
 {
-    [Register ("BookmarkedViewController")]
-    partial class BookmarkedViewController
+    [Register ("SchoolVplanViewController")]
+    partial class SchoolVplanViewController
     {
         void ReleaseDesignerOutlets ()
         {

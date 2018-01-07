@@ -113,7 +113,7 @@ namespace FLSVertretungsplan.iOS
 
         public override UICollectionViewCell GetCell(UICollectionView collectionView, NSIndexPath indexPath)
         {
-            var cell = collectionView.DequeueReusableCell("CHIP_CELL", indexPath) as ChipCell;
+            var cell = collectionView.DequeueReusableCell(ChipCollectionViewCell.Key, indexPath) as ChipCollectionViewCell;
             var item = Items[indexPath.Row];
 
             cell.Label.Text = item.Name;

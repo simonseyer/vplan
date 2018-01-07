@@ -66,15 +66,6 @@ namespace FLSVertretungsplan.iOS
                 dataStore.Load();
             });
 
-            UITabBarItem.Appearance.SetTitleTextAttributes(new UITextAttributes
-            {
-                TextColor = Color.IconColor.ToUIColor()
-            }, UIControlState.Normal);
-            UITabBarItem.Appearance.SetTitleTextAttributes(new UITextAttributes
-            {
-                TextColor = Color.SelectedIconColor.ToUIColor()
-            }, UIControlState.Selected);
-
             return true;
         }
 

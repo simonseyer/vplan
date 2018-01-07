@@ -13,8 +13,8 @@ namespace FLSVertretungsplan.iOS
         {
             var attributedString = new NSMutableAttributedString();
             var font = UIFont.SystemFontOfSize(15);
-            var primaryTextColor = usePrimaryColor ? Color.PrimaryTextColor.ToUIColor() : Color.SecondaryTextColor.ToUIColor();
-            var secondaryTextColor = Color.SecondaryTextColor.ToUIColor();
+            var primaryTextColor = usePrimaryColor ? Color.PRIMARY_TEXT_COLOR.ToUIColor() : Color.SECONDARY_TEXT_COLOR.ToUIColor();
+            var secondaryTextColor = Color.SECONDARY_TEXT_COLOR.ToUIColor();
             foreach (var component in textComponents)
             {
                 if (component.PrimaryText != null)

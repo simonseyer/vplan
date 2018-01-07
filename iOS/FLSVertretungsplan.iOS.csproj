@@ -134,66 +134,66 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ViewControllers\VplanViewController.cs" />
-    <Compile Include="ViewControllers\VplanViewController.designer.cs">
-      <DependentUpon>VplanViewController.cs</DependentUpon>
-    </Compile>
     <Compile Include="AppDelegate.cs" />
     <Compile Include="Main.cs" />
-    <Compile Include="ViewControllers\SettingsViewController.cs" />
-    <Compile Include="ViewControllers\SettingsViewController.designer.cs">
-      <DependentUpon>SettingsViewController.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Views\ChipCell.cs" />
-    <Compile Include="Views\ChipCell.designer.cs">
-      <DependentUpon>ChipCell.cs</DependentUpon>
+    <Compile Include="Views\ChipCollectionViewCell.cs" />
+    <Compile Include="Views\ChipCollectionViewCell.designer.cs">
+      <DependentUpon>ChipCollectionViewCell.cs</DependentUpon>
     </Compile>
     <Compile Include="UIColorExtension.cs" />
-    <Compile Include="ViewControllers\AllChangesViewController.cs" />
-    <Compile Include="ViewControllers\AllChangesViewController.designer.cs">
-      <DependentUpon>AllChangesViewController.cs</DependentUpon>
-    </Compile>
-    <Compile Include="ViewControllers\BookmarkedChangesViewController.cs" />
-    <Compile Include="ViewControllers\BookmarkedViewController.designer.cs">
-      <DependentUpon>BookmarkedChangesViewController.cs</DependentUpon>
-    </Compile>
     <Compile Include="Views\DynamicCollectionView.cs" />
     <Compile Include="Helpers\RgbColorExtension.cs" />
-    <Compile Include="ViewControllers\TabBarController.cs" />
-    <Compile Include="ViewControllers\TabBarController.designer.cs">
-      <DependentUpon>TabBarController.cs</DependentUpon>
-    </Compile>
-    <Compile Include="ViewControllers\VplanContainerViewController.cs" />
-    <Compile Include="ViewControllers\VplanContainerViewController.designer.cs">
-      <DependentUpon>VplanContainerViewController.cs</DependentUpon>
-    </Compile>
-    <Compile Include="ViewControllers\VplanDayViewController.cs" />
-    <Compile Include="ViewControllers\VplanDayViewController.designer.cs">
-      <DependentUpon>VplanDayViewController.cs</DependentUpon>
-    </Compile>
-    <Compile Include="ViewControllers\EmptyVplanViewController.cs" />
-    <Compile Include="ViewControllers\EmptyVplanViewController.designer.cs">
-      <DependentUpon>EmptyVplanViewController.cs</DependentUpon>
-    </Compile>
-    <Compile Include="ViewControllers\NewSchoolClassesViewController.cs" />
-    <Compile Include="ViewControllers\NewSchoolClassesViewController.designer.cs">
-      <DependentUpon>NewSchoolClassesViewController.cs</DependentUpon>
-    </Compile>
-    <Compile Include="ViewControllers\SetupViewController.cs" />
-    <Compile Include="ViewControllers\SetupViewController.designer.cs">
-      <DependentUpon>SetupViewController.cs</DependentUpon>
-    </Compile>
-    <Compile Include="ViewControllers\ChangeViewController.cs" />
-    <Compile Include="ViewControllers\ChangeViewController.designer.cs">
-      <DependentUpon>ChangeViewController.cs</DependentUpon>
-    </Compile>
     <Compile Include="Views\ChangeTableViewCell.cs" />
     <Compile Include="Views\ChangeTableViewCell.designer.cs">
       <DependentUpon>ChangeTableViewCell.cs</DependentUpon>
     </Compile>
     <Compile Include="Helpers\TextComponentFormatter.cs" />
     <Compile Include="Helpers\DateExtension.cs" />
-    <Compile Include="ViewControllers\IVplanTabContentViewController.cs" />
+    <Compile Include="ViewControllers\Vplan\ChangeViewController.cs" />
+    <Compile Include="ViewControllers\Vplan\ChangeViewController.designer.cs">
+      <DependentUpon>ChangeViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ViewControllers\Vplan\EmptyVplanViewController.cs" />
+    <Compile Include="ViewControllers\Vplan\EmptyVplanViewController.designer.cs">
+      <DependentUpon>EmptyVplanViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ViewControllers\Vplan\VplanContainerViewController.cs" />
+    <Compile Include="ViewControllers\Vplan\VplanContainerViewController.designer.cs">
+      <DependentUpon>VplanContainerViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ViewControllers\Vplan\VplanDayViewController.cs" />
+    <Compile Include="ViewControllers\Vplan\VplanDayViewController.designer.cs">
+      <DependentUpon>VplanDayViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ViewControllers\Vplan\VplanViewController.cs" />
+    <Compile Include="ViewControllers\Vplan\VplanViewController.designer.cs">
+      <DependentUpon>VplanViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ViewControllers\Settings\NewSchoolClassesViewController.cs" />
+    <Compile Include="ViewControllers\Settings\NewSchoolClassesViewController.designer.cs">
+      <DependentUpon>NewSchoolClassesViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ViewControllers\Settings\SettingsViewController.cs" />
+    <Compile Include="ViewControllers\Settings\SettingsViewController.designer.cs">
+      <DependentUpon>SettingsViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ViewControllers\Settings\SetupViewController.cs" />
+    <Compile Include="ViewControllers\Settings\SetupViewController.designer.cs">
+      <DependentUpon>SetupViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ViewControllers\Vplan\MyVplanViewController.cs" />
+    <Compile Include="ViewControllers\Vplan\MyVplanViewController.designer.cs">
+      <DependentUpon>MyVplanViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ViewControllers\Vplan\SchoolVplanViewController.cs" />
+    <Compile Include="ViewControllers\Vplan\SchoolVplanViewController.designer.cs">
+      <DependentUpon>SchoolVplanViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ViewControllers\TabBar\IVplanTabContentViewController.cs" />
+    <Compile Include="ViewControllers\TabBar\TabBarController.cs" />
+    <Compile Include="ViewControllers\TabBar\TabBarController.designer.cs">
+      <DependentUpon>TabBarController.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Entitlements.plist" />
@@ -214,6 +214,9 @@
     <Folder Include="Assets.xcassets\icon.imageset\" />
     <Folder Include="Assets.xcassets\empty-visual.imageset\" />
     <Folder Include="Assets.xcassets\close-button.imageset\" />
+    <Folder Include="ViewControllers\Vplan\" />
+    <Folder Include="ViewControllers\Settings\" />
+    <Folder Include="ViewControllers\TabBar\" />
   </ItemGroup>
   <ItemGroup>
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\appicon_1024.png" />

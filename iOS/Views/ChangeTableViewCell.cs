@@ -37,7 +37,7 @@ namespace FLSVertretungsplan.iOS
 
             ContentBackgroundView.Layer.CornerRadius = 8;
             ContentBackgroundView.Layer.BorderWidth = 1;
-            ContentBackgroundView.Layer.BorderColor = UIColor.FromRGB(227, 228, 232).CGColor;
+            ContentBackgroundView.Layer.BorderColor = Color.BORDER_COLOR.ToUIColor().CGColor;
             ContentBackgroundView.Layer.ShadowColor = UIColor.Black.CGColor;
             ContentBackgroundView.Layer.ShadowOffset = new CoreGraphics.CGSize(0, 2);
             ContentBackgroundView.Layer.ShadowRadius = 3;

@@ -11,8 +11,8 @@ using UIKit;
 
 namespace FLSVertretungsplan.iOS
 {
-    [Register ("AllChangesViewController")]
-    partial class AllChangesViewController
+    [Register ("MyVplanViewController")]
+    partial class MyVplanViewController
     {
         void ReleaseDesignerOutlets ()
         {

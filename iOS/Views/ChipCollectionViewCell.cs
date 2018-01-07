@@ -6,8 +6,10 @@ using UIKit;
 
 namespace FLSVertretungsplan.iOS
 {
-    public partial class ChipCell : UICollectionViewCell
+    public partial class ChipCollectionViewCell : UICollectionViewCell
     {
+        public static readonly NSString Key = new NSString("ChipCollectionViewCell");
+
         CAGradientLayer GradientLayer;
 
         Gradient gradient;
@@ -20,21 +22,18 @@ namespace FLSVertretungsplan.iOS
             set
             {
                 gradient = value;
-                CATransaction.Begin();
-                CATransaction.DisableActions = true;
                 if (gradient != null)
                 {
-                    GradientLayer.Colors = new CGColor[] { gradient.Start.ToUIColor().CGColor, gradient.End.ToUIColor().CGColor };
+                    UpdateColors(new CGColor[] { gradient.Start.ToUIColor().CGColor, gradient.End.ToUIColor().CGColor });
                 }
                 else
                 {
-                    GradientLayer.Colors = new CGColor[] { UIColor.Clear.CGColor, UIColor.Clear.CGColor };
+                    UpdateColors(new CGColor[] { UIColor.Clear.CGColor, UIColor.Clear.CGColor });
                 }
-                CATransaction.Commit();
             }
         }
 
-        protected ChipCell(IntPtr handle) : base(handle)
+        protected ChipCollectionViewCell(IntPtr handle) : base(handle)
         {
             // Note: this .ctor should not contain any initialization logic.
         }
@@ -46,6 +45,7 @@ namespace FLSVertretungsplan.iOS
             GradientLayer = new CAGradientLayer
             {
                 Locations = new NSNumber[] { 0, 1 },
+                // Rotate gradient to be horizontal
                 Transform = CATransform3D.MakeRotation(NMath.PI / 2, 0, 0, 1)
             };
             Layer.InsertSublayer(GradientLayer, 0);
@@ -58,6 +58,14 @@ namespace FLSVertretungsplan.iOS
             CATransaction.Begin();
             CATransaction.DisableActions = true;
             GradientLayer.Frame = Bounds;
+            CATransaction.Commit();
+        }
+
+        void UpdateColors(CGColor[] colors)
+        {
+            CATransaction.Begin();
+            CATransaction.DisableActions = true;
+            GradientLayer.Colors = colors;
             CATransaction.Commit();
         }
 
