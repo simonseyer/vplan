@@ -12,11 +12,11 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="169" id="cxk-wN-pdQ" customClass="ChangeTableViewCell">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="169"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="134" id="cxk-wN-pdQ" customClass="ChangeTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="147"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="cxk-wN-pdQ" id="YTl-1W-gDM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="168.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="146.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="320-aJ-77y">
@@ -48,13 +48,20 @@
                                 <color key="textColor" red="0.090196078430000007" green="0.16862745100000001" blue="0.29803921570000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Durch S. Max" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J1j-I1-jTO">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J1j-I1-jTO">
                                 <rect key="frame" x="26" y="101.5" width="97" height="19"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                <color key="textColor" red="0.64313725489999995" green="0.68235294120000001" blue="0.72941176470000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <attributedString key="attributedText">
+                                    <fragment content="Durch S. Max">
+                                        <attributes>
+                                            <color key="NSColor" red="0.64313725489999995" green="0.68235294120000001" blue="0.72941176470000002" alpha="1" colorSpace="calibratedRGB"/>
+                                            <font key="NSFont" metaFont="system" size="16"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Deutsch bei M. Schatz (Raum C05)" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pqU-1r-1HJ">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Deutsch bei M. Schatz (Raum C05)" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pqU-1r-1HJ">
                                 <rect key="frame" x="26" y="46" width="260" height="19.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <color key="textColor" red="0.090196078430000007" green="0.16862745100000001" blue="0.29803921570000003" alpha="1" colorSpace="calibratedRGB"/>
@@ -85,7 +92,7 @@
                 <constraints>
                     <constraint firstAttribute="trailing" secondItem="320-aJ-77y" secondAttribute="trailing" constant="8" id="Ifg-JI-pqT"/>
                     <constraint firstItem="320-aJ-77y" firstAttribute="top" secondItem="YTl-1W-gDM" secondAttribute="top" constant="4" id="Lgg-ci-ziK"/>
-                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="320-aJ-77y" secondAttribute="bottom" constant="4" id="LyF-MD-Yqn"/>
+                    <constraint firstAttribute="bottom" secondItem="320-aJ-77y" secondAttribute="bottom" priority="750" constant="4" id="LyF-MD-Yqn"/>
                     <constraint firstItem="320-aJ-77y" firstAttribute="leading" secondItem="YTl-1W-gDM" secondAttribute="leading" constant="8" id="OhG-VS-olU"/>
                 </constraints>
             </tableViewCellContentView>
@@ -99,7 +106,7 @@
                 <outlet property="SchoolClassLabel" destination="ix9-7b-ct3" id="y7i-wP-Dfl"/>
                 <outlet property="SchoolGradientView" destination="ocy-cp-3Bd" id="dKk-Gv-gjx"/>
             </connections>
-            <point key="canvasLocation" x="54" y="142.5"/>
+            <point key="canvasLocation" x="54" y="131.5"/>
         </tableViewCell>
     </objects>
 </document>

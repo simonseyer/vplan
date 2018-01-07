@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using Foundation;
 using UIKit;
 
@@ -22,11 +23,8 @@ namespace FLSVertretungsplan.iOS
         public override void ViewDidLoad()
         {
             base.ViewDidLoad();
-
             ChangeView.DisableShadows();
-            PreferredContentSize = View.Bounds.Size;
         }
-
 
         ChangeTableViewCell ChangeView
         {
@@ -47,6 +45,10 @@ namespace FLSVertretungsplan.iOS
             ChangeView.SchoolGradientView.Gradient = model.FillColor;
             ChangeView.OriginalLessonLabel.AttributedText = TextComponentFormatter.AttributedStringForTextComponents(model.OldLesson, true);
             ChangeView.ChangeDescriptionLabel.AttributedText = TextComponentFormatter.AttributedStringForTextComponents(model.Description, false);
+
+            // Calculate the dynamic content size with the width restricted to the view's width and a boundless height. 
+            // Set the priority for the width to required (so it doesn't get larger than the available space) the priority of the height to low
+            PreferredContentSize = ChangeView.SystemLayoutSizeFittingSize(new CoreGraphics.CGSize(View.Bounds.Size.Width, nfloat.MaxValue), 1000, 100);
         }
 
         public UIViewController Context;
