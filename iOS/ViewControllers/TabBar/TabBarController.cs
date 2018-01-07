@@ -8,6 +8,8 @@ namespace FLSVertretungsplan.iOS
 {
     public partial class TabBarController : UITabBarController, IUITabBarControllerDelegate
     {
+        const int NEW_SCHOOL_CLASSES_DELAY = 200;
+        const int INITIALLY_SELECTED_INDEX = 1;
 
         NewSchoolClassesViewModel ViewModel;
         UIViewController LastViewController;
@@ -41,7 +43,8 @@ namespace FLSVertretungsplan.iOS
             TabBar.ClipsToBounds = true;
             TabBar.TintColor = Color.SELECTED_ICON_COLOR.ToUIColor();
             TabBar.UnselectedItemTintColor = Color.ICON_COLOR.ToUIColor();
-            SelectedIndex = 1;
+
+            SelectedIndex = INITIALLY_SELECTED_INDEX;
             LastViewController = SelectedViewController;
 
             ViewControllerSelected += (sender, e) => {
@@ -58,11 +61,12 @@ namespace FLSVertretungsplan.iOS
 
         void NewSchoolClasses_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
-            Task.Delay(200).ContinueWith(t2 =>
+            Task.Delay(NEW_SCHOOL_CLASSES_DELAY).ContinueWith(t2 =>
             {
                 InvokeOnMainThread(() =>
                 {
-                    if (ViewModel.SchoolClasses.Count > 0 && NavigationController.PresentedViewController == null)
+                    if (ViewModel.SchoolClasses.Count > 0 && 
+                        NavigationController.PresentedViewController == null)
                     {
                         PerformSegue("showNewClasses", View);
                     }
@@ -71,4 +75,3 @@ namespace FLSVertretungsplan.iOS
         }
     }
 }
-

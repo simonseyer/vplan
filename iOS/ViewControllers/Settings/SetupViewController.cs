@@ -5,16 +5,9 @@ using UserNotifications;
 
 namespace FLSVertretungsplan.iOS
 {
-    public interface INotificationActivationDelegate 
-    {
-        void ActivateNotifications();
-    }
-
-
     public partial class SetupViewController : UIViewController
     {
-
-        public INotificationActivationDelegate NotificationActivationDelegate;
+        public NotificationHandler NotificationHandler;
 
         public SetupViewController() : base("SetupViewController", null)
         {
@@ -34,8 +27,7 @@ namespace FLSVertretungsplan.iOS
         public override void ViewDidDisappear(bool animated)
         {
             base.ViewDidDisappear(animated);
-            NotificationActivationDelegate.ActivateNotifications();
+            NotificationHandler.ActivateNotifications();
         }
     }
 }
-

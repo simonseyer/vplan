@@ -140,7 +140,6 @@
     <Compile Include="Views\ChipCollectionViewCell.designer.cs">
       <DependentUpon>ChipCollectionViewCell.cs</DependentUpon>
     </Compile>
-    <Compile Include="UIColorExtension.cs" />
     <Compile Include="Views\DynamicCollectionView.cs" />
     <Compile Include="Helpers\RgbColorExtension.cs" />
     <Compile Include="Views\ChangeTableViewCell.cs" />
@@ -194,6 +193,9 @@
     <Compile Include="ViewControllers\TabBar\TabBarController.designer.cs">
       <DependentUpon>TabBarController.cs</DependentUpon>
     </Compile>
+    <Compile Include="Handlers\BackgroundFetchHandler.cs" />
+    <Compile Include="Handlers\NotificationHandler.cs" />
+    <Compile Include="Helpers\UIColorExtension.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Entitlements.plist" />
@@ -217,6 +219,7 @@
     <Folder Include="ViewControllers\Vplan\" />
     <Folder Include="ViewControllers\Settings\" />
     <Folder Include="ViewControllers\TabBar\" />
+    <Folder Include="Handlers\" />
   </ItemGroup>
   <ItemGroup>
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\appicon_1024.png" />

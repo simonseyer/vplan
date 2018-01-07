@@ -130,20 +130,20 @@ namespace FLSVertretungsplan.iOS
                     ViewModel = DataSource.Items[indexPath.Row],
                     Context = this
                 };
+
                 var alertController = new UIAlertController();
-                alertController.AddAction(UIAlertAction.Create(NSBundle.MainBundle.LocalizedString("share_image", ""), UIAlertActionStyle.Default,(obj) => 
-                {
-                    shareViewController.ShareImage();
-                }));
-                alertController.AddAction(UIAlertAction.Create(NSBundle.MainBundle.LocalizedString("share_text", ""), UIAlertActionStyle.Default, (obj) =>
-                {
-                    shareViewController.ShareText();
-                }));
-                alertController.AddAction(UIAlertAction.Create(NSBundle.MainBundle.LocalizedString("share_calendar_entry", ""), UIAlertActionStyle.Default, (obj) =>
-                {
-                    shareViewController.ShareCalendarEvent();
-                }));
-                alertController.AddAction(UIAlertAction.Create(NSBundle.MainBundle.LocalizedString("share_done", ""), UIAlertActionStyle.Cancel, (obj) => {}));
+                alertController.AddAction(UIAlertAction.Create(NSBundle.MainBundle.LocalizedString("share_image", ""), 
+                                                               UIAlertActionStyle.Default,
+                                                               (obj) => shareViewController.ShareImage()));
+                alertController.AddAction(UIAlertAction.Create(NSBundle.MainBundle.LocalizedString("share_text", ""), 
+                                                               UIAlertActionStyle.Default, 
+                                                               (obj) => shareViewController.ShareText()));
+                alertController.AddAction(UIAlertAction.Create(NSBundle.MainBundle.LocalizedString("share_calendar_entry", ""), 
+                                                               UIAlertActionStyle.Default, 
+                                                               (obj) => shareViewController.ShareCalendarEvent()));
+                alertController.AddAction(UIAlertAction.Create(NSBundle.MainBundle.LocalizedString("share_done", ""), 
+                                                               UIAlertActionStyle.Cancel, 
+                                                               (obj) => {}));
                 PresentViewController(alertController, true, null);
             }
         }

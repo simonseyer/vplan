@@ -10,11 +10,11 @@ namespace FLSVertretungsplan.iOS
 {
     public partial class SettingsViewController : UIViewController
     {
-        SettingsViewModel ViewModel { get; set; }
-        ChipCollectionViewDataSource SchoolsDataSource { get; set; }
-        ChipCollectionViewDataSource SchoolClassesDataSource { get; set; }
-        ChipCollectionViewDelegate SchoolsDelegate { get; set; }
-        ChipCollectionViewDelegate SchoolClassesDelegate { get; set; }
+        SettingsViewModel ViewModel;
+        ChipCollectionViewDataSource SchoolsDataSource;
+        ChipCollectionViewDataSource SchoolClassesDataSource;
+        ChipCollectionViewDelegate SchoolsDelegate;
+        ChipCollectionViewDelegate SchoolClassesDelegate;
 
         public SettingsViewController(IntPtr handle) : base(handle)
         {
@@ -60,10 +60,9 @@ namespace FLSVertretungsplan.iOS
 
     class ChipCollectionViewDataSource : UICollectionViewDataSource
     {
-
-        public UICollectionView CollectionView { get; private set; }
-        public ObservableCollection<ChipViewModel> ObservableItems { get; private set; }
-        public Collection<ChipViewModel> Items { get; private set; }
+        public readonly UICollectionView CollectionView;
+        public readonly ObservableCollection<ChipViewModel> ObservableItems;
+        Collection<ChipViewModel> Items;
 
         public ChipCollectionViewDataSource(UICollectionView collectionView, ObservableCollection<ChipViewModel> items)
         {
@@ -117,24 +116,9 @@ namespace FLSVertretungsplan.iOS
             var item = Items[indexPath.Row];
 
             cell.Label.Text = item.Name;
-            if (item.Filled)
-            {
-                cell.Gradient = item.FillColor;
-                cell.Layer.BorderWidth = 0;
-                cell.Layer.BorderColor = UIColor.Clear.CGColor;
-                cell.Label.TextColor = UIColor.White;
-            }
-            else
-            {
-                cell.Gradient = null;
-                cell.Layer.BorderWidth = 1;
-                cell.Layer.BorderColor = item.OutlineColor.ToUIColor().CGColor;
-                cell.Label.TextColor = item.OutlineColor.ToUIColor();
-            }
-
-
-            cell.Layer.CornerRadius = 18;
-            cell.ClipsToBounds = true;
+            cell.Gradient = item.FillColor;
+            cell.OutlineColor = item.OutlineColor.ToUIColor();
+            cell.Outline = !item.Filled;
 
             return cell;
         }
@@ -143,7 +127,6 @@ namespace FLSVertretungsplan.iOS
         {
             return Items.Count;
         }
-
     }
 
     class ChipCollectionViewDelegate : UICollectionViewDelegateFlowLayout
@@ -184,9 +167,5 @@ namespace FLSVertretungsplan.iOS
                 FeedbackGenerator = null;
             }
         }
-
     }
-
-
 }
-

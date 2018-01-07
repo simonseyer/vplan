@@ -36,18 +36,15 @@ namespace FLSVertretungsplan.iOS
             {
                 return new IUIPreviewActionItem[]
                 {
-                    UIPreviewAction.Create(NSBundle.MainBundle.LocalizedString("share_image", ""), UIPreviewActionStyle.Default, (action, previewViewController) =>
-                    {
-                        ShareImage();
-                    }),
-                    UIPreviewAction.Create(NSBundle.MainBundle.LocalizedString("share_text", ""), UIPreviewActionStyle.Default, (action, previewViewController) =>
-                    {
-                        ShareText();
-                    }),
-                    UIPreviewAction.Create(NSBundle.MainBundle.LocalizedString("share_calendar_entry", ""), UIPreviewActionStyle.Default, (action, previewViewController) =>
-                    {
-                        ShareCalendarEvent();
-                    })
+                    UIPreviewAction.Create(NSBundle.MainBundle.LocalizedString("share_image", ""),
+                                           UIPreviewActionStyle.Default,
+                                           (action, previewViewController) => ShareImage()),
+                    UIPreviewAction.Create(NSBundle.MainBundle.LocalizedString("share_text", ""),
+                                           UIPreviewActionStyle.Default,
+                                           (action, previewViewController) => ShareText()),
+                    UIPreviewAction.Create(NSBundle.MainBundle.LocalizedString("share_calendar_entry", ""),
+                                           UIPreviewActionStyle.Default,
+                                           (action, previewViewController) => ShareCalendarEvent())
                 };
             }
         }

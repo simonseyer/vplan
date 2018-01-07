@@ -23,7 +23,6 @@ namespace FLSVertretungsplan.iOS
 
         public static ChangeTableViewCell Create()
         {
-
             var arr = NSBundle.MainBundle.LoadNib("ChangeTableViewCell", null, null);
             var v = Runtime.GetNSObject<ChangeTableViewCell>(arr.ValueAt(0));
 
@@ -32,9 +31,6 @@ namespace FLSVertretungsplan.iOS
 
         public override void AwakeFromNib()
         {
-            SchoolGradientView.Layer.CornerRadius = 5;
-            SchoolGradientView.ClipsToBounds = true;
-
             ContentBackgroundView.Layer.CornerRadius = 8;
             ContentBackgroundView.Layer.BorderWidth = 1;
             ContentBackgroundView.Layer.BorderColor = Color.BORDER_COLOR.ToUIColor().CGColor;

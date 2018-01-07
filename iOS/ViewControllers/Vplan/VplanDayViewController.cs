@@ -50,4 +50,3 @@ namespace FLSVertretungsplan.iOS
         }
     }
 }
-

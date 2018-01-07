@@ -12,24 +12,46 @@ namespace FLSVertretungsplan.iOS
 
         CAGradientLayer GradientLayer;
 
-        Gradient gradient;
+        Gradient _Gradient;
         public Gradient Gradient
         {
             get
             {
-                return gradient;
+                return _Gradient;
             }
             set
             {
-                gradient = value;
-                if (gradient != null)
-                {
-                    UpdateColors(new CGColor[] { gradient.Start.ToUIColor().CGColor, gradient.End.ToUIColor().CGColor });
-                }
-                else
-                {
-                    UpdateColors(new CGColor[] { UIColor.Clear.CGColor, UIColor.Clear.CGColor });
-                }
+                _Gradient = value;
+                UpdateColors();
+            }
+        }
+
+        UIColor _OutlineColor;
+        public UIColor OutlineColor
+        {
+            get
+            {
+                return _OutlineColor;
+            }
+            set
+            {
+                _OutlineColor = value;
+                UpdateColors();
+
+            }
+        }
+
+        bool _Outline;
+        public bool Outline
+        {
+            get
+            {
+                return _Outline;    
+            }
+            set
+            {
+                _Outline = value;
+                UpdateColors();
             }
         }
 
@@ -42,6 +64,7 @@ namespace FLSVertretungsplan.iOS
         {
             base.AwakeFromNib();
 
+            ClipsToBounds = true;
             GradientLayer = new CAGradientLayer
             {
                 Locations = new NSNumber[] { 0, 1 },
@@ -58,16 +81,44 @@ namespace FLSVertretungsplan.iOS
             CATransaction.Begin();
             CATransaction.DisableActions = true;
             GradientLayer.Frame = Bounds;
+            Layer.CornerRadius = Bounds.Height / 2;
             CATransaction.Commit();
         }
 
-        void UpdateColors(CGColor[] colors)
+        void UpdateColors()
         {
+            CGColor[] gradientColors;
+            if (_Gradient != null && !Outline)
+            {
+                gradientColors = new CGColor[] { _Gradient.Start.ToUIColor().CGColor, _Gradient.End.ToUIColor().CGColor };
+            }
+            else
+            {
+                gradientColors = new CGColor[] { UIColor.Clear.CGColor, UIColor.Clear.CGColor };
+            }
+
             CATransaction.Begin();
             CATransaction.DisableActions = true;
-            GradientLayer.Colors = colors;
+            if (Outline)
+            {
+                Layer.BorderWidth = 1;
+                Layer.BorderColor = OutlineColor.CGColor;
+                if (Label != null)
+                {
+                    Label.TextColor = OutlineColor;
+                }
+            }
+            else
+            {
+                Layer.BorderWidth = 0;
+                Layer.BorderColor = UIColor.Clear.CGColor;
+                if (Label != null)
+                {
+                    Label.TextColor = UIColor.White;
+                }
+            }
+            GradientLayer.Colors = gradientColors;
             CATransaction.Commit();
         }
-
     }
 }

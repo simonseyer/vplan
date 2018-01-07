@@ -7,8 +7,8 @@ namespace FLSVertretungsplan.iOS
     public partial class NewSchoolClassesViewController : UIViewController
     {
         NewSchoolClassesViewModel ViewModel;
-        ChipCollectionViewDataSource SchoolClassesDataSource { get; set; }
-        ChipCollectionViewDelegate SchoolClassesDelegate { get; set; }
+        ChipCollectionViewDataSource SchoolClassesDataSource;
+        ChipCollectionViewDelegate SchoolClassesDelegate;
 
         public NewSchoolClassesViewController() : base("NewSchoolClassesViewController", null)
         {
