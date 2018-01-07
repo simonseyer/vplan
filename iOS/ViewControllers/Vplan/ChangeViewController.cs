@@ -112,8 +112,7 @@ namespace FLSVertretungsplan.iOS
                 theEvent.EndDate = Model.Date.ToNSDate();
                 theEvent.Calendar = store.DefaultCalendarForNewEvents;
 
-                NSError saveError;
-                store.SaveEvent(theEvent, EventKit.EKSpan.ThisEvent, out saveError);
+                store.SaveEvent(theEvent, EventKit.EKSpan.ThisEvent, out NSError saveError);
                 if (saveError != null)
                 {
                     System.Diagnostics.Debug.WriteLine("Failed to save calendar event: " + saveError.LocalizedDescription);
