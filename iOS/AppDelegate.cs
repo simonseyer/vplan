@@ -15,7 +15,7 @@ namespace FLSVertretungsplan.iOS
     public class AppDelegate : UIApplicationDelegate
     {
         const int REFRESH_ON_APP_START_DELAY = 600;
-        const string APP_CENTER_IDENTIFIER = "***REMOVED***";
+        const string APP_CENTER_IDENTIFIER = "**REMOVED**";
 
         public override UIWindow Window { get; set; }
 

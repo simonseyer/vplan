@@ -28,7 +28,7 @@ namespace FLSVertretungsplan.Droid
         {
             base.OnCreate(savedInstanceState);
 
-            AppCenter.Start("***REMOVED***", typeof(Analytics), typeof(Crashes));
+            AppCenter.Start("**REMOVED**", typeof(Analytics), typeof(Crashes));
 
             adapter = new TabsAdapter(this, SupportFragmentManager);
             pager = FindViewById<ViewPager>(Resource.Id.viewpager);
