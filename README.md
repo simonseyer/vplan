@@ -44,8 +44,8 @@ The following list shows where I am heading with the project:
 
 ## About
 
-Developer: Simon Seyer (@simonseyer)  
-Designer: Kamil Drozd (@kamildrozd91)
+Developer: Simon Seyer ([@simonseyer](https://github.com/simonseyer))  
+Designer: Kamil Drozd ([@kamildrozd91](https://github.com/kamildrozd91))
 
 If you are interested in getting a similar app for your school, just get in touch via my
 GitHub [profile](https://github.com/simonseyer).
