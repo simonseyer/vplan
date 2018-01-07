@@ -15,7 +15,6 @@ namespace FLSVertretungsplan.iOS
     public class AppDelegate : UIApplicationDelegate
     {
         const int REFRESH_ON_APP_START_DELAY = 600;
-        const string APP_CENTER_IDENTIFIER = "**REMOVED**";
 
         public override UIWindow Window { get; set; }
 
@@ -27,7 +26,7 @@ namespace FLSVertretungsplan.iOS
 
         public override bool FinishedLaunching(UIApplication application, NSDictionary launchOptions)
         {
-            AppCenter.Start(APP_CENTER_IDENTIFIER, typeof(Analytics), typeof(Crashes));
+            AppCenter.Start(Secrets.IOS_APP_CENTER_SECRET, typeof(Analytics), typeof(Crashes));
             BackgroundFetchHandler.Setup();
             App.Initialize();
 
