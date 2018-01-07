@@ -112,12 +112,12 @@ namespace FLSVertretungsplan.Droid
     {
         readonly Activity Activity;
         readonly RecyclerView RecyclerView;
-        ObservableCollection<ChipPresentationModel> ObservableItems;
-        List<ChipPresentationModel> Items;
+        ObservableCollection<ChipViewModel> ObservableItems;
+        List<ChipViewModel> Items;
 
         public event ItemClickEventHandler ItemClick;
 
-        public ChipAdapter(Activity activity, RecyclerView recyclerView, ObservableCollection<ChipPresentationModel> items)
+        public ChipAdapter(Activity activity, RecyclerView recyclerView, ObservableCollection<ChipViewModel> items)
         {
             Activity = activity;
             RecyclerView = recyclerView;

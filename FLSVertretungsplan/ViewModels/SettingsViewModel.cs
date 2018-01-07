@@ -5,19 +5,19 @@ namespace FLSVertretungsplan
     public class SettingsViewModel
     {
         IVplanDataStore DataStore => ServiceLocator.Instance.Get<IVplanDataStore>();
-        ChipViewModel<SchoolBookmark> SchoolsPresentationModel;
-        ChipViewModel<SchoolClassBookmark> SchoolClassesPresentationModel;
+        ChipCollectionViewModel<SchoolBookmark> SchoolCollectionViewModel;
+        ChipCollectionViewModel<SchoolClassBookmark> SchoolClassCollectionViewModel;
 
-        public ObservableCollection<ChipPresentationModel> Schools;
-        public ObservableCollection<ChipPresentationModel> SchoolClasses;
+        public readonly ObservableCollection<ChipViewModel> Schools;
+        public readonly ObservableCollection<ChipViewModel> SchoolClasses;
 
         public SettingsViewModel()
         {
-            SchoolsPresentationModel = new ChipViewModel<SchoolBookmark>(DataStore.SchoolBookmarks, ChipPresentationModel.Create);
-            Schools = SchoolsPresentationModel.PresentationModels;
+            SchoolCollectionViewModel = new ChipCollectionViewModel<SchoolBookmark>(DataStore.SchoolBookmarks, ChipViewModel.Create);
+            Schools = SchoolCollectionViewModel.ChipViewModels;
 
-            SchoolClassesPresentationModel = new ChipViewModel<SchoolClassBookmark>(DataStore.SchoolClassBookmarks, ChipPresentationModel.Create);
-            SchoolClasses = SchoolClassesPresentationModel.PresentationModels;
+            SchoolClassCollectionViewModel = new ChipCollectionViewModel<SchoolClassBookmark>(DataStore.SchoolClassBookmarks, ChipViewModel.Create);
+            SchoolClasses = SchoolClassCollectionViewModel.ChipViewModels;
         }
 
         public void ToggleSchoolBookmarkAtIndex(int index)

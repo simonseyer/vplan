@@ -25,7 +25,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Models\Lesson.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Change.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\VplanDiff.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\ChipViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\ChipCollectionViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\NewSchoolClassesViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Plugins\Loader\CloudVplanLoader.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Plugins\Loader\IVplanLoader.cs" />
@@ -38,7 +38,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)Services\SettingsDataStore\ISettingsDataStore.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\SettingsDataStore\StandardSettingsDataStore.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\VplanDataStore\DefaultData.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Helpers\Color.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Definitions\Color.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\ChangeViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Plugins\" />
@@ -46,5 +47,6 @@
     <Folder Include="$(MSBuildThisFileDirectory)Plugins\Persistence\" />
     <Folder Include="$(MSBuildThisFileDirectory)Services\VplanDataStore\" />
     <Folder Include="$(MSBuildThisFileDirectory)Services\SettingsDataStore\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Definitions\" />
   </ItemGroup>
 </Project>

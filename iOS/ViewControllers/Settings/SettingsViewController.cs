@@ -62,20 +62,20 @@ namespace FLSVertretungsplan.iOS
     {
 
         public UICollectionView CollectionView { get; private set; }
-        public ObservableCollection<ChipPresentationModel> ObservableItems { get; private set; }
-        public Collection<ChipPresentationModel> Items { get; private set; }
+        public ObservableCollection<ChipViewModel> ObservableItems { get; private set; }
+        public Collection<ChipViewModel> Items { get; private set; }
 
-        public ChipCollectionViewDataSource(UICollectionView collectionView, ObservableCollection<ChipPresentationModel> items)
+        public ChipCollectionViewDataSource(UICollectionView collectionView, ObservableCollection<ChipViewModel> items)
         {
             CollectionView = collectionView;
             ObservableItems = items;
-            Items = new Collection<ChipPresentationModel>(ObservableItems);
+            Items = new Collection<ChipViewModel>(ObservableItems);
             items.CollectionChanged += CollectionChanged;
         }
 
         void CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
-            var newItems = new Collection<ChipPresentationModel>(ObservableItems);
+            var newItems = new Collection<ChipViewModel>(ObservableItems);
             InvokeOnMainThread(() =>
             {
                 Items = newItems;
@@ -148,11 +148,11 @@ namespace FLSVertretungsplan.iOS
 
     class ChipCollectionViewDelegate : UICollectionViewDelegateFlowLayout
     {
-        ObservableCollection<ChipPresentationModel> Items;
+        ObservableCollection<ChipViewModel> Items;
         Action<int> ToggleBookmark;
         UISelectionFeedbackGenerator FeedbackGenerator;
 
-        public ChipCollectionViewDelegate(ObservableCollection<ChipPresentationModel> items, Action<int> toggleBookmark)
+        public ChipCollectionViewDelegate(ObservableCollection<ChipViewModel> items, Action<int> toggleBookmark)
         {
             Items = items;
             ToggleBookmark = toggleBookmark;

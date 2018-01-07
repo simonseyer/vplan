@@ -168,7 +168,7 @@ namespace FLSVertretungsplan.iOS
                     content.Badge = diff.NewNewSchoolClassBookmarks.Count();
                 }
 
-                var request = UNNotificationRequest.FromIdentifier(dataStore.Vplan.Value.LastUpdate.ToString(), content, null);
+                var request = UNNotificationRequest.FromIdentifier(dataStore.SchoolVplan.Value.LastUpdate.ToString(), content, null);
                 await notificationCenter.AddNotificationRequestAsync(request);
             }
 

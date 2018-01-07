@@ -7,6 +7,51 @@ namespace FLSVertretungsplan.iOS
 {
     public partial class ChangeViewController : UIViewController
     {
+        ChangeViewModel _ViewModel;
+        public ChangeViewModel ViewModel
+        {
+            get
+            {
+                return _ViewModel;
+            }
+            set
+            {
+                _ViewModel = value;
+                UpdateView(value);
+            }
+        }
+        public UIViewController Context;
+
+        ChangeTableViewCell ChangeView
+        {
+            get
+            {
+                return View as ChangeTableViewCell;
+            }
+        }
+
+        public override IUIPreviewActionItem[] PreviewActionItems
+        {
+            get
+            {
+                return new IUIPreviewActionItem[]
+                {
+                    UIPreviewAction.Create(NSBundle.MainBundle.LocalizedString("share_image", ""), UIPreviewActionStyle.Default, (action, previewViewController) =>
+                    {
+                        ShareImage();
+                    }),
+                    UIPreviewAction.Create(NSBundle.MainBundle.LocalizedString("share_text", ""), UIPreviewActionStyle.Default, (action, previewViewController) =>
+                    {
+                        ShareText();
+                    }),
+                    UIPreviewAction.Create(NSBundle.MainBundle.LocalizedString("share_calendar_entry", ""), UIPreviewActionStyle.Default, (action, previewViewController) =>
+                    {
+                        ShareCalendarEvent();
+                    })
+                };
+            }
+        }
+
         public ChangeViewController() : base("ChangeViewController", null)
         {
         }
@@ -20,25 +65,10 @@ namespace FLSVertretungsplan.iOS
             View = ChangeTableViewCell.Create();
         }
 
-        public override void ViewDidLoad()
+        void UpdateView(ChangeViewModel model)
         {
-            base.ViewDidLoad();
             ChangeView.DisableShadows();
-        }
 
-        ChangeTableViewCell ChangeView
-        {
-            get
-            {
-                return View as ChangeTableViewCell;
-            }
-        }
-
-        ChangePresentationModel Model;
-
-        public void SetPresentationModel(ChangePresentationModel model)
-        {
-            Model = model;
             ChangeView.SchoolClassLabel.Text = model.ClassName;
             ChangeView.HoursLabel.Text = model.Day + ", " + model.Hours;
             ChangeView.ChangeLabel.Text = NSBundle.MainBundle.LocalizedString(model.Type, "");
@@ -49,29 +79,6 @@ namespace FLSVertretungsplan.iOS
             // Calculate the dynamic content size with the width restricted to the view's width and a boundless height. 
             // Set the priority for the width to required (so it doesn't get larger than the available space) the priority of the height to low
             PreferredContentSize = ChangeView.SystemLayoutSizeFittingSize(new CoreGraphics.CGSize(View.Bounds.Size.Width, nfloat.MaxValue), 1000, 100);
-        }
-
-        public UIViewController Context;
-
-        public override IUIPreviewActionItem[] PreviewActionItems
-        {
-            get
-            {
-                return new IUIPreviewActionItem[] {
-                    UIPreviewAction.Create(NSBundle.MainBundle.LocalizedString("share_image", ""), UIPreviewActionStyle.Default, (action, previewViewController) => 
-                    {
-                        ShareImage();
-                    }),
-                    UIPreviewAction.Create(NSBundle.MainBundle.LocalizedString("share_text", ""), UIPreviewActionStyle.Default, (action, previewViewController) => 
-                    {
-                        ShareText();
-                    }),
-                    UIPreviewAction.Create(NSBundle.MainBundle.LocalizedString("share_calendar_entry", ""), UIPreviewActionStyle.Default, (action, previewViewController) => 
-                    {
-                        ShareCalendarEvent();
-                    })
-                };
-            }
         }
 
         public void ShareImage()
@@ -89,7 +96,7 @@ namespace FLSVertretungsplan.iOS
 
         public void ShareText()
         {
-            var text = TextComponentFormatter.PlainStringForTextComponents(Model.TextRepresentation);
+            var text = TextComponentFormatter.PlainStringForTextComponents(ViewModel.TextRepresentation);
             var activityViewController = new UIActivityViewController(new NSObject[] { new NSString(text) }, null);
             Context.PresentViewController(activityViewController, true, null);
         }
@@ -105,11 +112,11 @@ namespace FLSVertretungsplan.iOS
                 }
 
                 var theEvent = EventKit.EKEvent.FromStore(store);
-                theEvent.Title = TextComponentFormatter.PlainStringForTextComponents(Model.EventTitle);
-                theEvent.Notes = TextComponentFormatter.PlainStringForTextComponents(Model.EventText);
+                theEvent.Title = TextComponentFormatter.PlainStringForTextComponents(ViewModel.EventTitle);
+                theEvent.Notes = TextComponentFormatter.PlainStringForTextComponents(ViewModel.EventText);
                 theEvent.AllDay = true;
-                theEvent.StartDate = Model.Date.ToNSDate();
-                theEvent.EndDate = Model.Date.ToNSDate();
+                theEvent.StartDate = ViewModel.Date.ToNSDate();
+                theEvent.EndDate = ViewModel.Date.ToNSDate();
                 theEvent.Calendar = store.DefaultCalendarForNewEvents;
 
                 store.SaveEvent(theEvent, EventKit.EKSpan.ThisEvent, out NSError saveError);

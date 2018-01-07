@@ -7,13 +7,13 @@ namespace FLSVertretungsplan
     {
         IVplanDataStore DataStore => ServiceLocator.Instance.Get<IVplanDataStore>();
 
-        ChipViewModel<SchoolClassBookmark> SchoolClassesPresentationModel;
-        public ObservableCollection<ChipPresentationModel> SchoolClasses;
+        ChipCollectionViewModel<SchoolClassBookmark> CollectionViewModel;
+        public readonly ObservableCollection<ChipViewModel> SchoolClasses;
 
         public NewSchoolClassesViewModel()
         {
-            SchoolClassesPresentationModel = new ChipViewModel<SchoolClassBookmark>(DataStore.NewSchoolClassBookmarks, ChipPresentationModel.Create);
-            SchoolClasses = SchoolClassesPresentationModel.PresentationModels;
+            CollectionViewModel = new ChipCollectionViewModel<SchoolClassBookmark>(DataStore.NewSchoolClassBookmarks, ChipViewModel.Create);
+            SchoolClasses = CollectionViewModel.ChipViewModels;
         }
 
         public void ToggleSchoolClassBookmarkAtIndex(int index)

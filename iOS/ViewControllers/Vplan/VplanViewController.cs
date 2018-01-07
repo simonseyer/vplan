@@ -11,23 +11,23 @@ namespace FLSVertretungsplan.iOS
         UIRefreshControl TableViewRefreshControl;
         UILongPressGestureRecognizer LongPressGestureRecognizer;
 
-        DatePresentationModel _PresentationModel;
-        public DatePresentationModel PresentationModel
+        VplanDayViewModel _ViewModel;
+        public VplanDayViewModel ViewModel
         {
             get
             {
-                return _PresentationModel;
+                return _ViewModel;
             }
             set
             {
-                if (_PresentationModel != null)
+                if (_ViewModel != null)
                 {
-                    _PresentationModel.IsRefreshing.PropertyChanged -= IsRefreshing_PropertyChanged;
+                    _ViewModel.IsRefreshing.PropertyChanged -= IsRefreshing_PropertyChanged;
                 }
-                _PresentationModel = value;
-                if (_PresentationModel != null)
+                _ViewModel = value;
+                if (_ViewModel != null)
                 {
-                    _PresentationModel.IsRefreshing.PropertyChanged += IsRefreshing_PropertyChanged;
+                    _ViewModel.IsRefreshing.PropertyChanged += IsRefreshing_PropertyChanged;
                 }
                 ReloadData();
             }
@@ -52,7 +52,7 @@ namespace FLSVertretungsplan.iOS
             TableView.ClipsToBounds = true;
             TableView.Layer.CornerRadius = 6;
             TableView.Layer.BorderWidth = 0.5F;
-            TableView.Layer.BorderColor = UIColor.FromRGB(236, 237, 241).CGColor;
+            TableView.Layer.BorderColor = Color.TAB_BORDER_COLOR.ToUIColor().CGColor;
             TableView.ContentInset = new UIEdgeInsets(14, 0, 14, 0);
 
             TableView.RegisterNibForCellReuse(ChangeTableViewCell.Nib, ChangeTableViewCell.Key);
@@ -73,18 +73,18 @@ namespace FLSVertretungsplan.iOS
 
         void RefreshControl_ValueChanged(object sender, EventArgs e)
         {
-            PresentationModel.LoadItemsCommand.Execute(null);
+            ViewModel.LoadItemsCommand.Execute(null);
         }
 
         void IsRefreshing_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             InvokeOnMainThread(() =>
             {
-                if (PresentationModel.IsRefreshing.Value && !TableViewRefreshControl.Refreshing)
+                if (ViewModel.IsRefreshing.Value && !TableViewRefreshControl.Refreshing)
                 {
                     TableViewRefreshControl.BeginRefreshing();
                 }
-                else if (!PresentationModel.IsRefreshing.Value)
+                else if (!ViewModel.IsRefreshing.Value)
                 {
                     TableViewRefreshControl.EndRefreshing();
                 }
@@ -96,10 +96,10 @@ namespace FLSVertretungsplan.iOS
             InvokeOnMainThread(() =>
             {
                 DataSource.Context = this;
-                DataSource.Items = PresentationModel?.Items;
+                DataSource.Items = ViewModel?.Items;
                 TableView.ReloadData();
                 var lastUpdateText = NSBundle.MainBundle.LocalizedString("vplan_last_update", ""); 
-                LastUpdateLabel.Text = NSString.LocalizedFormat(lastUpdateText, PresentationModel?.LastUpdate);
+                LastUpdateLabel.Text = NSString.LocalizedFormat(lastUpdateText, ViewModel?.LastUpdate);
             });
         }
 
@@ -125,10 +125,11 @@ namespace FLSVertretungsplan.iOS
             var indexPath = TableView.IndexPathForRowAtPoint(location);
             if (indexPath != null)
             {
-                var shareViewController = new ChangeViewController();
-                shareViewController.SetPresentationModel(DataSource.Items[indexPath.Row]);
-                shareViewController.Context = this;
-
+                var shareViewController = new ChangeViewController
+                {
+                    ViewModel = DataSource.Items[indexPath.Row],
+                    Context = this
+                };
                 var alertController = new UIAlertController();
                 alertController.AddAction(UIAlertAction.Create(NSBundle.MainBundle.LocalizedString("share_image", ""), UIAlertActionStyle.Default,(obj) => 
                 {
@@ -156,10 +157,11 @@ namespace FLSVertretungsplan.iOS
             var indexPath = TableView.IndexPathForRowAtPoint(cellPosition);
             if (indexPath != null)
             {
-                var viewController = new ChangeViewController();
-                viewController.SetPresentationModel(DataSource.Items[indexPath.Row]);
-                viewController.Context = this;
-
+                var viewController = new ChangeViewController
+                {
+                    ViewModel = DataSource.Items[indexPath.Row],
+                    Context = this
+                };
                 var tableCell = TableView.CellAt(indexPath);
                 previewingContext.SourceRect = View.ConvertRectFromView(tableCell.ContentView.Frame, TableView);
 
@@ -173,7 +175,7 @@ namespace FLSVertretungsplan.iOS
 
     class ItemsDataSource : UITableViewSource
     {
-        public Collection<ChangePresentationModel> Items;
+        public ReadOnlyCollection<ChangeViewModel> Items;
         public VplanViewController Context;
 
         public override nint NumberOfSections(UITableView tableView)

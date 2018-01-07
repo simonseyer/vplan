@@ -128,7 +128,7 @@ namespace FLSVertretungsplan.iOS
                 for (var i = 0; i < count; i++)
                 {
                     var viewController = ChildViewControllers[i] as VplanDayViewController;
-                    viewController.PresentationModel = ViewModel.Dates.Value[i];
+                    viewController.ViewModel = ViewModel.Dates.Value[i];
                 }
             }
             else

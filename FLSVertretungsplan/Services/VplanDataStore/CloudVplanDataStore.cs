@@ -18,13 +18,13 @@ namespace FLSVertretungsplan
         public Property<bool> LastRefreshFailed { get; }
 
         // State
-        public Property<Vplan> Vplan { get; }
+        public Property<Vplan> SchoolVplan { get; }
         public HashSet<SchoolClassBookmark> AllSchoolClassBookmarks { get; }
         public ObservableCollection<SchoolBookmark> SchoolBookmarks { get; }
         public ObservableCollection<SchoolClassBookmark> NewSchoolClassBookmarks { get; }
 
         // Derived state
-        public Property<Vplan> BookmarkedVplan { get; }
+        public Property<Vplan> MyVplan { get; }
         // Contains only SchoolClassBookmarks of the bookmarked schools
         public ObservableCollection<SchoolClassBookmark> SchoolClassBookmarks { get; }
 
@@ -38,11 +38,11 @@ namespace FLSVertretungsplan
             IsRefreshing = new Property<bool>();
             LastRefreshFailed = new Property<bool>();
 
-            Vplan = new Property<Vplan>
+            SchoolVplan = new Property<Vplan>
             {
                 Value = null
             };
-            BookmarkedVplan = new Property<Vplan>()
+            MyVplan = new Property<Vplan>()
             {
                 Value = null
             };
@@ -77,7 +77,7 @@ namespace FLSVertretungsplan
 
         async Task DoLoad()
         {
-            Vplan.Value = await Persistence.LoadVplan();
+            SchoolVplan.Value = await Persistence.LoadVplan();
 
             var newSchoolClassBookmarks = await Persistence.LoadNewSchoolClassBookmarks();
             foreach (var schoolClassBookmark in newSchoolClassBookmarks)
@@ -129,18 +129,18 @@ namespace FLSVertretungsplan
             LastRefreshFailed.Value = false;
             IsRefreshing.Value = true;
 
-            var oldVplan = BookmarkedVplan.Value;
+            var oldVplan = MyVplan.Value;
             var oldNewSchoolClasses = NewSchoolClassBookmarks.ToList();
 
             try
             {
                 var newVplan = await Loader.Load();
-                if (newVplan.Equals(Vplan.Value))
+                if (newVplan.Equals(SchoolVplan.Value))
                 {
                     IsRefreshing.Value = false;
                     return new VplanDiff(false, new List<Change>(), new List<SchoolClassBookmark>());
                 }
-                Vplan.Value = newVplan;
+                SchoolVplan.Value = newVplan;
             } 
             catch (Exception e)
             {
@@ -155,9 +155,9 @@ namespace FLSVertretungsplan
 
             await PersistAll();
 
-            var gotUpdated = Vplan.Value != null && (oldVplan == null || !oldVplan.LastUpdate.Equals(Vplan.Value.LastUpdate));
+            var gotUpdated = SchoolVplan.Value != null && (oldVplan == null || !oldVplan.LastUpdate.Equals(SchoolVplan.Value.LastUpdate));
             var oldBookmarkedChanges = oldVplan?.Changes.ToHashSet() ?? new HashSet<Change>();
-            var newBookmarkedChanges = BookmarkedVplan.Value?.Changes.ToHashSet() ?? new HashSet<Change>();
+            var newBookmarkedChanges = MyVplan.Value?.Changes.ToHashSet() ?? new HashSet<Change>();
             var newBookmarks = newBookmarkedChanges.Except(oldBookmarkedChanges);
             var newNewClasses = NewSchoolClassBookmarks.ToHashSet().Except(oldNewSchoolClasses.ToHashSet());
 
@@ -210,13 +210,13 @@ namespace FLSVertretungsplan
 
         void UpdateBookmarkedVplan()
         {
-            if (Vplan.Value == null)
+            if (SchoolVplan.Value == null)
             {
                 return;
             }
 
             List<Change> bookmarkedChanges = new List<Change>();
-            foreach (Change change in Vplan.Value.Changes)
+            foreach (Change change in SchoolVplan.Value.Changes)
             {
                 var bookmark = GetSchoolClassBookmark(change.SchoolClass);
                 if (bookmark != null && bookmark.Bookmarked)
@@ -225,16 +225,16 @@ namespace FLSVertretungsplan
                 }
             }
 
-            var newVplan = new Vplan(Vplan.Value.LastUpdate, bookmarkedChanges);
-            if (!newVplan.Equals(BookmarkedVplan.Value))
+            var newVplan = new Vplan(SchoolVplan.Value.LastUpdate, bookmarkedChanges);
+            if (!newVplan.Equals(MyVplan.Value))
             {
-                BookmarkedVplan.Value = newVplan;
+                MyVplan.Value = newVplan;
             }
         }
 
         void UpdateSchoolClasses()
         {
-            foreach (Change change in Vplan.Value.Changes)
+            foreach (Change change in SchoolVplan.Value.Changes)
             {
                 AddClass(change.SchoolClass);
             }
@@ -346,7 +346,7 @@ namespace FLSVertretungsplan
 
         async Task PersistAll()
         {
-            await Persistence.PersistVplan(Vplan.Value);
+            await Persistence.PersistVplan(SchoolVplan.Value);
             await PersistNewSchoolClasses();
             await PersistSchoolBookmarks();
             await PersistSchoolClassBookmarks();

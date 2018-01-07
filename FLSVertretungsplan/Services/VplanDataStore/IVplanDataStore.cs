@@ -9,8 +9,8 @@ namespace FLSVertretungsplan
     {
         Property<bool> IsRefreshing { get; }
         Property<bool> LastRefreshFailed { get; }
-        Property<Vplan> Vplan { get; }
-        Property<Vplan> BookmarkedVplan { get; }
+        Property<Vplan> SchoolVplan { get; }
+        Property<Vplan> MyVplan { get; }
         ObservableCollection<SchoolBookmark> SchoolBookmarks { get; }
         ObservableCollection<SchoolClassBookmark> SchoolClassBookmarks { get; }
         ObservableCollection<SchoolClassBookmark> NewSchoolClassBookmarks { get; }

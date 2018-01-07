@@ -6,15 +6,15 @@ namespace FLSVertretungsplan.iOS
 {
     public partial class VplanDayViewController : UIViewController
     {
-        DatePresentationModel _PresentationModel;
-        public DatePresentationModel PresentationModel {
+        VplanDayViewModel _ViewModel;
+        public VplanDayViewModel ViewModel {
             get
             {
-                return _PresentationModel;
+                return _ViewModel;
             } 
             set
             {
-                _PresentationModel = value;
+                _ViewModel = value;
                 ReloadData();
             }
         }
@@ -39,14 +39,14 @@ namespace FLSVertretungsplan.iOS
             base.PrepareForSegue(segue, sender);
 
             VplanViewController = segue.DestinationViewController as VplanViewController;
-            VplanViewController.PresentationModel = _PresentationModel;
+            VplanViewController.ViewModel = ViewModel;
         }
 
         void ReloadData()
         {
-            DayTitleLabel.Text = _PresentationModel?.Title;
-            DaySubTitleLabel.Text = _PresentationModel?.SubTitle;
-            VplanViewController.PresentationModel = _PresentationModel;
+            DayTitleLabel.Text = ViewModel?.Title;
+            DaySubTitleLabel.Text = ViewModel?.SubTitle;
+            VplanViewController.ViewModel = ViewModel;
         }
     }
 }
