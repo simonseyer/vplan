@@ -35,6 +35,7 @@ namespace FLSVertretungsplan.iOS
             SchoolClassCollectionView.DataSource = SchoolClassesDataSource;
             SchoolClassesDelegate = new ChipCollectionViewDelegate(ViewModel.SchoolClasses, ViewModel.ToggleSchoolClassBookmarkAtIndex);
             SchoolClassCollectionView.Delegate = SchoolClassesDelegate;
+            SchoolClassCollectionView.AccessibilityIdentifier = "SchoolClassCollectionView";
 
             TabBarItem.Title = NSBundle.MainBundle.LocalizedString("filter_tab", "");
             TitleLabel.Text = NSBundle.MainBundle.LocalizedString("filter_title", "");
