@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FLSVertretungsplan.Droid", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlowLayoutManager", "FlowLayoutManager\FlowLayoutManager.csproj", "{7CE9FBCE-41A5-4039-B9D6-6986A0B65B1E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "iOSUITests", "iOSUITests\iOSUITests.csproj", "{F2A155A7-976B-4EAA-A2C3-F14AF5B4A022}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|iPhoneSimulator = Debug|iPhoneSimulator
@@ -55,5 +57,17 @@ Global
 		{7CE9FBCE-41A5-4039-B9D6-6986A0B65B1E}.Release|iPhoneSimulator.Build.0 = Debug|Any CPU
 		{7CE9FBCE-41A5-4039-B9D6-6986A0B65B1E}.Release|Any CPU.ActiveCfg = Debug|Any CPU
 		{7CE9FBCE-41A5-4039-B9D6-6986A0B65B1E}.Release|Any CPU.Build.0 = Debug|Any CPU
+		{F2A155A7-976B-4EAA-A2C3-F14AF5B4A022}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{F2A155A7-976B-4EAA-A2C3-F14AF5B4A022}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{F2A155A7-976B-4EAA-A2C3-F14AF5B4A022}.Release|iPhone.ActiveCfg = Release|Any CPU
+		{F2A155A7-976B-4EAA-A2C3-F14AF5B4A022}.Release|iPhone.Build.0 = Release|Any CPU
+		{F2A155A7-976B-4EAA-A2C3-F14AF5B4A022}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{F2A155A7-976B-4EAA-A2C3-F14AF5B4A022}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
+		{F2A155A7-976B-4EAA-A2C3-F14AF5B4A022}.Debug|iPhone.ActiveCfg = Debug|Any CPU
+		{F2A155A7-976B-4EAA-A2C3-F14AF5B4A022}.Debug|iPhone.Build.0 = Debug|Any CPU
+		{F2A155A7-976B-4EAA-A2C3-F14AF5B4A022}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F2A155A7-976B-4EAA-A2C3-F14AF5B4A022}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F2A155A7-976B-4EAA-A2C3-F14AF5B4A022}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F2A155A7-976B-4EAA-A2C3-F14AF5B4A022}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
