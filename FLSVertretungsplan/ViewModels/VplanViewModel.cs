@@ -17,6 +17,14 @@ namespace FLSVertretungsplan
         public readonly Property<bool> IsRefreshing;
         public readonly Command LoadItemsCommand;
 
+        public bool ShouldProvideLongpressGesture
+        {
+            get
+            {
+                return ServiceLocator.Instance.Get<ISettingsDataStore>().TestEnvironment;
+            }
+        }
+
         public VplanDayViewModel(string title, string subTitle, string lastUpdate, Collection<ChangeViewModel> items, Property<bool> isRefreshing, Command loadItemsCommand)
         {
             Title = title;

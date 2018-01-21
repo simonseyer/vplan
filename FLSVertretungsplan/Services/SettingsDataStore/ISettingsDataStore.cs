@@ -5,5 +5,7 @@ namespace FLSVertretungsplan
     {
 
         bool FirstAppLaunch { get; set; }
+
+        bool TestEnvironment { get; set; }
     }
 }

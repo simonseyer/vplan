@@ -22,20 +22,39 @@ namespace FLSVertretungsplan.iOS
 
         BackgroundFetchHandler BackgroundFetchHandler => new BackgroundFetchHandler();
         NotificationHandler NotificationHandler => new NotificationHandler();
-        ISettingsDataStore SettingsDataSore => ServiceLocator.Instance.Get<ISettingsDataStore>();
+        ISettingsDataStore SettingsDataStore;
 
         public override bool FinishedLaunching(UIApplication application, NSDictionary launchOptions)
         {
             AppCenter.Start(Secrets.IOS_APP_CENTER_SECRET, typeof(Analytics), typeof(Crashes));
             BackgroundFetchHandler.Setup();
-            App.Initialize();
+           
+            App.Initialize(false);
+            SettingsDataStore = ServiceLocator.Instance.Get<ISettingsDataStore>();
 
+            InitializeView();
+
+            var dataStore = ServiceLocator.Instance.Get<IVplanDataStore>();
+            Task.Run(() =>
+            {
+                dataStore.Load();
+            });
+
+            #if ENABLE_TEST_CLOUD
+            Xamarin.Calabash.Start();
+            #endif
+
+            return true;
+        }
+
+        void InitializeView() 
+        {
             var navigationController = Window.RootViewController as UINavigationController;
             var storyboard = UIStoryboard.FromName("Main", NSBundle.MainBundle);
 
-            if (SettingsDataSore.FirstAppLaunch)
+            if (SettingsDataStore.FirstAppLaunch)
             {
-                SettingsDataSore.FirstAppLaunch = false;
+                SettingsDataStore.FirstAppLaunch = false;
                 var setupViewController = storyboard.InstantiateViewController("SetupViewController") as SetupViewController;
                 setupViewController.NotificationHandler = NotificationHandler;
                 navigationController.ViewControllers = new UIViewController[]
@@ -51,14 +70,42 @@ namespace FLSVertretungsplan.iOS
                     storyboard.InstantiateViewController("MainViewController")
                 };
             }
+        }
 
-            var dataStore = ServiceLocator.Instance.Get<IVplanDataStore>();
+        // Backdoor for tests
+        [Export("activateTestEnvironment:")]
+        public NSString ActivateTestEnvironment(NSString value)
+        {
+            var dataStore = ServiceLocator.Instance.Get<ISettingsDataStore>();
+            dataStore.TestEnvironment = new NSString("true").Equals(value);
+
             Task.Run(() =>
             {
-                dataStore.Load();
+                _ = Reinitialize();
             });
 
-            return true;
+            return new NSString();
+        }
+
+        async Task Reinitialize()
+        {
+            var settingsDataStore = ServiceLocator.Instance.Get<ISettingsDataStore>();
+            var testEnvironment = settingsDataStore.TestEnvironment;
+
+            App.Initialize(settingsDataStore.TestEnvironment);
+
+            SettingsDataStore = ServiceLocator.Instance.Get<ISettingsDataStore>();
+            SettingsDataStore.TestEnvironment = testEnvironment;
+            SettingsDataStore.FirstAppLaunch = true;
+
+            var dataStore = ServiceLocator.Instance.Get<IVplanDataStore>();
+            await dataStore.Load();
+            await dataStore.Refresh();
+
+            InvokeOnMainThread(() =>
+            {
+                InitializeView();
+            });
         }
 
         public override void OnActivated(UIApplication application)

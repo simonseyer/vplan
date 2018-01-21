@@ -6,7 +6,7 @@ namespace FLSVertretungsplan
 {
     public class StandardSettingsDataStore: ISettingsDataStore
     {
-        private static ISettings AppSettings
+        static ISettings AppSettings
         {
             get
             {
@@ -14,7 +14,7 @@ namespace FLSVertretungsplan
             }
         }
 
-        private const string InitialStartKey = "InitialStartKey";
+        const string InitialStartKey = "InitialStartKey";
         public bool FirstAppLaunch
         {
             get
@@ -24,6 +24,19 @@ namespace FLSVertretungsplan
             set
             {
                 AppSettings.AddOrUpdateValue(InitialStartKey, value);
+            }
+        }
+
+        bool _TestEnvironment;
+        public bool TestEnvironment
+        {
+            get
+            {
+                return _TestEnvironment;
+            }
+            set
+            {
+                _TestEnvironment = value;
             }
         }
     }

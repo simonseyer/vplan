@@ -105,8 +105,9 @@ namespace FLSVertretungsplan.iOS
 
         void AddLongPressGestureRecognizerIfNeeded()
         {
-            if (TraitCollection.ForceTouchCapability == UIForceTouchCapability.Unavailable &&
-                LongPressGestureRecognizer == null)
+            if ((TraitCollection.ForceTouchCapability == UIForceTouchCapability.Unavailable &&
+                 LongPressGestureRecognizer == null) ||
+                (ViewModel != null && ViewModel.ShouldProvideLongpressGesture))
             {
                 LongPressGestureRecognizer = new UILongPressGestureRecognizer();
                 LongPressGestureRecognizer.AddTarget(() => this.LongPressPerformed(LongPressGestureRecognizer));
