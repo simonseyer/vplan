@@ -42,6 +42,12 @@ namespace FLSVertretungsplan.iOS
             SubTitleLabel.Text = NSBundle.MainBundle.LocalizedString("filter_subtitle", "");
             SchoolSectionLabel.Text = NSBundle.MainBundle.LocalizedString("filter_school_section_title", "");
             SchoolClassSectionLabel.Text = NSBundle.MainBundle.LocalizedString("filter_school_class_section_title", "");
+
+            if (UIScreen.MainScreen.Bounds.Height < 600) {
+                TopMarginConstraint.Constant = 20;
+                SchoolTitleTopMarginConstraint.Constant = 20;
+                SchoolClassTitleTopMarginConstraint.Constant = 20;
+            }
         }
 
         public override void ViewWillAppear(bool animated)

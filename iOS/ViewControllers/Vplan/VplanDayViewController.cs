@@ -32,6 +32,11 @@ namespace FLSVertretungsplan.iOS
         public override void ViewDidLoad()
         {
             base.ViewDidLoad();
+
+            if (UIScreen.MainScreen.Bounds.Height < 600)
+            {
+                TopMarginConstraint.Constant = 20;
+            }
         }
 
         public override void PrepareForSegue(UIStoryboardSegue segue, Foundation.NSObject sender)
