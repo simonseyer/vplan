@@ -8,13 +8,13 @@
 
 "new_plan_title" = "Neuer Vertretungsplan verfügbar";
 
-"new_changes_singular" = "\"Ein neuer Eintrag\"";
+"new_changes_singular" = "Ein neuer Eintrag";
 
-"new_changes_plural" = "\"%@ neue Einträge\"";
+"new_changes_plural" = "%@ neue Einträge";
 
-"new_school_classes_singular" = "\"Eine neue Klasse\"";
+"new_school_classes_singular" = "Eine neue Klasse";
 
-"new_school_classes_plural" = "\"%@ neue Klassen\"";
+"new_school_classes_plural" = "%@ neue Klassen";
 
 
 /********** setup **********/

@@ -2,13 +2,13 @@
 	[new_plan_title]
 		de = Neuer Vertretungsplan verfügbar
 	[new_changes_singular]
-		de = "Ein neuer Eintrag"
+		de = Ein neuer Eintrag
 	[new_changes_plural]
-		de = "%@ neue Einträge"
+		de = %@ neue Einträge
 	[new_school_classes_singular]
-		de = "Eine neue Klasse"
+		de = Eine neue Klasse
 	[new_school_classes_plural]
-		de = "%@ neue Klassen"
+		de = %@ neue Klassen
 
 [[setup]]
 	[setup_start_button]
