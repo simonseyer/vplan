@@ -5,7 +5,7 @@
 	<key>CFBundleIdentifier</key>
 	<string>de.fls-wiesbaden.vplan</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.4</string>
+	<string>1.5</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>UIDeviceFamily</key>
@@ -46,11 +46,11 @@
 	<string>10.0</string>
 	<key>XSAppIconAssets</key>
 	<string>Assets.xcassets/AppIcon.appiconset</string>
-	<key>CFBundleVersion</key>
-	<string>1.4</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>de</string>
 	<key>NSCalendarsUsageDescription</key>
 	<string>Um Kalendereinträge für Änderungen anzulegen, braucht die App Zugriff auf deinen Kalender.</string>
+	<key>CFBundleVersion</key>
+	<string>3</string>
 </dict>
 </plist>
