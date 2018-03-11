@@ -12,7 +12,6 @@ namespace FLSVertretungsplan.iOS
         public VplanViewModel ViewModel { get; set; }
 
         static readonly nfloat ScrollViewMargin = 12;
-        static readonly nfloat PageSpacing = 6;
 
         NSLayoutConstraint TrailingConstraint;
         bool Visible;
@@ -99,8 +98,7 @@ namespace FLSVertretungsplan.iOS
 
         void PageControlValueChanged(object sender, EventArgs e)
         {
-            var pageWidth = ScrollView.ContentSize.Width / ViewModel.Dates.Value.Count;
-            var origin = new CGPoint(pageWidth * PageControl.CurrentPage, 0);
+            var origin = new CGPoint(ScrollView.Bounds.Size.Width * PageControl.CurrentPage, 0);
             ScrollView.ScrollRectToVisible(new CGRect(origin, ScrollView.Bounds.Size), true);
         }
 
@@ -166,7 +164,7 @@ namespace FLSVertretungsplan.iOS
 
                 if (precedingViewController != null)
                 {
-                    newViewController.View.LeadingAnchor.ConstraintEqualTo(precedingViewController.View.TrailingAnchor, PageSpacing).Active = true;
+                    newViewController.View.LeadingAnchor.ConstraintEqualTo(precedingViewController.View.TrailingAnchor, 2 * ScrollViewMargin).Active = true;
                 }
                 else
                 {
