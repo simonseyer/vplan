@@ -13,7 +13,7 @@ platform :ios do
   lane :beta do
     archive
     pilot(
-      ipa: "../bin/builds/FLSVertretungsplan.iOS.ipa",
+      ipa: "bin/builds/FLSVertretungsplan.iOS.ipa",
       distribute_external: true,
       changelog: File.read('metadata/beta-release-notes.txt')
     )
@@ -26,7 +26,7 @@ platform :ios do
     deliver(
       submit_for_review: true,
       automatic_release: false,
-      ipa: "../bin/builds/FLSVertretungsplan.iOS.ipa",
+      ipa: "bin/builds/FLSVertretungsplan.iOS.ipa",
       force: true
     )
   end
