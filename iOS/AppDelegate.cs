@@ -110,13 +110,14 @@ namespace FLSVertretungsplan.iOS
 
         public override void OnActivated(UIApplication application)
         {
+            UIApplication.SharedApplication.ApplicationIconBadgeNumber = 0;
+
             if (!InitialActivation)
             {
                 return;
             }
             InitialActivation = false;
 
-            UIApplication.SharedApplication.ApplicationIconBadgeNumber = 0;
             _ = Refresh();
         }
 
