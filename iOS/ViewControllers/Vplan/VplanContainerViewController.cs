@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
+using CoreGraphics;
 using Foundation;
 using UIKit;
 
@@ -52,10 +53,7 @@ namespace FLSVertretungsplan.iOS
 
         void Dates_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            InvokeOnMainThread(() =>
-            {
-                ReloadData();
-            });
+            InvokeOnMainThread(ReloadData);
         }
 
         void LastRefreshFailed_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
@@ -116,7 +114,7 @@ namespace FLSVertretungsplan.iOS
             {
                 if (PageControl.CurrentPage > ViewModel.Dates.Value.Count)
                 {
-                    ScrollView.ScrollRectToVisible(CoreGraphics.CGRect.FromLTRB(0, 0, 0, 0), true);
+                    ScrollView.ScrollRectToVisible(CGRect.FromLTRB(0, 0, 0, 0), true);
                 }
                 RemovePages(Math.Abs(diff));
             }
@@ -201,7 +199,7 @@ namespace FLSVertretungsplan.iOS
 
         public void ResetContent()
         {
-            ScrollView.SetContentOffset(CoreGraphics.CGPoint.Empty, true);
+            ScrollView.SetContentOffset(CGPoint.Empty, true);
             PageControl.CurrentPage = 0;
         }
     }
