@@ -1,0 +1,46 @@
+{
+  "device_frame_version": "latest",
+  "default": {
+    "title": {
+      "font": "./SF-Pro-Display-Bold.otf"
+    },
+    "background": "./background.jpg",
+    "padding": 50,
+    "show_complete_frame": true,
+    "stack_title" : false,
+    "title_below_image" : false,
+    "font_scale_factor" : 0.06
+  },
+  "data": [
+    {
+      "filter" : "1",
+      "title" : {
+        "color": "#FE9674"
+      }
+    },
+    {
+      "filter" : "2",
+      "title" : {
+        "color": "#1E9AF9"
+      }
+    },
+    {
+      "filter" : "3",
+      "title" : {
+        "color": "#1BC9B6"
+      }
+    },
+    {
+      "filter" : "4",
+      "title" : {
+        "color": "#713FC0"
+      }
+    },
+    {
+      "filter" : "5",
+      "title" : {
+        "color": "#FE395E"
+      }
+    }
+  ]
+}
