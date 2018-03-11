@@ -13,22 +13,7 @@ namespace FLSVertretungsplan.iOS
 	partial class SettingsViewController
 	{
 		[Outlet]
-		UIKit.UICollectionView SchoolClassCollectionView { get; set; }
-
-		[Outlet]
-		UIKit.UILabel SchoolClassSectionLabel { get; set; }
-
-		[Outlet]
-		UIKit.NSLayoutConstraint SchoolClassTitleTopMarginConstraint { get; set; }
-
-		[Outlet]
-		UIKit.UICollectionView SchoolCollectionView { get; set; }
-
-		[Outlet]
-		UIKit.UILabel SchoolSectionLabel { get; set; }
-
-		[Outlet]
-		UIKit.NSLayoutConstraint SchoolTitleTopMarginConstraint { get; set; }
+		UIKit.UICollectionView CollectionView { get; set; }
 
 		[Outlet]
 		UIKit.UILabel SubTitleLabel { get; set; }
@@ -41,24 +26,9 @@ namespace FLSVertretungsplan.iOS
 		
 		void ReleaseDesignerOutlets ()
 		{
-			if (SchoolClassCollectionView != null) {
-				SchoolClassCollectionView.Dispose ();
-				SchoolClassCollectionView = null;
-			}
-
-			if (SchoolClassSectionLabel != null) {
-				SchoolClassSectionLabel.Dispose ();
-				SchoolClassSectionLabel = null;
-			}
-
-			if (SchoolCollectionView != null) {
-				SchoolCollectionView.Dispose ();
-				SchoolCollectionView = null;
-			}
-
-			if (SchoolSectionLabel != null) {
-				SchoolSectionLabel.Dispose ();
-				SchoolSectionLabel = null;
+			if (CollectionView != null) {
+				CollectionView.Dispose ();
+				CollectionView = null;
 			}
 
 			if (SubTitleLabel != null) {
@@ -74,16 +44,6 @@ namespace FLSVertretungsplan.iOS
 			if (TopMarginConstraint != null) {
 				TopMarginConstraint.Dispose ();
 				TopMarginConstraint = null;
-			}
-
-			if (SchoolTitleTopMarginConstraint != null) {
-				SchoolTitleTopMarginConstraint.Dispose ();
-				SchoolTitleTopMarginConstraint = null;
-			}
-
-			if (SchoolClassTitleTopMarginConstraint != null) {
-				SchoolClassTitleTopMarginConstraint.Dispose ();
-				SchoolClassTitleTopMarginConstraint = null;
 			}
 		}
 	}

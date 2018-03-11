@@ -144,7 +144,6 @@
     <Compile Include="Views\ChipCollectionViewCell.designer.cs">
       <DependentUpon>ChipCollectionViewCell.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\DynamicCollectionView.cs" />
     <Compile Include="Helpers\RgbColorExtension.cs" />
     <Compile Include="Views\ChangeTableViewCell.cs" />
     <Compile Include="Views\ChangeTableViewCell.designer.cs">
@@ -200,6 +199,10 @@
     <Compile Include="Handlers\BackgroundFetchHandler.cs" />
     <Compile Include="Handlers\NotificationHandler.cs" />
     <Compile Include="Helpers\UIColorExtension.cs" />
+    <Compile Include="Views\ChipCollectionHeaderView.cs" />
+    <Compile Include="Views\ChipCollectionHeaderView.designer.cs">
+      <DependentUpon>ChipCollectionHeaderView.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Entitlements.plist" />

@@ -26,9 +26,9 @@ Creates new screenshots and uploads them to iTunes Connect
 fastlane ios beta
 ```
 Submits a new Beta Build to Apple TestFlight
-### ios deploy
+### ios release
 ```
-fastlane ios deploy
+fastlane ios release
 ```
 Deploys a new version to the App Store
 

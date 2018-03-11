@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.ObjectModel;
 using Foundation;
 using UIKit;
 
@@ -24,9 +25,18 @@ namespace FLSVertretungsplan.iOS
 
             ViewModel = new NewSchoolClassesViewModel();
 
-            SchoolClassesDataSource = new ChipCollectionViewDataSource(CollectionView, ViewModel.SchoolClasses);
+            var sections = new Collection<ChipSection>()
+            {
+                new ChipSection(
+                    null,
+                    ViewModel.SchoolClasses, 
+                    ViewModel.ToggleSchoolClassBookmarkAtIndex
+                )
+            };
+
+            SchoolClassesDataSource = new ChipCollectionViewDataSource(CollectionView, sections);
             CollectionView.DataSource = SchoolClassesDataSource;
-            SchoolClassesDelegate = new ChipCollectionViewDelegate(ViewModel.SchoolClasses, ViewModel.ToggleSchoolClassBookmarkAtIndex);
+            SchoolClassesDelegate = new ChipCollectionViewDelegate(sections);
             CollectionView.Delegate = SchoolClassesDelegate;
 
             TitleLabel.Text = NSBundle.MainBundle.LocalizedString("new_school_classes_title", "");

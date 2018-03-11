@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
 using System.Text.RegularExpressions;
 using NUnit.Framework;
 using Xamarin.UITest;
@@ -62,12 +61,12 @@ namespace iOS.uitest
             app.Tap(c => c.Marked("11/12 M"));
             app.Tap(c => c.Marked("11/11 G"));
 
-            app.ScrollDown("SchoolClassCollectionView", strategy: ScrollStrategy.Gesture);
+            app.ScrollDown("filterCollectionView", ScrollStrategy.Gesture);
 
             app.Tap(c => c.Marked("12"));
             app.Tap(c => c.Marked("1292"));
 
-            app.ScrollUp("SchoolClassCollectionView", strategy: ScrollStrategy.Gesture);
+            app.ScrollUp("filterCollectionView", ScrollStrategy.Gesture);
 
             app.Screenshot("filter");
 
