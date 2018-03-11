@@ -92,12 +92,12 @@ namespace FLSVertretungsplan.iOS
             }
             InvokeOnMainThread(() =>
             {
-                if (ViewModel.IsRefreshing.Value)
+                if (ViewModel.IsRefreshing.Value && !TableViewRefreshControl.Refreshing)
                 {
                     TableViewRefreshControl.BeginRefreshing();
                     TableView.SetContentOffset(new CGPoint(0, -RefreshControl.Frame.Size.Height), true);
                 }
-                else
+                else if (!ViewModel.IsRefreshing.Value)
                 {
                     TableViewRefreshControl.EndRefreshing();
                 }
