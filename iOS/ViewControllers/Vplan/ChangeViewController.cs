@@ -67,7 +67,7 @@ namespace FLSVertretungsplan.iOS
             ChangeView.DisableShadows();
 
             ChangeView.SchoolClassLabel.Text = model.ClassName;
-            ChangeView.HoursLabel.Text = model.Day + ", " + model.Hours;
+            ChangeView.HoursLabel.Text = model.Day + ", " + model.Hours + " " + NSBundle.MainBundle.LocalizedString("change_suffix_hour", "");
             ChangeView.ChangeLabel.Text = NSBundle.MainBundle.LocalizedString(model.Type, "");
             ChangeView.SchoolGradientView.Gradient = model.FillColor;
             ChangeView.OriginalLessonLabel.AttributedText = TextComponentFormatter.AttributedStringForTextComponents(model.OldLesson, true);

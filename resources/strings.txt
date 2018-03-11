@@ -16,9 +16,9 @@
 
 [[tab_bar]]
 	[school_tab]
-		de = Schul-Plan
+		de = FLS-VPlan
 	[my_plan_tab]
-		de = Mein Plan
+		de = Mein VPlan
 	[filter_tab]
 		de = Filter
 
@@ -26,15 +26,15 @@
 	[new_school_classes_title]
 		de = Neue Klassen verfügbar
 	[new_school_classes_subtitle]
-		de = Wähle die Klassen, die dich interessieren.
+		de = Wählen Sie die Klassen, die Sie interessieren.
 	[new_school_classses_done_button]
 		de = Fertig
 
 [[filter]]
 	[filter_title]
-		de = FLS Vertretungsplan
+		de = FLS-Vertretungsplan
 	[filter_subtitle]
-		de = Wähle deine Schulform und Klassen. Die Liste wird ständig aktualisiert.
+		de = Wählen Sie Ihre Schulform und Klassen. Die Liste wird ständig aktualisiert.
 	[filter_school_section_title]
 		de = Schulformen
 	[filter_school_class_section_title]
@@ -44,7 +44,7 @@
 	[empty_vplan_title]
 		de = Alles nach Plan
 	[empty_vplan_subtitle]
-		de = Du wirst benachrichtigt, wenn neue Vertretungen vorliegen.\nZiehen zum Aktualisieren.
+		de = Es sind zurzeit keine Vertretungsdaten vorhanden. Dies heißt aber nicht unbedingt, dass keine Vertretungen existieren.\n\nSie werden benachrichtigt, wenn neue Daten vorliegen.\nZiehen zum Aktualisieren.
 
 [[vplan]]
 	[vplan_last_update]
@@ -69,6 +69,8 @@
 		de = Raum
 	[change_suffix_time]
 		de = Stunde
+	[change_suffix_hour]
+		de = Std.
 
 [[share]]
 	[share_image]

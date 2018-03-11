@@ -24,9 +24,9 @@
 
 /********** tab_bar **********/
 
-"school_tab" = "Schul-Plan";
+"school_tab" = "FLS-VPlan";
 
-"my_plan_tab" = "Mein Plan";
+"my_plan_tab" = "Mein VPlan";
 
 "filter_tab" = "Filter";
 
@@ -35,16 +35,16 @@
 
 "new_school_classes_title" = "Neue Klassen verfügbar";
 
-"new_school_classes_subtitle" = "Wähle die Klassen, die dich interessieren.";
+"new_school_classes_subtitle" = "Wählen Sie die Klassen, die Sie interessieren.";
 
 "new_school_classses_done_button" = "Fertig";
 
 
 /********** filter **********/
 
-"filter_title" = "FLS Vertretungsplan";
+"filter_title" = "FLS-Vertretungsplan";
 
-"filter_subtitle" = "Wähle deine Schulform und Klassen. Die Liste wird ständig aktualisiert.";
+"filter_subtitle" = "Wählen Sie Ihre Schulform und Klassen. Die Liste wird ständig aktualisiert.";
 
 "filter_school_section_title" = "Schulformen";
 
@@ -55,7 +55,7 @@
 
 "empty_vplan_title" = "Alles nach Plan";
 
-"empty_vplan_subtitle" = "Du wirst benachrichtigt, wenn neue Vertretungen vorliegen.\nZiehen zum Aktualisieren.";
+"empty_vplan_subtitle" = "Es sind zurzeit keine Vertretungsdaten vorhanden. Dies heißt aber nicht unbedingt, dass keine Vertretungen existieren.\n\nSie werden benachrichtigt, wenn neue Daten vorliegen.\nZiehen zum Aktualisieren.";
 
 
 /********** vplan **********/
@@ -82,6 +82,8 @@
 "change_prefix_room" = "Raum";
 
 "change_suffix_time" = "Stunde";
+
+"change_suffix_hour" = "Std.";
 
 
 /********** share **********/

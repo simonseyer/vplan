@@ -195,7 +195,7 @@ namespace FLSVertretungsplan.iOS
             var change = Items[indexPath.Row];
 
             cell.SchoolClassLabel.Text = change.ClassName;
-            cell.HoursLabel.Text = change.Hours;
+            cell.HoursLabel.Text = change.Hours + " " + NSBundle.MainBundle.LocalizedString("change_suffix_hour", "");
             cell.ChangeLabel.Text = NSBundle.MainBundle.LocalizedString(change.Type, "");
             cell.SchoolGradientView.Gradient = change.FillColor;
             cell.OriginalLessonLabel.AttributedText = TextComponentFormatter.AttributedStringForTextComponents(change.OldLesson, true);
