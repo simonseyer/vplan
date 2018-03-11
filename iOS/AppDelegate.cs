@@ -102,10 +102,7 @@ namespace FLSVertretungsplan.iOS
             await dataStore.Load();
             await dataStore.Refresh();
 
-            InvokeOnMainThread(() =>
-            {
-                InitializeView();
-            });
+            InvokeOnMainThread(InitializeView);
         }
 
         public override void OnActivated(UIApplication application)
