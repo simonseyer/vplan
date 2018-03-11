@@ -1,0 +1,12 @@
+* Eine Reihe von kleinere Glitches in der Oberfläche behoben
+* Texte aktualisiert (Sie werden jetzt korrekt gesiezt)
+* In den Filtern ist jetzt der Großteil der Oberfläche scrollbar
+* Die Zahl neuer Vertretungen am App Icon wird jetzt korrekt zurückgesetzt
+* iPad Unterstützung entfernt — die App ist noch nicht auf das iPad optimiert und stürtzt dort in manchen Fällen ab
+
+English:
+* Fixed a number of UI glitches
+* Updated copies
+* Made the greater part of the filter screen scrollable
+* Reseting the badge number next to the app icon now works correctly
+* Removed iPad support — the app is not optimised for the iPad yet and crashed in some circumstances

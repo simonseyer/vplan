@@ -5,7 +5,7 @@
 	<key>CFBundleIdentifier</key>
 	<string>de.fls-wiesbaden.vplan</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.5</string>
+	<string>1.6</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>UIDeviceFamily</key>
