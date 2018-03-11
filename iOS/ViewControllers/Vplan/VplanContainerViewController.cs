@@ -37,6 +37,8 @@ namespace FLSVertretungsplan.iOS
             ViewModel.Dates.PropertyChanged += Dates_PropertyChanged;
             ViewModel.LastRefreshFailed.PropertyChanged += LastRefreshFailed_PropertyChanged;
             ReloadData();
+
+            PageControl.ValueChanged += PageControlValueChanged;
         }
 
         public override void ViewWillAppear(bool animated)
@@ -93,6 +95,13 @@ namespace FLSVertretungsplan.iOS
         public void DecelerationEnded(UIScrollView scrollView)
         {
             PageControl.CurrentPage = (int)((ScrollView.ContentOffset.X + 0.5 * ScrollView.Frame.Size.Width)  / ScrollView.Frame.Size.Width);
+        }
+
+        void PageControlValueChanged(object sender, EventArgs e)
+        {
+            var pageWidth = ScrollView.ContentSize.Width / ViewModel.Dates.Value.Count;
+            var origin = new CGPoint(pageWidth * PageControl.CurrentPage, 0);
+            ScrollView.ScrollRectToVisible(new CGRect(origin, ScrollView.Bounds.Size), true);
         }
 
         void ReloadData() 
