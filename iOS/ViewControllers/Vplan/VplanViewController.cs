@@ -29,6 +29,7 @@ namespace FLSVertretungsplan.iOS
                 {
                     _ViewModel.IsRefreshing.PropertyChanged += IsRefreshing_PropertyChanged;
                 }
+                UpdateRefreshControlState();
                 ReloadData();
             }
         }
@@ -60,9 +61,11 @@ namespace FLSVertretungsplan.iOS
             AddLongPressGestureRecognizerIfNeeded();
         }
 
-        public override void ViewDidAppear(bool animated)
+        public override void ViewWillAppear(bool animated)
         {
-            base.ViewDidAppear(animated);
+            base.ViewWillAppear(animated);
+            TableViewRefreshControl.EndRefreshing();
+            UpdateRefreshControlState();
         }
 
         public override void TraitCollectionDidChange(UITraitCollection previousTraitCollection)
@@ -78,13 +81,23 @@ namespace FLSVertretungsplan.iOS
 
         void IsRefreshing_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
+            UpdateRefreshControlState();
+        }
+
+        void UpdateRefreshControlState()
+        {
+            if (ViewModel == null)
+            {
+                return;
+            }
             InvokeOnMainThread(() =>
             {
-                if (ViewModel.IsRefreshing.Value && !TableViewRefreshControl.Refreshing)
+                if (ViewModel.IsRefreshing.Value)
                 {
                     TableViewRefreshControl.BeginRefreshing();
+                    TableView.SetContentOffset(new CGPoint(0, -RefreshControl.Frame.Size.Height), true);
                 }
-                else if (!ViewModel.IsRefreshing.Value)
+                else
                 {
                     TableViewRefreshControl.EndRefreshing();
                 }
