@@ -63,7 +63,7 @@ HTTP-Body:
 			"subject": {
 				"name": "Deutsch",
 				"identifier": "DEUT"
-			}
+			},
 			"room": "C05"
 		},
 		"changes": {
@@ -75,7 +75,7 @@ HTTP-Body:
 			"subject": {
 				"name": "Mathe",
 				"identifier": "MAT"
-			}
+			},
 			"room": "C51"
 		},
 		"canceled": false,
