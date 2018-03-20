@@ -15,9 +15,8 @@ The app on the other hand sends the `If-Modified-Since` header field. If the pla
 The server must support HTTPS.
 
 
-## Request
+## Request Header
 
-Example request:
 ```
 GET /vplan.json HTTP/1.1
 Accept: application/json; charset=utf-8
@@ -25,18 +24,16 @@ Accept-Encoding: gzip,deflate
 If-Modified-Since: Mon, 18 Jul 2016 02:36:04 GMT
 ```
 
-## Response
+## Response Header
 
 ### Up to date
 
-HTTP header:
 ```
 HTTP/1.x 304 Not Modified
 ```
 
 ### New data available
 
-HTTP header:
 ```
 HTTP/1.x 200 OK
 Last-Modified: Wed, 21 Oct 2015 07:28:00 GMT
@@ -44,11 +41,14 @@ Content-Type: application/json; charset=utf-8
 Content-Encoding: gzip
 ```
 
-HTTP-Body:
+## Endpoints
+
+### /vplan.json
+
 ```json
 [
 	{
-		"schoolclass": {
+		"class": {
 			"name": "11/5 W/Bili",
 			"school": "BG"
 		},
@@ -84,5 +84,28 @@ HTTP-Body:
 			"Noch eine Information"
 		]
 	}
+]
+```
+
+### /classes.json
+
+```json
+[
+	{
+		"name": "11/5 W/Bili",
+		"school": "BG"
+	}
+]
+```
+
+### /teacher.json
+
+```json
+[
+	{
+		"firstname": "Matthias",
+		"lastname": "Schatz",
+		"identifier": "SCHA"
+	},
 ]
 ```
