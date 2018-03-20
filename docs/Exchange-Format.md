@@ -49,33 +49,19 @@ Content-Encoding: gzip
 [
 	{
 		"class": {
-			"name": "11/5 W/Bili",
+			"name": "11/5",
 			"school": "BG"
 		},
-		"day": "2018-03-19",
+		"date": "2018-03-19",
 		"hours": [3, 4],
 		"lesson": {
-			"teacher": {
-				"firstname": "Matthias",
-				"lastname": "Schatz",
-				"identifier": "SCHA"
-			},
-			"subject": {
-				"name": "Deutsch",
-				"identifier": "DEUT"
-			},
+			"teacher": "SCHA",
+			"subject": "DEUT",
 			"room": "C05"
 		},
 		"changes": {
-			"teacher": {
-				"firstname": "Sonja",
-				"lastname": "Max",
-				"identifier": "MAX"
-			},
-			"subject": {
-				"name": "Mathe",
-				"identifier": "MAT"
-			},
+			"teacher": "MAX",
+			"subject": "MAT",
 			"room": "C51"
 		},
 		"canceled": false,
@@ -92,7 +78,7 @@ Content-Encoding: gzip
 ```json
 [
 	{
-		"name": "11/5 W/Bili",
+		"name": "11/5",
 		"school": "BG"
 	}
 ]
@@ -107,5 +93,25 @@ Content-Encoding: gzip
 		"lastname": "Schatz",
 		"identifier": "SCHA"
 	},
+	{
+		"firstname": "Sonja",
+		"lastname": "Max",
+		"identifier": "MAX"
+	}
+]
+```
+
+### /subjects.json
+
+```json
+[
+	{
+		"name": "Deutsch",
+		"identifier": "DEUT"
+	},
+	{
+		"name": "Mathe",
+		"identifier": "MAT"
+	}
 ]
 ```
