@@ -55,7 +55,7 @@ Provides the latest version of the plan. Only the current and the next few days 
 ```
 [Change]
 ```
-*(see [models](#Models) below)*
+*(see [models](#models) below)*
 
 #### Example
 
@@ -97,7 +97,7 @@ Provides a list of all classes currently present at the school. The client is ex
 ```
 [SchoolClass]
 ```
-*(see [models](#Models) below)*
+*(see [models](#models) below)*
 
 #### Example
 
@@ -120,7 +120,7 @@ Provides a list of all teachers currently teaching at the school. The client is 
 ```
 [Teacher]
 ```
-*(see [models](#Models) below)*
+*(see [models](#models) below)*
 
 #### Example
 
@@ -149,7 +149,7 @@ Provides a list of all subjects currently taught at the school. The client is ex
 ```
 [Subject]
 ```
-*(see [models](#Models) below)*
+*(see [models](#models) below)*
 
 #### Example
 
