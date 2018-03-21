@@ -14,158 +14,6 @@ The client on the other hand sends the `If-Modified-Since` header field. If the 
 
 Requests are only supported via HTTPS.
 
-
-## Request Header
-
-```
-GET /vplan HTTP/1.1
-Accept: application/json; charset=utf-8
-Accept-Encoding: gzip,deflate
-If-Modified-Since: Mon, 18 Jul 2016 02:36:04 GMT
-```
-
-## Response Header
-
-### Up to date
-
-```
-HTTP/1.x 304 Not Modified
-```
-
-No body content.
-
-### New data available
-
-```
-HTTP/1.x 200 OK
-Last-Modified: Wed, 21 Oct 2015 07:28:00 GMT
-Content-Type: application/json; charset=utf-8
-Content-Encoding: gzip
-```
-
-Body content depends on the endpoint below.
-
-## Endpoints
-
-### /vplan
-
-Provides the latest version of the plan. Only the current and the next few days are made available.
-
-#### Response
-```
-[Change]
-```
-*(see [models](#models) below)*
-
-#### Example
-
-```json
-[
-	{
-		"school_class": {
-			"name": "11/5",
-			"school": "BG"
-		},
-		"date": "2018-03-19",
-		"hours": [3, 4],
-		"lesson": {
-			"teacher": "SCHA",
-			"subject": "DEUT",
-			"room": "C05"
-		},
-		"changes": {
-			"teacher": "MAX",
-			"subject": "MAT",
-			"room": "C51"
-		},
-		"canceled": false,
-		"information": [
-			"Eine Information",
-			"Noch eine Information"
-		]
-	}
-]
-```
-
-### /classes
-
-Provides a list of all classes currently present at the school. The client is expected to request this list
-* on a regular interval, e.g. once a week
-* when a class id is encountered in a vplan that is not part of the locally cached list of classes
-
-#### Response
-```
-[SchoolClass]
-```
-*(see [models](#models) below)*
-
-#### Example
-
-```json
-[
-	{
-		"name": "11/5",
-		"school": "BG"
-	}
-]
-```
-
-### /teacher
-
-Provides a list of all teachers currently teaching at the school. The client is expected to request this list
-* on a regular interval, e.g. once a week
-* when a teacher id is encountered in a vplan that is not part of the locally cached list of teachers
-
-#### Response
-```
-[Teacher]
-```
-*(see [models](#models) below)*
-
-#### Example
-
-```python
-[
-	{
-		"firstname": "Matthias",
-		"lastname": "Schatz",
-		"identifier": "SCHA"
-	},
-	{
-		"firstname": "Sonja",
-		"lastname": "Max",
-		"identifier": "MAX"
-	}
-]
-```
-
-### /subjects
-
-Provides a list of all subjects currently taught at the school. The client is expected to request this list
-* on a regular interval, e.g. once a week
-* when a subject id is encountered in a vplan that is not part of the locally cached list of subjects
-
-#### Response
-```
-[Subject]
-```
-*(see [models](#models) below)*
-
-#### Example
-
-```json
-[
-	{
-		"name": "Deutsch",
-		"identifier": "DEUT"
-	},
-	{
-		"name": "Mathe",
-		"identifier": "MAT"
-	}
-]
-```
-
 ## Models
 ```ruby
 Change {
@@ -208,5 +56,147 @@ Teacher {
 	id*		string		# the identifier of the teacher, e.g. SCHA
 	firstname	string		# first name (usually only the first letter is shown)
 	lastname	string		# last name (if undefined, the identifier is shown)
+}
+```
+
+`* = required`
+
+## Request Header
+
+```
+GET /vplan
+Accept: application/json; charset=utf-8
+Accept-Encoding: gzip,deflate
+If-Modified-Since: Mon, 18 Jul 2016 02:36:04 GMT
+```
+
+## Response Header
+
+### Up to date
+
+```
+304 Not Modified
+```
+
+No body content.
+
+### New data available
+
+```
+200 OK
+Last-Modified: Wed, 21 Oct 2015 07:28:00 GMT
+Content-Type: application/json; charset=utf-8
+Content-Encoding: gzip
+```
+
+Body content depends on the endpoint below.
+
+## Endpoints
+
+### /vplan
+
+Provides the latest version of the plan. Only the current and the next few days are made available.
+
+#### Response
+```
+[Change]
+```
+
+#### Example
+
+```json
+[
+	{
+		"school_class": {
+			"name": "11/5",
+			"school": "BG"
+		},
+		"date": "2018-03-19",
+		"hours": [3, 4],
+		"lesson": {
+			"teacher": "SCHA",
+			"subject": "DEUT",
+			"room": "C05"
+		},
+		"changes": {
+			"teacher": "MAX",
+			"subject": "MAT",
+			"room": "C51"
+		},
+		"canceled": false,
+		"information": [
+			"Eine Information",
+			"Noch eine Information"
+		]
+	},
+	{
+		"school_class": {
+			"name": "1336",
+			"school": "HBFS"
+		},
+		"date": "2018-03-20",
+		"hours": [5, 6, 7],
+		"lesson": {
+			"teacher": "SDA",
+			"subject": "DEUT",
+			"room": "D4"
+		},
+		"changes": {
+		},
+		"canceled": true,
+		"information": [
+		]
+	}
+]
+```
+
+### /school
+
+Provides a set of metadata of the school. This includes a list of all classes, teachers and subjects. The client is expected to request this data
+* on a regular interval, e.g. once a week
+* when a class/teacher/subject id is encountered in a vplan that is not part of the locally cached metadata
+
+#### Response
+```
+{
+	"classes": [SchoolClass],
+	"teachers": [Teacher],
+	"subjects": [Subject]
+}
+
+```
+
+#### Example
+
+```json
+{
+	"classes": [
+		{
+			"name": "11/5",
+			"school": "BG"
+		}
+	],
+	"teachers": [
+		{
+			"firstname": "Matthias",
+			"lastname": "Schatz",
+			"identifier": "SCHA"
+		},
+		{
+			"firstname": "Sonja",
+			"lastname": "Max",
+			"identifier": "MAX"
+		}
+	],
+	"subjects": [
+		{
+			"name": "Deutsch",
+			"identifier": "DEUT"
+		},
+		{
+			"name": "Mathe",
+			"identifier": "MAT"
+		}
+	]	
 }
 ```
