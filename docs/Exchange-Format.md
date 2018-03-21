@@ -174,6 +174,10 @@ Provides a set of metadata of the school. This includes a list of all classes, t
 		{
 			"name": "11/5",
 			"school": "BG"
+		},
+		{
+			"name": "1336",
+			"school": "HBFS"
 		}
 	],
 	"teachers": [
