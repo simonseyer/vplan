@@ -102,6 +102,8 @@ namespace FLSVertretungsplan
                 }
 
                 description.Add(new TextComponent { IconIdentifier = TextComponent.Icon.Person });
+                description.Add(new TextComponent { SecondaryText = "change_prefix_teacher" });
+                description.Add(new TextComponent { SecondaryText = " " });
                 description.Add(new TextComponent { PrimaryText = text });
                 description.Add(new TextComponent { SecondaryText = "\n" });
             }
