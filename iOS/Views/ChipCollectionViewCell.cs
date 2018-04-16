@@ -69,7 +69,7 @@ namespace FLSVertretungsplan.iOS
             {
                 Locations = new NSNumber[] { 0, 1 },
                 // Rotate gradient to be horizontal
-                Transform = CATransform3D.MakeRotation(NMath.PI / 2, 0, 0, 1)
+                Transform = CATransform3D.MakeRotation(- NMath.PI / 2, 0, 0, 1)
             };
             Layer.InsertSublayer(GradientLayer, 0);
         }

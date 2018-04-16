@@ -25,7 +25,7 @@
                                 <rect key="frame" x="100" y="238.5" width="175" height="190"/>
                             </imageView>
                         </subviews>
-                        <color key="backgroundColor" red="0.090196078431372548" green="0.16862745098039217" blue="0.29803921568627451" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.0039215686274509803" green="0.42352941176470588" blue="0.6470588235294118" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="ugt-yC-WlK" firstAttribute="centerY" secondItem="yd7-JS-zBw" secondAttribute="centerY" id="Mac-di-0wy"/>
                             <constraint firstItem="ugt-yC-WlK" firstAttribute="centerX" secondItem="yd7-JS-zBw" secondAttribute="centerX" id="POk-Ej-dDb"/>

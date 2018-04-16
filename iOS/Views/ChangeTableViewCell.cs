@@ -38,6 +38,10 @@ namespace FLSVertretungsplan.iOS
             ContentBackgroundView.Layer.ShadowOffset = new CoreGraphics.CGSize(0, 2);
             ContentBackgroundView.Layer.ShadowRadius = 3;
             ContentBackgroundView.Layer.ShadowOpacity = 0.06F;
+
+            SchoolClassLabel.TextColor = Color.PRIMARY_TEXT_COLOR.ToUIColor();
+            HoursLabel.TextColor = Color.PRIMARY_TEXT_COLOR.ToUIColor();
+            ChangeLabel.TextColor = Color.PRIMARY_TEXT_COLOR.ToUIColor();
         }
 
         public void DisableShadows()
