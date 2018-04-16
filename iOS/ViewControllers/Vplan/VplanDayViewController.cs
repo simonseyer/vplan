@@ -33,6 +33,9 @@ namespace FLSVertretungsplan.iOS
         {
             base.ViewDidLoad();
 
+            DayTitleLabel.TextColor = Color.PRIMARY_TEXT_COLOR.ToUIColor();
+            DaySubTitleLabel.TextColor = Color.SECONDARY_TEXT_COLOR.ToUIColor();
+
             if (UIScreen.MainScreen.Bounds.Height < 600)
             {
                 TopMarginConstraint.Constant = 20;

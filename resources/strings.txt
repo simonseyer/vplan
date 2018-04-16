@@ -44,7 +44,11 @@
 	[empty_vplan_title]
 		de = Alles nach Plan
 	[empty_vplan_subtitle]
-		de = Es sind zurzeit keine Vertretungsdaten vorhanden. Dies heißt aber nicht unbedingt, dass keine Vertretungen existieren.\n\nSie werden benachrichtigt, wenn neue Daten vorliegen.\nZiehen zum Aktualisieren.
+		de = Es sind zurzeit keine Vertretungsdaten vorhanden. Dies heißt aber nicht unbedingt, dass keine Vertretungen existieren.
+	[empty_vplan_notifications]
+		de = Sie werden benachrichtigt, wenn neue Daten vorliegen.\nZiehen zum Aktualisieren.
+	[empty_vplan_no_notifications]
+		de = Um über neue Daten benachrichtigt zu werden, aktivieren Sie dies bitte in den Einstellungen (tippen um dorthin zu gelangen).\nZiehen zum Aktualisieren.
 
 [[vplan]]
 	[vplan_last_update]
@@ -64,9 +68,11 @@
 	[change_connector_room]
 		de = in Raum
 	[change_prefix_subject]
-		de = Fach
+		de = Neu: Fach
 	[change_prefix_room]
-		de = Raum
+		de = Neu: Raum
+	[change_prefix_teacher]
+		de = Neu:
 	[change_suffix_time]
 		de = Stunde
 	[change_suffix_hour]

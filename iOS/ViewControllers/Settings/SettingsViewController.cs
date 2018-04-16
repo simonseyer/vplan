@@ -46,6 +46,9 @@ namespace FLSVertretungsplan.iOS
             TabBarItem.Title = NSBundle.MainBundle.LocalizedString("filter_tab", "");
             TitleLabel.Text = NSBundle.MainBundle.LocalizedString("filter_title", "");
             SubTitleLabel.Text = NSBundle.MainBundle.LocalizedString("filter_subtitle", "");
+
+            TitleLabel.TextColor = Color.PRIMARY_TEXT_COLOR.ToUIColor();
+            SubTitleLabel.TextColor = Color.PRIMARY_TEXT_COLOR.ToUIColor();
         }
 
         public override void ViewWillAppear(bool animated)
@@ -116,6 +119,7 @@ namespace FLSVertretungsplan.iOS
             var view = collectionView.DequeueReusableSupplementaryView(elementKind, ChipCollectionHeaderView.Key, indexPath) as ChipCollectionHeaderView;
 
             view.TitleLabel.Text = Sections[indexPath.Section].Title;
+            view.TitleLabel.TextColor = Color.PRIMARY_TEXT_COLOR.ToUIColor();
             if (UIScreen.MainScreen.Bounds.Height < 600)
             {
                 view.TitleTopMarginConstraint.Constant = 10;

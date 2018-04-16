@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="IVu-6x-Ha6">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
@@ -87,6 +87,7 @@
                     <tabBarItem key="tabBarItem" title="First" image="First" id="acW-dT-cKf"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="U58-7W-wiN">
+                        <rect key="frame" x="0.0" y="0.0" width="0.0" height="0.0"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </navigationBar>
@@ -135,7 +136,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="81" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5740" y="-816.79160419790117"/>
+            <point key="canvasLocation" x="5740" y="-816.7916"/>
         </scene>
         <!--Vplan Day View Controller-->
         <scene sceneID="bk2-yS-yIK">
@@ -156,7 +157,7 @@
                                 </connections>
                             </containerView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mittwoch" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PYQ-UT-0xP">
-                                <rect key="frame" x="139" y="36" width="97.5" height="26.5"/>
+                                <rect key="frame" x="140.5" y="36" width="94.5" height="26.5"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
                                 <color key="textColor" red="0.090196078430000007" green="0.16862745100000001" blue="0.29803921570000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -203,7 +204,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Yn-Gb-7k5">
-                                <rect key="frame" x="0.0" y="20" width="375" height="561"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="581"/>
                             </scrollView>
                             <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="aJe-iV-NLN">
                                 <rect key="frame" x="168" y="581" width="39" height="37"/>
@@ -217,7 +218,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="0.0"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Der neue Vertretungsplan konnte leider nicht geladen werden. Versuche es später erneut." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wxc-zE-uym">
-                                        <rect key="frame" x="37" y="-53.5" width="301" height="33.5"/>
+                                        <rect key="frame" x="37" y="8" width="301" height="0.0"/>
                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -279,7 +280,7 @@
                                                 <rect key="frame" x="57.5" y="151" width="260" height="232"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Alles nach Plan" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3fE-jM-Bvy">
-                                                        <rect key="frame" x="17" y="130" width="226" height="38.5"/>
+                                                        <rect key="frame" x="20.5" y="130" width="219.5" height="38.5"/>
                                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="32"/>
                                                         <color key="textColor" red="0.090196078430000007" green="0.16862745100000001" blue="0.29803921570000003" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
@@ -358,19 +359,19 @@ Ziehen zum Aktualisieren.</string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="FLS Vertretungsplan" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="28" translatesAutoresizingMaskIntoConstraints="NO" id="XA4-Y5-Aar">
-                                <rect key="frame" x="26" y="70" width="304.5" height="39"/>
+                                <rect key="frame" x="26" y="50" width="295" height="38.5"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="32"/>
                                 <color key="textColor" red="0.090196078430000007" green="0.16862745100000001" blue="0.29803921570000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wähle deine Schulen und Klassen. Die Liste wird ständig aktualisiert." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0lb-jv-dYj">
-                                <rect key="frame" x="26" y="115" width="323" height="20"/>
+                                <rect key="frame" x="26" y="94.5" width="319" height="38.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <color key="textColor" red="0.64313725490196072" green="0.68235294117647061" blue="0.72941176470588232" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Hh1-rQ-F2U">
-                                <rect key="frame" x="26" y="145" width="339" height="450.5"/>
+                                <rect key="frame" x="26" y="143" width="339" height="452.5"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="FYz-TY-w3N">
                                     <size key="itemSize" width="50" height="35"/>
@@ -387,7 +388,7 @@ Ziehen zum Aktualisieren.</string>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="clip" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dca-PA-8Zt">
-                                                    <rect key="frame" x="4" y="7.5" width="42" height="20.5"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="42" height="20.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -408,13 +409,13 @@ Ziehen zum Aktualisieren.</string>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Schulen" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ya3-uy-bMz">
-                                            <rect key="frame" x="0.0" y="40" width="84.5" height="26.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="82" height="26.5"/>
                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
                                             <color key="textColor" red="0.090196078430000007" green="0.16862745100000001" blue="0.29803921570000003" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="364-2B-cLW">
-                                            <rect key="frame" x="0.0" y="69.5" width="323" height="1"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="0.0" height="0.0"/>
                                             <color key="backgroundColor" red="0.92549019610000005" green="0.92941176469999998" blue="0.94509803920000002" alpha="1" colorSpace="calibratedRGB"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="1" id="HIP-Cq-TvM"/>
@@ -460,7 +461,7 @@ Ziehen zum Aktualisieren.</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mH5-VI-aeb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2845.5999999999999" y="-47.676161919040482"/>
+            <point key="canvasLocation" x="2845.6" y="-47.67616"/>
         </scene>
         <!--Vertretungsplan-->
         <scene sceneID="1NB-3Y-rq6">
@@ -468,7 +469,7 @@ Ziehen zum Aktualisieren.</string>
                 <tabBarController storyboardIdentifier="MainViewController" id="JTJ-bb-ilh" customClass="TabBarController" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" title="Vertretungsplan" id="AbE-I0-FzN"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="y5h-h2-r5D">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
+                        <rect key="frame" x="0.0" y="618" width="375" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <color key="tintColor" red="0.090196078431372548" green="0.16862745098039217" blue="0.29803921568627451" alpha="1" colorSpace="calibratedRGB"/>
@@ -589,19 +590,19 @@ Ziehen zum Aktualisieren.</string>
                                 </connections>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Neue Klassen verfügbar" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q9s-uH-RkV">
-                                <rect key="frame" x="26" y="120" width="323" height="39"/>
+                                <rect key="frame" x="26" y="120" width="205" height="76.5"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="32"/>
                                 <color key="textColor" red="0.090196078430000007" green="0.16862745100000001" blue="0.29803921570000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wähle die Klassen, die dich interessieren." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VK2-ES-Olc">
-                                <rect key="frame" x="26" y="165" width="299" height="20"/>
+                                <rect key="frame" x="26" y="202.5" width="299" height="19.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <color key="textColor" red="0.64313725489999995" green="0.68235294120000001" blue="0.72941176470000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="SKu-Mq-o8j">
-                                <rect key="frame" x="26" y="215" width="339" height="380"/>
+                                <rect key="frame" x="26" y="252" width="339" height="343.5"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="qfK-5j-U0K">
                                     <size key="itemSize" width="50" height="35"/>
@@ -618,7 +619,7 @@ Ziehen zum Aktualisieren.</string>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="clip" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Ae-zy-yzf">
-                                                    <rect key="frame" x="4" y="7.5" width="42" height="20.5"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="42" height="20.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -694,12 +695,10 @@ Ziehen zum Aktualisieren.</string>
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="2832.8000000000002" y="-2152.1739130434785"/>
+            <point key="canvasLocation" x="2832.8" y="-2152.174"/>
         </scene>
     </scenes>
     <resources>
-        <image name="First" width="32" height="30"/>
-        <image name="arrow-forward" width="12" height="11"/>
         <image name="close-button" width="32" height="32"/>
         <image name="empty-visual" width="104" height="104"/>
         <image name="favorite-normal" width="21" height="19"/>

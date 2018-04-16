@@ -58,6 +58,8 @@ namespace FLSVertretungsplan.iOS
 
             TableView.RegisterNibForCellReuse(ChangeTableViewCell.Nib, ChangeTableViewCell.Key);
 
+            LastUpdateLabel.TextColor = Color.SECONDARY_TEXT_COLOR.ToUIColor();
+
             AddLongPressGestureRecognizerIfNeeded();
         }
 

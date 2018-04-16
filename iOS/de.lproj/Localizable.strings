@@ -55,7 +55,11 @@
 
 "empty_vplan_title" = "Alles nach Plan";
 
-"empty_vplan_subtitle" = "Es sind zurzeit keine Vertretungsdaten vorhanden. Dies heißt aber nicht unbedingt, dass keine Vertretungen existieren.\n\nSie werden benachrichtigt, wenn neue Daten vorliegen.\nZiehen zum Aktualisieren.";
+"empty_vplan_subtitle" = "Es sind zurzeit keine Vertretungsdaten vorhanden. Dies heißt aber nicht unbedingt, dass keine Vertretungen existieren.";
+
+"empty_vplan_notifications" = "Sie werden benachrichtigt, wenn neue Daten vorliegen.\nZiehen zum Aktualisieren.";
+
+"empty_vplan_no_notifications" = "Um über neue Daten benachrichtigt zu werden, aktivieren Sie dies bitte in den Einstellungen (tippen um dorthin zu gelangen).\nZiehen zum Aktualisieren.";
 
 
 /********** vplan **********/
@@ -77,9 +81,11 @@
 
 "change_connector_room" = "in Raum";
 
-"change_prefix_subject" = "Fach";
+"change_prefix_subject" = "Neu: Fach";
 
-"change_prefix_room" = "Raum";
+"change_prefix_room" = "Neu: Raum";
+
+"change_prefix_teacher" = "Neu:";
 
 "change_suffix_time" = "Stunde";
 

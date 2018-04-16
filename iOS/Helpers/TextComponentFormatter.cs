@@ -50,10 +50,18 @@ namespace FLSVertretungsplan.iOS
                     var iconAttachment = new NSTextAttachment
                     {
                         Image = iconImage,
-                        Bounds = new CoreGraphics.CGRect(new CoreGraphics.CGPoint(0, font.Descender), iconImage.Size)
+                        Bounds = new CoreGraphics.CGRect(new CoreGraphics.CGPoint(0, font.Descender), iconImage.Size),
                     };
 
-                    attributedString.Append(NSAttributedString.FromAttachment(iconAttachment));
+                    var attributedIconString = NSAttributedString.FromAttachment(iconAttachment);
+
+                    // Fix for text attachment tinting bug https://stackoverflow.com/a/36319475/1668608
+                    attributedString.Append(new NSAttributedString(" ", UIFont.SystemFontOfSize(0)));
+
+                    attributedString.Append(attributedIconString);
+                    attributedString.AddAttributes(new UIStringAttributes { ForegroundColor = secondaryTextColor },
+                                                   new NSRange(attributedString.Length - attributedIconString.Length - 1, attributedIconString.Length + 1));
+                    
                     attributedString.Append(new NSAttributedString(" ", font));
                 }
             }
