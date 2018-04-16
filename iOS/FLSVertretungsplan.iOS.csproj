@@ -259,13 +259,13 @@
     <ImageAsset Include="Assets.xcassets\settings-normal.imageset\Contents.json" />
     <ImageAsset Include="Assets.xcassets\settings-normal.imageset\settings-normal.pdf" />
     <ImageAsset Include="Assets.xcassets\location.imageset\Contents.json" />
-    <ImageAsset Include="Assets.xcassets\location.imageset\location.pdf" />
     <ImageAsset Include="Assets.xcassets\icon.imageset\Contents.json" />
     <ImageAsset Include="Assets.xcassets\icon.imageset\icon.pdf" />
     <ImageAsset Include="Assets.xcassets\empty-visual.imageset\Contents.json" />
     <ImageAsset Include="Assets.xcassets\empty-visual.imageset\empty-visual.pdf" />
     <ImageAsset Include="Assets.xcassets\close-button.imageset\Contents.json" />
     <ImageAsset Include="Assets.xcassets\close-button.imageset\close-button.pdf" />
+    <ImageAsset Include="Assets.xcassets\location.imageset\house.pdf" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="de.lproj\Localizable.strings" />
