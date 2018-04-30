@@ -33,7 +33,7 @@ namespace FLSVertretungsplan
 
         public static RgbColor GetOutlineColor(string school)
         {
-            if (!OutlineColors.ContainsKey(school))
+            if (school == null || !OutlineColors.ContainsKey(school))
             {
                 return UNKNOWN_SCHOOL_COLOR;
             }
@@ -42,7 +42,7 @@ namespace FLSVertretungsplan
 
         public static Gradient GetFillColor(string school)
         {
-            if (!FillColors.ContainsKey(school))
+            if (school == null || !FillColors.ContainsKey(school))
             {
                 return new Gradient(UNKNOWN_SCHOOL_COLOR, UNKNOWN_SCHOOL_COLOR);
             }
