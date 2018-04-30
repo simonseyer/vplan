@@ -37,10 +37,11 @@
     <Compile Include="$(MSBuildThisFileDirectory)Services\VplanDataStore\IVplanDataStore.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\SettingsDataStore\ISettingsDataStore.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\SettingsDataStore\StandardSettingsDataStore.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Services\VplanDataStore\DefaultData.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\VplanDataStore\FLSDefaultData.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Definitions\Color.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\ChangeViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Definitions\Secrets.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\VplanDataStore\IDefaultData.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Plugins\" />

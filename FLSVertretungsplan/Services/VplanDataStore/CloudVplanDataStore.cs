@@ -12,6 +12,7 @@ namespace FLSVertretungsplan
 
         IVplanLoader Loader => ServiceLocator.Instance.Get<IVplanLoader>();
         IVplanPersistence Persistence => ServiceLocator.Instance.Get<IVplanPersistence>();
+        IDefaultData DefaultData => ServiceLocator.Instance.Get<IDefaultData>();
 
         // Transient state
         public Property<bool> IsRefreshing { get; }

@@ -3,9 +3,9 @@ using System.Collections.ObjectModel;
 
 namespace FLSVertretungsplan
 {
-    public static class DefaultData
+    public class FLSDefaultData: IDefaultData
     {
-        public static Collection<string> Schools = new Collection<string> {
+        public Collection<string> Schools =>  new Collection<string> {
             "BFS",
             "BG",
             "BS",
@@ -13,7 +13,7 @@ namespace FLSVertretungsplan
             "InteA"
         };
 
-        public static Collection<SchoolClass> SchoolClasses = new Collection<SchoolClass>
+        public Collection<SchoolClass> SchoolClasses => new Collection<SchoolClass>
         {
             new SchoolClass("BFS", "1081"),
             new SchoolClass("BFS", "1082"),
