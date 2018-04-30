@@ -24,57 +24,22 @@ namespace FLSVertretungsplan
 
         public async Task<List<SchoolClassBookmark>> LoadNewSchoolClassBookmarks()
         {
-            try
-            {
-                var result = await Load<List<SchoolClassBookmark>>(NewClassesFileName, NewSchoolClassBookmarksSempahore);
-                return result ?? new List<SchoolClassBookmark>();
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine(ex);
-                return new List<SchoolClassBookmark>();
-            }
+            return await Load(NewClassesFileName, NewSchoolClassBookmarksSempahore, new List<SchoolClassBookmark>());
         }
 
         public async Task<List<SchoolBookmark>> LoadSchoolBookmarks()
         {
-            try
-            {
-                var result = await Load<List<SchoolBookmark>>(SchoolBookmarksFileName, SchoolBookmarksSempahore);
-                return result ?? new List<SchoolBookmark>();
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine(ex);
-                return new List<SchoolBookmark>();
-            }
+            return await Load(SchoolBookmarksFileName, SchoolBookmarksSempahore, new List<SchoolBookmark>());
         }
 
         public async Task<List<SchoolClassBookmark>> LoadSchoolClassBookmarks()
         {
-            try
-            {
-                var result = await Load<List<SchoolClassBookmark>>(SchoolClassBookmarksFileName, SchoolClassBookmarksSempahore);
-                return result ?? new List<SchoolClassBookmark>();
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine(ex);
-                return new List<SchoolClassBookmark>();
-            }
+            return await Load(SchoolClassBookmarksFileName, SchoolClassBookmarksSempahore, new List<SchoolClassBookmark>());
         }
 
         public async Task<Vplan> LoadVplan()
         {
-            try
-            {
-                return await Load<Vplan>(VplanFileName, VplanSempahore);
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine(ex);
-                return null;
-            }
+            return await Load<Vplan>(VplanFileName, VplanSempahore, null);
         }
 
 
@@ -118,7 +83,7 @@ namespace FLSVertretungsplan
             }
         }
 
-        async Task<T> Load<T>(string fileName, SemaphoreSlim semaphore)
+        async Task<T> Load<T>(string fileName, SemaphoreSlim semaphore, T defaultValue)
         {
             await semaphore.WaitAsync();
             try
@@ -131,9 +96,10 @@ namespace FLSVertretungsplan
                     return await Task.Run(() => JsonConvert.DeserializeObject<T>(json));
                 }
             }
-            catch
+            catch (Exception ex)
             {
-                throw;
+                Debug.WriteLine(ex);
+                return defaultValue;
             }
             finally
             {
