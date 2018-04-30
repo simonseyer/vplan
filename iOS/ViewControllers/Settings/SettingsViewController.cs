@@ -24,23 +24,7 @@ namespace FLSVertretungsplan.iOS
 
             ViewModel = new SettingsViewModel();
 
-            var sections = new Collection<ChipSection>()
-            {
-                new ChipSection(
-                    NSBundle.MainBundle.LocalizedString("filter_school_section_title", ""), 
-                    ViewModel.Schools, 
-                    ViewModel.ToggleSchoolBookmarkAtIndex
-                ),
-                new ChipSection(
-                    NSBundle.MainBundle.LocalizedString("filter_school_class_section_title", ""), 
-                    ViewModel.SchoolClasses, 
-                    ViewModel.ToggleSchoolClassBookmarkAtIndex
-                )
-            };
-            DataSource = new ChipCollectionViewDataSource(CollectionView, sections);
-            CollectionView.DataSource = DataSource;
-            Delegate = new ChipCollectionViewDelegate(sections);
-            CollectionView.Delegate = Delegate;
+            ReloadCollectionView();
             CollectionView.AccessibilityIdentifier = "filterCollectionView";
 
             TabBarItem.Title = NSBundle.MainBundle.LocalizedString("filter_tab", "");
@@ -49,6 +33,38 @@ namespace FLSVertretungsplan.iOS
 
             TitleLabel.TextColor = Color.PRIMARY_TEXT_COLOR.ToUIColor();
             SubTitleLabel.TextColor = Color.PRIMARY_TEXT_COLOR.ToUIColor();
+        }
+
+        void ReloadCollectionView()
+        {
+            var sections = new Collection<ChipSection>()
+            {
+                new ChipSection(
+                    NSBundle.MainBundle.LocalizedString("filter_school_section_title", ""),
+                    ViewModel.Schools,
+                    ViewModel.ToggleSchoolBookmarkAtIndex
+                ),
+                new ChipSection(
+                    NSBundle.MainBundle.LocalizedString("filter_school_class_section_title", ""),
+                    ViewModel.SchoolClasses,
+                    ViewModel.ToggleSchoolClassBookmarkAtIndex
+                ),
+                new ChipSection("Lehrer", new ObservableCollection<ChipViewModel>(), null)
+            };
+
+            // TODO: observe teacher for changes (make an observable with a static list?)
+            foreach (ChipGroupViewModel teacherGroup in ViewModel.TeacherGroups)
+            {
+                sections.Add(new ChipSection(teacherGroup.Name, teacherGroup.TeacherViewModels, null));
+            }
+
+            DataSource = new ChipCollectionViewDataSource(CollectionView, sections);
+
+            Delegate = new ChipCollectionViewDelegate(sections);
+
+            CollectionView.DataSource = DataSource;
+            CollectionView.Delegate = Delegate;
+            CollectionView.ReloadData();
         }
 
         public override void ViewWillAppear(bool animated)
@@ -82,7 +98,7 @@ namespace FLSVertretungsplan.iOS
     {
         readonly UICollectionView CollectionView;
         readonly Collection<ChipSection> Sections;
-        Collection<Collection<ChipViewModel>> Items;
+        readonly Collection<Collection<ChipViewModel>> Items;
         readonly Collection<Binding> Bindings;
 
         public ChipCollectionViewDataSource(UICollectionView collectionView, Collection<ChipSection> sections)
