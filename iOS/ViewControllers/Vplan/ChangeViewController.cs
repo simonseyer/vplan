@@ -87,15 +87,28 @@ namespace FLSVertretungsplan.iOS
             var image = UIGraphics.GetImageFromCurrentImageContext();
             UIGraphics.EndImageContext();
 
-            var activityViewController = new UIActivityViewController(new NSObject[] { image }, null);
+            var activityViewController = CreateActivityViewController(image);
             Context.PresentViewController(activityViewController, true, null);
         }
 
         public void ShareText()
         {
             var text = TextComponentFormatter.PlainStringForTextComponents(ViewModel.TextRepresentation);
-            var activityViewController = new UIActivityViewController(new NSObject[] { new NSString(text) }, null);
+            var activityViewController = CreateActivityViewController(new NSString(text));
             Context.PresentViewController(activityViewController, true, null);
+        }
+
+        private UIActivityViewController CreateActivityViewController(NSObject content)
+        {
+            return new UIActivityViewController(new NSObject[] { content }, null)
+            {
+                ExcludedActivityTypes = new NSString[] {
+                    UIActivityType.AddToReadingList,
+                    UIActivityType.AssignToContact,
+                    UIActivityType.OpenInIBooks,
+                    UIActivityType.SaveToCameraRoll
+                }
+            };
         }
 
         public void ShareCalendarEvent()
