@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace FLSVertretungsplan
 {
-    public class SchoolBookmark
+    public class SchoolBookmark: IComparable
     {
         public string School { get; private set; }
         public bool Bookmarked { get; private set; }
@@ -24,6 +24,15 @@ namespace FLSVertretungsplan
         public override int GetHashCode()
         {
             return -39790255 + EqualityComparer<string>.Default.GetHashCode(School);
+        }
+
+        public int CompareTo(object obj)
+        {
+            if (obj is SchoolBookmark bookmark)
+            {
+                return School.CompareTo(bookmark.School);
+            }
+            throw new ArgumentException("Object is not a SchoolClass");
         }
     }
 }

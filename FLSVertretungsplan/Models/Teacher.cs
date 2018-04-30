@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace FLSVertretungsplan
 {
-    public class Teacher
+    public class Teacher: IComparable
     {
         public string FirstName { get; private set; }
         public string LastName { get; private set; }
@@ -26,6 +26,15 @@ namespace FLSVertretungsplan
         public override int GetHashCode()
         {
             return 1186239758 + EqualityComparer<string>.Default.GetHashCode(Identifier);
+        }
+
+        public int CompareTo(object obj)
+        {
+            if (obj is Teacher teacher)
+            {
+                return string.Compare(Identifier, teacher.Identifier, StringComparison.Ordinal);
+            }
+            throw new ArgumentException("Object is not a Teacher");
         }
     }
 }

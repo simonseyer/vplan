@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace FLSVertretungsplan
 {
-    public class SchoolClassBookmark
+    public class SchoolClassBookmark: IComparable
     {
         public SchoolClass SchoolClass { get; private set; }
         public bool Bookmarked { get; private set; }
@@ -18,14 +18,22 @@ namespace FLSVertretungsplan
 
         public override bool Equals(object obj)
         {
-            var bookmark = obj as SchoolClassBookmark;
-            return bookmark != null &&
+            return obj is SchoolClassBookmark bookmark &&
                    EqualityComparer<SchoolClass>.Default.Equals(SchoolClass, bookmark.SchoolClass);
         }
 
         public override int GetHashCode()
         {
             return 573291979 + EqualityComparer<SchoolClass>.Default.GetHashCode(SchoolClass);
+        }
+
+        public int CompareTo(object obj)
+        {
+            if (obj is SchoolClassBookmark bookmark)
+            {
+                return SchoolClass.CompareTo(bookmark.SchoolClass);
+            }
+            throw new ArgumentException("Object is not a SchoolClass");
         }
     }
 }
