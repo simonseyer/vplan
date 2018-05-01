@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Diagnostics;
 using System.Linq;
+using System.Collections.Immutable;
 
 namespace FLSVertretungsplan
 {
@@ -35,19 +36,10 @@ namespace FLSVertretungsplan
 
         public CloudVplanDataStore()
         {
-            
             IsRefreshing = new Property<bool>();
             LastRefreshFailed = new Property<bool>();
-
-            SchoolVplan = new Property<Vplan>
-            {
-                Value = null
-            };
-            MyVplan = new Property<Vplan>()
-            {
-                Value = null
-            };
-
+            SchoolVplan = new Property<Vplan> { Value = null };
+            MyVplan = new Property<Vplan>() { Value = null };
             SchoolBookmarks = new ObservableCollection<SchoolBookmark>(
                 DefaultData.Schools.Select(school => new SchoolBookmark(school, false))
             );
@@ -65,48 +57,21 @@ namespace FLSVertretungsplan
                 await LoadTask;
                 return;
             }
-            if (Loaded)
+            if (!Loaded)
             {
-                return;
+                Loaded = true;
+                LoadTask = DoLoad();
+                await LoadTask;
+                LoadTask = null;
             }
-            Loaded = true;
-
-            LoadTask = DoLoad();
-            await LoadTask;
-            LoadTask = null;
         }
 
         async Task DoLoad()
         {
             SchoolVplan.Value = await Persistence.LoadVplan();
-
-            var newSchoolClassBookmarks = await Persistence.LoadNewSchoolClassBookmarks();
-            foreach (var schoolClassBookmark in newSchoolClassBookmarks)
-            {
-                NewSchoolClassBookmarks.Add(schoolClassBookmark);
-            }
-
-            var schoolBookmarks = await Persistence.LoadSchoolBookmarks();
-            foreach (var bookmark in schoolBookmarks)
-            {
-                var i = SchoolBookmarks.IndexOf(bookmark);
-                if (i >= 0)
-                {
-                    SchoolBookmarks[i] = bookmark;
-                }
-                else
-                {
-                    SchoolBookmarks.Add(bookmark);
-                }
-            }
-
-            var schoolClassBookmarks = await Persistence.LoadSchoolClassBookmarks();
-            foreach (var bookmark in schoolClassBookmarks)
-            {
-                Debug.Print(string.Format("new SchoolClass(\"{0}\", \"{1}\"),", bookmark.SchoolClass.School, bookmark.SchoolClass.Name));
-                UpdateSchoolClassBookmark(bookmark);
-            }
-
+            NewSchoolClassBookmarks.AddRange(await Persistence.LoadNewSchoolClassBookmarks());
+            SchoolBookmarks.UpdateOrInsertRange(await Persistence.LoadSchoolBookmarks());
+            (await Persistence.LoadSchoolClassBookmarks()).ForEach(UpdateSchoolClassBookmark);
             UpdateBookmarkedVplan();
         }
 
@@ -151,16 +116,16 @@ namespace FLSVertretungsplan
                 return null;
             }
 
-            UpdateSchoolClasses();
+            AddNewSchoolClasses(SchoolVplan.Value.Changes.Select(c => c.SchoolClass));
             UpdateBookmarkedVplan();
 
             await PersistAll();
 
             var gotUpdated = SchoolVplan.Value != null && (oldVplan == null || !oldVplan.LastUpdate.Equals(SchoolVplan.Value.LastUpdate));
-            var oldBookmarkedChanges = oldVplan?.Changes.ToHashSet() ?? new HashSet<Change>();
-            var newBookmarkedChanges = MyVplan.Value?.Changes.ToHashSet() ?? new HashSet<Change>();
+            var oldBookmarkedChanges = new HashSet<Change>(oldVplan != null ? oldVplan.Changes : new ImmutableArray<Change>());
+            var newBookmarkedChanges = new HashSet<Change>(MyVplan.Value != null ? MyVplan.Value.Changes : new ImmutableArray<Change>());
             var newBookmarks = newBookmarkedChanges.Except(oldBookmarkedChanges);
-            var newNewClasses = NewSchoolClassBookmarks.ToHashSet().Except(oldNewSchoolClasses.ToHashSet());
+            var newNewClasses = new HashSet<SchoolClassBookmark>(NewSchoolClassBookmarks).Except(new HashSet<SchoolClassBookmark>(oldNewSchoolClasses));
 
             IsRefreshing.Value = false;
             return new VplanDiff(gotUpdated, newBookmarks.ToList(), newNewClasses.ToList());
@@ -174,25 +139,21 @@ namespace FLSVertretungsplan
 
         public async Task BookmarkSchool(string school, bool bookmark)
         {
-            var i = IndexOfSchoolBookmark(school);
-            Debug.Assert(i >= 0, string.Format("School bookmark {0} schould exist", school));
-            SchoolBookmarks[i] = new SchoolBookmark(school, bookmark);
+            SchoolBookmarks.UpdateOrInsert(new SchoolBookmark(school, bookmark));
 
-            foreach (var schoolClassBookmark in new HashSet<SchoolClassBookmark>(AllSchoolClassBookmarks))
-            {
-                if (schoolClassBookmark.SchoolClass.School.Equals(school))
-                {
-                    var newBookmark = new SchoolClassBookmark(schoolClassBookmark.SchoolClass,
-                                                              schoolClassBookmark.Bookmarked,
-                                                              bookmark);
-                    UpdateSchoolClassBookmark(newBookmark);
-                }
-            }
+            AllSchoolClassBookmarks.Where( (arg) => arg.SchoolClass.School.Equals(school) )
+                                   .ToList()
+                                   .ForEach(schoolClassBookmark => {
+                var newBookmark = new SchoolClassBookmark(schoolClassBookmark.SchoolClass,
+                                                          schoolClassBookmark.Bookmarked,
+                                                          bookmark);
+                UpdateSchoolClassBookmark(newBookmark);
+            });
             UpdateBookmarkedVplan();
 
             await PersistSchoolBookmarks();
             await PersistSchoolClassBookmarks();
-        }
+        }   
 
         public async Task BookmarkSchoolClass(SchoolClass schoolClass, bool bookmark)
         {
@@ -233,32 +194,27 @@ namespace FLSVertretungsplan
             }
         }
 
-        void UpdateSchoolClasses()
+        void AddNewSchoolClasses(IEnumerable<SchoolClass> schoolClasses)
         {
-            foreach (Change change in SchoolVplan.Value.Changes)
+            foreach (SchoolClass schoolClass in schoolClasses)
             {
-                AddClass(change.SchoolClass);
-            }
-        }
+                var schoolBookmark = GetSchoolBookmark(schoolClass.School);
+                Debug.Assert(schoolBookmark != null, string.Format("School class bookmark {0} schould exist", schoolClass));
+                var newBookmark = new SchoolClassBookmark(schoolClass,
+                                                         false,
+                                                         schoolBookmark.Bookmarked);
 
-        void AddClass(SchoolClass schoolClass)
-        {
-            var schoolBookmark = GetSchoolBookmark(schoolClass.School);
-            Debug.Assert(schoolBookmark != null, string.Format("School class bookmark {0} schould exist", schoolClass));
-            var newBookmark = new SchoolClassBookmark(schoolClass,
-                                                     false,
-                                                     schoolBookmark.Bookmarked);
+                if (AllSchoolClassBookmarks.Contains(newBookmark))
+                {
+                    return;
+                }
 
-            if (AllSchoolClassBookmarks.Contains(newBookmark))
-            {
-                return;
+                if (schoolBookmark.Bookmarked)
+                {
+                    NewSchoolClassBookmarks.Add(newBookmark);
+                }
+                UpdateSchoolClassBookmark(newBookmark);
             }
-
-            if (schoolBookmark.Bookmarked)
-            {
-                NewSchoolClassBookmarks.Add(newBookmark);
-            }
-            UpdateSchoolClassBookmark(newBookmark);
         }
 
         void UpdateSchoolClassBookmark(SchoolClassBookmark newBookmark)
@@ -275,22 +231,7 @@ namespace FLSVertretungsplan
 
             if (newBookmark.SchoolBookmarked)
             {
-                for (var i = 0; i < SchoolClassBookmarks.Count; i++)
-                {
-                    var bookmark = SchoolClassBookmarks[i];
-                    var comparison = bookmark.SchoolClass.CompareTo(newBookmark.SchoolClass);
-                    if (comparison == 0)
-                    {
-                        SchoolClassBookmarks[i] = newBookmark;
-                        return;
-                    }
-                    else if (comparison > 0)
-                    {
-                        SchoolClassBookmarks.Insert(i, newBookmark);
-                        return;
-                    }
-                }
-                SchoolClassBookmarks.Add(newBookmark);
+                SchoolClassBookmarks.UpdateOrInsert(newBookmark);
             }
             else
             {
