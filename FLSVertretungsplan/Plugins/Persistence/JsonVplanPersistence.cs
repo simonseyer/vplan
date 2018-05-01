@@ -13,6 +13,7 @@ namespace FLSVertretungsplan
         static string NewClassesFileName = "newSchoolClassBookmarks.json";
         static string SchoolBookmarksFileName = "schoolBookmarks.json";
         static string SchoolClassBookmarksFileName = "schoolClassBookmarks.json";
+        static string TeacherBookmarksFileName = "teacherBookmarks.json";
         static string VplanFileName = "vplan.json";
 
         // Prevent loading and persisting the json files at the same time by
@@ -20,6 +21,7 @@ namespace FLSVertretungsplan
         SemaphoreSlim NewSchoolClassBookmarksSempahore = new SemaphoreSlim(1, 1);
         SemaphoreSlim SchoolBookmarksSempahore = new SemaphoreSlim(1, 1);
         SemaphoreSlim SchoolClassBookmarksSempahore = new SemaphoreSlim(1, 1);
+        SemaphoreSlim TeacherBookmarksSempahore = new SemaphoreSlim(1, 1);
         SemaphoreSlim VplanSempahore = new SemaphoreSlim(1, 1);
 
         public async Task<List<SchoolClassBookmark>> LoadNewSchoolClassBookmarks()
@@ -35,6 +37,11 @@ namespace FLSVertretungsplan
         public async Task<List<SchoolClassBookmark>> LoadSchoolClassBookmarks()
         {
             return await Load(SchoolClassBookmarksFileName, SchoolClassBookmarksSempahore, new List<SchoolClassBookmark>());
+        }
+
+        public async Task<List<TeacherBookmark>> LoadTeacherBookmarks()
+        {
+            return await Load(TeacherBookmarksFileName, TeacherBookmarksSempahore, new List<TeacherBookmark>());
         }
 
         public async Task<Vplan> LoadVplan()
@@ -56,6 +63,11 @@ namespace FLSVertretungsplan
         public async Task PersistSchoolClassBookmarks(List<SchoolClassBookmark> schoolClassBookmarks)
         {
             await Persist(schoolClassBookmarks, SchoolClassBookmarksFileName, SchoolClassBookmarksSempahore);
+        }
+
+        public async Task PersistTeacherBookmarks(List<TeacherBookmark> teacherBookmarks)
+        {
+            await Persist(teacherBookmarks, TeacherBookmarksFileName, TeacherBookmarksSempahore);
         }
 
         public async Task PersistVplan(Vplan vplan)

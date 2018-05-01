@@ -29,12 +29,17 @@ namespace FLSVertretungsplan
             return schoolClassBookmarks.ToList();
         }
 
+        public Task<List<TeacherBookmark>> LoadTeacherBookmarks() => Task.FromResult(new List<TeacherBookmark>());
+
+
+        public Task PersistVplan(Vplan vplan) => Task.CompletedTask;
+
         public Task PersistNewSchoolClassBookmarks(List<SchoolClassBookmark> newSchoolClassBookmarks) => Task.CompletedTask;
 
         public Task PersistSchoolBookmarks(List<SchoolBookmark> schoolBookmarks) => Task.CompletedTask;
 
         public Task PersistSchoolClassBookmarks(List<SchoolClassBookmark> schoolClassBookmarks) => Task.CompletedTask;
 
-        public Task PersistVplan(Vplan vplan) => Task.CompletedTask;
+        public Task PersistTeacherBookmarks(List<TeacherBookmark> teacherBookmarks) => Task.CompletedTask;
     }
 }

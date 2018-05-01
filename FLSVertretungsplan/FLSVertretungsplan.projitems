@@ -41,6 +41,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)Definitions\Color.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\ChangeViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Definitions\Secrets.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\TeacherBookmark.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Helpers\CollectionExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\VplanDataStore\IDefaultData.cs" />
   </ItemGroup>
   <ItemGroup>

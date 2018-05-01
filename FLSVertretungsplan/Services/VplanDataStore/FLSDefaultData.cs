@@ -102,5 +102,7 @@ namespace FLSVertretungsplan
             new SchoolClass("InteA", "InteA 3"),
             new SchoolClass("InteA", "InteA Sport")
         };
+
+        public Collection<Teacher> Teacher => new Collection<Teacher>();
     }
 }

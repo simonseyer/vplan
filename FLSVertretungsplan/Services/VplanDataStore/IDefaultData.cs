@@ -7,5 +7,6 @@ namespace FLSVertretungsplan
     {
         Collection<string> Schools { get; }
         Collection<SchoolClass> SchoolClasses { get; }
+        Collection<Teacher> Teacher { get; }
     }
 }

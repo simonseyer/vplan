@@ -24,6 +24,7 @@ namespace FLSVertretungsplan
         public HashSet<SchoolClassBookmark> AllSchoolClassBookmarks { get; }
         public ObservableCollection<SchoolBookmark> SchoolBookmarks { get; }
         public ObservableCollection<SchoolClassBookmark> NewSchoolClassBookmarks { get; }
+        public ObservableCollection<TeacherBookmark> TeacherBookmarks { get; }
 
         // Derived state
         public Property<Vplan> MyVplan { get; }
@@ -48,6 +49,9 @@ namespace FLSVertretungsplan
             );
             SchoolClassBookmarks = new ObservableCollection<SchoolClassBookmark>();
             NewSchoolClassBookmarks = new ObservableCollection<SchoolClassBookmark>();
+            TeacherBookmarks = new ObservableCollection<TeacherBookmark>(
+                DefaultData.Teacher.Select(teacher => new TeacherBookmark(teacher, false))
+            );
         }
 
         public async Task Load()
@@ -71,6 +75,7 @@ namespace FLSVertretungsplan
             SchoolVplan.Value = await Persistence.LoadVplan();
             NewSchoolClassBookmarks.AddRange(await Persistence.LoadNewSchoolClassBookmarks());
             SchoolBookmarks.UpdateOrInsertRange(await Persistence.LoadSchoolBookmarks());
+            TeacherBookmarks.UpdateOrInsertRange(await Persistence.LoadTeacherBookmarks());
             (await Persistence.LoadSchoolClassBookmarks()).ForEach(UpdateSchoolClassBookmark);
             UpdateBookmarkedVplan();
         }
@@ -117,6 +122,8 @@ namespace FLSVertretungsplan
             }
 
             AddNewSchoolClasses(SchoolVplan.Value.Changes.Select(c => c.SchoolClass));
+            AddNewTeachers(SchoolVplan.Value.Changes.Select( c => c.OldLesson.Teacher ).Where( teacher => teacher != null ));
+            AddNewTeachers(SchoolVplan.Value.Changes.Select( c => c.NewLesson.Teacher ).Where( teacher => teacher != null ));
             UpdateBookmarkedVplan();
 
             await PersistAll();
@@ -170,6 +177,14 @@ namespace FLSVertretungsplan
             await PersistSchoolClassBookmarks();
         }
 
+        public async Task BookmarkTeacher(Teacher teacher, bool bookmark)
+        {
+            TeacherBookmarks.UpdateOrInsert(new TeacherBookmark(teacher, bookmark));
+            UpdateBookmarkedVplan();
+
+            await PersistTeacherBookmarks();
+        }
+
         void UpdateBookmarkedVplan()
         {
             if (SchoolVplan.Value == null)
@@ -214,6 +229,18 @@ namespace FLSVertretungsplan
                     NewSchoolClassBookmarks.Add(newBookmark);
                 }
                 UpdateSchoolClassBookmark(newBookmark);
+            }
+        }
+
+        void AddNewTeachers(IEnumerable<Teacher> teachers)
+        {
+            foreach (Teacher teacher in teachers)
+            {
+                var bookmark = new TeacherBookmark(teacher, false);
+                if (!TeacherBookmarks.Contains(bookmark))
+                {
+                    TeacherBookmarks.UpdateOrInsert(bookmark);
+                }
             }
         }
 
@@ -281,6 +308,11 @@ namespace FLSVertretungsplan
             await Persistence.PersistSchoolClassBookmarks(AllSchoolClassBookmarks.ToList());
         }
 
+        async Task PersistTeacherBookmarks()
+        {
+            await Persistence.PersistTeacherBookmarks(TeacherBookmarks.ToList());
+        }
+
         async Task PersistNewSchoolClasses()
         {
             await Persistence.PersistNewSchoolClassBookmarks(NewSchoolClassBookmarks.ToList());
@@ -292,6 +324,7 @@ namespace FLSVertretungsplan
             await PersistNewSchoolClasses();
             await PersistSchoolBookmarks();
             await PersistSchoolClassBookmarks();
+            await PersistTeacherBookmarks();
         }
     }
 }
